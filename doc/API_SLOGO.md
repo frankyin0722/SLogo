@@ -18,3 +18,8 @@ Commands get information from the front end, which forwards parsed command and p
 5. How is the GUI updated after a command has completed execution?
 
 The GUI contains private instance variables such as current location. The command will update parameters for the gui, which the gui will display
+
+The following is an example of the implementation stucture, with the 4 relevant APIs.
+
+![Internal and External API](file:///Users/xlany/Files/Duke%2017-18/Sem%202/CS%20308/projects/slogo_team08/doc/IMG_1643.jpg)
+
