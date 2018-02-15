@@ -21,5 +21,5 @@ The GUI contains private instance variables such as current location. The comman
 
 The following is an example of the implementation stucture, with the 4 relevant APIs.
 
-![Internal and External API](file:///Users/xlany/Files/Duke%2017-18/Sem%202/CS%20308/projects/slogo_team08/doc/IMG_1643.jpg)
+![Internal and External API](file:./IMG_1643.jpg)
 
