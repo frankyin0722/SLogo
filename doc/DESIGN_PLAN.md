@@ -164,6 +164,9 @@ public interface VariableManager {
     
     //changes the variable that matches the name
     public void setVariable(Object data);
+    
+    // this method returns a class type that is used to create variables
+    public Class<?> createVariable();
 }
 
 /**
