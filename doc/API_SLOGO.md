@@ -21,5 +21,9 @@ The GUI contains private instance variables such as current location. The comman
 
 The following is an example of the implementation stucture, with the 4 relevant APIs.
 
+<<<<<<< HEAD
 ![Internal and External API](file:./IMG_1643.jpg)
+=======
+![Internal and External API](IMG_1643.jpg)
+>>>>>>> 7a0a50fe1355080929a527b7ff9d39d119a448ea
 
