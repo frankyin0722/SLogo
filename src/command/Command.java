@@ -1,5 +1,7 @@
 package command;
 
-public class Command {
+public abstract class Command {
 
+	public abstract double execute();
+	
 }
