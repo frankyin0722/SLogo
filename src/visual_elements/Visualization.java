@@ -24,4 +24,5 @@ public class Visualization {
 		Scene scene = new Scene(myRoot,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 		return scene;
 	}
+	
 }
