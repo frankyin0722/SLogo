@@ -14,7 +14,9 @@ public class ForwardCommand implements Command{
 	
 	public double execute(){
 		// here goes how to change turtle position
-		
+		myTurtle.changeX(myTurtle.getX() + Math.sin(myTurtle.getDirection())*myMovement);
+		myTurtle.changeY(myTurtle.getY() + Math.cos(myTurtle.getDirection())*myMovement);
+		myTurtle.update();
 		return myMovement;
 	}
 	
