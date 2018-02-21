@@ -7,7 +7,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-
+import javafx.scene.layout.Pane;
 
 public class Canvas extends Pane {
 	public Canvas(Group root) {
