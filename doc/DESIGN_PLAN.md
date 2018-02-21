@@ -134,7 +134,7 @@ public interface CommandManager {
 */
 public interface Command {
     // this method is called by back end to execute the command and to return 
-    public double calculateValue();
+    public Object calculateValue();
 }
 
 
@@ -164,6 +164,9 @@ public interface VariableManager {
     
     //changes the variable that matches the name
     public void setVariable(Object data);
+    
+    // this method returns a class type that is used to create variables
+    public Class<?> createVariable();
 }
 
 /**
@@ -322,7 +325,7 @@ Our last important design consideration was the way the user input shall be proc
 
 * CommandTreeInterpreter
     * contains variables, turtles, command manager and all necessary classes for the execution of the command
-    * contains interpretCommandTree method that loops through all CommandTreeNode and its children, initializes specific sub-commands when each node is checked out, and executes them in the order they are unravelled 
+    * contains interpretCommandTree method that loops through all CommandTreeNode and its children, initializes specific sub-commands when each node is checked out, and executes them in the order they are unraveled 
     * contains update method that takes in both the CommandTreeNode and its parameters and passes in corresponding parameters based on the type of the command for the executeCommand operation 
     * contains the executeCommand method that is called by the interpretCommandTree method as the interpreting process continues
 
