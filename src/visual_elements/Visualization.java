@@ -1,6 +1,6 @@
 package visual_elements;
 
-import javafx.scene.Scene;
+import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
 
 public class Visualization extends BorderPane {
@@ -13,8 +13,9 @@ public class Visualization extends BorderPane {
 	 * Initializes and arranges each of the elements within the scene
 	 * 
 	 */
-	public Visualization(Scene scene) {
-		this.setCenter(new Canvas());
+	public Visualization(Group root) {
+		this.setCenter(new Canvas(root));
+		root.getChildren().add(this);
 //		this.setBottom(new CommandWindow());
 	}
 	

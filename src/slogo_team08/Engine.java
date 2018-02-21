@@ -23,7 +23,7 @@ public class Engine {
 	private Scene setupScene() {
 		myRoot = new Group();
 		Scene scene = new Scene(myRoot,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
-		new Visualization(scene);
+		new Visualization(myRoot);
 		return scene;
 	}
 }
