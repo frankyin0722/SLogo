@@ -9,8 +9,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 
-public class Canvas extends Pane {
-	public Canvas(Group root) {
+public class DrawingWindow extends Pane {
+	public DrawingWindow(Group root) {
 		setupInitialCanvas();
 		root.getChildren().addAll(this);
 	}
