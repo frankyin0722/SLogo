@@ -2,7 +2,7 @@ package command.Math;
 
 import command.Command;
 
-public class SumCommand extends Command{
+public class SumCommand implements Command{
 	private double input1;
 	private double input2;
 	

@@ -2,7 +2,7 @@ package command.Boolean;
 
 import command.Command;
 
-public class AndCommand extends Command{
+public class AndCommand implements Command{
 	private double input1;
 	private double input2;
 	
