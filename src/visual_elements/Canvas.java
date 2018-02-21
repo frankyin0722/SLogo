@@ -21,7 +21,6 @@ public class Canvas extends Pane {
 //		this.setStyle("-fx-background-color: #" + color);
 		
 		this.setBackground(new Background(new BackgroundFill(Color.web("#" + color), CornerRadii.EMPTY, Insets.EMPTY)));
-
 	}
 	
 }

@@ -4,7 +4,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 public class Visualization extends BorderPane {
-	
 	/**
 	 * @author elizabethshulman
 	 * @author xlany
@@ -14,6 +13,7 @@ public class Visualization extends BorderPane {
 	 * 
 	 */
 	public Visualization(Scene scene) {
+		
 		this.setCenter(new Canvas());
 //		this.setBottom(new CommandWindow());
 	}
