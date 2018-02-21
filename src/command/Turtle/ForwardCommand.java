@@ -3,7 +3,7 @@ package command.Turtle;
 import command.Command;
 import turtle.Turtle;
 
-public class ForwardCommand extends Command{
+public class ForwardCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
 	
