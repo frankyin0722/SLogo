@@ -1,5 +1,7 @@
 package visual_elements;
 
-public class Canvas {
+import javafx.scene.layout.BorderPane;
+
+public class Canvas extends BorderPane{
 
 }
