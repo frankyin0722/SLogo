@@ -10,13 +10,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import turtle.Turtle;
 
-
-public class Canvas extends Pane {
+public class DrawingWindow extends Pane {
 	public static final int INITIAL_WIDTH = 600;
 	public static final int INITIAL_HEIGHT = 400;
-
 	private Turtle myTurtle;
-	public Canvas(Group root) {
+
+	public DrawingWindow(Group root) {
 		setupInitialCanvas();
 		
 		this.getChildren().addAll(testing());
