@@ -17,4 +17,5 @@ public class Visualization extends BorderPane {
 		this.setCenter(new Canvas());
 //		this.setBottom(new CommandWindow());
 	}
+	
 }
