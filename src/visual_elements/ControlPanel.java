@@ -1,16 +1,21 @@
 package visual_elements;
 
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import option_managers.*;
 
-public class ControlPanel extends GridPane {
+public class ControlPanel extends VBox {
 
 	public ControlPanel() {
-		
-		this.add(new Button(), 0, 0);
-		this.add(new Button(), 0, 1);
-		this.add(new Button(), 0, 2);
+		initializeButtons();
+	}
+
+	private void initializeButtons() {
+
+		this.getChildren().addAll(new PenOption(), new Button(), new Button());
 	
 	}
+	
+	
 	
 }

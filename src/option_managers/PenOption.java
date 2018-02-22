@@ -1,5 +1,5 @@
 package option_managers;
 
-public class PenOption implements OptionManager {
+public class PenOption extends TurtleManager {
 
 }
