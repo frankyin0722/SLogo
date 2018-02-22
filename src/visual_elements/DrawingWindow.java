@@ -28,7 +28,6 @@ public class DrawingWindow extends Pane {
 
 	public DrawingWindow(Group root) {
 		setupInitialCanvas();
-		
 		this.getChildren().addAll(testing(), setupTurtle());
 		root.getChildren().addAll(this);
 	}
@@ -37,8 +36,6 @@ public class DrawingWindow extends Pane {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
-	
-	
 	
 	private Rectangle testing() {
 		Rectangle rect = new Rectangle(20, 20, 100, 100);
@@ -50,12 +47,12 @@ public class DrawingWindow extends Pane {
 
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 //		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TEST_IMAGE));
-		Turtle turtle = new Turtle();
-		turtle.setImage(turtleImage);
+		Turtle turtle = new Turtle(turtleImage);
+//		turtle.setImage(turtleImage);
 		turtle.setFitWidth(TURTLE_WIDTH);
 		turtle.setFitHeight(TURTLE_HEIGHT);
-		turtle.setX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
-		turtle.setY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
+		turtle.changeX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
+		turtle.changeY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
 		return turtle;
 	}
 }
