@@ -12,8 +12,8 @@ public class HomeCommand implements Command{
 	
 	public double execute(){
 		double delta = Math.sqrt(Math.pow(myTurtle.getX(), 2)+Math.pow(myTurtle.getY(), 2));
-		myTurtle.setX(0);
-		myTurtle.setY(0);
+		myTurtle.changeX(0);
+		myTurtle.changeY(0);
 		return delta;
 	}
 	
