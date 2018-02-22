@@ -13,7 +13,7 @@ public class BackwardCommand implements Command{
 	}
 	
 	public double execute(){
-		myTurtle.changeX(myTurtle.getX() - Math.sin(myTurtle.getDirection())*myMovement);
+		myTurtle.changeX(myTurtle.getX() + Math.sin(myTurtle.getDirection())*myMovement);
 		myTurtle.changeY(myTurtle.getY() - Math.cos(myTurtle.getDirection())*myMovement);
 		myTurtle.update();
 		return myMovement;
