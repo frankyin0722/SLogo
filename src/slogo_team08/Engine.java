@@ -9,25 +9,19 @@ public class Engine {
 	public Stage myStage;
 	public Group myRoot;
 	private Scene myScene;
+	private Visualization myVis;
 	
-	public static final int INITIAL_SCENE_WIDTH = 1000;
-	public static final int INITIAL_SCENE_HEIGHT = 600;
+
 	
 	public void initializeSimulation(Stage primaryStage) {
 		myStage = primaryStage;
-		myScene = setupScene();
+		myVis = new Visualization();
+		myScene = myVis.getScene();
 		
 		myStage.setScene(myScene);
 		myStage.setMaximized(true);
 		myStage.setFullScreen(true);
 		
 		myStage.show();
-	}
-	
-	private Scene setupScene() {
-		myRoot = new Group();
-		Scene scene = new Scene(myRoot,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
-		new Visualization(myRoot);
-		return scene;
 	}
 }
