@@ -23,32 +23,32 @@ public class Parser implements TreeGenerator{
 	private PatternManager SomePatternManager;
 	private CommandInitializerType commandInitializer; 
 	
-	private void generateInputHandlerMap() {
-		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
-		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
-		for (Entry<String, Pattern> pattern : syntaxPatternMapping) {
-			String type = pattern.getKey();
-			try {
-				Class<?> myInstance = Class.forName("parser." + type
-						+ "Type");
-				Constructor<?> constructor = myInstance
-						.getConstructor(new Class[] { TreeGenerator.class,
-								List.class });
-				CommandTypes myCases = (CommandTypes) constructor.newInstance(
-						(TreeGenerator) this, userInput);
-				if (type.equals("Command")) {
-					commandInitializer = new CommandInitializerType((TreeGenerator) this, userInput);
-					inputHandlerMap.put(pattern.getValue(), commandInitializer);
-				} else
-					inputHandlerMap.put(pattern.getValue(), myCases);
-
-			} catch (NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
-				System.out.println("ERROR");
-			
-			}
-		}
-	}
-	
+//	private void generateInputHandlerMap() {
+//		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
+//		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
+//		for (Entry<String, Pattern> pattern : syntaxPatternMapping) {
+//			String type = pattern.getKey();
+//			try {
+//				Class<?> myInstance = Class.forName("parser." + type
+//						+ "Type");
+//				Constructor<?> constructor = myInstance
+//						.getConstructor(new Class[] { TreeGenerator.class,
+//								List.class });
+//				CommandTypes myCases = (CommandTypes) constructor.newInstance(
+//						(TreeGenerator) this, userInput);
+//				if (type.equals("Command")) {
+//					commandInitializer = new CommandInitializerType((TreeGenerator) this, userInput);
+//					inputHandlerMap.put(pattern.getValue(), commandInitializer);
+//				} else
+//					inputHandlerMap.put(pattern.getValue(), myCases);
+//
+//			} catch (NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
+//				System.out.println("ERROR");
+//			
+//			}
+//		}
+//	}
+//	
 	@Override
 	public void increaseIndex() {
 		// TODO Auto-generated method stub

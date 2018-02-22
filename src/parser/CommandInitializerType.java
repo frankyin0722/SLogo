@@ -29,13 +29,13 @@ public class CommandInitializerType implements CommandTypes {
 	
 	public void initialize(String language) {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
-		String nodeValue = useLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
+//		String nodeValue = useLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
 		
 	}
-	
-	private String useLanguageBundle(String input) {
-
-	}
+//	
+//	private String useLanguageBundle(String input) {
+//
+//	}
 	
 	private void makeParametersMapping() {
 		ResourceBundle resources = ResourceBundle.getBundle("parser/CommandParametersMapping");
