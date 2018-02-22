@@ -16,6 +16,7 @@ public class Visualization extends BorderPane {
 	public Visualization(Group root) {
 		this.setCenter(new DrawingWindow(root));
 		this.setBottom(new CommandWindow());
+		this.setRight(new ControlPanel());
 		root.getChildren().add(this);
 	}
 	

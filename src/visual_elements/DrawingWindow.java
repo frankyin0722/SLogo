@@ -25,14 +25,14 @@ public class DrawingWindow extends Pane {
 	
 	private void setupInitialCanvas() {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
-		this.setBackground(new Background(new BackgroundFill(Color.BLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
 	
 	
 	private Rectangle testing() {
 		Rectangle rect = new Rectangle(20, 20, 100, 100);
-		rect.setFill(Color.RED);
+		rect.setFill(Color.AQUAMARINE);
 		return rect;
 	}
 	
