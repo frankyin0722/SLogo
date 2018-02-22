@@ -45,6 +45,7 @@ public class Turtle extends Group {
     //change the turtle's bearing
     public void setDirection(double direction) {
     		this.direction = direction;
+    		myImage.setRotate(Math.toDegrees(direction));
     }
     //modifies x, remembers old xvalue
     public void changeX(double newX) {

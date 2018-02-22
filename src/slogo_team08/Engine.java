@@ -19,8 +19,8 @@ public class Engine {
 		myScene = myVis.getScene();
 		
 		myStage.setScene(myScene);
-		myStage.setMaximized(true);
-		myStage.setFullScreen(true);
+//		myStage.setMaximized(true);
+//		myStage.setFullScreen(true);
 		
 		myStage.show();
 	}
