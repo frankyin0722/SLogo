@@ -5,8 +5,8 @@ import javafx.scene.layout.BorderPane;
 
 public class Visualization {
 	
-	public static final int INITIAL_SCENE_WIDTH = 800;
-	public static final int INITIAL_SCENE_HEIGHT = 800;
+	public static final int INITIAL_SCENE_WIDTH = 1000;
+	public static final int INITIAL_SCENE_HEIGHT = 600;
 	
 	private Scene myScene;
 	private BorderPane myPane;
