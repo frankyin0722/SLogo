@@ -30,10 +30,10 @@ public class Turtle extends Group {
 
     //updates turtle's position, updates its list of lines if necessary
     public void update() {
-    		image.setX(newX);
-    		image.setY(newY);
+    		myImage.setX(newX);
+    		myImage.setY(newY);
     		if(!pen.PenUp()) {
-    			lines.add(new Line(oldX, oldY, image.getX(), image.getY()));
+    			lines.add(new Line(oldX, oldY, myImage.getX(), myImage.getY()));
     		}
     }
 
@@ -48,12 +48,12 @@ public class Turtle extends Group {
     }
     //modifies x, remembers old xvalue
     public void changeX(double newX) {
-    		oldX = image.getX();
+    		oldX = myImage.getX();
     		this.newX = newX;
     }
     //modifies y, remembers old yvalue
     public void changeY(double newY) {
-    		oldX = image.getY();
+    		oldX = myImage.getY();
     		this.newY = newY;
     }
     //deletes all lines of the turtle
@@ -61,21 +61,21 @@ public class Turtle extends Group {
     		lines.clear();
     }
     public double getX() {
-		return image.getX();
+		return myImage.getX();
     }
     public double getY() {
-		return image.getX();
+		return myImage.getX();
     }
     public void setVisibility(boolean visible) {
-    		image.setVisible(visible);
+    		myImage.setVisible(visible);
     }
     public void setImage(Image newImage) {
-    		image.setImage(newImage);
+    		myImage.setImage(newImage);
     }
     public void setFitWidth(double width) {
-    		image.setFitWidth(width);
+    		myImage.setFitWidth(width);
     }
     public void setFitHeight(double height) {
-		image.setFitHeight(height);
+    		myImage.setFitHeight(height);
     }
 }
