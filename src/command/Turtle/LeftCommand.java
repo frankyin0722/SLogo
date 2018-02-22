@@ -13,7 +13,7 @@ public class LeftCommand implements Command{
 	}
 	
 	public double execute(){
-		myTurtle.setDirection(myTurtle.getDirection() + myMovement);
+		myTurtle.setDirection(myTurtle.getDirection() - myMovement);
 		return myMovement;
 	}
 	

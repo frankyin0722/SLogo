@@ -11,16 +11,14 @@ import javafx.scene.shape.Line;
 public class Turtle extends Group {
 	private Pen pen = new Pen();
 	private ImageView myImage;
-	private double direction = 0;
+	private double direction = Math.PI / 2;
 	private double oldX;
 	private double oldY;
 	private double newX;
 	private double newY;
-	private List<Line> lines = new ArrayList<>();
 	public Turtle(Image image) {
 		super();
 		myImage = new ImageView(image);
-		getChildren().addAll(lines);
 		getChildren().add(myImage);
 	}
 	 //returns the turtle's pen
@@ -33,8 +31,10 @@ public class Turtle extends Group {
     		myImage.setX(newX);
     		myImage.setY(newY);
     		if(!pen.PenUp()) {
-    			lines.add(new Line(oldX, oldY, myImage.getX(), myImage.getY()));
+    			getChildren().add(new Line(oldX, oldY, myImage.getX(), myImage.getY()));
     		}
+    		oldX = newX;
+    		oldY = newY;
     }
 
     //check the direction the turtle is facing in radians
@@ -50,24 +50,23 @@ public class Turtle extends Group {
     //modifies x, remembers old xvalue
     public void changeX(double newX) {
     		oldX = myImage.getX();
-    		myImage.setX(newX);
     		this.newX = newX;
     }
     //modifies y, remembers old yvalue
     public void changeY(double newY) {
-    		oldX = myImage.getY();
-    		myImage.setY(newY);
+    		oldY = myImage.getY();
     		this.newY = newY;
     }
     //deletes all lines of the turtle
     public void clearLines() {
-    		lines.clear();
+    		getChildren().clear();
+    		getChildren().add(myImage);
     }
     public double getX() {
 		return myImage.getX();
     }
     public double getY() {
-		return myImage.getX();
+		return myImage.getY();
     }
     public void setVisibility(boolean visible) {
     		myImage.setVisible(visible);
