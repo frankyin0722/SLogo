@@ -29,10 +29,9 @@ public class DrawingWindow extends Pane {
 	public DrawingWindow(Group root) {
 		setupInitialCanvas();
 		
-		this.getChildren().addAll(setupTurtle());
+		this.getChildren().addAll(testing(), setupTurtle());
 		root.getChildren().addAll(this);
 	}
-	
 	
 	private void setupInitialCanvas() {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
@@ -51,15 +50,12 @@ public class DrawingWindow extends Pane {
 
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 //		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TEST_IMAGE));
-
 		Turtle turtle = new Turtle();
 		turtle.setImage(turtleImage);
 		turtle.setFitWidth(TURTLE_WIDTH);
 		turtle.setFitHeight(TURTLE_HEIGHT);
 		turtle.setX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
 		turtle.setY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
-
 		return turtle;
 	}
-	
 }
