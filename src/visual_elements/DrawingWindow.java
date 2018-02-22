@@ -5,7 +5,6 @@ import java.io.File;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -26,11 +25,12 @@ public class DrawingWindow extends Pane {
 //	public static final String TEST_IMAGE = "./images/cute_turtle.png";
 	private Turtle myTurtle;
 
-	public DrawingWindow(Group root) {
+	public DrawingWindow() {
 		setupInitialCanvas();
-		setupTurtle(root);
-		this.getChildren().addAll(testing());
-		root.getChildren().addAll(this);
+		setupTurtle();
+//		myTurtle.changeX(myTurtle.getX() + 100);
+//		this.getChildren().addAll(testing());
+//		root.getChildren().addAll(this);
 	}
 	
 	private void setupInitialCanvas() {
@@ -44,17 +44,17 @@ public class DrawingWindow extends Pane {
 		return rect;
 	}
 	
-	
-	private void setupTurtle(Group root) {
+	private void setupTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 //		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TEST_IMAGE));
 		myTurtle = new Turtle(turtleImage);
-//		turtle.setImage(turtleImage);
 		myTurtle.setFitWidth(TURTLE_WIDTH);
 		myTurtle.setFitHeight(TURTLE_HEIGHT);
 		myTurtle.changeX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
 		myTurtle.changeY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
-		root.getChildren().add(myTurtle);
+		this.getChildren().add(myTurtle);
 	}
+	
+	
 }
 	
