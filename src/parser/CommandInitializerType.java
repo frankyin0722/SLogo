@@ -34,7 +34,7 @@ public class CommandInitializerType implements CommandTypes {
 	}
 	
 	private String useLanguageBundle(String input) {
-		
+
 	}
 	
 	private void makeParametersMapping() {

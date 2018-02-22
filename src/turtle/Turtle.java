@@ -71,4 +71,10 @@ public class Turtle extends Group {
     public void setImage(Image newImage) {
     		image.setImage(newImage);
     }
+    public void setFitWidth(double width) {
+    		image.setFitWidth(width);
+    }
+    public void setFitHeight(double height) {
+		image.setFitHeight(height);
+    }
 }
