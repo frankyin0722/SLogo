@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.Group;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 
@@ -67,5 +68,7 @@ public class Turtle extends Group {
     public void setVisibility(boolean visible) {
     		image.setVisible(visible);
     }
-
+    public void setImage(Image newImage) {
+    		image.setImage(newImage);
+    }
 }
