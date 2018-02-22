@@ -4,12 +4,12 @@ import javafx.scene.layout.VBox;
 
 public class CommandContainer extends VBox {
 
-	CommandInput textInput;
+	TextFieldInput textInput;
 	HistoryManager historyDisplay;
 	
 	public CommandContainer() {
 		
-		textInput = new CommandInput();
+		textInput = new TextFieldInput();
 		historyDisplay = new HistoryManager();
 		this.getChildren().addAll(historyDisplay, textInput);
 	

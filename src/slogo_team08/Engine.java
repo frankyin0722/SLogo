@@ -10,8 +10,8 @@ public class Engine {
 	public Group myRoot;
 	private Scene myScene;
 	
-	public static final int INITIAL_SCENE_WIDTH = 800;
-	public static final int INITIAL_SCENE_HEIGHT = 800;
+	public static final int INITIAL_SCENE_WIDTH = 650;
+	public static final int INITIAL_SCENE_HEIGHT = 492;
 	
 	public void initializeSimulation(Stage primaryStage) {
 		myStage = primaryStage;
