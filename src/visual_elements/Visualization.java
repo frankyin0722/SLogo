@@ -1,9 +1,15 @@
 package visual_elements;
 
-import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
-public class Visualization extends BorderPane {
+public class Visualization {
+	
+	public static final int INITIAL_SCENE_WIDTH = 800;
+	public static final int INITIAL_SCENE_HEIGHT = 800;
+	
+	private Scene myScene;
+	private BorderPane myPane;
 	/**
 	 * @author elizabethshulman
 	 * @author xlany
@@ -13,19 +19,21 @@ public class Visualization extends BorderPane {
 	 * 
 	 */
 
-	public Visualization(Group root) {
-		initializeVis(root);
-	}
-
-	private void initializeVis(Group root) {
-		this.setCenter(new DrawingWindow(root));
-		this.setBottom(new TextFieldInput());
-		this.setRight(new ControlPanelRight());
-		this.setLeft(new ControlPanelLeft());
-		
-		this.setWidth(getMaxWidth());
-		
-		root.getChildren().add(this);
+	public Visualization() {
+		myPane = new BorderPane();
+		initializeVis();
 	}
 	
+	private void initializeVis() {
+		myPane.setCenter(new DrawingWindow());
+		myPane.setBottom(new TextFieldInput());
+		myPane.setRight(new ControlPanelRight());
+		myPane.setLeft(new ControlPanelLeft());
+		
+		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
+	}
+	
+	public Scene getScene() {
+		return myScene;
+	}
 }
