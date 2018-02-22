@@ -42,6 +42,20 @@ public class Parser implements TreeGenerator{
 	}
 	
 	@Override
+	public void recurse(CommandNode root) {
+		if (currentIndex >= userInput.size()) {
+			return;
+		}
+		for (Pattern pattern : inputHandlerMap.keySet()) {
+			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
+				CommandTypes cmdType = inputHandlerMap.get(pattern);
+				cmdType.recurse(root);
+				break; // after the leaves get called, break this for loop and end recurse 
+			}
+		}
+	}
+	
+	@Override
 	public void increaseIndex() {
 		// TODO Auto-generated method stub
 		
@@ -65,10 +79,5 @@ public class Parser implements TreeGenerator{
 		
 	}
 
-	@Override
-	public void recurse(CommandNode commandNode) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 }

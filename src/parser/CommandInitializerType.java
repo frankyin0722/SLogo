@@ -35,7 +35,9 @@ public class CommandInitializerType implements CommandTypes {
 		
 		myRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
 		
-		
+		for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
+			myTreeGenerator.recurse(myRoot);
+		}
 		
 	}
 	
@@ -74,10 +76,19 @@ public class CommandInitializerType implements CommandTypes {
 		}
 	}
 	
+	private void createUserDefinedInstruction(CommandNode root, String value) {
+		CommandNode child = new CommandNode(getCommandCategory(value), value, null, 0);
+		root.addChild(child);
+		myTreeGenerator.recurse(root);
+	}
+	
 	@Override
 	public void recurse(CommandNode node) {
-		// TODO Auto-generated method stub
-		
+		String currentValue = getCommandFromLanguageBundle(node.getCommandType());
+		if (userDefinedInstruction) { // if the command type is user-defined command
+			createUserDefinedInstruction(node, currentValue);
+			return;
+		}
 	} 
 	
 }
