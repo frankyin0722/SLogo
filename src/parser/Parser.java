@@ -22,7 +22,7 @@ public class Parser implements TreeGenerator{
 	private int ListStartIndex = 0;
 	private int ListEndIndex = 0;
 	private PatternManager SomePatternManager;
-	private CommandInitializerType commandInitializer; 
+	private CommandType commandInitializer; 
 	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
@@ -37,7 +37,7 @@ public class Parser implements TreeGenerator{
 								List.class });
 				CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
 				if (type.equals("Command")) {
-					commandInitializer = new CommandInitializerType(userInput, (TreeGenerator) this);
+					commandInitializer = new CommandType(userInput, (TreeGenerator) this);
 					inputHandlerMap.put(pattern.getValue(), commandInitializer);
 				} else
 					inputHandlerMap.put(pattern.getValue(), myCommandTypes);
@@ -62,16 +62,18 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
+	public List<String> getMethods() {
+		return commandInitializer.getMethods();
+	}
+	
 	@Override
 	public void increaseIndex() {
-		// TODO Auto-generated method stub
-		
+		currentIndex++;
 	}
 
 	@Override
 	public int getIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return currentIndex;
 	}
 
 	@Override
@@ -84,12 +86,4 @@ public class Parser implements TreeGenerator{
 		ListEndIndex++;
 	}
 
-<<<<<<< HEAD
-=======
-	@Override
-	public void recurse(CommandNode commandNode) {
-		// TODO Auto-generated method stub
-	}
->>>>>>> 57552d44235967228c340d5a67676c52adb9aa27
-	
 }
