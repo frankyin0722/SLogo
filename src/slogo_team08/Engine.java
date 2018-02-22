@@ -16,7 +16,11 @@ public class Engine {
 	public void initializeSimulation(Stage primaryStage) {
 		myStage = primaryStage;
 		myScene = setupScene();
+		
 		myStage.setScene(myScene);
+		myStage.setMaximized(true);
+		myStage.setFullScreen(true);
+		
 		myStage.show();
 	}
 	
