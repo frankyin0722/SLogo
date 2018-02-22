@@ -7,64 +7,76 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-public class Parser {
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
+public class Parser implements TreeGenerator{
+	private static final String Syntax = "Syntax";
+	private HashMap<Pattern, CommandTypes> inputHandlerMap;
+	private List<String> userInput;
+	private int currentIndex;
+	private int ListStartIndex = 0;
+	private int ListEndIndex = 0;
+	private PatternManager SomePatternManager;
+	private CommandInitializerType commandInitializer; 
 	
+	private void generateInputHandlerMap() {
+		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
+		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
+		for (Entry<String, Pattern> pattern : syntaxPatternMapping) {
+			String type = pattern.getKey();
+			try {
+				Class<?> myInstance = Class.forName("parser." + type
+						+ "Type");
+				Constructor<?> constructor = myInstance
+						.getConstructor(new Class[] { TreeGenerator.class,
+								List.class });
+				CommandTypes myCases = (CommandTypes) constructor.newInstance(
+						(TreeGenerator) this, userInput);
+				if (type.equals("Command")) {
+					commandInitializer = new CommandInitializerType((TreeGenerator) this, userInput);
+					inputHandlerMap.put(pattern.getValue(), commandInitializer);
+				} else
+					inputHandlerMap.put(pattern.getValue(), myCases);
 
-/**
- * Simple parser based on regular expressions that matches program strings to 
- * kinds of language features.
- * 
- * @author Robert C. Duvall
- */
-    // "types" and the regular expression patterns that recognize those types
-    // note, it is a list because order matters (some patterns may be more generic)
-    private List<Entry<String, Pattern>> mySymbols;
+			} catch (NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
+				System.out.println("ERROR");
+			
+			}
+		}
+	}
+	
+	@Override
+	public void increaseIndex() {
+		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public int getIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
-    /**
-     * Create an empty parser.
-     */
-    public Parser () {
-        mySymbols = new ArrayList<>();
-    }
+	@Override
+	public void increaseListStartIndex() {
+		// TODO Auto-generated method stub
+		
+	}
 
-    /**
-     * Adds the given resource file to this language's recognized types
-     */
-    public void addPatterns (String syntax) {
-        ResourceBundle resources = ResourceBundle.getBundle(syntax);
-        Enumeration<String> iter = resources.getKeys();
-        while (iter.hasMoreElements()) {
-            String key = iter.nextElement();
-            String regex = resources.getString(key);
-            mySymbols.add(new SimpleEntry<>(key,
-                           // THIS IS THE IMPORTANT LINE
-                           Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
-        }
-    }
+	@Override
+	public void IncreaseListEndIndex() {
+		// TODO Auto-generated method stub
+		
+	}
 
-    /**
-     * Returns language's type associated with the given text if one exists 
-     */
-    public String getSymbol (String text) {
-        final String ERROR = "NO MATCH";
-        for (Entry<String, Pattern> e : mySymbols) {
-            if (match(text, e.getValue())) {
-                return e.getKey();
-            }
-        }
-        // FIXME: perhaps throw an exception instead
-        return ERROR;
-    }
-
-    /**
-     * Returns true if the given text matches the given regular expression pattern
-     */
-    private boolean match (String text, Pattern regex) {
-        // THIS IS THE KEY LINE
-        return regex.matcher(text).matches();
-    }
-
-
+	@Override
+	public void recurse(CommandNode commandNode) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
