@@ -50,11 +50,13 @@ public class Turtle extends Group {
     //modifies x, remembers old xvalue
     public void changeX(double newX) {
     		oldX = myImage.getX();
+    		myImage.setX(newX);
     		this.newX = newX;
     }
     //modifies y, remembers old yvalue
     public void changeY(double newY) {
     		oldX = myImage.getY();
+    		myImage.setY(newY);
     		this.newY = newY;
     }
     //deletes all lines of the turtle
