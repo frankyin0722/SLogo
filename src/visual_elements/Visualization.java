@@ -2,6 +2,7 @@ package visual_elements;
 
 import javafx.scene.Group;
 import javafx.scene.layout.BorderPane;
+import visual_elements.user_input_presentation.CommandContainer;
 
 public class Visualization extends BorderPane {
 	/**
@@ -15,7 +16,7 @@ public class Visualization extends BorderPane {
 
 	public Visualization(Group root) {
 		this.setCenter(new DrawingWindow(root));
-		this.setBottom(new CommandWindow());
+		this.setBottom(new CommandContainer());
 		this.setRight(new ControlPanel());
 		root.getChildren().add(this);
 	}
