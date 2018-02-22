@@ -1,6 +1,7 @@
 package parser;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -27,17 +28,15 @@ public class Parser implements TreeGenerator{
 				Constructor<?> constructor = myInstance
 						.getConstructor(new Class[] { TreeGenerator.class,
 								List.class });
-				CommandTypes myCases = (CommandTypes) constructor.newInstance(
-						(TreeGenerator) this, userInput);
+				CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
 				if (type.equals("Command")) {
-					commandInitializer = new CommandInitializerType((TreeGenerator) this, userInput);
+					commandInitializer = new CommandInitializerType(userInput, (TreeGenerator) this);
 					inputHandlerMap.put(pattern.getValue(), commandInitializer);
 				} else
-					inputHandlerMap.put(pattern.getValue(), myCases);
+					inputHandlerMap.put(pattern.getValue(), myCommandTypes);
 
-			} catch (NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
-				System.out.println("ERROR");
-			
+			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
+				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
 			}
 		}
 	}
