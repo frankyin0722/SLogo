@@ -18,7 +18,7 @@ public class Visualization extends BorderPane {
 	}
 
 	private void initializeVis(Group root) {
-		this.setCenter(new DrawingWindow(root));
+		this.setCenter(new DrawingWindow());
 		this.setBottom(new TextFieldInput());
 		this.setRight(new ControlPanelRight());
 		this.setLeft(new ControlPanelLeft());
