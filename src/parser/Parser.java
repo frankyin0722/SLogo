@@ -62,20 +62,17 @@ public class Parser implements TreeGenerator{
 
 	@Override
 	public void increaseListStartIndex() {
-		// TODO Auto-generated method stub
-		
+		ListStartIndex++;
 	}
 
 	@Override
-	public void IncreaseListEndIndex() {
-		// TODO Auto-generated method stub
-		
+	public void increaseListEndIndex() {
+		ListEndIndex++;
 	}
 
 	@Override
 	public void recurse(CommandNode commandNode) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 }
