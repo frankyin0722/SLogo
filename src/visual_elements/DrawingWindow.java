@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -15,10 +16,8 @@ public class DrawingWindow extends Pane {
 	public static final int INITIAL_HEIGHT = 400;
 	private Turtle myTurtle;
 
-	public DrawingWindow(Group root) {
+	public DrawingWindow() {
 		setupInitialCanvas();
-		
-		root.getChildren().addAll(this);
 	}
 	
 	
@@ -26,9 +25,4 @@ public class DrawingWindow extends Pane {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
-	
-//	private void setupTurtle(Group root) {
-//		
-//	}
-	
 }
