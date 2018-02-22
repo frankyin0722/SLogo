@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import turtle.Turtle;
 
 public class DrawingWindow extends Pane {
-	public static final int INITIAL_WIDTH = 600;
+	public static final int INITIAL_WIDTH = 800;
 	public static final int INITIAL_HEIGHT = 400;
 	public static final int TURTLE_WIDTH = 20;
 	public static final int TURTLE_HEIGHT = 30;
@@ -26,6 +26,7 @@ public class DrawingWindow extends Pane {
 		setupInitialCanvas();
 		setupTurtle();
 //		myTurtle.changeX(myTurtle.getX() + 100);
+		myTurtle.setDirection(Math.PI/2);
 //		this.getChildren().addAll(testing());
 //		root.getChildren().addAll(this);
 	}
@@ -47,6 +48,8 @@ public class DrawingWindow extends Pane {
 		myTurtle = new Turtle(turtleImage);
 		myTurtle.setFitWidth(TURTLE_WIDTH);
 		myTurtle.setFitHeight(TURTLE_HEIGHT);
+//		myTurtle.changeX((this.getMaxWidth() - TURTLE_WIDTH)/2);
+//		myTurtle.changeY((this.getHeight() - TURTLE_HEIGHT)/2);
 		myTurtle.changeX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
 		myTurtle.changeY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
 		this.getChildren().add(myTurtle);
