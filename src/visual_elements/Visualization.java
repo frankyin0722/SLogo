@@ -14,9 +14,17 @@ public class Visualization extends BorderPane {
 	 */
 
 	public Visualization(Group root) {
+		initializeVis(root);
+	}
+
+	private void initializeVis(Group root) {
 		this.setCenter(new DrawingWindow(root));
-		this.setBottom(new CommandWindow());
-		this.setRight(new ControlPanel());
+		this.setBottom(new TextFieldInput());
+		this.setRight(new ControlPanelRight());
+		this.setLeft(new ControlPanelLeft());
+		
+		this.setWidth(getMaxWidth());
+		
 		root.getChildren().add(this);
 	}
 	
