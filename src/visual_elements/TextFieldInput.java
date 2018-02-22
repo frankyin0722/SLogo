@@ -1,4 +1,4 @@
-package visual_elements.user_input_presentation;
+package visual_elements;
 
 import javafx.scene.control.TextField;
 
