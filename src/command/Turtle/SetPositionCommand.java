@@ -16,8 +16,8 @@ public class SetPositionCommand implements Command{
 	
 	public double execute(){
 		double delta = Math.sqrt(Math.pow(newX - myTurtle.getX(), 2)+Math.pow(newY - myTurtle.getY(), 2));
-		myTurtle.setX(newX);
-		myTurtle.setY(newY);
+		myTurtle.changeX(newX);
+		myTurtle.changeY(newY);
 		return delta;
 	}
 	

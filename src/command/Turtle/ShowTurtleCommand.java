@@ -11,7 +11,7 @@ public class ShowTurtleCommand implements Command{
 	}
 	
 	public double execute(){
-		myTurtle.setVisible(true);
+		myTurtle.setVisibility(true);
 		return 1;
 	}
 	

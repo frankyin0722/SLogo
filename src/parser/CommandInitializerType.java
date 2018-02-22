@@ -52,6 +52,7 @@ public class CommandInitializerType implements CommandTypes {
 			return input;
 		}
 		throw new IllegalArgumentException("Error converting language to Command: Command Not Found in Such Language!");
+
 	}
 	
 	private void makeParametersMapping() {

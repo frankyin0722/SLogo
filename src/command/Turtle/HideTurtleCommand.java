@@ -11,7 +11,7 @@ public class HideTurtleCommand implements Command{
 	}
 	
 	public double execute(){
-		myTurtle.setVisible(false);
+		myTurtle.setVisibility(false);
 		return 0;
 	}
 	

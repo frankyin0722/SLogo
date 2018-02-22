@@ -1,4 +1,11 @@
 package parser;
+import java.util.Enumeration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -69,15 +76,20 @@ public class Parser implements TreeGenerator{
 
 	@Override
 	public void increaseListStartIndex() {
-		// TODO Auto-generated method stub
-		
+		ListStartIndex++;
 	}
 
 	@Override
-	public void IncreaseListEndIndex() {
-		// TODO Auto-generated method stub
-		
+	public void increaseListEndIndex() {
+		ListEndIndex++;
 	}
 
+<<<<<<< HEAD
+=======
+	@Override
+	public void recurse(CommandNode commandNode) {
+		// TODO Auto-generated method stub
+	}
+>>>>>>> 57552d44235967228c340d5a67676c52adb9aa27
 	
 }

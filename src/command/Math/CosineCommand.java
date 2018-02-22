@@ -7,6 +7,6 @@ public class CosineCommand {
 	}
 	
 	public double execute(){
-		return Math.sin(input1);
+		return Math.cos(input1);
 	}
 }
