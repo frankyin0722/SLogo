@@ -71,13 +71,7 @@ public class DrawingWindow extends Pane {
 	private void getNewTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 //		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TEST_IMAGE));
-		myTurtle = new Turtle(turtleImage);
-		myTurtle.getPen().setPen(false);
-		myTurtle.setFitWidth(TURTLE_WIDTH);
-		myTurtle.setFitHeight(TURTLE_HEIGHT);
-		myTurtle.changeX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
-		myTurtle.changeY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
-		myTurtle.getPen().setPen(true);
+		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		this.getChildren().add(myTurtle);
 	}
 	
