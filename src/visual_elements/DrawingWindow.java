@@ -64,15 +64,6 @@ public class DrawingWindow extends Pane {
 		this.getChildren().add(rect);
 	}
 	
-	private void setupTurtle() {
-		StackPane sp = new StackPane();
-//		sp.getChildren().add(myTurtle);
-		sp.setAlignment(Pos.CENTER);
-//		sp.translateXProperty().bind(this.widthProperty().subtract(sp.widthProperty()).divide(2));
-//		sp.translateYProperty().bind(this.heightProperty().subtract(sp.heightProperty()).divide(2));
-		this.getChildren().add(sp);
-	}
-	
 	private void getNewTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 //		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TEST_IMAGE));
