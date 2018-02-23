@@ -1,6 +1,12 @@
 package visual_elements;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
+import command.Command;
+import command.Control.RepeatCommand;
+import command.Turtle.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -31,8 +37,14 @@ public class DrawingWindow extends Pane {
 		setupInitialCanvas();
 		getNewTurtle();
 //		setupTurtle();
-		myTurtle.changeX(myTurtle.getX() + 100);
-		myTurtle.setDirection(Math.PI/2);
+		
+//		myTurtle.changeX(myTurtle.getX() + 100);
+		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
+			add(new ForwardCommand(myTurtle,50));
+			add(new RightCommand(myTurtle,90));}});
+		System.out.println(testing.execute());
+//		this.getChildren().addAll(testing());
+//		root.getChildren().addAll(this);
 	}
 	
 	private void setupInitialCanvas() {
