@@ -34,7 +34,9 @@ public class Turtle extends Group {
     		myImage.setX(newX);
     		myImage.setY(newY);
     		if(!pen.PenUp()) {
-    			getChildren().add(new Line(oldX, oldY, myImage.getX() + (myImage.getFitWidth() / 2), myImage.getY()+ (myImage.getFitHeight() / 2)));
+    			Line line = new Line(oldX, oldY, myImage.getX() + (myImage.getFitWidth() / 2), myImage.getY()+ (myImage.getFitHeight() / 2));
+    			line.setStroke(pen.getColor());
+    			getChildren().add(line);
     		}
     		oldX = newX;
     		oldY = newY;
