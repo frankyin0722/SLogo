@@ -1,5 +1,11 @@
 package visual_elements;
 
+
+
+
+import java.util.ResourceBundle;
+
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
@@ -12,25 +18,33 @@ import javafx.scene.layout.BorderPane;
  * 
  */
 public class Visualization {
-	
+	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
 	public static final int INITIAL_SCENE_WIDTH = 1000;
-	public static final int INITIAL_SCENE_HEIGHT = 600;
+	public static final int INITIAL_SCENE_HEIGHT = 700;
 	
 	private Scene myScene;
 	private BorderPane myPane;
+	private ResourceBundle myResources;
 
 	public Visualization() {
 		myPane = new BorderPane();
+		setupLanguage("English");
 		initializeVis();
 	}
 
-	private void initializeVis() {
-		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
-
+	private void initializeVis() {		
+		myPane.setPadding(new Insets(20,20,20,20));
+		myPane.setTop(new InfoTop());
 		myPane.setCenter(new DrawingWindow());
-		myPane.setBottom(new ControlPanelConsole());
+		myPane.setBottom(new ControlTextInput());
 		myPane.setRight(new ControlPanelRight());
-		myPane.setLeft(new ControlPanelLeft());
+		myPane.setLeft(new ControlPanelLeft(myResources));
+		
+		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
+	}
+	
+	private void setupLanguage(String language) {
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
 		
 	}
 	

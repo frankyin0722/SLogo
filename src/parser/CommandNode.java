@@ -12,8 +12,8 @@ public class CommandNode {
 	public CommandNode (String commandType, String commandName, List<CommandNode> subCommands, double value) {
 		myCommandType = commandType;
 		myCommandName = commandName;
-		myChildren = new ArrayList<CommandNode>();
 		myChildren = subCommands;
+		myChildren = new ArrayList<CommandNode>();
 		myNodeValue = value;
 	}
 	
