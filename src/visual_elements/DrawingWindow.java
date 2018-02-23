@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+
 import command.Command;
 import command.Control.RepeatCommand;
 import command.Turtle.*;
@@ -13,14 +14,17 @@ import javafx.geometry.Pos;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
+import menu_managers.TurtleMenu;
 
 public class DrawingWindow extends Pane {
 	public static final int INITIAL_WIDTH = 900;
@@ -33,15 +37,12 @@ public class DrawingWindow extends Pane {
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	
 	private Turtle myTurtle;
-	private Background myBackground;
 	private double myHomeX;
 	private double myHomeY;
-	private Pane drawingWindow;
 
 	public DrawingWindow() {
 		setupInitialCanvas();
-		getNewTurtle();
-//		setupTurtle();
+		setupTurtle();
 		
 //		myTurtle.changeX(myTurtle.getX() + 100);
 		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
@@ -59,7 +60,7 @@ public class DrawingWindow extends Pane {
 		this.setBackgroundColor(INITIAL_COLOR);
 	}
 	
-	private void getNewTurtle() {
+	private void setupTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		this.getChildren().add(myTurtle);
@@ -72,10 +73,19 @@ public class DrawingWindow extends Pane {
 			@Override
 			public void handle(Event event) {
 				setBackgroundColor(colorPicker.getValue());
-
 			}
 		});
 		this.getChildren().add(colorPicker);
+	}
+	
+	private void initializeTurtleMenu() {
+		TurtleMenu turtleMenu = new TurtleMenu();
+//		for (Button b: turtleMenu.getTurtleButtons()) {
+//			if (b.getGraphic() instanceof ImageView) {
+//				b.setOnAction(e -> myTurtle.setImage((ImageView)b.getGraphic()));
+//			}
+//		}
+		this.getChildren().add(turtleMenu);
 	}
 	
 	private void setBackgroundColor(Color color) {
@@ -87,6 +97,11 @@ public class DrawingWindow extends Pane {
 				"-fx-background-color: " + hex + ";"
 				);
 	}
+	
+	
+//	private void changeTurtleImage() {
+//		
+//	}
 	
 }
 	
