@@ -57,12 +57,13 @@ public class TextFieldInput extends VBox {
 	
 	private void setButtonEvents() {
 		myRunButton.setOnAction(e -> inputToParser());
-		myClearButton.setOnAction(e -> myTextField.clear());
+		myClearButton.setOnAction(e -> myTextArea.clear());
 	}
 	
 	private void inputToParser() {
 //		new Parser(myTextField.getText());
-		new Parser(myTextArea.getParagraphs());
+//		new Parser(myTextArea.getParagraphs());
+		System.out.print(myTextArea.getParagraphs());
 	}
 	/**
 	 * design q: how to put these things in controller?
