@@ -14,23 +14,14 @@ public class HistoryMenu extends TitledPane{
 	public HistoryMenu() {
 		historyDisplay = new TableView<String>();
 		currentHistory = new ArrayList<String>();
-		this.setText("History");
-		
 	}
 	
-	private void clearHistory() {
+	public void clearHistory() {
 		currentHistory.clear();
 	}
 	
-	private void addCommand(String command) {
+	public void addCommand(String command) {
 		currentHistory.add(command);
 	}
-	
-	
-//	
-//	private TableView<String> buildInternalTable() {
-//		
-//	}
-//	
 }
 
