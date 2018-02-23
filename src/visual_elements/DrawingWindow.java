@@ -51,6 +51,11 @@ public class DrawingWindow extends Pane {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 		this.setMaxSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setStyle("-fx-padding: 10;" + 
+                "-fx-border-style: solid inside;" + 
+                "-fx-border-width: 15;" +
+                "-fx-border-insets: 5;" + 
+                "-fx-border-color: deepskyblue;");
 	}
 	
 	private void testing() {
@@ -59,22 +64,11 @@ public class DrawingWindow extends Pane {
 		this.getChildren().add(rect);
 	}
 	
-	private void setupTurtle() {
-		StackPane sp = new StackPane();
-//		sp.getChildren().add(myTurtle);
-		sp.setAlignment(Pos.CENTER);
-//		sp.translateXProperty().bind(this.widthProperty().subtract(sp.widthProperty()).divide(2));
-//		sp.translateYProperty().bind(this.heightProperty().subtract(sp.heightProperty()).divide(2));
-		this.getChildren().add(sp);
-	}
-	
 	private void getNewTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 //		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TEST_IMAGE));
 		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		this.getChildren().add(myTurtle);
 	}
-	
-	
 }
 	

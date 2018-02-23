@@ -7,6 +7,8 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import javafx.collections.ObservableList;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -24,6 +26,14 @@ public class Parser implements TreeGenerator{
 	private PatternManager SomePatternManager;
 	private CommandType commandInitializer; 
 	
+	public Parser(String commands) {
+		System.out.print(commands);
+	}
+	
+	public Parser(ObservableList<CharSequence> paragraphs) {
+		System.out.print(paragraphs.toString());
+	}
+
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
 		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
