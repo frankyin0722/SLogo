@@ -2,11 +2,14 @@ package visual_elements;
 
 
 import parser.Parser;
+import buttons.RunButton;
+import buttons.ClearButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
+
 
 public class TextFieldInput extends VBox {
 	private TextField myTextField;
@@ -49,10 +52,10 @@ public class TextFieldInput extends VBox {
 	}
 	
 	private void setupTextFieldButtons() {
-		TextFieldButtons buttons = new TextFieldButtons();
-		myRunButton = buttons.getRunButton();
-		myClearButton = buttons.getClearButton();
-		this.getChildren().add(buttons);
+		myRunButton = new RunButton();
+		myClearButton = new ClearButton();
+		
+		this.getChildren().addAll(myRunButton, myClearButton);
 	}
 	
 	private void setButtonEvents() {

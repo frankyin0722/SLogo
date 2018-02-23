@@ -14,6 +14,7 @@ public class HistoryMenu extends TitledPane{
 	public HistoryMenu() {
 		historyDisplay = new TableView<String>();
 		currentHistory = new ArrayList<String>();
+		this.setText("History");
 	}
 	
 	public void clearHistory() {
