@@ -1,16 +1,14 @@
 package visual_elements;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import command.Command;
 import command.Control.RepeatCommand;
-import command.Turtle.ForwardCommand;
-import command.Turtle.RightCommand;
-import javafx.event.Event;
-import javafx.event.EventHandler;
+import command.Turtle.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -34,13 +32,10 @@ public class DrawingWindow extends Pane {
 	private Turtle myTurtle;
 	private double myHomeX;
 	private double myHomeY;
-	private Pane drawingWindow;
 
 	public DrawingWindow() {
-		drawingWindow = this;
 		setupInitialCanvas();
 		getNewTurtle();
-		initializeColorPicker();
 //		setupTurtle();
 		
 //		myTurtle.changeX(myTurtle.getX() + 100);
@@ -75,18 +70,5 @@ public class DrawingWindow extends Pane {
 		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		this.getChildren().add(myTurtle);
 	}
-	
-	private void initializeColorPicker() {
-		ColorPicker colorPicker = new ColorPicker();
-		colorPicker.setOnAction(new EventHandler() {
-			@Override
-			public void handle(Event event) {
-				drawingWindow.setBackground(new Background( 
-						new BackgroundFill(colorPicker.getValue(), CornerRadii.EMPTY, Insets.EMPTY)));
-			}
-		});
-		this.getChildren().add(colorPicker);
-	}
-	
 }
 	
