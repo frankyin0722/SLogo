@@ -26,13 +26,20 @@ public class Parser implements TreeGenerator{
 	private int ListEndIndex = 0;
 	private PatternManager SomePatternManager = new PatternManager();
 	private CommandType commandInitializer; 
+	private String usedLanguage;
 	
-	public CommandNode generateCommandTree(String input, String language) {
+	public List<CommandNode> generateCommandTree(String input, String language) {
 		try {
 			currentIndex = 0;
+			usedLanguage = language;
 			userInput = Arrays.asList(input.split("\\s+"));
 			generateInputHandlerMap();
 			commandInitializer.initialize(language);
+			System.out.println(getIndex()+"!!!");
+			if (getIndex() < userInput.size()) {
+				System.out.println("executed!!!!!!!");
+				commandInitializer.initialize(language);
+			}
 			return commandInitializer.getRoot();
 		} catch (NullPointerException e) {
 			System.out.println("Error in parsing: No Input Command Found! ");
@@ -73,16 +80,17 @@ public class Parser implements TreeGenerator{
 	
 	@Override
 	public void recurse(CommandNode root) {
+		//System.out.println(currentIndex);
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
 		for (Pattern pattern : inputHandlerMap.keySet()) {
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				System.out.println(1);
-				System.out.println(userInput.get(currentIndex));
+				//System.out.println(1);
+				System.out.println(cmdType.toString());
 				cmdType.recurse(root);
-				break; // after the leaves get called, break this for loop and end recurse 
+				break;
 			}
 		}
 	}
@@ -115,6 +123,7 @@ public class Parser implements TreeGenerator{
 		System.out.println("Type is: " + node.getCommandType());
 		System.out.println(node.getCommandName());
 		System.out.println("Root value is: " + node.getNodeValue());
+		System.out.println("Current index is: " + getIndex());
 		System.out.println();
 	}
 	
