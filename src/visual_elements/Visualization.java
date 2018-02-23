@@ -30,11 +30,9 @@ public class Visualization {
 
 	private void initializeVis() {
 		myPane.setPadding(new Insets(20,20,20,20));
-//		myPane.setMargin(myPane.getCenter(), new Insets(12,12,12,12));
 		myPane.setTop(new InfoTop());
 		myPane.setCenter(new DrawingWindow());
 		myPane.setBottom(new ControlTextInput());
-
 		myPane.setRight(new ControlPanelRight());
 		myPane.setLeft(new ControlPanelLeft());
 		

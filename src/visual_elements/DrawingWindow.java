@@ -27,11 +27,13 @@ public class DrawingWindow extends Pane {
 	public static final int INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;
-
 //	public static final String IMAGE_PATH = "./images/";
 	public static final String FRANKLIN_IMAGE = "franklin.jpg";
 	public static final String TURTLE_IMAGE = "cute_turtle.png";
+	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
+	
 	private Turtle myTurtle;
+	private Background myBackground;
 	private double myHomeX;
 	private double myHomeY;
 	private Pane drawingWindow;
@@ -54,7 +56,7 @@ public class DrawingWindow extends Pane {
 	private void setupInitialCanvas() {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 		this.setMaxSize(INITIAL_WIDTH, INITIAL_HEIGHT);
-		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setBackgroundColor(INITIAL_COLOR);
 	}
 	
 	private void getNewTurtle() {
@@ -69,11 +71,22 @@ public class DrawingWindow extends Pane {
 		colorPicker.setOnAction(new EventHandler() {
 			@Override
 			public void handle(Event event) {
-				drawingWindow.setBackground(new Background( 
-						new BackgroundFill(colorPicker.getValue(), CornerRadii.EMPTY, Insets.EMPTY)));
+				setBackgroundColor(colorPicker.getValue());
+
 			}
 		});
 		this.getChildren().add(colorPicker);
 	}
+	
+	private void setBackgroundColor(Color color) {
+		String hex = String.format( "#%02X%02X%02X",
+	            (int)( color.getRed() * 255 ),
+	            (int)( color.getGreen() * 255 ),
+	            (int)( color.getBlue() * 255 ) );
+		this.setStyle(
+				"-fx-background-color: " + hex + ";"
+				);
+	}
+	
 }
 	

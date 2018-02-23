@@ -66,7 +66,7 @@ public class TextFieldInput extends VBox {
 	private void inputToParser() {
 //		new Parser(myTextField.getText());
 //		new Parser(myTextArea.getParagraphs());
-		System.out.print(myTextArea.getParagraphs());
+		System.out.print(myTextArea.getParagraphs().toString());
 	}
 	/**
 	 * design q: how to put these things in controller?
