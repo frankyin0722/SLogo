@@ -24,6 +24,10 @@ public class Parser implements TreeGenerator{
 	private PatternManager SomePatternManager;
 	private CommandType commandInitializer; 
 	
+	public Parser(String commands) {
+		System.out.print(commands);
+	}
+	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
 		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
