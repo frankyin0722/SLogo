@@ -1,6 +1,11 @@
 package visual_elements;
 
+import java.io.File;
+import java.util.concurrent.TimeUnit;
 
+import command.Command;
+import command.Turtle.BackwardCommand;
+import command.Turtle.ForwardCommand;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -33,12 +38,25 @@ public class DrawingWindow extends Pane {
 //		setupTurtle();
 		myTurtle.changeX(myTurtle.getX() + 100);
 		myTurtle.setDirection(Math.PI/2);
+		
+//		myTurtle.changeX(myTurtle.getX() + 100);
+		myTurtle.setDirection(Math.PI);
+		Command testing = new BackwardCommand(myTurtle,50);
+		Command testing2 = new ForwardCommand(myTurtle, testing.execute());
+		testing2.execute();
+//		this.getChildren().addAll(testing());
+//		root.getChildren().addAll(this);
 	}
 	
 	private void setupInitialCanvas() {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 		this.setMaxSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+		this.setStyle("-fx-padding: 10;" + 
+                "-fx-border-style: solid inside;" + 
+                "-fx-border-width: 15;" +
+                "-fx-border-insets: 5;" + 
+                "-fx-border-color: deepskyblue;");
 	}
 	
 	private void testing() {
@@ -65,10 +83,9 @@ public class DrawingWindow extends Pane {
 		myTurtle.setFitHeight(TURTLE_HEIGHT);
 		myTurtle.changeX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
 		myTurtle.changeY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
+		myTurtle.update();
 		myTurtle.getPen().setPen(true);
 		this.getChildren().add(myTurtle);
 	}
-	
-	
 }
 	
