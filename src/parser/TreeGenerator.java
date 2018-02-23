@@ -8,7 +8,7 @@ public interface TreeGenerator {
 	
 	public void increaseListStartIndex();
 	
-	public void IncreaseListEndIndex();
+	public void increaseListEndIndex();
 	
 	public void recurse(CommandNode commandNode);
 }
