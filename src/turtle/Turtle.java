@@ -1,8 +1,5 @@
 package turtle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,14 +8,20 @@ import javafx.scene.shape.Line;
 public class Turtle extends Group {
 	private Pen pen = new Pen();
 	private ImageView myImage;
-	private double direction = Math.PI / 2;
+	private double direction = 0;
 	private double oldX;
 	private double oldY;
 	private double newX;
 	private double newY;
-	public Turtle(Image image) {
+	public Turtle(Image image, double x, double y, double width, double height) {
 		super();
 		myImage = new ImageView(image);
+		myImage.setX(x- width/2);
+		oldX = x- width/2;
+		myImage.setY(y - height/2);
+		oldY = y - height/2;
+		myImage.setFitWidth(width);
+		myImage.setFitHeight(height);
 		getChildren().add(myImage);
 	}
 	 //returns the turtle's pen
@@ -31,10 +34,11 @@ public class Turtle extends Group {
     		myImage.setX(newX);
     		myImage.setY(newY);
     		if(!pen.PenUp()) {
-    			getChildren().add(new Line(oldX, oldY, myImage.getX(), myImage.getY()));
+    			getChildren().add(new Line(oldX, oldY, myImage.getX() + (myImage.getFitWidth() / 2), myImage.getY()+ (myImage.getFitHeight() / 2)));
     		}
     		oldX = newX;
     		oldY = newY;
+    		myImage.toFront();
     }
 
     //check the direction the turtle is facing in radians
@@ -49,12 +53,12 @@ public class Turtle extends Group {
     }
     //modifies x, remembers old xvalue
     public void changeX(double newX) {
-    		oldX = myImage.getX();
+    		oldX = myImage.getX() + (myImage.getFitWidth()/ 2);
     		this.newX = newX;
     }
     //modifies y, remembers old yvalue
     public void changeY(double newY) {
-    		oldY = myImage.getY();
+    		oldY = myImage.getY() + (myImage.getFitHeight()/2);
     		this.newY = newY;
     }
     //deletes all lines of the turtle
@@ -68,6 +72,8 @@ public class Turtle extends Group {
     public double getY() {
 		return myImage.getY();
     }
+    
+    //not needed rn, but who knows
     public void setVisibility(boolean visible) {
     		myImage.setVisible(visible);
     }
