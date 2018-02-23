@@ -1,11 +1,14 @@
 package visual_elements;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import command.Command;
 import command.Turtle.BackwardCommand;
 import command.Turtle.ForwardCommand;
+import command.Turtle.RightCommand;
+import command.Control.RepeatCommand;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
@@ -35,9 +38,10 @@ public class DrawingWindow extends Pane {
 		setupTurtle();
 //		myTurtle.changeX(myTurtle.getX() + 100);
 		myTurtle.setDirection(Math.PI);
-		Command testing = new BackwardCommand(myTurtle,50);
-		Command testing2 = new ForwardCommand(myTurtle, testing.execute());
-		testing2.execute();
+		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
+			add(new ForwardCommand(myTurtle,50));
+			add(new RightCommand(myTurtle,90));}});
+		testing.execute();
 //		this.getChildren().addAll(testing());
 //		root.getChildren().addAll(this);
 	}

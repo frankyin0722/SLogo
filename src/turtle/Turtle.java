@@ -11,14 +11,18 @@ import javafx.scene.shape.Line;
 public class Turtle extends Group {
 	private Pen pen = new Pen();
 	private ImageView myImage;
-	private double direction = Math.PI / 2;
+	private double direction = 0;
 	private double oldX;
 	private double oldY;
 	private double newX;
 	private double newY;
-	public Turtle(Image image) {
+	public Turtle(Image image, double x, double y, double width, double height) {
 		super();
 		myImage = new ImageView(image);
+		myImage.setX(x);
+		myImage.setY(y);
+		myImage.setFitWidth(width);
+		myImage.setFitHeight(height);
 		getChildren().add(myImage);
 	}
 	 //returns the turtle's pen
