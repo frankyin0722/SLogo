@@ -19,6 +19,7 @@ public class CommandType implements CommandTypes {
 	private List<String> userMethods = new ArrayList<>(); 
 	private TreeGenerator myTreeGenerator;
 	private List<String> userInput;
+	private List<CommandNode> myRoots;
 	private CommandNode myRoot;
 	private PatternManager SomePatternManager = new PatternManager();;
 	
@@ -26,22 +27,25 @@ public class CommandType implements CommandTypes {
 		myTreeGenerator = treeGenerator;
 		userInput = input;
 		makeParametersMapping();
-		System.out.println(userInput);
+		myRoots = new ArrayList<>();
+		//System.out.println(userInput);
 	}
 	
 	public void initialize(String language) {
-		//System.out.println(userInput);
 		languagePatternMapping = SomePatternManager.getPatterns(language);
-		//System.out.println(userInput + "!!!");
 		String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
+		//System.out.println(myTreeGenerator.getIndex()+"!!!!!");
 		// missing nodeValue
 		//System.out.println(nodeValue);
 		userDefinedInstruction = nodeValue.equals(userDefinedCommand);
 		
 		myRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
+		//System.out.println(myRoot.getCommandName());
+		myRoots.add(myRoot);
 		//myTreeGenerator.printNode(myRoot);
-		//System.out.println(getNumParameterNeeded(nodeValue));
-		
+		myTreeGenerator.printNode(myRoot);
+		//System.out.println("Num Para Needed: " + getNumParameterNeeded(nodeValue));
+		myTreeGenerator.increaseIndex();
 		for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
 			myTreeGenerator.recurse(myRoot);
 		}
@@ -93,32 +97,23 @@ public class CommandType implements CommandTypes {
 	
 	@Override
 	public void recurse(CommandNode node) {
-		//System.out.println(myTreeGenerator.getIndex());
 		String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); // which parsed item the recursion is currently looking at 
-		//System.out.println(currentValue);
-		
-		myTreeGenerator.increaseIndex();
-		System.out.println(myTreeGenerator.getIndex());
 		if (userDefinedInstruction) { // if the command type is user-defined command
 			// userDefinedInstruction = false;
 			createUserDefinedInstruction(node, currentValue);
 			return;
 		}
 		CommandNode child = new CommandNode(getCommandCategory(currentValue), currentValue, null, 0);
-		//myTreeGenerator.printNode(child);
-		myTreeGenerator.printNode(node);
 		myTreeGenerator.printNode(child);
-
+		myTreeGenerator.increaseIndex();
 		node.addChild(child);
-		System.out.println(getNumParameterNeeded(currentValue));
 		for (int i = 0; i < getNumParameterNeeded(currentValue); i++) {
-			System.out.println(getNumParameterNeeded(currentValue));
 			myTreeGenerator.recurse(child);
 		}
 	} 
 	
-	public CommandNode getRoot() {
-		return myRoot;
+	public List<CommandNode> getRoot() {
+		return myRoots;
 	}
 	
 	public List<String> getMethods() {
