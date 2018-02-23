@@ -22,7 +22,7 @@ public class Parser implements TreeGenerator{
 	private int ListStartIndex = 0;
 	private int ListEndIndex = 0;
 	private PatternManager SomePatternManager;
-	private CommandInitializerType commandInitializer; 
+	private CommandType commandInitializer; 
 	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
@@ -37,7 +37,7 @@ public class Parser implements TreeGenerator{
 								List.class });
 				CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
 				if (type.equals("Command")) {
-					commandInitializer = new CommandInitializerType(userInput, (TreeGenerator) this);
+					commandInitializer = new CommandType(userInput, (TreeGenerator) this);
 					inputHandlerMap.put(pattern.getValue(), commandInitializer);
 				} else
 					inputHandlerMap.put(pattern.getValue(), myCommandTypes);
@@ -49,15 +49,31 @@ public class Parser implements TreeGenerator{
 	}
 	
 	@Override
+	public void recurse(CommandNode root) {
+		if (currentIndex >= userInput.size()) {
+			return;
+		}
+		for (Pattern pattern : inputHandlerMap.keySet()) {
+			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
+				CommandTypes cmdType = inputHandlerMap.get(pattern);
+				cmdType.recurse(root);
+				break; // after the leaves get called, break this for loop and end recurse 
+			}
+		}
+	}
+	
+	public List<String> getMethods() {
+		return commandInitializer.getMethods();
+	}
+	
+	@Override
 	public void increaseIndex() {
-		// TODO Auto-generated method stub
-		
+		currentIndex++;
 	}
 
 	@Override
 	public int getIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return currentIndex;
 	}
 
 	@Override
@@ -70,9 +86,4 @@ public class Parser implements TreeGenerator{
 		ListEndIndex++;
 	}
 
-	@Override
-	public void recurse(CommandNode commandNode) {
-		// TODO Auto-generated method stub
-	}
-	
 }
