@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import command.Command;
-import command.Turtle.BackwardCommand;
-import command.Turtle.ForwardCommand;
-import command.Turtle.RightCommand;
 import command.Control.RepeatCommand;
+import command.Turtle.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -41,11 +39,10 @@ public class DrawingWindow extends Pane {
 //		setupTurtle();
 		
 //		myTurtle.changeX(myTurtle.getX() + 100);
-		myTurtle.setDirection(Math.PI);
 		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
 			add(new ForwardCommand(myTurtle,50));
 			add(new RightCommand(myTurtle,90));}});
-		testing.execute();
+		System.out.println(testing.execute());
 //		this.getChildren().addAll(testing());
 //		root.getChildren().addAll(this);
 	}
@@ -74,12 +71,7 @@ public class DrawingWindow extends Pane {
 	private void getNewTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 //		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TEST_IMAGE));
-		myTurtle = new Turtle(turtleImage);
-		myTurtle.setFitWidth(TURTLE_WIDTH);
-		myTurtle.setFitHeight(TURTLE_HEIGHT);
-		myTurtle.changeX((INITIAL_WIDTH - TURTLE_WIDTH)/2);
-		myTurtle.changeY((INITIAL_HEIGHT - TURTLE_HEIGHT)/2);
-		myTurtle.update();
+		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		this.getChildren().add(myTurtle);
 	}
 	
