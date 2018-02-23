@@ -7,6 +7,14 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
+/**
+ * @author elizabethshulman
+ * @author xlany
+ * @param scene
+ * 
+ * Initializes and arranges each of the elements within the scene
+ * 
+ */
 public class Visualization {
 	
 	public static final int INITIAL_SCENE_WIDTH = 1000;
@@ -14,15 +22,6 @@ public class Visualization {
 	
 	private Scene myScene;
 	private BorderPane myPane;
-//	private DrawingWindow myDrawingWindow;
-	/**
-	 * @author elizabethshulman
-	 * @author xlany
-	 * @param scene
-	 * 
-	 * Initializes and arranges each of the elements within the scene
-	 * 
-	 */
 
 	public Visualization() {
 		myPane = new BorderPane();
@@ -30,13 +29,11 @@ public class Visualization {
 	}
 
 	private void initializeVis() {
-//		myDrawingWindow = new DrawingWindow();
-		
 		myPane.setPadding(new Insets(20,20,20,20));
 //		myPane.setMargin(myPane.getCenter(), new Insets(12,12,12,12));
 		myPane.setTop(new InfoTop());
 		myPane.setCenter(new DrawingWindow());
-		myPane.setBottom(new TextFieldInput());
+		myPane.setBottom(new ControlTextInput());
 
 		myPane.setRight(new ControlPanelRight());
 		myPane.setLeft(new ControlPanelLeft());
