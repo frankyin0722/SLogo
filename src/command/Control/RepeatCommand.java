@@ -3,25 +3,30 @@ package command.Control;
 import java.util.List;
 
 import command.Command;
+import interpreter.CommandTreeInterpreter;
+import parser.CommandNode;
 //purely speculative, will likely change a lot, but possible model for control commands
 public class RepeatCommand implements Command{
-	private double myNumTimes;
-	private List<Command> myCommands;
+	private CommandTreeInterpreter myInterpreter;
+	private int myNumTimes;
+	private List<CommandNode> mySubCommands;
 
-	public RepeatCommand(double numTimes, List<Command> commands) {
-		myNumTimes = numTimes;
-		myCommands = commands;
+	public RepeatCommand(CommandNode numTimes, List<CommandNode> commands, CommandTreeInterpreter tree) {
+		myInterpreter = tree;
+		myInterpreter.interpretTree(numTimes);
+		myNumTimes = (int) numTimes.getNodeValue();
+		mySubCommands = commands;
 	}
 
 	@Override
 	public double execute() {
-		double returnValue = 0;
 		while(myNumTimes > 0) {
-			for(Command command: myCommands) {
-				returnValue = command.execute();
+			for(CommandNode subCommand: mySubCommands) {
+				myInterpreter.interpretTree(subCommand);
 			}
 			myNumTimes--;
 		}
+		double returnValue = mySubCommands.get(mySubCommands.size()-1).getNodeValue();
 		return returnValue;
 	}
 }

@@ -35,16 +35,16 @@ public class Parser implements TreeGenerator{
 			userInput = Arrays.asList(input.split("\\s+"));
 			generateInputHandlerMap();
 			commandInitializer.initialize(language);
-			System.out.println(getIndex()+"!!!");
-			if (getIndex() < userInput.size()) {
-				System.out.println("executed!!!!!!!");
+			while (getIndex() < userInput.size()) {
+				System.out.println("Next command index: " + getIndex());
+				//System.out.println("executed!!!!!!!");
 				commandInitializer.initialize(language);
 			}
 			return commandInitializer.getRoot();
 		} catch (NullPointerException e) {
-			System.out.println("Error in parsing: No Input Command Found! ");
+			System.err.println("Error in parsing: No Input Command Found! ");
 		} catch (IndexOutOfBoundsException e) {
-			System.out.println("Error in parsing: Unmatched Number of Brackets!");
+			System.err.println("Error in parsing: Unmatched Number of Brackets!");
 		}
 		return null;
 	}
@@ -67,13 +67,13 @@ public class Parser implements TreeGenerator{
 					commandInitializer = new CommandType(userInput, (TreeGenerator) this);
 					//System.out.println(commandInitializer.getUserInput());
 					inputHandlerMap.put(pattern.getValue(), commandInitializer);
-					System.out.println(commandInitializer.getUserInput());
+					//System.out.println(commandInitializer.getUserInput());
 					//System.out.println(inputHandlerMap.get(pattern.getValue()).);
 				} else {
 					inputHandlerMap.put(pattern.getValue(), myCommandTypes);
 				}
 			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
-				//System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
+				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
 			}
 		}
 	}
