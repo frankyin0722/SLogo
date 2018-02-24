@@ -6,7 +6,7 @@ import turtle.Turtle;
 public class HomeCommand implements Command{
 	private Turtle myTurtle;
 	
-	public HomeCommand(Turtle turtle, double x, double y){
+	public HomeCommand(double x, double y, Turtle turtle){
 		myTurtle = turtle;
 	}
 	

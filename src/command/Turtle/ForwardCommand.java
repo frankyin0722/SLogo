@@ -7,7 +7,7 @@ public class ForwardCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
 	
-	public ForwardCommand(Turtle turtle, double movement){
+	public ForwardCommand(double movement, Turtle turtle){
 		myTurtle = turtle;
 		myMovement = movement;
 	}
