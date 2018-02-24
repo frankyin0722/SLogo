@@ -14,8 +14,8 @@ public class ClearScreenCommand implements Command{
 		double delta = Math.sqrt(Math.pow(myTurtle.getX(), 2)+Math.pow(myTurtle.getY(), 2));
 		myTurtle.changeX(0);
 		myTurtle.changeY(0);
-		myTurtle.clearLines();
 		myTurtle.update();
+		myTurtle.clearLines();
 		return delta;
 	}
 	
