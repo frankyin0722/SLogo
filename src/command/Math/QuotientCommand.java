@@ -1,6 +1,8 @@
 package command.Math;
 
-public class QuotientCommand {
+import command.Command;
+
+public class QuotientCommand implements Command {
 	private double input1;
 	private double input2;
 	

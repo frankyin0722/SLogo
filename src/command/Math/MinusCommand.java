@@ -1,6 +1,8 @@
 package command.Math;
 
-public class MinusCommand {
+import command.Command;
+
+public class MinusCommand implements Command{
 	private double input1;
 	
 	public MinusCommand (double expr1){

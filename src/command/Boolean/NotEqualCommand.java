@@ -1,6 +1,8 @@
 package command.Boolean;
 
-public class NotEqualCommand {
+import command.Command;
+
+public class NotEqualCommand implements Command{
 	private double input1;
 	private double input2;
 	

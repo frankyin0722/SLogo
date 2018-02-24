@@ -1,8 +1,9 @@
 package command.Turtle;
 
+import command.Command;
 import turtle.Turtle;
 
-public class IsShowingCommand {
+public class IsShowingCommand implements Command {
 	private Turtle myTurtle;
 	public IsShowingCommand (Turtle turtle){
 		myTurtle = turtle;
