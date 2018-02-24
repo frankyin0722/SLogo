@@ -37,8 +37,9 @@ public class CommandTreeInterpreter {
 	
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
+		System.out.println(myRoot.getCommandName());
 		if (myRoot.getNodeChildren().size()!=0) {
-			if (!myRoot.getCommandType().equals("Bracket")) {
+			//if (!myRoot.getCommandType().equals("Bracket")) {
 				for (CommandNode child : myRoot.getNodeChildren()) {
 					interpretTree(child);
 					if (myRoot.getCommandType().equals("Control")) {
@@ -46,9 +47,10 @@ public class CommandTreeInterpreter {
 					}
 					else {
 						Parameters.add(child.getNodeValue());
+						System.out.println(child.getNodeValue());
 					}
 				}
-			}
+			//}
 		}
 		updateNodeValue(myRoot, Parameters);
 	}
@@ -69,6 +71,7 @@ public class CommandTreeInterpreter {
 				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
 			case "Bracket":
+				node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 				break;
 			default: 
 				createCommand(node, Parameters);

@@ -66,7 +66,7 @@ public class Parser implements TreeGenerator{
 					inputHandlerMap.put(pattern.getValue(), myCommandTypes);
 				}
 			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
-				//System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
+				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
 			}
 		}
 	}
