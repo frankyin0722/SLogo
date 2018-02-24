@@ -26,6 +26,7 @@ public class CommandTreeInterpreter {
 		myVariables = new VariableManager();
 		currentTurtle = defaultTurtle;
 		myTurtles = new ArrayList<>();
+		myTurtles.add(turtle);
 		userDefinedCommands = new HashMap<String, List<CommandNode>>();
 	}
 	
