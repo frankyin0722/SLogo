@@ -6,7 +6,7 @@ import turtle.Turtle;
 public class ClearScreenCommand implements Command{
 	private Turtle myTurtle;
 	
-	public ClearScreenCommand(Turtle turtle, double x, double y){
+	public ClearScreenCommand(double x, double y, Turtle turtle){
 		myTurtle = turtle;
 	}
 	

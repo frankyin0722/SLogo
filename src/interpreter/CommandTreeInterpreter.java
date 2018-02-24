@@ -22,11 +22,12 @@ public class CommandTreeInterpreter {
 	private HashMap<String, List<CommandNode>> userDefinedCommands;
 	private static int defaultTurtle = 0;
 	
-	public CommandTreeInterpreter() {
+	public CommandTreeInterpreter(Turtle turtle) {
 		myCommandManager = new CommandManager();
 		myVariables = new VariableManager();
 		currentTurtle = defaultTurtle;
 		myTurtles = new ArrayList<>();
+		myTurtles.add(turtle);
 		userDefinedCommands = new HashMap<String, List<CommandNode>>();
 	}
 	

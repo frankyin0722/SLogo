@@ -21,6 +21,7 @@ public class ControlTextInput extends HBox {
 		this.getChildren().addAll(
 				myCommandWindow,
 				buttonBox());
+		setButtonAction();
 	}
 
 	private VBox buttonBox() {
