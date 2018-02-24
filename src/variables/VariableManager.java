@@ -19,7 +19,11 @@ public class VariableManager {
     public void addVariable(Variable var, String name) {
     		variables.put(name, var);
     }
-
+    
+    public boolean checkVariable(String name) {
+    	return variables.containsKey(name);
+    }
+    
     //changes the variable that matches the name
     public void setVariable(Object data, String name) {
     		variables.replace(name, new Variable(data));

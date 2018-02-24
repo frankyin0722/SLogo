@@ -11,6 +11,7 @@ import command.Command;
 import command.CommandManager;
 import parser.CommandNode;
 import turtle.Turtle;
+import variables.Variable;
 import variables.VariableManager;
 
 public class CommandTreeInterpreter {
@@ -21,7 +22,7 @@ public class CommandTreeInterpreter {
 	private HashMap<String, List<CommandNode>> userDefinedCommands;
 	private static int defaultTurtle = 0;
 	
-	public CommandTreeInterpreter(Turtle turtle) {
+	public CommandTreeInterpreter() {
 		myCommandManager = new CommandManager();
 		myVariables = new VariableManager();
 		currentTurtle = defaultTurtle;
@@ -38,16 +39,20 @@ public class CommandTreeInterpreter {
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
 		System.out.println(myRoot.getCommandName());
+		System.out.println(myRoot.getCommandType());
+		System.out.println(myRoot.getNodeChildren().size());
 		if (myRoot.getNodeChildren().size()!=0) {
 			//if (!myRoot.getCommandType().equals("Bracket")) {
 				for (CommandNode child : myRoot.getNodeChildren()) {
 					interpretTree(child);
 					if (myRoot.getCommandType().equals("Control")) {
+						//System.out.println("!!!");
 						Parameters.add(child);
 					}
 					else {
+						//System.out.println("!!!");
 						Parameters.add(child.getNodeValue());
-						System.out.println(child.getNodeValue());
+						//System.out.println(child.getNodeValue());
 					}
 				}
 			//}
@@ -60,16 +65,23 @@ public class CommandTreeInterpreter {
 			case "Turtle":
 				Parameters.add(myTurtles.get(currentTurtle));
 				createCommand(node, Parameters);
+				break;
 			case "Control":
 				Parameters.add(this);
 				createCommand(node, Parameters);
+				break;
 			case "Constant":
 				break;
 			case "Variable":
 				if (userDefinedCommands.containsKey(node.getCommandName())) {
 					// run user command
 				}
+				if (!myVariables.checkVariable(node.getCommandName())) {
+					Variable var = new Variable(0.0);
+					myVariables.addVariable(var, node.getCommandName());
+				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
+				break;
 			case "Bracket":
 				node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 				break;
@@ -92,18 +104,19 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			System.out.println(thisCommand.toString());
+			//System.out.println(thisCommand.toString());
 			try {
-				System.out.println(thisCommand.toString());
-				System.out.println(parameters);
+				//System.out.println(thisCommand.toString());
+				//System.out.println(parameters);
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
+				System.out.println(node.getCommandName() + ": " + node.getNodeValue());
 			}
 			catch (IllegalAccessException | InvocationTargetException e) {
-				System.err.print("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
 			}
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
-			System.err.print("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+			System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
 		} 
 		
 	}

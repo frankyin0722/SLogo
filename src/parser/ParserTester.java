@@ -9,7 +9,7 @@ public class ParserTester {
 		//String userinput = "repeat [ fd sum sum :expr bk 50 50 ]";
 		//String userinput = "repeat 4 [ repeat 4 [ fd 50 ] ] fd 50";
 		//String userinput = "fd 50 repeat [ repeat 4 [ bk 50 fd 50 ] bk 50 bk 50 repeat 4 [ bk 4 ] ]";
-		String userinput = "SUM 20 ( SUM 30 40 ) SUM 20 30";
+		String userinput = "DOTIMES [ :expr 50 ] [ SUM 20 80 SUM 20 30 ]";
 		Parser myparser = new Parser();
 		String language = "resources.languages/English";
 		
