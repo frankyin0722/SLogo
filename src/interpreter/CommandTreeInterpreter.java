@@ -89,8 +89,11 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
+			System.out.println(thisCommand.toString());
 			try {
-				Double result = (Double) thisExecution.invoke(thisCommand, parameters);
+				System.out.println(thisCommand.toString());
+				System.out.println(parameters);
+				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
 			}
 			catch (IllegalAccessException | InvocationTargetException e) {

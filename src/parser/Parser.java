@@ -37,7 +37,6 @@ public class Parser implements TreeGenerator{
 			commandInitializer.initialize(language);
 			while (getIndex() < userInput.size()) {
 				System.out.println("Next command index: " + getIndex());
-				//System.out.println("executed!!!!!!!");
 				commandInitializer.initialize(language);
 			}
 			return commandInitializer.getRoot();
@@ -54,26 +53,20 @@ public class Parser implements TreeGenerator{
 		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
 		for (Entry<String, Pattern> pattern : syntaxPatternMapping) {
 			String type = pattern.getKey();
-			//System.out.println(type);
 			try {
 				Class<?> myInstance = Class.forName("parser." + type
 						+ "Type");
-				Constructor<?> constructor = myInstance
-						.getConstructor(new Class[] { List.class, TreeGenerator.class });
+				Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
 				CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
 				if (type.equals("Command")) {
-					//System.out.println(type);
-					//System.out.println(userInput);
+					System.out.println(type);
 					commandInitializer = new CommandType(userInput, (TreeGenerator) this);
-					//System.out.println(commandInitializer.getUserInput());
 					inputHandlerMap.put(pattern.getValue(), commandInitializer);
-					//System.out.println(commandInitializer.getUserInput());
-					//System.out.println(inputHandlerMap.get(pattern.getValue()).);
 				} else {
 					inputHandlerMap.put(pattern.getValue(), myCommandTypes);
 				}
 			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
-				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
+				//System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
 			}
 		}
 	}
