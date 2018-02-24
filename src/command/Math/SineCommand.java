@@ -1,6 +1,8 @@
 package command.Math;
 
-public class SineCommand {
+import command.Command;
+
+public class SineCommand implements Command {
 	private double input1;
 	
 	public SineCommand (double expr1){

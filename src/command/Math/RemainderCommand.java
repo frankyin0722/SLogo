@@ -1,6 +1,8 @@
 package command.Math;
 
-public class RemainderCommand {
+import command.Command;
+
+public class RemainderCommand implements Command {
 	private double input1;
 	private double input2;
 	

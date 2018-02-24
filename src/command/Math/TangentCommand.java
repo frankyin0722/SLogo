@@ -1,6 +1,8 @@
 package command.Math;
 
-public class TangentCommand {
+import command.Command;
+
+public class TangentCommand implements Command {
 	private double input1;
 	
 	public 
