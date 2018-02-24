@@ -54,21 +54,27 @@ public class Parser implements TreeGenerator{
 		for (Entry<String, Pattern> pattern : syntaxPatternMapping) {
 			String type = pattern.getKey();
 			try {
-				Class<?> myInstance = Class.forName("parser." + type
-						+ "Type");
-				Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
-				CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
-				if (type.equals("Command")) {
-					System.out.println(type);
-					commandInitializer = new CommandType(userInput, (TreeGenerator) this);
-					inputHandlerMap.put(pattern.getValue(), commandInitializer);
-				} else {
-					inputHandlerMap.put(pattern.getValue(), myCommandTypes);
+				if (existingCommandTypes(type)) {
+					Class<?> myInstance = Class.forName("parser." + type
+							+ "Type");
+					Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
+					CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
+					if (type.equals("Command")) {
+						System.out.println(type);
+						commandInitializer = new CommandType(userInput, (TreeGenerator) this);
+						inputHandlerMap.put(pattern.getValue(), commandInitializer);
+					} else {
+						inputHandlerMap.put(pattern.getValue(), myCommandTypes);
+					}
 				}
 			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
 				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
 			}
 		}
+	}
+	
+	private boolean existingCommandTypes(String type) {
+		return (!type.equals("ListEnd") && !type.equals("GroupEnd") && !type.equals("Comment") && !type.equals("Newline") && !type.equals("Whitespace"));
 	}
 	
 	@Override
