@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import turtle.Turtle;
 
 /**
  * @author elizabethshulman
@@ -25,20 +26,36 @@ public class Visualization {
 	private Scene myScene;
 	private BorderPane myPane;
 	private ResourceBundle myResources;
-
+	private DrawingWindow myDrawingWindow;
+	private ControlTextInput myControlTextInput;
+	
+	private Turtle myDefaultTurtle;
 	public Visualization() {
 		myPane = new BorderPane();
 		setupLanguage("English");
+		initializeAll();
 		initializeVis();
+	}
+	
+	private void initializeAll() {
+		myDrawingWindow = new DrawingWindow();
+		myDefaultTurtle = myDrawingWindow.getDefaultTurtle();
+		myControlTextInput = new ControlTextInput(myDefaultTurtle);
 	}
 
 	private void initializeVis() {		
 		myPane.setPadding(new Insets(20,20,20,20));
 		myPane.setTop(new InfoTop());
-		myPane.setCenter(new DrawingWindow());
-		myPane.setBottom(new ControlTextInput());
+		myPane.setCenter(myDrawingWindow);
+		myPane.setBottom(myControlTextInput);
 		myPane.setRight(new ControlPanelRight());
 		myPane.setLeft(new ControlPanelLeft(myResources));
+		
+//		DrawingWindow drawingWindow = new DrawingWindow();
+//		myPane.setCenter(new DrawingWindow());
+//		myPane.setBottom(new ControlTextInput());
+//		myPane.setRight(new ControlPanelRight());
+//		myPane.setLeft(new ControlPanelLeft(myResources));
 		
 		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}

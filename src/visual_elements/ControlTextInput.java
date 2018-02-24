@@ -2,23 +2,34 @@ package visual_elements;
 
 import buttons.ClearButton;
 import buttons.RunButton;
+import interpreter.CommandTreeInterpreter;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import parser.Parser;
+import turtle.Turtle;
 
 public class ControlTextInput extends HBox {
-
-	public ControlTextInput() {
+	private Turtle myTurtle;
+	private CommandWindow myCommandWindow;
+	private RunButton myRunButton;
+	private ClearButton myClearButton;
+	
+	public ControlTextInput(Turtle turtle) {
+		myTurtle = turtle;
+		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
-				new CommandWindow(),
+				myCommandWindow,
 				buttonBox());
 	}
 
 	private VBox buttonBox() {
 		VBox buttons = new VBox();
 		buttons.setFillWidth(true);
-		addButton(buttons, new RunButton());
-		addButton(buttons, new ClearButton());
+		myRunButton = new RunButton();
+		myClearButton = new ClearButton();
+		addButton(buttons, myRunButton);
+		addButton(buttons, myClearButton);
 		return buttons;
 	}
 
@@ -26,4 +37,15 @@ public class ControlTextInput extends HBox {
         button.setMaxWidth(Double.MAX_VALUE);
         buttonBox.getChildren().add(button);
     }
+    
+    public void setButtonAction() {
+    		myRunButton.setOnAction(e -> inputToParser());
+    		myClearButton.setOnAction(e -> myCommandWindow.clearText());
+    }
+    
+	private void inputToParser() {
+		Parser parser = new Parser();
+		CommandTreeInterpreter interpreter = new CommandTreeInterpreter(myTurtle);
+		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), "resources.languages/English"));
+	}
 }
