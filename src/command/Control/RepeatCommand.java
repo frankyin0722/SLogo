@@ -11,11 +11,11 @@ public class RepeatCommand implements Command{
 	private int myNumTimes;
 	private List<CommandNode> mySubCommands;
 
-	public RepeatCommand(CommandNode numTimes, List<CommandNode> commands, CommandTreeInterpreter tree) {
+	public RepeatCommand(CommandNode numTimes, CommandNode subCommandsParent, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myInterpreter.interpretTree(numTimes);
 		myNumTimes = (int) numTimes.getNodeValue();
-		mySubCommands = commands;
+		mySubCommands = subCommandsParent.getNodeChildren();
 	}
 
 	@Override

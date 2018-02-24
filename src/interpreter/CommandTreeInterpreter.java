@@ -29,6 +29,12 @@ public class CommandTreeInterpreter {
 		userDefinedCommands = new HashMap<String, List<CommandNode>>();
 	}
 	
+	public void interpretAllTrees(List<CommandNode> myRoots) {
+		for (int i = 0; i < myRoots.size(); i++) {
+			interpretTree(myRoots.get(i));
+		}
+	}
+	
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
 		if (myRoot.getNodeChildren().size()!=0) {
@@ -106,6 +112,10 @@ public class CommandTreeInterpreter {
 	
 	public void setCurrentTurtle(int index) {
 		currentTurtle = index;
+	}
+	
+	public VariableManager getVariables() {
+		return myVariables;
 	}
 	
 	public HashMap<String, List<CommandNode>> getUserCommands(){
