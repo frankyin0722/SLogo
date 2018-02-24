@@ -7,7 +7,7 @@ public class RightCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
 	
-	public RightCommand(Turtle turtle, double movement){
+	public RightCommand(double movement, Turtle turtle){
 		myTurtle = turtle;
 		myMovement = Math.toRadians(movement);
 	}

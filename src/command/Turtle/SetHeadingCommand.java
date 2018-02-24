@@ -7,7 +7,7 @@ public class SetHeadingCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
 	
-	public SetHeadingCommand(Turtle turtle, double movement){
+	public SetHeadingCommand(double movement, Turtle turtle){
 		myTurtle = turtle;
 		myMovement = Math.toRadians(movement);
 	}

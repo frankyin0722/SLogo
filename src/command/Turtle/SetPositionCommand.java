@@ -8,7 +8,7 @@ public class SetPositionCommand implements Command{
 	private double newX;
 	private double newY;
 	
-	public SetPositionCommand(Turtle turtle, double x, double y){
+	public SetPositionCommand(double x, double y, Turtle turtle){
 		myTurtle = turtle;
 		newX = x;
 		newY = y;
