@@ -44,15 +44,18 @@ public class CommandTreeInterpreter {
 		System.out.println(myRoot.getNodeChildren().size());
 		if (myRoot.getNodeChildren().size()!=0) {
 			//if (!myRoot.getCommandType().equals("Bracket")) {
-				for (CommandNode child : myRoot.getNodeChildren()) {
-					interpretTree(child);
+				for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
 					if (myRoot.getCommandType().equals("Control")) {
 						//System.out.println("!!!");
-						Parameters.add(child);
+						if (i == 0) {
+							interpretTree(myRoot.getNodeChildren().get(i));
+						}
+						Parameters.add(myRoot.getNodeChildren().get(i));
 					}
 					else {
 						//System.out.println("!!!");
-						Parameters.add(child.getNodeValue());
+						interpretTree(myRoot.getNodeChildren().get(i));
+						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
 						//System.out.println(child.getNodeValue());
 					}
 				}
@@ -88,6 +91,7 @@ public class CommandTreeInterpreter {
 				break;
 			default: 
 				createCommand(node, Parameters);
+				break;
 		}
 	}
 

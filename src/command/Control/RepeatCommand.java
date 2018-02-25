@@ -27,6 +27,8 @@ public class RepeatCommand implements Command{
 			myNumTimes--;
 		}
 		double returnValue = mySubCommands.get(mySubCommands.size()-1).getNodeValue();
+		System.out.println(mySubCommands.get(mySubCommands.size()-1).getCommandName());
+		System.out.println(mySubCommands.size());
 		return returnValue;
 	}
 }
