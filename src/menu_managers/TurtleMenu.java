@@ -13,14 +13,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Box;
+import turtle.Turtle;
 
 public class TurtleMenu extends TitledPane {
 	public static final int THUMBNAIL_WIDTH = 50;
 	public static final int THUMBNAIL_HEIGHT = 50;
 	private List<Button> myTurtleButtons;
 	private VBox myTurtleList;
+	private Turtle myTurtle;
 	
-	public TurtleMenu() {
+	public TurtleMenu(Turtle turtle) {
+		myTurtle = turtle;
 		setupTurtleSelection();
 	}
 	
@@ -54,25 +57,33 @@ public class TurtleMenu extends TitledPane {
 	
 	private void makeButton(String filepath, VBox vbox) {
 		Button button = new Button();
-		ImageView img = new ImageView(new Image(getClass().getClassLoader().getResourceAsStream(filepath)));
-		img.setFitWidth(THUMBNAIL_WIDTH);
-		img.setFitHeight(THUMBNAIL_HEIGHT);
-		button.setGraphic(img);
+		Image img = new Image(getClass().getClassLoader().getResourceAsStream(filepath));
+		ImageView imgview = new ImageView(img);
+		imgview.setFitWidth(THUMBNAIL_WIDTH);
+		imgview.setFitHeight(THUMBNAIL_HEIGHT);
+		button.setGraphic(imgview);
+		button.setOnAction(e -> changeTurtleImage(img));
 		myTurtleButtons.add(button);
 		vbox.getChildren().add(button);
 		
+	}
+	
+//	private void setAction() {
+//		for (Button b: myTurtleButtons) {
+//			b.setOnAction(e -> changeTurtleImage());
+//		}
+//	}
+	
+	private void changeTurtleImage(Image img) {
+		myTurtle.setImage(img);
+	}
+	
+	public List<Button> getTurtleButtons() {
+		return myTurtleButtons;
 	}
 	
 	public VBox getTurtleList() {
 		return myTurtleList;
 	}
 	
-	public void setAction() {
-		for (Button b: myTurtleButtons) {
-		}
-	}
-	
-	public List<Button> getTurtleButtons() {
-		return myTurtleButtons;
-	}
 }

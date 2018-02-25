@@ -44,7 +44,7 @@ public class DrawingWindow extends Pane {
 		setupInitialCanvas();
 		setupTurtle();
 		
-//		myTurtle.changeX(myTurtle.getX() + 100);
+		myTurtle.changeX(myTurtle.getX() + 300);
 //		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
 //			add(new ForwardCommand(myTurtle,50));
 //			add(new RightCommand(myTurtle,90));}});
@@ -78,16 +78,6 @@ public class DrawingWindow extends Pane {
 		this.getChildren().add(colorPicker);
 	}
 	
-	private void initializeTurtleMenu() {
-		TurtleMenu turtleMenu = new TurtleMenu();
-//		for (Button b: turtleMenu.getTurtleButtons()) {
-//			if (b.getGraphic() instanceof ImageView) {
-//				b.setOnAction(e -> myTurtle.setImage((ImageView)b.getGraphic()));
-//			}
-//		}
-		this.getChildren().add(turtleMenu);
-	}
-	
 	private void setBackgroundColor(Color color) {
 		String hex = String.format( "#%02X%02X%02X",
 	            (int)( color.getRed() * 255 ),
@@ -97,11 +87,6 @@ public class DrawingWindow extends Pane {
 				"-fx-background-color: " + hex + ";"
 				);
 	}
-	
-	
-//	private void changeTurtleImage() {
-//		
-//	}
 	
 	public Turtle getDefaultTurtle() {
 		return myTurtle;
