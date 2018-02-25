@@ -34,7 +34,12 @@ public class ForCommand implements Command{
 			var.setValue(newvalue); 
 		}
 		
-		return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
+		if (mySubCommands.size() != 0) {
+			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
+		}
+		else {
+			return 0.0;
+		}
 	}
 	
 }

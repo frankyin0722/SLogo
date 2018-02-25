@@ -32,6 +32,11 @@ public class DoTimesCommand implements Command{
 				myInterpreter.interpretTree(mySubCommands.get(j));
 			}
 		}
-		return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
+		if (mySubCommands.size() != 0) {
+			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
+		}
+		else {
+			return 0.0;
+		}
 	}
 }
