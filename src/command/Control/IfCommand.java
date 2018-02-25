@@ -8,21 +8,24 @@ import parser.CommandNode;
 
 public class IfCommand implements Command {
 	private CommandTreeInterpreter myInterpreter;
-	private List<CommandNode> myParameters;
+	private boolean myExpression;
 	private List<CommandNode> mySubCommands;
 	
-	public IfCommand (CommandNode parameterParent, CommandNode subCommandsParent, CommandTreeInterpreter tree) {
-		myParameters = parameterParent.getNodeChildren();
+	public IfCommand (CommandNode expression, CommandNode subCommandsParent, CommandTreeInterpreter tree) {
+		if (expression.getNodeValue() != 0) {
+			myExpression = true;
+		}
+		else {
+			myExpression = false;
+		}
 		mySubCommands = subCommandsParent.getNodeChildren();
 		myInterpreter = tree;
 	}
 	
 	@Override
 	public double execute() {
-		// TODO Auto-generated method stub
-		int expression = (int) myParameters.get(0).getNodeValue();
-		System.out.println(expression);
-		if (expression != 0) {
+		System.out.println("expression: " + myExpression);
+		if (myExpression) {
 			for (int i = 0; i < mySubCommands.size(); i++) {
 				myInterpreter.interpretTree(mySubCommands.get(i));
 			}

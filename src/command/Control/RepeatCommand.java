@@ -13,7 +13,6 @@ public class RepeatCommand implements Command{
 
 	public RepeatCommand(CommandNode numTimes, CommandNode subCommandsParent, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
-		myInterpreter.interpretTree(numTimes);
 		myNumTimes = (int) numTimes.getNodeValue();
 		mySubCommands = subCommandsParent.getNodeChildren();
 	}

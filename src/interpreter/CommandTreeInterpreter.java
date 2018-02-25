@@ -49,6 +49,7 @@ public class CommandTreeInterpreter {
 						//System.out.println("!!!");
 						if (i == 0) {
 							interpretTree(myRoot.getNodeChildren().get(i));
+							System.out.println("if statement variable value: "+myRoot.getNodeValue());
 						}
 						Parameters.add(myRoot.getNodeChildren().get(i));
 					}
@@ -56,7 +57,7 @@ public class CommandTreeInterpreter {
 						//System.out.println("!!!");
 						interpretTree(myRoot.getNodeChildren().get(i));
 						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
-						//System.out.println(child.getNodeValue());
+						System.out.println("if statement variable value: "+myRoot.getNodeValue());
 					}
 				}
 			//}
@@ -80,11 +81,14 @@ public class CommandTreeInterpreter {
 				if (userDefinedCommands.containsKey(node.getCommandName())) {
 					// run user command
 				}
+				System.out.println(node.getCommandName());
+				System.out.println(myVariables.checkVariable(node.getCommandName()));
 				if (!myVariables.checkVariable(node.getCommandName())) {
 					Variable var = new Variable(0.0);
 					myVariables.addVariable(var, node.getCommandName());
 				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
+				System.out.println("currentNode value: " + node.getNodeValue());
 				break;
 			case "Bracket":
 				node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
@@ -100,10 +104,11 @@ public class CommandTreeInterpreter {
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		
 		Command thisCommand = null;
+		
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-			System.err.print("Error creating commands: " + thisCommand.getClass().getName());
+			System.err.println("Error creating commands: " + commandClass.getName());
 		}
 		
 		Method thisExecution = null;
