@@ -15,8 +15,10 @@ public class ControlTextInput extends HBox {
 	private RunButton myRunButton;
 	private ClearButton myClearButton;
 	private CommandTreeInterpreter interpreter;
+	
 	public ControlTextInput(Turtle turtle) {
 		myTurtle = turtle;
+		interpreter = new CommandTreeInterpreter(myTurtle);
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
 				myCommandWindow,
