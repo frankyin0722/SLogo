@@ -26,32 +26,34 @@ public class Visualization {
 	private Scene myScene;
 	private BorderPane myPane;
 	private ResourceBundle myResources;
-	private DrawingWindow myDrawingWindow;
+	private ScrollingDrawingWindow myScrollingDrawingWindow;
 	private ControlTextInput myControlTextInput;
-	
+	private ControlPanelRight myControlPanelRight;
+	private ControlPanelLeft myControlPanelLeft;
 	private Turtle myDefaultTurtle;
 	public Visualization() {
 		myPane = new BorderPane();
 		setupLanguage("English");
 		initializeAll();
-		initializeVis();
+		initializeLayout();
 	}
 	
 	private void initializeAll() {
-		myDrawingWindow = new DrawingWindow();
-		myDefaultTurtle = myDrawingWindow.getDefaultTurtle();
+		myScrollingDrawingWindow = new ScrollingDrawingWindow();
+		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
 		myControlTextInput = new ControlTextInput(myDefaultTurtle);
+		myControlPanelRight = new ControlPanelRight();
+		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
 	}
 
-	private void initializeVis() {		
+	private void initializeLayout() {		
 		myPane.setPadding(new Insets(20,20,20,20));
 		myPane.setTop(new InfoTop());
-		myPane.setCenter(myDrawingWindow);
+		myPane.setCenter(myScrollingDrawingWindow);
 		myPane.setBottom(myControlTextInput);
-		myPane.setRight(new ControlPanelRight());
-		myPane.setLeft(new ControlPanelLeft(myResources));
+		myPane.setRight(myControlPanelRight);
+		myPane.setLeft(myControlPanelLeft);
 		
-//		DrawingWindow drawingWindow = new DrawingWindow();
 //		myPane.setCenter(new DrawingWindow());
 //		myPane.setBottom(new ControlTextInput());
 //		myPane.setRight(new ControlPanelRight());
