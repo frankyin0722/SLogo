@@ -98,5 +98,6 @@ public class Turtle extends Group {
     public void resetTurtle() {
     		myImage.setX(zeroX);
     		myImage.setY(zeroY);
+    		clearLines();
     }
 }
