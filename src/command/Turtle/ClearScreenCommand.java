@@ -6,7 +6,7 @@ import turtle.Turtle;
 public class ClearScreenCommand implements Command{
 	private Turtle myTurtle;
 	
-	public ClearScreenCommand(double x, double y, Turtle turtle){
+	public ClearScreenCommand(Turtle turtle){
 		myTurtle = turtle;
 	}
 	
@@ -14,6 +14,7 @@ public class ClearScreenCommand implements Command{
 		double delta = Math.sqrt(Math.pow(myTurtle.getX(), 2)+Math.pow(myTurtle.getY(), 2));
 		myTurtle.changeX(0);
 		myTurtle.changeY(0);
+		myTurtle.update();
 		myTurtle.clearLines();
 		return delta;
 	}
