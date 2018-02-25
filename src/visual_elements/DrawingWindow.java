@@ -10,8 +10,8 @@ import javafx.scene.paint.Color;
 import turtle.Turtle;
 
 public class DrawingWindow extends Pane {
-	public static final int INITIAL_WIDTH = 700;
-	public static final int INITIAL_HEIGHT = 500;
+	public static final double INITIAL_WIDTH = 1000;
+	public static final double INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;
 //	public static final String IMAGE_PATH = "./images/";
@@ -37,7 +37,7 @@ public class DrawingWindow extends Pane {
 	
 	private void setupInitialCanvas() {
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
-		this.setMaxSize(INITIAL_WIDTH, INITIAL_HEIGHT);
+		this.setMaxSize(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
 		this.setBackgroundColor(INITIAL_COLOR);
 	}
 	
