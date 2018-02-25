@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -18,12 +19,14 @@ import turtle.Turtle;
 public class TurtleMenu extends TitledPane {
 	public static final int THUMBNAIL_WIDTH = 50;
 	public static final int THUMBNAIL_HEIGHT = 50;
+	public static final String TURTLE_MENU_KEY = "TurtleMenu";
 	private List<Button> myTurtleButtons;
 	private VBox myTurtleList;
 	private Turtle myTurtle;
 	
-	public TurtleMenu(Turtle turtle) {
+	public TurtleMenu(ResourceBundle resources, Turtle turtle) {
 		myTurtle = turtle;
+		setupPane(resources);
 		setupTurtleSelection();
 	}
 	
@@ -43,6 +46,10 @@ public class TurtleMenu extends TitledPane {
 //			System.out.print(x);
 //		}
 //	}
+	
+	private void setupPane(ResourceBundle resources) {
+		this.setText(resources.getString(TURTLE_MENU_KEY));
+	}
 	
 	private void setupTurtleSelection() {
 		myTurtleList = new VBox();
@@ -67,12 +74,6 @@ public class TurtleMenu extends TitledPane {
 		vbox.getChildren().add(button);
 		
 	}
-	
-//	private void setAction() {
-//		for (Button b: myTurtleButtons) {
-//			b.setOnAction(e -> changeTurtleImage());
-//		}
-//	}
 	
 	private void changeTurtleImage(Image img) {
 		myTurtle.setImage(img);

@@ -1,33 +1,16 @@
 package visual_elements;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
-
-import command.Command;
-import command.Control.RepeatCommand;
-import command.Turtle.*;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
-import menu_managers.TurtleMenu;
 
 public class DrawingWindow extends Pane {
-	public static final int INITIAL_WIDTH = 900;
+	public static final int INITIAL_WIDTH = 700;
 	public static final int INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;
@@ -37,8 +20,6 @@ public class DrawingWindow extends Pane {
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	
 	private Turtle myTurtle;
-	private double myHomeX;
-	private double myHomeY;
 
 	public DrawingWindow() {
 		setupInitialCanvas();

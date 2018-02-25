@@ -26,7 +26,7 @@ public class Visualization {
 	private Scene myScene;
 	private BorderPane myPane;
 	private ResourceBundle myResources;
-	private DrawingWindow myDrawingWindow;
+	private ScrollingDrawingWindow myScrollingDrawingWindow;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
 	private ControlPanelLeft myControlPanelLeft;
@@ -39,9 +39,8 @@ public class Visualization {
 	}
 	
 	private void initializeAll() {
-		myDrawingWindow = new DrawingWindow();
-		myDefaultTurtle = myDrawingWindow.getDefaultTurtle();
-		
+		myScrollingDrawingWindow = new ScrollingDrawingWindow();
+		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
 		myControlTextInput = new ControlTextInput(myDefaultTurtle);
 		myControlPanelRight = new ControlPanelRight();
 		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
@@ -50,7 +49,7 @@ public class Visualization {
 	private void initializeLayout() {		
 		myPane.setPadding(new Insets(20,20,20,20));
 		myPane.setTop(new InfoTop());
-		myPane.setCenter(myDrawingWindow);
+		myPane.setCenter(myScrollingDrawingWindow);
 		myPane.setBottom(myControlTextInput);
 		myPane.setRight(myControlPanelRight);
 		myPane.setLeft(myControlPanelLeft);
