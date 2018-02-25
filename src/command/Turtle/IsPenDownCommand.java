@@ -1,8 +1,9 @@
 package command.Turtle;
 
+import command.Command;
 import turtle.Turtle;
 
-public class IsPenDownCommand {
+public class IsPenDownCommand implements Command{
 	private Turtle myTurtle;
 	public IsPenDownCommand (Turtle turtle){
 		myTurtle = turtle;

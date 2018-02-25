@@ -1,6 +1,8 @@
 package command.Math;
 
-public class PowerCommand {
+import command.Command;
+
+public class PowerCommand implements Command {
 	private double input1;
 	private double input2;
 	

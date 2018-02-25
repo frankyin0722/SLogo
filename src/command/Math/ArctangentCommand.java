@@ -1,6 +1,8 @@
 package command.Math;
 
-public class ArctangentCommand {
+import command.Command;
+
+public class ArctangentCommand implements Command{
 	private double input1;
 	
 	public ArctangentCommand (double expr1){

@@ -1,6 +1,8 @@
 package command.Math;
 
-public class RandomCommand {
+import command.Command;
+
+public class RandomCommand implements Command {
 private double input1;
 	
 	public RandomCommand (double expr1){

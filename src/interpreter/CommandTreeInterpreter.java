@@ -11,6 +11,7 @@ import command.Command;
 import command.CommandManager;
 import parser.CommandNode;
 import turtle.Turtle;
+import variables.Variable;
 import variables.VariableManager;
 
 public class CommandTreeInterpreter {
@@ -26,6 +27,7 @@ public class CommandTreeInterpreter {
 		myVariables = new VariableManager();
 		currentTurtle = defaultTurtle;
 		myTurtles = new ArrayList<>();
+		myTurtles.add(turtle);
 		userDefinedCommands = new HashMap<String, List<CommandNode>>();
 	}
 	
@@ -37,18 +39,28 @@ public class CommandTreeInterpreter {
 	
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
+		System.out.println(myRoot.getCommandName());
+		System.out.println(myRoot.getCommandType());
+		System.out.println(myRoot.getNodeChildren().size());
 		if (myRoot.getNodeChildren().size()!=0) {
-			if (!myRoot.getCommandType().equals("Bracket")) {
-				for (CommandNode child : myRoot.getNodeChildren()) {
-					interpretTree(child);
+			//if (!myRoot.getCommandType().equals("Bracket")) {
+				for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
 					if (myRoot.getCommandType().equals("Control")) {
-						Parameters.add(child);
+						//System.out.println("!!!");
+						if (i == 0) {
+							interpretTree(myRoot.getNodeChildren().get(i));
+							System.out.println("if statement variable value: "+myRoot.getNodeValue());
+						}
+						Parameters.add(myRoot.getNodeChildren().get(i));
 					}
 					else {
-						Parameters.add(child.getNodeValue());
+						//System.out.println("!!!");
+						interpretTree(myRoot.getNodeChildren().get(i));
+						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
+						System.out.println("if statement variable value: "+myRoot.getNodeValue());
 					}
 				}
-			}
+			//}
 		}
 		updateNodeValue(myRoot, Parameters);
 	}
@@ -58,20 +70,32 @@ public class CommandTreeInterpreter {
 			case "Turtle":
 				Parameters.add(myTurtles.get(currentTurtle));
 				createCommand(node, Parameters);
+				break;
 			case "Control":
 				Parameters.add(this);
 				createCommand(node, Parameters);
+				break;
 			case "Constant":
 				break;
 			case "Variable":
 				if (userDefinedCommands.containsKey(node.getCommandName())) {
 					// run user command
 				}
+				System.out.println(node.getCommandName());
+				System.out.println(myVariables.checkVariable(node.getCommandName()));
+				if (!myVariables.checkVariable(node.getCommandName())) {
+					Variable var = new Variable(0.0);
+					myVariables.addVariable(var, node.getCommandName());
+				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
+				System.out.println("currentNode value: " + node.getNodeValue());
+				break;
 			case "Bracket":
+				node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 				break;
 			default: 
 				createCommand(node, Parameters);
+				break;
 		}
 	}
 
@@ -80,27 +104,29 @@ public class CommandTreeInterpreter {
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		
 		Command thisCommand = null;
+		
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-			System.err.print("Error creating commands: " + thisCommand.getClass().getName());
+			System.err.println("Error creating commands: " + commandClass.getName());
 		}
 		
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			System.out.println(thisCommand.toString());
+			//System.out.println(thisCommand.toString());
 			try {
-				System.out.println(thisCommand.toString());
-				System.out.println(parameters);
+				//System.out.println(thisCommand.toString());
+				//System.out.println(parameters);
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
+				System.out.println(node.getCommandName() + ": " + node.getNodeValue());
 			}
 			catch (IllegalAccessException | InvocationTargetException e) {
-				System.err.print("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
 			}
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
-			System.err.print("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+			System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
 		} 
 		
 	}

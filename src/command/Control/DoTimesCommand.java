@@ -21,16 +21,22 @@ public class DoTimesCommand implements Command{
 	public double execute() {
 		myInterpreter.getVariables().setVariable((double) 0.0, myParameters.get(0).getCommandName());
 		Variable var = myInterpreter.getVariables().getVariable(myParameters.get(0).getCommandName());
-		for (CommandNode parameter : myParameters) {
-			myInterpreter.interpretTree(parameter);
-		}
+		
 		int end = (int) myParameters.get(1).getNodeValue();
-		for (int i = 0; i < end; i++) {
-			var.setValue(i+1); 
+		
+		for (int i = 0; i < end; i++) { 
+			double newvalue = (double) i + 1;
+			var.setValue(newvalue); 
+			//System.out.println(myInterpreter.getVariables().getVariable(myParameters.get(0).getCommandName()).getValue());
 			for (int j = 0; j < mySubCommands.size(); j++) {
 				myInterpreter.interpretTree(mySubCommands.get(j));
 			}
 		}
-		return (double) var.getValue();
+		if (mySubCommands.size() != 0) {
+			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
+		}
+		else {
+			return 0.0;
+		}
 	}
 }

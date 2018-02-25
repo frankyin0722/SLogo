@@ -1,6 +1,8 @@
 package command.Math;
 
-public class DifferenceCommand {
+import command.Command;
+
+public class DifferenceCommand implements Command{
 	private double input1;
 	private double input2;
 	

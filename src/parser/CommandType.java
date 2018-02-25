@@ -56,7 +56,9 @@ public class CommandType implements CommandTypes {
 		//System.out.println(1);
 		for (Entry<String, Pattern> pattern : languagePatternMapping) {
 			if (SomePatternManager.match(input, pattern.getValue())) {
+				System.out.println(pattern.getKey());
 				return pattern.getKey();
+				
 			}
 		}
 		if (userDefinedInstruction) {

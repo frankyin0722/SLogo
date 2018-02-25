@@ -1,6 +1,8 @@
 package command.Math;
 
-public class NaturalLogCommand {
+import command.Command;
+
+public class NaturalLogCommand implements Command{
 	private double input1;
 	
 	public NaturalLogCommand (double expr1){

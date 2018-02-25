@@ -14,15 +14,17 @@ public class ControlTextInput extends HBox {
 	private CommandWindow myCommandWindow;
 	private RunButton myRunButton;
 	private ClearButton myClearButton;
+	private CommandTreeInterpreter interpreter;
 	
 	public ControlTextInput(Turtle turtle) {
 		myTurtle = turtle;
+		interpreter = new CommandTreeInterpreter(myTurtle);
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
 				myCommandWindow,
 				buttonBox());
 		setButtonAction();
-
+		interpreter = new CommandTreeInterpreter(myTurtle);
 	}
 
 	private VBox buttonBox() {
@@ -48,7 +50,6 @@ public class ControlTextInput extends HBox {
 	private void inputToParser() {
 		System.out.print("we are here");
 		Parser parser = new Parser();
-		CommandTreeInterpreter interpreter = new CommandTreeInterpreter(myTurtle);
 		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), "resources.languages/English"));
 	}
 }
