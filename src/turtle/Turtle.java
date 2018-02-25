@@ -94,4 +94,8 @@ public class Turtle extends Group {
     public void setFitHeight(double height) {
     		myImage.setFitHeight(height);
     }
+    public void resetTurtle() {
+    		changeX(zeroX);
+    		changeY(zeroY);
+    }
 }
