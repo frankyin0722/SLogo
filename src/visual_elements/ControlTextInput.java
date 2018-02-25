@@ -38,6 +38,7 @@ public class ControlTextInput extends HBox {
 		myResetButton = new ResetButton();
 		addButton(buttons, myRunButton);
 		addButton(buttons, myClearButton);
+		addButton(buttons, myResetButton);
 		return buttons;
 	}
 

@@ -4,6 +4,6 @@ import javafx.scene.control.Button;
 
 public class ResetButton extends Button {
 	public ResetButton() {
-		this.setText("Reset");
+		this.setText("Reset Turtle");
 	}
 }
