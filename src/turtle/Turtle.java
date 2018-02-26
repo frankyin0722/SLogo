@@ -94,4 +94,10 @@ public class Turtle extends Group {
     public void setFitHeight(double height) {
     		myImage.setFitHeight(height);
     }
+    // TODO: update old X and old Y? better way to do?
+    public void resetTurtle() {
+    		myImage.setX(zeroX);
+    		myImage.setY(zeroY);
+    		clearLines();
+    }
 }
