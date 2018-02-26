@@ -24,6 +24,7 @@ public class ControlTextInput extends HBox {
 				myCommandWindow,
 				buttonBox());
 		setButtonAction();
+		interpreter = new CommandTreeInterpreter(myTurtle);
 	}
 
 	private VBox buttonBox() {
