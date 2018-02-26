@@ -21,11 +21,10 @@ public class RepeatCommand implements Command{
 	@Override
 	public double execute() {
 		for (int i = 0; i < myNumTimes; i++) {
-			repcountUpdate(i+1);
+			repcountUpdate((double) i+1);
 			for(CommandNode subCommand: mySubCommands) {
 				myInterpreter.interpretTree(subCommand);
 			}
-			myNumTimes--;
 		}
 		if (mySubCommands.size() != 0) {
 			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
@@ -40,7 +39,9 @@ public class RepeatCommand implements Command{
 			myInterpreter.getVariables().setVariable(count, ":repcount");
 		}
 		else {
-			Variable newvar = new Variable(1);
+			System.out.println("add :repcount");
+			Variable newvar = new Variable((double) 1);
+			System.out.println(newvar.getValue());
 			myInterpreter.getVariables().addVariable(newvar, ":repcount");
 		}
 	}
