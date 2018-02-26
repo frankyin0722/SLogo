@@ -17,7 +17,6 @@ public class ControlPanelLeft extends VBox {
 	}
 
 	private void initializeMenus(ResourceBundle resources) {
-//		myTurtleMenu = new TurtleMenu(myTurtle);
 		this.getChildren().addAll(new HistoryMenu(resources), 
 				new TurtleMenu(resources, myTurtle), 
 				new PenColorMenu(resources, myTurtle.getPen()));

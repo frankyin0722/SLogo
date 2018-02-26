@@ -24,7 +24,6 @@ public class DrawingWindow extends Pane {
 	public DrawingWindow() {
 		setupInitialCanvas();
 		setupTurtle();
-		
 		myTurtle.changeX(myTurtle.getX() + 300);
 //		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
 //			add(new ForwardCommand(myTurtle,50));
