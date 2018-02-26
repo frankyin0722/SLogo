@@ -31,15 +31,15 @@ public class CommandTreeInterpreter {
 		userDefinedCommands = new HashMap<String, CommandNode>();
 	}
 	
-	public void interpretAllTrees(List<CommandNode> myRoots, HashMap<String, CommandNode> myMethods) {
+	public void interpretAllTrees(List<CommandNode> myRoots) {
 		//mergeMethods(myMethods);
-		System.out.println("existing :expr command?: " + getUserCommands().containsKey(":expr"));
+		//System.out.println("existing :expr command?: " + getUserCommands().containsKey(":expr"));
 		for (int i = 0; i < myRoots.size(); i++) {
 			interpretTree(myRoots.get(i));
 		}
 	}
 	
-	private void mergeMethods(HashMap<String, CommandNode> newmethods) {
+	/*private void mergeMethods(HashMap<String, CommandNode> newmethods) {
 		for (String key : newmethods.keySet()) {
 			if (!myVariables.checkVariable(key)) {
 				if (!userDefinedCommands.containsKey(key)) {
@@ -51,7 +51,7 @@ public class CommandTreeInterpreter {
 			}
 		}
 		
-	}
+	}*/
 	
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
@@ -64,7 +64,7 @@ public class CommandTreeInterpreter {
 				for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
 					if (myRoot.getCommandType().equals("Control")) {
 						//MakeUserInstructionCase(myRoot);
-						if (i == 0) {
+						if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction")) {
 							interpretTree(myRoot.getNodeChildren().get(i));
 							//System.out.println("if statement variable value: "+myRoot.getNodeValue());
 						}

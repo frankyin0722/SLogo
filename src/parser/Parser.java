@@ -49,9 +49,9 @@ public class Parser implements TreeGenerator{
 		return null;
 	}
 	
-	public HashMap<String, CommandNode> generateUserDefinedMethods() {
+	/*public HashMap<String, CommandNode> generateUserDefinedMethods() {
 		return getMethods();
-	}
+	}*/
 	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
@@ -99,9 +99,9 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
-	public HashMap<String, CommandNode> getMethods() {
+	/*public HashMap<String, CommandNode> getMethods() {
 		return commandInitializer.getMethods();
-	}
+	}*/
 	
 	@Override
 	public void increaseIndex() {

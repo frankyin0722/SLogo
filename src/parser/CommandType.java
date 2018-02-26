@@ -15,9 +15,9 @@ public class CommandType implements CommandTypes {
 	private static final String userDefinedCommand = "MakeUserInstruction";
 	private Map<String, String[]> parametersMapping;
 	private List<Entry<String, Pattern>> languagePatternMapping;
-	private boolean userDefinedInstruction;
+	//private boolean userDefinedInstruction;
 	//private List<String> userMethods = new ArrayList<>(); 
-	private HashMap<String, CommandNode> userMethods = new HashMap<>();
+	//private HashMap<String, CommandNode> userMethods = new HashMap<>();
 	private TreeGenerator myTreeGenerator;
 	private List<String> userInput;
 	private List<CommandNode> myRoots;
@@ -36,7 +36,7 @@ public class CommandType implements CommandTypes {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
 		// check if it's user-defined method (Variable), if yes, deal with it differently 
 		String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
-		userDefinedInstruction = nodeValue.equals(userDefinedCommand);
+		//userDefinedInstruction = nodeValue.equals(userDefinedCommand);
 		
 		myRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
 		myRoots.add(myRoot);
@@ -47,7 +47,7 @@ public class CommandType implements CommandTypes {
 			myTreeGenerator.recurse(myRoot);
 		}
 		
-		if (userDefinedInstruction) { // if the current method is MakeUserInstruction 
+		/*if (userDefinedInstruction) { // if the current method is MakeUserInstruction 
 			String methodName = myRoot.getNodeChildren().get(0).getCommandName();
 			CommandNode methodRoot = new CommandNode(getCommandCategory(nodeValue), methodName, null, 0);
 			methodRoot.addChild(myRoot.getNodeChildren().get(1));
@@ -58,7 +58,7 @@ public class CommandType implements CommandTypes {
 			else {
 				userMethods.put(methodName, methodRoot);
 			}
-		}
+		}*/
 		
 	}
 	
@@ -127,9 +127,9 @@ public class CommandType implements CommandTypes {
 		return myRoots;
 	}
 	
-	public HashMap<String, CommandNode> getMethods() {
+	/*public HashMap<String, CommandNode> getMethods() {
 		return userMethods;
-	}
+	}*/
 	
 	public List<String> getUserInput(){
 		return userInput;

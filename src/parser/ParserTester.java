@@ -17,7 +17,7 @@ public class ParserTester {
 		
 		List<CommandNode> myroots = myparser.generateCommandTree(userinput, language);
 		System.out.println("!!!");
-		System.out.println(myparser.getMethods().containsKey(":expr"));
+		//System.out.println(myparser.getMethods().containsKey(":expr"));
 		/*for (int i = 0; i < myroots.size(); i++) {
 			System.out.println(myroots.get(i).getCommandName());
 		}*/
@@ -27,7 +27,8 @@ public class ParserTester {
 		}*/
 		Turtle turtle = new Turtle(null);
 		CommandTreeInterpreter tree = new CommandTreeInterpreter(turtle);
-		tree.interpretAllTrees(myroots, myparser.generateUserDefinedMethods());
+		tree.interpretAllTrees(myroots);
+		System.out.println(tree.getUserCommands().containsKey(":exprr"));
 		
 	}
 	
