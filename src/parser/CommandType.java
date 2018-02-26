@@ -33,18 +33,13 @@ public class CommandType implements CommandTypes {
 	
 	public void initialize(String language) {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
+		// check if it's user-defined method (Variable), if yes, deal with it differently 
 		String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
-		//System.out.println(myTreeGenerator.getIndex()+"!!!!!");
-		// missing nodeValue
-		//System.out.println(nodeValue);
 		userDefinedInstruction = nodeValue.equals(userDefinedCommand);
 		
 		myRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
-		//System.out.println(myRoot.getCommandName());
 		myRoots.add(myRoot);
-		//myTreeGenerator.printNode(myRoot);
 		myTreeGenerator.printNode(myRoot);
-		//System.out.println("Num Para Needed: " + getNumParameterNeeded(nodeValue));
 		myTreeGenerator.increaseIndex();
 		for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
 			myTreeGenerator.recurse(myRoot);
@@ -53,7 +48,6 @@ public class CommandType implements CommandTypes {
 	}
 	
 	private String getCommandFromLanguageBundle(String input) {
-		//System.out.println(1);
 		for (Entry<String, Pattern> pattern : languagePatternMapping) {
 			if (SomePatternManager.match(input, pattern.getValue())) {
 				System.out.println(pattern.getKey());
