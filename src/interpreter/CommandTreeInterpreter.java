@@ -20,6 +20,7 @@ public class CommandTreeInterpreter {
 	private int currentTurtle;
 	private List<Turtle> myTurtles;
 	private HashMap<String, CommandNode> userDefinedCommands;
+	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 0;
 	
 	public CommandTreeInterpreter(Turtle turtle) {
@@ -29,6 +30,7 @@ public class CommandTreeInterpreter {
 		myTurtles = new ArrayList<>();
 		myTurtles.add(turtle);
 		userDefinedCommands = new HashMap<String, CommandNode>();
+		userDefinedCommandParameters = new HashMap<String, List<CommandNode>>();
 	}
 	
 	public void interpretAllTrees(List<CommandNode> myRoots) {
@@ -60,7 +62,7 @@ public class CommandTreeInterpreter {
 		System.out.println(myRoot.getNodeChildren().size());
 		
 		if (myRoot.getNodeChildren().size()!=0) {
-			//if (!myRoot.getCommandName().equals("MakerUserInstruction")) {
+			if (!myRoot.getCommandType().equals("UserDefined")) {
 				for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
 					if (myRoot.getCommandType().equals("Control")) {
 						//MakeUserInstructionCase(myRoot);
@@ -77,7 +79,7 @@ public class CommandTreeInterpreter {
 						//System.out.println("if statement variable value: "+myRoot.getNodeValue());
 					}
 				}
-			//}
+			}
 		}
 		updateNodeValue(myRoot, Parameters);
 	}
@@ -93,6 +95,8 @@ public class CommandTreeInterpreter {
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
+			case "UserDefined":
+				
 			case "Turtle":
 				Parameters.add(myTurtles.get(currentTurtle));
 				createCommand(node, Parameters);
@@ -175,6 +179,10 @@ public class CommandTreeInterpreter {
 	
 	public HashMap<String, CommandNode> getUserCommands(){
         return userDefinedCommands;
+    }
+	
+	public HashMap<String, List<CommandNode>> getUserCommandParameters(){
+        return userDefinedCommandParameters;
     }
 	
 }
