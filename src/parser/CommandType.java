@@ -16,7 +16,8 @@ public class CommandType implements CommandTypes {
 	private Map<String, String[]> parametersMapping;
 	private List<Entry<String, Pattern>> languagePatternMapping;
 	private boolean userDefinedInstruction;
-	private List<String> userMethods = new ArrayList<>(); 
+	//private List<String> userMethods = new ArrayList<>(); 
+	private HashMap<String, CommandNode> userMethods = new HashMap<>();
 	private TreeGenerator myTreeGenerator;
 	private List<String> userInput;
 	private List<CommandNode> myRoots;
@@ -41,8 +42,22 @@ public class CommandType implements CommandTypes {
 		myRoots.add(myRoot);
 		myTreeGenerator.printNode(myRoot);
 		myTreeGenerator.increaseIndex();
+		System.out.println(getNumParameterNeeded(nodeValue));
 		for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
 			myTreeGenerator.recurse(myRoot);
+		}
+		
+		if (userDefinedInstruction) { // if the current method is MakeUserInstruction 
+			String methodName = myRoot.getNodeChildren().get(0).getCommandName();
+			CommandNode methodRoot = new CommandNode(getCommandCategory(nodeValue), methodName, null, 0);
+			methodRoot.addChild(myRoot.getNodeChildren().get(1));
+			methodRoot.addChild(myRoot.getNodeChildren().get(2));
+			if (userMethods.containsKey(methodName)) {
+				userMethods.replace(methodName, methodRoot);
+			}
+			else {
+				userMethods.put(methodName, methodRoot);
+			}
 		}
 		
 	}
@@ -55,10 +70,10 @@ public class CommandType implements CommandTypes {
 				
 			}
 		}
-		if (userDefinedInstruction) {
+		/*if (userDefinedInstruction) {
 			userMethods.add(input);
 			return input;
-		}
+		}*/
 		throw new IllegalArgumentException("Error converting language to Command: Command Not Found in Such Language!");
 
 	}
@@ -94,11 +109,11 @@ public class CommandType implements CommandTypes {
 	@Override
 	public void recurse(CommandNode node) {
 		String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); // which parsed item the recursion is currently looking at 
-		if (userDefinedInstruction) { // if the command type is user-defined command
+		/*if (userDefinedInstruction) { // if the command type is user-defined command
 			// userDefinedInstruction = false;
 			createUserDefinedInstruction(node, currentValue);
 			return;
-		}
+		}*/
 		CommandNode child = new CommandNode(getCommandCategory(currentValue), currentValue, null, 0);
 		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();
@@ -112,7 +127,7 @@ public class CommandType implements CommandTypes {
 		return myRoots;
 	}
 	
-	public List<String> getMethods() {
+	public HashMap<String, CommandNode> getMethods() {
 		return userMethods;
 	}
 	

@@ -39,6 +39,7 @@ public class Parser implements TreeGenerator{
 				System.out.println("Next command index: " + getIndex());
 				commandInitializer.initialize(language);
 			}
+			System.out.println("parser ends");
 			return commandInitializer.getRoot();
 		} catch (NullPointerException e) {
 			System.err.println("Error in parsing: No Input Command Found! ");
@@ -94,7 +95,7 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
-	public List<String> getMethods() {
+	public HashMap<String, CommandNode> getMethods() {
 		return commandInitializer.getMethods();
 	}
 	
