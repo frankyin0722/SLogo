@@ -53,7 +53,6 @@ public class CommandType implements CommandTypes {
 	}
 	
 	private String getCommandFromLanguageBundle(String input) {
-		//System.out.println(1);
 		for (Entry<String, Pattern> pattern : languagePatternMapping) {
 			if (SomePatternManager.match(input, pattern.getValue())) {
 				System.out.println(pattern.getKey());
