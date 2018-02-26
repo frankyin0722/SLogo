@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import interpreter.CommandTreeInterpreter;
 import javafx.collections.ObservableList;
 
 import java.lang.reflect.Constructor;
@@ -27,6 +28,11 @@ public class Parser implements TreeGenerator{
 	private PatternManager SomePatternManager = new PatternManager();
 	private CommandType commandInitializer; 
 	private String usedLanguage;
+	private CommandTreeInterpreter myInterpreter;
+	
+	public Parser(CommandTreeInterpreter interpreter) {
+		myInterpreter = interpreter;
+	}
 	
 	public List<CommandNode> generateCommandTree(String input, String language) {
 		try {
@@ -39,6 +45,7 @@ public class Parser implements TreeGenerator{
 				System.out.println("Next command index: " + getIndex());
 				commandInitializer.initialize(language);
 			}
+			System.out.println("parser ends");
 			return commandInitializer.getRoot();
 		} catch (NullPointerException e) {
 			System.err.println("Error in parsing: No Input Command Found! ");
@@ -47,7 +54,11 @@ public class Parser implements TreeGenerator{
 		}
 		return null;
 	}
-
+	
+	/*public HashMap<String, CommandNode> generateUserDefinedMethods() {
+		return getMethods();
+	}*/
+	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
 		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
@@ -83,10 +94,10 @@ public class Parser implements TreeGenerator{
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
+		//System.out.println(userInput.get(getIndex()));
 		for (Pattern pattern : inputHandlerMap.keySet()) {
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				//System.out.println(1);
 				System.out.println(cmdType.toString());
 				cmdType.recurse(root);
 				break;
@@ -94,9 +105,9 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
-	public List<String> getMethods() {
+	/*public HashMap<String, CommandNode> getMethods() {
 		return commandInitializer.getMethods();
-	}
+	}*/
 	
 	@Override
 	public void increaseIndex() {
