@@ -34,18 +34,22 @@ public class MakeUserInstructionCommand implements Command {
 		}
 		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
 			myInterpreter.getUserCommands().replace(myCommandName, methodRoot);
+			myInterpreter.getUserCommandParameters().replace(myCommandName, myVariables);
 		}
 		else {
 			myInterpreter.getUserCommands().put(myCommandName, methodRoot);
+			myInterpreter.getUserCommandParameters().put(myCommandName, myVariables);
 		}
 		
 		for (CommandNode variable : myVariables) {
 			if (myInterpreter.getUserCommands().containsKey(variable.getCommandName())) {
 				myInterpreter.getUserCommands().remove(myCommandName);
+				myInterpreter.getUserCommandParameters().remove(myCommandName);
 				System.out.println("Failed to create user-defined method: parameters are user-defined methods");
 				return 0.0; // if the variable used is already a user command, fails 
 			}
 		}
+		
 		
 		return 1.0;
 	}

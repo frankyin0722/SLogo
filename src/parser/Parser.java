@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import interpreter.CommandTreeInterpreter;
 import javafx.collections.ObservableList;
 
 import java.lang.reflect.Constructor;
@@ -27,6 +28,11 @@ public class Parser implements TreeGenerator{
 	private PatternManager SomePatternManager = new PatternManager();
 	private CommandType commandInitializer; 
 	private String usedLanguage;
+	private CommandTreeInterpreter myInterpreter;
+	
+	public Parser(CommandTreeInterpreter interpreter) {
+		myInterpreter = interpreter;
+	}
 	
 	public List<CommandNode> generateCommandTree(String input, String language) {
 		try {

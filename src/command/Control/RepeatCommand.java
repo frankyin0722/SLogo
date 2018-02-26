@@ -5,6 +5,7 @@ import java.util.List;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
+import variables.Variable;
 //purely speculative, will likely change a lot, but possible model for control commands
 public class RepeatCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
@@ -19,7 +20,8 @@ public class RepeatCommand implements Command{
 
 	@Override
 	public double execute() {
-		while(myNumTimes > 0) {
+		for (int i = 0; i < myNumTimes; i++) {
+			repcountUpdate(i+1);
 			for(CommandNode subCommand: mySubCommands) {
 				myInterpreter.interpretTree(subCommand);
 			}
@@ -32,4 +34,15 @@ public class RepeatCommand implements Command{
 			return 0.0;
 		}
 	}
+	
+	private void repcountUpdate(double count) {
+		if (myInterpreter.getVariables().checkVariable(":repcount")) {
+			myInterpreter.getVariables().setVariable(count, ":repcount");
+		}
+		else {
+			Variable newvar = new Variable(1);
+			myInterpreter.getVariables().addVariable(newvar, ":repcount");
+		}
+	}
+	
 }
