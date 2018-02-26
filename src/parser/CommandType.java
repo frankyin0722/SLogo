@@ -100,11 +100,11 @@ public class CommandType implements CommandTypes {
 		}
 	}
 	
-	private void createUserDefinedInstruction(CommandNode root, String value) {
+	/*private void createUserDefinedInstruction(CommandNode root, String value) {
 		CommandNode child = new CommandNode(getCommandCategory(value), value, null, 0);
 		root.addChild(child);
 		myTreeGenerator.recurse(root);
-	}
+	}*/
 	
 	@Override
 	public void recurse(CommandNode node) {

@@ -11,7 +11,7 @@ public class ParserTester {
 		//String userinput = "repeat 4 [ repeat 4 [ fd 50 ] ] fd 50";
 		//String userinput = "fd 50 repeat [ repeat 4 [ bk 50 fd 50 ] bk 50 bk 50 repeat 4 [ bk 4 ] ]";
 		//String userinput = "DOTIMES [ :expr 50 ] [ SUM 20 80 SUM 20 30 ]";
-		String userinput = "TO :expr [ :var1 :var2 ] [ fd var1 fd var 2 ]";
+		String userinput = "TO :expr [ :exprr :exprr ] [ fd :varr fd :varr ]";
 		Parser myparser = new Parser();
 		String language = "resources.languages/English";
 		
@@ -27,13 +27,8 @@ public class ParserTester {
 		}*/
 		Turtle turtle = new Turtle(null);
 		CommandTreeInterpreter tree = new CommandTreeInterpreter(turtle);
-		//tree.interpretAllTrees(myroots);
-		for (int i = 0; i < myroots.size(); i++) {
-			//System.out.println(myroots.get(i).getNodeValue());
-		}
-		System.out.println("!!!");
-		System.out.println(myparser.getMethods().containsKey(":expr"));
-		//System.out.println(myroots.get(0).getNodeChildren().get(1).getNodeValue());
+		tree.interpretAllTrees(myroots, myparser.generateUserDefinedMethods());
+		
 	}
 	
 	private void printTree(CommandNode myRoot) {

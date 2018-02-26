@@ -48,7 +48,11 @@ public class Parser implements TreeGenerator{
 		}
 		return null;
 	}
-
+	
+	public HashMap<String, CommandNode> generateUserDefinedMethods() {
+		return getMethods();
+	}
+	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
 		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
@@ -84,10 +88,10 @@ public class Parser implements TreeGenerator{
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
+		//System.out.println(userInput.get(getIndex()));
 		for (Pattern pattern : inputHandlerMap.keySet()) {
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				//System.out.println(1);
 				System.out.println(cmdType.toString());
 				cmdType.recurse(root);
 				break;
