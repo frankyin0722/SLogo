@@ -20,10 +20,13 @@ public class ListStartType implements CommandTypes{
 		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();
 		while (!userInput.get(myTreeGenerator.getIndex()).equals("]")) {
+			System.out.println("inside first list bracket");
+			System.out.println(userInput.get(myTreeGenerator.getIndex()));
 			myTreeGenerator.recurse(child);
 		}
-		//System.out.println("this gets printed");
+		
 		myTreeGenerator.increaseIndex();
+		System.out.println(myTreeGenerator.getIndex());
 		myTreeGenerator.increaseListEndIndex();
 	}
 	
