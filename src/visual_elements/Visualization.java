@@ -33,7 +33,6 @@ public class Visualization {
 	private Turtle myDefaultTurtle;
 	public Visualization() {
 		myPane = new BorderPane();
-		setupLanguage("English");
 		initializeAll();
 		initializeLayout();
 	}
@@ -41,8 +40,10 @@ public class Visualization {
 	private void initializeAll() {
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
+		
 		myControlTextInput = new ControlTextInput(myDefaultTurtle);
 		myControlPanelRight = new ControlPanelRight();
+		myResources = myControlPanelRight.getLanguage();
 		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
 	}
 
@@ -62,10 +63,6 @@ public class Visualization {
 		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}
 	
-	private void setupLanguage(String language) {
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-		
-	}
 	
 	public Scene getScene() {
 		return myScene;

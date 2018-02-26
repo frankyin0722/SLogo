@@ -49,14 +49,18 @@ public class ControlTextInput extends HBox {
     
     private void setButtonAction() {
     		myRunButton.setOnAction(e -> inputToParser());
-    		myClearButton.setOnAction(e -> myCommandWindow.clearText());
+    		myClearButton.setOnAction(e -> resetCommandWindow());
     		myResetButton.setOnAction(e -> resetTurtle());
     }
     
 	private void inputToParser() {
-		System.out.print("we are here");
 		Parser parser = new Parser();
 		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), "resources.languages/English"));
+		resetCommandWindow();
+	}
+		
+	private void resetCommandWindow() {
+		myCommandWindow.clearText();
 	}
 	
 	private void resetTurtle() {

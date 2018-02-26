@@ -16,12 +16,12 @@ public class ScrollingDrawingWindow extends ScrollPane{
 		this.setHbarPolicy(ScrollBarPolicy.ALWAYS);
 //		this.setPrefViewportWidth(100);
 //		this.setPrefViewportHeight(100);
-
+		
 	}
-	
-	private void setupScrolling() {
-	
-	}
+		
+//	private void setupScrolling() {
+//	
+//	}
 	
 	public Turtle getDefaultTurtle() {
 		return myDrawingWindow.getDefaultTurtle();
