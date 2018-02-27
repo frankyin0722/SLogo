@@ -56,10 +56,6 @@ public class Parser implements TreeGenerator{
 		return null;
 	}
 	
-	/*public HashMap<String, CommandNode> generateUserDefinedMethods() {
-		return getMethods();
-	}*/
-	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
 		inputHandlerMap = new HashMap<Pattern, CommandTypes>();
@@ -91,11 +87,9 @@ public class Parser implements TreeGenerator{
 	
 	@Override
 	public void recurse(CommandNode root) {
-		//System.out.println(currentIndex);
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
-		
 		if (myInterpreter.getUserCommands().containsKey(userInput.get(currentIndex))) {
 			CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
 			System.out.println("!!!!!!" + userInput.get(currentIndex));
@@ -104,26 +98,6 @@ public class Parser implements TreeGenerator{
 			increaseIndex();
 			parameter.recurse(userdefinedmethod);
 		}
-		
-		/*if (myInterpreter.getUserCommands().containsKey(root.getCommandName())) {
-			//CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
-			//root.addChild(userdefinedmethod);
-			//increaseIndex();
-			List<CommandNode> para = myInterpreter.getUserCommandParameters().get(root.getCommandName());
-			System.out.println("!!!!!!!!!!!!!!!" + para.size());
-			increaseIndex();
-			System.out.println("current index: " + getIndex());
-			for (int i = 0; i < para.size(); i++) {
-				for (Pattern pattern : inputHandlerMap.keySet()) {
-					if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
-						CommandTypes cmdType = inputHandlerMap.get(pattern);
-						System.out.println(cmdType.toString());
-						cmdType.recurse(root);
-						break;
-					}
-				}
-			}
-		}*/
 		else {
 			for (Pattern pattern : inputHandlerMap.keySet()) {
 				if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
@@ -135,11 +109,6 @@ public class Parser implements TreeGenerator{
 			}
 		}
 	}
-	//}
-	
-	/*public HashMap<String, CommandNode> getMethods() {
-		return commandInitializer.getMethods();
-	}*/
 	
 	@Override
 	public void increaseIndex() {
