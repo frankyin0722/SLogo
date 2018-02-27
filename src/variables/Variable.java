@@ -16,9 +16,8 @@ public class Variable {
     		return value;
     }
 
-    //changes value to new value, throws TypeException if the type doesn't match the variable type. 
+    //changes value to new value
     public void setValue(Object newValue){
-    	//TODO throw exception
     		value = (double) newValue;
     }
 

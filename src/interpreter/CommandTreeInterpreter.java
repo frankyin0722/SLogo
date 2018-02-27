@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import alerts.Alerts;
+import alerts.CommandException;
+import alerts.Resources;
 import command.Command;
 import command.CommandManager;
 import parser.CommandNode;
@@ -158,7 +161,8 @@ public class CommandTreeInterpreter {
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-			System.err.println("Error creating commands: " + commandClass.getName());
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError1");
+			throw new CommandException("Invalid Syntax");
 		}
 		
 		Method thisExecution = null;
