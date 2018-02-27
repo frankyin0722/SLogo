@@ -78,7 +78,7 @@ public class CommandType implements CommandTypes {
 		if (myTreeGenerator.getInterpreter().getUserCommands().containsKey(input)) {
 			return input;
 		}
-		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError");
+		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
 		throw new CommandException("Invalid Syntax");
 	}
 	
