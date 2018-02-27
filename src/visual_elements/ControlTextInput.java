@@ -1,5 +1,7 @@
 package visual_elements;
 
+import java.util.ResourceBundle;
+
 import buttons.ClearButton;
 import buttons.ResetButton;
 
@@ -8,6 +10,7 @@ import interpreter.CommandTreeInterpreter;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import menu_managers.LanguageMenu;
 import parser.Parser;
 import turtle.Turtle;
 
@@ -18,9 +21,11 @@ public class ControlTextInput extends HBox {
 	private ClearButton myClearButton;
 	private ResetButton myResetButton;
 	private CommandTreeInterpreter interpreter;
+	private ResourceBundle myResources;
 	
-	public ControlTextInput(Turtle turtle) {
+	public ControlTextInput(Turtle turtle, ResourceBundle resources) {
 		myTurtle = turtle;
+		myResources = resources;
 		interpreter = new CommandTreeInterpreter(myTurtle);
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
