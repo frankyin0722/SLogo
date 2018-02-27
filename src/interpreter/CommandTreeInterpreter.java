@@ -20,6 +20,7 @@ public class CommandTreeInterpreter {
 	private int currentTurtle;
 	private List<Turtle> myTurtles;
 	private HashMap<String, CommandNode> userDefinedCommands;
+	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 0;
 	
 	public CommandTreeInterpreter(Turtle turtle) {
@@ -29,6 +30,7 @@ public class CommandTreeInterpreter {
 		myTurtles = new ArrayList<>();
 		myTurtles.add(turtle);
 		userDefinedCommands = new HashMap<String, CommandNode>();
+		userDefinedCommandParameters = new HashMap<String, List<CommandNode>>();
 	}
 	
 	public void interpretAllTrees(List<CommandNode> myRoots) {
@@ -59,8 +61,9 @@ public class CommandTreeInterpreter {
 		System.out.println(myRoot.getCommandType());
 		System.out.println(myRoot.getNodeChildren().size());
 		
+		
 		if (myRoot.getNodeChildren().size()!=0) {
-			//if (!myRoot.getCommandName().equals("MakerUserInstruction")) {
+			//if (!myRoot.getCommandType().equals("UserDefined")) {
 				for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
 					if (myRoot.getCommandType().equals("Control")) {
 						//MakeUserInstructionCase(myRoot);
@@ -72,6 +75,7 @@ public class CommandTreeInterpreter {
 					}
 					else {
 						//System.out.println("!!!");
+						System.out.println("new print statement: " + myRoot.getNodeChildren().get(i).getCommandName());
 						interpretTree(myRoot.getNodeChildren().get(i));
 						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
 						//System.out.println("if statement variable value: "+myRoot.getNodeValue());
@@ -93,6 +97,27 @@ public class CommandTreeInterpreter {
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
+			case "UserDefined":
+				List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
+				System.out.println("user-defined parameter size: " + para.size());
+				if (node.getNodeChildren().get(0).getNodeChildren().size()!=para.size()) {
+					throw new IllegalArgumentException("Error in executing user-defined method: Unmatched Number of Parameters!");
+				}
+				for (int i = 0; i < para.size(); i++) {
+					if (myVariables.checkVariable(para.get(i).getCommandName())) {
+						myVariables.setVariable(node.getNodeChildren().get(0).getNodeChildren().get(i).getNodeValue(), para.get(i).getCommandName());
+					}
+					else {
+						myVariables.addVariable(new Variable((double) node.getNodeChildren().get(0).getNodeChildren().get(i).getNodeValue()), para.get(i).getCommandName());
+					}
+					System.out.println(":expr value: " + myVariables.getVariable(para.get(i).getCommandName()).getValue());
+				}
+				
+				System.out.println("inside my list: " + userDefinedCommands.get(node.getCommandName()).getCommandName());
+				CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
+				interpretTree(storedMethod);
+				node.setNodeValue(storedMethod.getNodeValue());
+				break;
 			case "Turtle":
 				Parameters.add(myTurtles.get(currentTurtle));
 				createCommand(node, Parameters);
@@ -110,8 +135,7 @@ public class CommandTreeInterpreter {
 				//System.out.println(node.getCommandName());
 				//System.out.println(myVariables.checkVariable(node.getCommandName()));
 				if (!myVariables.checkVariable(node.getCommandName())) {
-					Variable var = new Variable(0.0);
-					myVariables.addVariable(var, node.getCommandName());
+					node.setNodeValue((double) 0.0); 
 				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
 				//System.out.println("currentNode value: " + node.getNodeValue());
@@ -175,6 +199,10 @@ public class CommandTreeInterpreter {
 	
 	public HashMap<String, CommandNode> getUserCommands(){
         return userDefinedCommands;
+    }
+	
+	public HashMap<String, List<CommandNode>> getUserCommandParameters(){
+        return userDefinedCommandParameters;
     }
 	
 }

@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import interpreter.CommandTreeInterpreter;
 import javafx.collections.ObservableList;
 
 import java.lang.reflect.Constructor;
@@ -21,12 +22,17 @@ public class Parser implements TreeGenerator{
 	private static final String Syntax = "resources.languages/Syntax";
 	private HashMap<Pattern, CommandTypes> inputHandlerMap;
 	private List<String> userInput;
-	private int currentIndex;
+	private int currentIndex = 0;
 	private int ListStartIndex = 0;
 	private int ListEndIndex = 0;
 	private PatternManager SomePatternManager = new PatternManager();
 	private CommandType commandInitializer; 
 	private String usedLanguage;
+	private CommandTreeInterpreter myInterpreter;
+	
+	public Parser(CommandTreeInterpreter interpreter) {
+		myInterpreter = interpreter;
+	}
 	
 	public List<CommandNode> generateCommandTree(String input, String language) {
 		try {
@@ -35,6 +41,7 @@ public class Parser implements TreeGenerator{
 			userInput = Arrays.asList(input.split("\\s+"));
 			generateInputHandlerMap();
 			commandInitializer.initialize(language);
+			System.out.println("loooook here!!!: "+getIndex());
 			while (getIndex() < userInput.size()) {
 				System.out.println("Next command index: " + getIndex());
 				commandInitializer.initialize(language);
@@ -48,10 +55,6 @@ public class Parser implements TreeGenerator{
 		}
 		return null;
 	}
-	
-	/*public HashMap<String, CommandNode> generateUserDefinedMethods() {
-		return getMethods();
-	}*/
 	
 	private void generateInputHandlerMap() {
 		List<Entry<String, Pattern>> syntaxPatternMapping = SomePatternManager.getPatterns(Syntax);
@@ -84,24 +87,30 @@ public class Parser implements TreeGenerator{
 	
 	@Override
 	public void recurse(CommandNode root) {
-		//System.out.println(currentIndex);
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
-		//System.out.println(userInput.get(getIndex()));
-		for (Pattern pattern : inputHandlerMap.keySet()) {
-			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
-				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				System.out.println(cmdType.toString());
-				cmdType.recurse(root);
-				break;
+		if (!root.getCommandName().equals("MakeUserInstruction") && myInterpreter.getUserCommands().containsKey(userInput.get(currentIndex))) {
+			// if it is not MakeUserInstruction command, consider already-existing commands as commands;
+			// if it is MakeUserInstruction command, consider already-existing commands as variables to be assigned with user-defined methods 
+			CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
+			System.out.println("!!!!!!" + userInput.get(currentIndex));
+			root.addChild(userdefinedmethod);
+			CommandTypes parameter = new ListStartType(userInput, this);
+			increaseIndex();
+			parameter.recurse(userdefinedmethod);
+		}
+		else {
+			for (Pattern pattern : inputHandlerMap.keySet()) {
+				if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
+					CommandTypes cmdType = inputHandlerMap.get(pattern);
+					System.out.println(cmdType.toString());
+					cmdType.recurse(root);
+					break;
+				}
 			}
 		}
 	}
-	
-	/*public HashMap<String, CommandNode> getMethods() {
-		return commandInitializer.getMethods();
-	}*/
 	
 	@Override
 	public void increaseIndex() {
@@ -122,7 +131,11 @@ public class Parser implements TreeGenerator{
 	public void increaseListEndIndex() {
 		ListEndIndex++;
 	}
-
+	
+	public CommandTreeInterpreter getInterpreter() {
+		return myInterpreter;
+	}
+	
 	public void printNode(CommandNode node) {
 		System.out.println("Type is: " + node.getCommandType());
 		System.out.println(node.getCommandName());

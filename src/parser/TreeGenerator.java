@@ -1,5 +1,7 @@
 package parser;
 
+import interpreter.CommandTreeInterpreter;
+
 public interface TreeGenerator {
 	
 	public void increaseIndex();
@@ -13,4 +15,6 @@ public interface TreeGenerator {
 	public void recurse(CommandNode commandNode);
 	
 	public void printNode(CommandNode node);
+
+	public CommandTreeInterpreter getInterpreter();
 }

@@ -23,4 +23,9 @@ public class GroupStartType implements CommandTypes{
 		}
 		myTreeGenerator.increaseIndex();
 	}
+
+	@Override
+	public String whichType() {
+		return "GroupStart";
+	}
 }

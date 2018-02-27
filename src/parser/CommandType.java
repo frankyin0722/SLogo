@@ -9,6 +9,10 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import alerts.Alerts;
+import alerts.CommandException;
+import alerts.Resources;
+
 public class CommandType implements CommandTypes {
 	private static final int parameterIndex = 0; // stored in the 0th index of the array
 	private static final int categoryIndex = 1; // stored in the 1st index of the array 
@@ -36,6 +40,7 @@ public class CommandType implements CommandTypes {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
 		// check if it's user-defined method (Variable), if yes, deal with it differently 
 		String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
+		System.out.println("look here: "+nodeValue);
 		//userDefinedInstruction = nodeValue.equals(userDefinedCommand);
 		
 		myRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
@@ -70,12 +75,11 @@ public class CommandType implements CommandTypes {
 				
 			}
 		}
-		/*if (userDefinedInstruction) {
-			userMethods.add(input);
+		if (myTreeGenerator.getInterpreter().getUserCommands().containsKey(input)) {
 			return input;
-		}*/
-		throw new IllegalArgumentException("Error converting language to Command: Command Not Found in Such Language!");
-
+		}
+		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError");
+		throw new CommandException("Invalid Syntax");
 	}
 	
 	private void makeParametersMapping() {
@@ -89,14 +93,29 @@ public class CommandType implements CommandTypes {
 	}
 	
 	private int getNumParameterNeeded(String key) {
-		return Integer.parseInt(parametersMapping.get(key)[parameterIndex]);
+		if (parametersMapping.containsKey(key)) {
+			return Integer.parseInt(parametersMapping.get(key)[parameterIndex]);
+		}
+		if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(key)) {
+			//return myTreeGenerator.getInterpreter().getUserCommandParameters().size();
+			return 1; // one bracket around all parameters of user-defined commands 
+		}
+		return 0;
 	}
 	
 	private String getCommandCategory(String key) {
 		try {
 			return parametersMapping.get(key)[categoryIndex];
 		} catch (NullPointerException e){
-			return "UserDefined";
+			try {
+				if (myTreeGenerator.getInterpreter().getUserCommands().containsKey(key)) {
+					return "UserDefined";
+				}
+				return null;
+			}
+			catch (NullPointerException ee) {
+				throw new IllegalArgumentException("Error in parsing: Command not defined!");
+			}
 		}
 	}
 	
@@ -133,5 +152,10 @@ public class CommandType implements CommandTypes {
 	
 	public List<String> getUserInput(){
 		return userInput;
+	}
+
+	@Override
+	public String whichType() {
+		return "Command";
 	}
 }
