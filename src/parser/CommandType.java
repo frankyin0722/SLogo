@@ -9,6 +9,10 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import alerts.Alerts;
+import alerts.CommandException;
+import alerts.Resources;
+
 public class CommandType implements CommandTypes {
 	private static final int parameterIndex = 0; // stored in the 0th index of the array
 	private static final int categoryIndex = 1; // stored in the 1st index of the array 
@@ -74,7 +78,8 @@ public class CommandType implements CommandTypes {
 			userMethods.add(input);
 			return input;
 		}*/
-		throw new IllegalArgumentException("Error converting language to Command: Command Not Found in Such Language!");
+		Alerts.createAlert(new CommandException(""), "CommandMessageError");
+		return null;
 
 	}
 	
