@@ -23,6 +23,7 @@ public class MakeUserInstructionCommand implements Command {
 	
 	@Override
 	public double execute() {
+		System.out.println("got into makeuserintruction class");
 		if (myInterpreter.getVariables().checkVariable(myCommandName)) {
 			System.out.println("Failed to create user-defined method: method name already exists in variables");
 			return 0.0; // if the commandName is already a variable, fails 
@@ -33,6 +34,7 @@ public class MakeUserInstructionCommand implements Command {
 			methodRoot.addChild(subcommand);
 		}
 		System.out.println("my inside command is: " + methodRoot.getNodeChildren().get(0).getCommandName());
+		System.out.println("right now it contains method :cs? "+myInterpreter.getUserCommands().containsKey(myCommandName));
 		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
 			myInterpreter.getUserCommands().replace(myCommandName, methodRoot);
 			myInterpreter.getUserCommandParameters().replace(myCommandName, myVariables);

@@ -90,7 +90,9 @@ public class Parser implements TreeGenerator{
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
-		if (myInterpreter.getUserCommands().containsKey(userInput.get(currentIndex))) {
+		if (!root.getCommandName().equals("MakeUserInstruction") && myInterpreter.getUserCommands().containsKey(userInput.get(currentIndex))) {
+			// if it is not MakeUserInstruction command, consider already-existing commands as commands;
+			// if it is MakeUserInstruction command, consider already-existing commands as variables to be assigned with user-defined methods 
 			CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
 			System.out.println("!!!!!!" + userInput.get(currentIndex));
 			root.addChild(userdefinedmethod);
