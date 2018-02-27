@@ -22,4 +22,9 @@ public class ConstantType implements CommandTypes{
 			myTreeGenerator.recurse(node);
 		}*/
 	}
+	
+	public String whichType() {
+		return "Constant";
+	}
+	
 }

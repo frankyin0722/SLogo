@@ -30,4 +30,7 @@ public class ListStartType implements CommandTypes{
 		myTreeGenerator.increaseListEndIndex();
 	}
 	
+	public String whichType() {
+		return "ListStart";
+	}
 }

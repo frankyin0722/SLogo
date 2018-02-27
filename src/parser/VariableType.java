@@ -21,4 +21,9 @@ public class VariableType implements CommandTypes{
 			myTreeGenerator.recurse(node);
 		}*/
 	}
+	
+	public String whichType() {
+		return "Variable";
+	}
+	
 }

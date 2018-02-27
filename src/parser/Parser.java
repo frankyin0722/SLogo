@@ -22,7 +22,7 @@ public class Parser implements TreeGenerator{
 	private static final String Syntax = "resources.languages/Syntax";
 	private HashMap<Pattern, CommandTypes> inputHandlerMap;
 	private List<String> userInput;
-	private int currentIndex;
+	private int currentIndex = 0;
 	private int ListStartIndex = 0;
 	private int ListEndIndex = 0;
 	private PatternManager SomePatternManager = new PatternManager();
@@ -41,6 +41,7 @@ public class Parser implements TreeGenerator{
 			userInput = Arrays.asList(input.split("\\s+"));
 			generateInputHandlerMap();
 			commandInitializer.initialize(language);
+			System.out.println("loooook here!!!: "+getIndex());
 			while (getIndex() < userInput.size()) {
 				System.out.println("Next command index: " + getIndex());
 				commandInitializer.initialize(language);
@@ -94,16 +95,47 @@ public class Parser implements TreeGenerator{
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
-		//System.out.println(userInput.get(getIndex()));
-		for (Pattern pattern : inputHandlerMap.keySet()) {
-			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
-				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				System.out.println(cmdType.toString());
-				cmdType.recurse(root);
-				break;
+		
+		if (myInterpreter.getUserCommands().containsKey(userInput.get(currentIndex))) {
+			CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
+			System.out.println("!!!!!!" + userInput.get(currentIndex));
+			root.addChild(userdefinedmethod);
+			CommandTypes parameter = new ListStartType(userInput, this);
+			increaseIndex();
+			parameter.recurse(userdefinedmethod);
+		}
+		
+		/*if (myInterpreter.getUserCommands().containsKey(root.getCommandName())) {
+			//CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
+			//root.addChild(userdefinedmethod);
+			//increaseIndex();
+			List<CommandNode> para = myInterpreter.getUserCommandParameters().get(root.getCommandName());
+			System.out.println("!!!!!!!!!!!!!!!" + para.size());
+			increaseIndex();
+			System.out.println("current index: " + getIndex());
+			for (int i = 0; i < para.size(); i++) {
+				for (Pattern pattern : inputHandlerMap.keySet()) {
+					if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
+						CommandTypes cmdType = inputHandlerMap.get(pattern);
+						System.out.println(cmdType.toString());
+						cmdType.recurse(root);
+						break;
+					}
+				}
+			}
+		}*/
+		else {
+			for (Pattern pattern : inputHandlerMap.keySet()) {
+				if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
+					CommandTypes cmdType = inputHandlerMap.get(pattern);
+					System.out.println(cmdType.toString());
+					cmdType.recurse(root);
+					break;
+				}
 			}
 		}
 	}
+	//}
 	
 	/*public HashMap<String, CommandNode> getMethods() {
 		return commandInitializer.getMethods();
@@ -128,7 +160,11 @@ public class Parser implements TreeGenerator{
 	public void increaseListEndIndex() {
 		ListEndIndex++;
 	}
-
+	
+	public CommandTreeInterpreter getInterpreter() {
+		return myInterpreter;
+	}
+	
 	public void printNode(CommandNode node) {
 		System.out.println("Type is: " + node.getCommandType());
 		System.out.println(node.getCommandName());

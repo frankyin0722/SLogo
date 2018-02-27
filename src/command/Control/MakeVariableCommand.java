@@ -10,7 +10,7 @@ public class MakeVariableCommand implements Command {
 	private CommandNode myVariable;
 	private double myValue;
 	
-	public MakeVariableCommand(CommandNode assignedvalue, CommandNode variable, CommandTreeInterpreter tree) {
+	public MakeVariableCommand(CommandNode variable, CommandNode assignedvalue, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myVariable = variable;
 		myValue = assignedvalue.getNodeValue();
