@@ -28,10 +28,11 @@ public class MakeUserInstructionCommand implements Command {
 			return 0.0; // if the commandName is already a variable, fails 
 		}
 		
-		CommandNode methodRoot = new CommandNode("UserDefined", myCommandName, null, 0);
+		CommandNode methodRoot = new CommandNode("Bracket", myCommandName, null, 0);
 		for (CommandNode subcommand : mySubCommands) {
 			methodRoot.addChild(subcommand);
 		}
+		System.out.println("my inside command is: " + methodRoot.getNodeChildren().get(0).getCommandName());
 		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
 			myInterpreter.getUserCommands().replace(myCommandName, methodRoot);
 			myInterpreter.getUserCommandParameters().replace(myCommandName, myVariables);
