@@ -78,9 +78,8 @@ public class CommandType implements CommandTypes {
 			userMethods.add(input);
 			return input;
 		}*/
-		Alerts.createAlert(new CommandException(""), "CommandMessageError");
-		return null;
-
+		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError");
+		throw new CommandException("Invalid Syntax");
 	}
 	
 	private void makeParametersMapping() {

@@ -11,8 +11,8 @@ public class Alerts {
 	public static void createAlert(Exception e, String message) {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle(Resources.getString("ErrorTitle"));
-        alert.setHeaderText(Resources.getString("CommandHeaderError"));
-        alert.setContentText(String.format(Resources.getString(message), e.getMessage()));
+        alert.setHeaderText(e.getMessage());
+        alert.setContentText(String.format(Resources.getString(message)));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             alert.close();
