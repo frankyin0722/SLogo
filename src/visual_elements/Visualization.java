@@ -5,9 +5,11 @@ package visual_elements;
 
 import java.util.ResourceBundle;
 
+import interpreter.CommandTreeInterpreter;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import turtle.Turtle;
 
 /**
  * @author elizabethshulman
@@ -25,30 +27,58 @@ public class Visualization {
 	private Scene myScene;
 	private BorderPane myPane;
 	private ResourceBundle myResources;
-
+	private ScrollingDrawingWindow myScrollingDrawingWindow;
+	private CommandTreeInterpreter interpreter;
+	private ControlTextInput myControlTextInput;
+	private ControlPanelRight myControlPanelRight;
+	private ControlPanelLeft myControlPanelLeft;
+	private Turtle myDefaultTurtle;
+	
 	public Visualization() {
 		myPane = new BorderPane();
-		setupLanguage("English");
-		initializeVis();
+		initializeAll();
+		initializeLayout();
+	}
+	
+	private void initializeAll() {
+		myScrollingDrawingWindow = new ScrollingDrawingWindow();
+		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
+		
+		changeLanguage();														//cannot pull RB from cpRight but need RB initialized
+		
+		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
+		myControlTextInput = new ControlTextInput(interpreter, this);
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources);
+
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
 	}
 
-	private void initializeVis() {		
+	private void initializeLayout() {		
 		myPane.setPadding(new Insets(20,20,20,20));
 		myPane.setTop(new InfoTop());
-		myPane.setCenter(new DrawingWindow());
-		myPane.setBottom(new ControlTextInput());
-		myPane.setRight(new ControlPanelRight());
-		myPane.setLeft(new ControlPanelLeft(myResources));
+		myPane.setCenter(myScrollingDrawingWindow);
+		myPane.setBottom(myControlTextInput);
+		myPane.setRight(myControlPanelRight);
+		myPane.setLeft(myControlPanelLeft);
 		
 		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}
 	
-	private void setupLanguage(String language) {
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-		
+	public void changeLanguage() {
+		myResources = myControlPanelRight.getLanguage();
+	}
+	
+	public ResourceBundle getLanguage() {
+		changeLanguage();
+		return myResources;
+	}
+	
+	public void updateLanguage() {
+		myResources = myControlPanelRight.getLanguage();
 	}
 	
 	public Scene getScene() {
 		return myScene;
 	}
+	
 }

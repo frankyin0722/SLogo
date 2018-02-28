@@ -1,6 +1,8 @@
 package command.Boolean;
 
-public class GreaterThanCommand {
+import command.Command;
+
+public class GreaterThanCommand implements Command{
 	private double input1;
 	private double input2;
 	

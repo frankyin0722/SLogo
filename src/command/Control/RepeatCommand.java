@@ -3,25 +3,47 @@ package command.Control;
 import java.util.List;
 
 import command.Command;
+import interpreter.CommandTreeInterpreter;
+import parser.CommandNode;
+import variables.Variable;
 //purely speculative, will likely change a lot, but possible model for control commands
 public class RepeatCommand implements Command{
-	private double myNumTimes;
-	private List<Command> myCommands;
+	private CommandTreeInterpreter myInterpreter;
+	private int myNumTimes;
+	private List<CommandNode> mySubCommands;
 
-	public RepeatCommand(double numTimes, List<Command> commands) {
-		myNumTimes = numTimes;
-		myCommands = commands;
+	public RepeatCommand(CommandNode numTimes, CommandNode subCommandsParent, CommandTreeInterpreter tree) {
+		myInterpreter = tree;
+		myNumTimes = (int) numTimes.getNodeValue();
+		mySubCommands = subCommandsParent.getNodeChildren();
 	}
 
 	@Override
 	public double execute() {
-		double returnValue = 0;
-		while(myNumTimes > 0) {
-			for(Command command: myCommands) {
-				returnValue = command.execute();
+		for (int i = 0; i < myNumTimes; i++) {
+			repcountUpdate((double) i+1);
+			for(CommandNode subCommand: mySubCommands) {
+				myInterpreter.interpretTree(subCommand);
 			}
-			myNumTimes--;
 		}
-		return returnValue;
+		if (mySubCommands.size() != 0) {
+			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
+		}
+		else {
+			return 0.0;
+		}
 	}
+	
+	private void repcountUpdate(double count) {
+		if (myInterpreter.getVariables().checkVariable(":repcount")) {
+			myInterpreter.getVariables().setVariable(count, ":repcount");
+		}
+		else {
+			System.out.println("add :repcount");
+			Variable newvar = new Variable((double) 1);
+			System.out.println(newvar.getValue());
+			myInterpreter.getVariables().addVariable(newvar, ":repcount");
+		}
+	}
+	
 }

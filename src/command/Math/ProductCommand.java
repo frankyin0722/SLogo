@@ -1,6 +1,8 @@
 package command.Math;
 
-public class ProductCommand {
+import command.Command;
+
+public class ProductCommand implements Command {
 	private double input1;
 	private double input2;
 	

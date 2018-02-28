@@ -7,7 +7,7 @@ public class LeftCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
 	
-	public LeftCommand(Turtle turtle, double movement){
+	public LeftCommand(double movement, Turtle turtle){
 		myTurtle = turtle;
 		myMovement = Math.toRadians(movement);
 	}

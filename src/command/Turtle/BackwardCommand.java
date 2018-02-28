@@ -7,7 +7,7 @@ public class BackwardCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
 	
-	public BackwardCommand(Turtle turtle, double movement){
+	public BackwardCommand(double movement, Turtle turtle){
 		myTurtle = turtle;
 		myMovement = movement;
 	}

@@ -4,6 +4,7 @@ package visual_elements;
 //import parser.Parser;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
+import turtle.Turtle;
 
 public class CommandWindow extends VBox {
 	private TextArea myTextArea;
@@ -18,8 +19,11 @@ public class CommandWindow extends VBox {
 		this.getChildren().add(myTextArea);
 	}
 	
-//	private void inputToParser() {
-//		new Parser(myTextArea.getParagraphs());
-//	}
-	
+	public String getText() {
+		return myTextArea.getText();
+	}
+
+	public void clearText() {
+		myTextArea.clear();
+	}
 }

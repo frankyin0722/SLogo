@@ -7,9 +7,9 @@ public class SetTowardsCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
 	
-	public SetTowardsCommand(Turtle turtle, double x, double y){
+	public SetTowardsCommand(double x, double y, Turtle turtle){
 		myTurtle = turtle;
-		myMovement = y < 0? Math.atan(x/y) + Math.PI: Math.atan(x/y);
+		myMovement = Math.atan2(x - turtle.getX(), y + turtle.getY());
 	}
 	
 	public double execute(){

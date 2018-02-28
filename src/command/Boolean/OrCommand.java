@@ -1,6 +1,8 @@
 package command.Boolean;
 
-public class OrCommand {
+import command.Command;
+
+public class OrCommand implements Command {
 	private double input1;
 	private double input2;
 	
