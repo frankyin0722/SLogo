@@ -13,6 +13,7 @@ public class MakeVariableCommand implements Command {
 	public MakeVariableCommand(CommandNode variable, CommandNode assignedvalue, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myVariable = variable;
+		myInterpreter.interpretTree(assignedvalue);
 		myValue = assignedvalue.getNodeValue();
 	}
 	
