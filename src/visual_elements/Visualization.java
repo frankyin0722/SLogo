@@ -43,10 +43,13 @@ public class Visualization {
 	private void initializeAll() {
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
+		myControlPanelRight = new ControlPanelRight();
+		changeLanguage();
+		
 		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
 		myControlTextInput = new ControlTextInput(interpreter, myResources);
-		myControlPanelRight = new ControlPanelRight();
-		myResources = myControlPanelRight.getLanguage();
+		
+//		myControlTextInput = new ControlTextInput(myDefaultTurtle, this);
 		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
 	}
 
@@ -61,6 +64,30 @@ public class Visualization {
 		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}
 	
+//	@SuppressWarnings({ "rawtypes", "unchecked" })
+//	private void setupLanguageObservable() {
+//        List<ResourceBundle> list = new ArrayList<>();
+//        list.add(myResources);
+//        ObservableList<ResourceBundle> observableList = FXCollections.observableList(list);
+//        observableList.addListener(new ListChangeListener() {
+//            @Override
+//            public void onChanged(ListChangeListener.Change change) {
+//            		System.out.print("changed languauge in vis!");
+//                myResources = observableList.get(0);
+//            }
+//        });
+//	}
+	
+	
+	public void changeLanguage() {
+		myResources = myControlPanelRight.getLanguage();
+	}
+	
+	public ResourceBundle getLanguage() {
+		changeLanguage();
+		return myResources;
+	}
+	
 	public void updateLanguage() {
 		myResources = myControlPanelRight.getLanguage();
 	}
@@ -68,4 +95,5 @@ public class Visualization {
 	public Scene getScene() {
 		return myScene;
 	}
+	
 }

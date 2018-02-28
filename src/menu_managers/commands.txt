@@ -1,0 +1,2 @@
+FORWARD pixels, FD pixels | moves turtle forward in its current heading by pixels distance, returns the value of pixels
+BACK pixels, BK pixels | moves turtle backward in its current heading by pixels distance, returns the value of pixels

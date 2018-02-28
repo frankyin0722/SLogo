@@ -9,6 +9,7 @@ import visual_elements.menu_managers.VariableMenu;
 
 public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;
+	private ResourceBundle myResources;
 	public ControlPanelRight() {
 		initializeMenus();
 	}
@@ -19,6 +20,9 @@ public class ControlPanelRight extends VBox {
 	}
 	
 	public ResourceBundle getLanguage() {
-		return myLanguageMenu.getLanguage();
+		myResources = myLanguageMenu.getLanguage();
+
+//		System.out.print(myResources.getString("Backward"));
+		return myResources;
 	}
 }
