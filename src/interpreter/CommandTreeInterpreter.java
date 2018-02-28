@@ -191,8 +191,8 @@ public class CommandTreeInterpreter {
 		return myTurtles;
 	}
 	
-	public int getCurrentTurtle() {
-		return currentTurtle;
+	public Turtle getCurrentTurtle() {
+		return myTurtles.get(currentTurtle);
 	}
 	
 	public void setCurrentTurtle(int index) {
@@ -210,5 +210,4 @@ public class CommandTreeInterpreter {
 	public HashMap<String, List<CommandNode>> getUserCommandParameters(){
         return userDefinedCommandParameters;
     }
-	
 }

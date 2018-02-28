@@ -7,28 +7,15 @@ import buttons.ResetButton;
 
 import buttons.RunButton;
 import interpreter.CommandTreeInterpreter;
-import javafx.animation.PauseTransition;
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import parser.Parser;
 import turtle.Turtle;
 import visual_elements.menu_managers.LanguageMenu;
 
 public class ControlTextInput extends HBox {
-	private final BooleanProperty shiftPressed = new SimpleBooleanProperty(false);
-	private final BooleanProperty enterPressed = new SimpleBooleanProperty(false);
-	private final BooleanBinding shiftAndEnterPressed = shiftPressed.and(enterPressed);
-	private Turtle myTurtle;
+
 	private CommandWindow myCommandWindow;
 	private RunButton myRunButton;
 	private ClearButton myClearButton;
@@ -36,18 +23,14 @@ public class ControlTextInput extends HBox {
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle myResources;
 	
-	public ControlTextInput(Turtle turtle, ResourceBundle resources) {
-		myTurtle = turtle;
+	public ControlTextInput(CommandTreeInterpreter i, ResourceBundle resources) {
 		myResources = resources;
-		System.out.println(resources);
-		interpreter = new CommandTreeInterpreter(myTurtle);
+		interpreter = i;
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
 				myCommandWindow,
 				buttonBox());
 		setButtonAction();
-		setupKeyInput();
-		interpreter = new CommandTreeInterpreter(myTurtle);
 	}
 
 	private VBox buttonBox() {
@@ -85,44 +68,6 @@ public class ControlTextInput extends HBox {
 	}
 	
 	private void resetTurtle() {
-		myTurtle.resetTurtle();
+		interpreter.getCurrentTurtle().resetTurtle();
 	}
-	
-	private void setupKeyInput() {
-		// How to respond to both keys pressed together:
-		PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
-		shiftAndEnterPressed.addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> obs, Boolean werePressed, Boolean arePressed) {
-		        System.out.println("Shift and enter pressed together");
-		        pause.setOnFinished(e -> inputToParser());
-		        pause.playFromStart();
-			}
-		});
-
-		// Wire up properties to key events:
-		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
-		    @Override
-		    public void handle(KeyEvent ke) {
-		        if (ke.getCode() == KeyCode.SHIFT) {
-		            shiftPressed.set(true);
-		        } else if (ke.getCode() == KeyCode.ENTER) {
-		            enterPressed.set(true);
-		        }
-		    }
-		});
-
-		this.setOnKeyReleased(new EventHandler<KeyEvent>() {
-		    @Override
-		    public void handle(KeyEvent ke) {
-		        if (ke.getCode() == KeyCode.SHIFT) {
-		        		shiftPressed.set(false);
-		        } else if (ke.getCode() == KeyCode.ENTER) {
-		        		enterPressed.set(false);
-		        }
-		    }
-		});
-	}
-
-
 }
