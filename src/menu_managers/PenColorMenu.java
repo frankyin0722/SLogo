@@ -22,6 +22,7 @@ public class PenColorMenu extends TitledPane {
 		this.setMaxWidth(Double.MAX_VALUE);
 		this.setText("Change Pen Color");
 		this.setContent(cp);
+		this.setExpanded(false);
 	}
 	
 	private void setupDefaultMenu() {

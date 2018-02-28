@@ -35,6 +35,7 @@ public class LanguageMenu extends TitledPane {
 	
 	private void setupLanguageMenu() {
 		this.setText(myResources.getString(LANGUAGE_MENU_KEY));
+		this.setExpanded(false);
 	}
 	
 	private void setupButtonBox() {

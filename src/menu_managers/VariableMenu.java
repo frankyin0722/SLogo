@@ -6,5 +6,6 @@ public class VariableMenu extends TitledPane {
 
 	public VariableMenu() {
 		this.setText("Active Variables");
+		this.setExpanded(false);
 	}
 }

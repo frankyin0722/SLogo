@@ -9,9 +9,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class HelpMenu extends VBox {
+public class CustomVarsMenu extends VBox {
 	private HelpButton myHelpButton;
-	public HelpMenu() {
+	public CustomVarsMenu() {
 		setupHelpMenu();
 	}
 	
@@ -23,7 +23,7 @@ public class HelpMenu extends VBox {
 		            public void handle(ActionEvent event) {
 		                Stage stage = new Stage();
 		                VBox helpBox = new VBox(20);
-		                helpBox.getChildren().add(new HelpMenuContent());
+		                helpBox.getChildren().add(new CustomVarsMenuContent());
 		                Scene dialogScene = new Scene(helpBox, 300, 200);
 		                stage.setScene(dialogScene);
 		                stage.show();

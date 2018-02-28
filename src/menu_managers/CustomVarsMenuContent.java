@@ -5,8 +5,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
 @SuppressWarnings("rawtypes")
-public class HelpMenuContent extends VBox {
-	public HelpMenuContent() {
+public class CustomVarsMenuContent extends VBox {
+	public CustomVarsMenuContent() {
 		setupTurtleCommandsTable();
 		
 	}

@@ -49,6 +49,7 @@ public class TurtleMenu extends TitledPane {
 	
 	private void setupPane(ResourceBundle resources) {
 		this.setText(resources.getString(TURTLE_MENU_KEY));
+		this.setExpanded(false);
 	}
 	
 	private void setupTurtleSelection() {
