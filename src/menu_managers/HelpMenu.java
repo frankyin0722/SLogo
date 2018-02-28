@@ -22,8 +22,6 @@ public class HelpMenu extends VBox {
 		            @Override
 		            public void handle(ActionEvent event) {
 		                Stage stage = new Stage();
-//		                dialog.initModality(Modality.APPLICATION_MODAL);
-//		                dialog.initOwner();
 		                VBox helpBox = new VBox(20);
 		                helpBox.getChildren().add(new HelpMenuContent());
 		                Scene dialogScene = new Scene(helpBox, 300, 200);
@@ -31,6 +29,7 @@ public class HelpMenu extends VBox {
 		                stage.show();
 		            }
 		      });
+		myHelpButton.setMaxWidth(Double.MAX_VALUE);
 		this.getChildren().add(myHelpButton);
 	}
 }

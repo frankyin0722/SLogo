@@ -17,6 +17,8 @@ public class HelpMenuContent extends VBox {
 		turtleCommands.setEditable(true);
 		TableColumn nameCol = new TableColumn("Name");
         TableColumn descripCol = new TableColumn("Description");
+        nameCol.prefWidthProperty().bind(turtleCommands.widthProperty().divide(2));
+        descripCol.prefWidthProperty().bind(turtleCommands.widthProperty().divide(2));
         turtleCommands.getColumns().addAll(nameCol, descripCol);
         this.getChildren().add(turtleCommands);
 	}
