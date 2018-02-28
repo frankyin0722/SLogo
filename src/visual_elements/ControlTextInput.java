@@ -10,9 +10,9 @@ import interpreter.CommandTreeInterpreter;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import menu_managers.LanguageMenu;
 import parser.Parser;
 import turtle.Turtle;
+import visual_elements.menu_managers.LanguageMenu;
 
 public class ControlTextInput extends HBox {
 	private Turtle myTurtle;

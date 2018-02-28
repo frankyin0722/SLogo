@@ -1,4 +1,4 @@
-package menu_managers;
+package visual_elements.menu_managers;
 
 import java.io.File;
 import java.io.IOException;
