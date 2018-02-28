@@ -73,6 +73,7 @@ public class ControlTextInput extends HBox {
 		Parser parser = new Parser(interpreter);
 		System.out.println(myResources.getString("Home"));
 		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), myResources));
+		interpreter.addToHistory(myCommandWindow.getText());
 		resetCommandWindow();
 	}
 	
