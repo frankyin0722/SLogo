@@ -1,5 +1,6 @@
 package visual_elements;
 
+import java.util.ResourceBundle;
 
 import buttons.ClearButton;
 import buttons.ResetButton;
@@ -21,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import parser.Parser;
 import turtle.Turtle;
+import visual_elements.menu_managers.LanguageMenu;
 
 public class ControlTextInput extends HBox {
 	private final BooleanProperty shiftPressed = new SimpleBooleanProperty(false);
@@ -32,9 +34,11 @@ public class ControlTextInput extends HBox {
 	private ClearButton myClearButton;
 	private ResetButton myResetButton;
 	private CommandTreeInterpreter interpreter;
+	private ResourceBundle myResources;
 	
-	public ControlTextInput(Turtle turtle) {
+	public ControlTextInput(Turtle turtle, ResourceBundle resources) {
 		myTurtle = turtle;
+		myResources = resources;
 		interpreter = new CommandTreeInterpreter(myTurtle);
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(

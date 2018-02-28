@@ -1,4 +1,4 @@
-package menu_managers;
+package visual_elements.menu_managers;
 
 import javafx.scene.control.TitledPane;
 import turtle.Turtle;
