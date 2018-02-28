@@ -21,7 +21,7 @@ public class PatternManager {
 	 /**
 	  * Return the Pattern mapping 
 	  */
-	 public List<Entry<String, Pattern>> getPatterns(String syntax){
+	 public List<Entry<String, Pattern>> getPatterns(ResourceBundle syntax){
 		 addPatterns(syntax);
 		 return mySymbols;
 	 }
@@ -29,9 +29,9 @@ public class PatternManager {
 	 /**
 	  * Adds the given resource file to this language's recognized types
 	  */
-	 public void addPatterns (String syntax) {
+	 public void addPatterns (ResourceBundle syntax) {
 		 //System.out.println("didn't get bundle");
-	     ResourceBundle resources = ResourceBundle.getBundle(syntax);
+	     ResourceBundle resources = syntax;
 	     //System.out.println("got bundle");
 	     Enumeration<String> iter = resources.getKeys();
 	     while (iter.hasMoreElements()) {
