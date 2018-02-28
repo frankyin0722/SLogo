@@ -1,17 +1,14 @@
 package visual_elements;
 
 import java.util.ResourceBundle;
-
 import buttons.ClearButton;
 import buttons.ResetButton;
-
 import buttons.RunButton;
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import parser.Parser;
-import turtle.Turtle;
 
 public class ControlTextInput extends HBox {
 
