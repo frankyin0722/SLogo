@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import alerts.Alerts;
+import alerts.CommandException;
+import alerts.Resources;
+
 public class VariableManager {
 	private Map<String, Variable> variables;
 	
@@ -12,8 +16,11 @@ public class VariableManager {
 	}
 	//returns the variable with a given name, or NoSuchVariableException if it doesn't exist.
     public Variable getVariable(String name) {
-    		//TODO: handle exception
-    		return variables.get(name);
+    		if(variables.containsKey(name)) {
+    			return variables.get(name);
+    		}
+    		Alerts.createAlert(new CommandException(Resources.getString("VariableHeaderError")), "VariableMessageError");
+    		throw new CommandException("Invalid Syntax");
     }
 
     //adds a new variable. returns DuplicatedVariableException if the variable already exists

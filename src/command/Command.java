@@ -6,6 +6,7 @@ package command;
  * @author FY
  *
  */
+@FunctionalInterface
 public interface Command {
 	
 	public double execute();
