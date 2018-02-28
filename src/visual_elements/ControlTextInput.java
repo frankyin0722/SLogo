@@ -61,6 +61,7 @@ public class ControlTextInput extends HBox {
 		getLanguage();
 		Parser parser = new Parser(interpreter);
 		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), "resources.languages/English"));
+		
 		resetCommandWindow();
 	}
 	
