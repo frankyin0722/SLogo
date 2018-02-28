@@ -43,12 +43,13 @@ public class Visualization {
 	private void initializeAll() {
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		myControlPanelRight = new ControlPanelRight();
-		changeLanguage();
+		
+		changeLanguage();														//cannot pull RB from cpRight but need RB initialized
 		
 		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources);
+
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
 	}
 
@@ -62,21 +63,6 @@ public class Visualization {
 		
 		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}
-	
-//	@SuppressWarnings({ "rawtypes", "unchecked" })
-//	private void setupLanguageObservable() {
-//        List<ResourceBundle> list = new ArrayList<>();
-//        list.add(myResources);
-//        ObservableList<ResourceBundle> observableList = FXCollections.observableList(list);
-//        observableList.addListener(new ListChangeListener() {
-//            @Override
-//            public void onChanged(ListChangeListener.Change change) {
-//            		System.out.print("changed languauge in vis!");
-//                myResources = observableList.get(0);
-//            }
-//        });
-//	}
-	
 	
 	public void changeLanguage() {
 		myResources = myControlPanelRight.getLanguage();

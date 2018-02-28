@@ -1,34 +1,35 @@
 package visual_elements.menu_managers;
 
-import buttons.HelpButton;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
+import interpreter.CommandTreeInterpreter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TitledPane;
+import observables.Listener;
+import variables.VariableManager;
 
-public class CustomVarsMenu extends VBox {
-	private HelpButton myHelpButton;
-	public CustomVarsMenu() {
-		setupHelpMenu();
-	}
+public class CustomVarsMenu extends TitledPane implements Listener {
 	
-	private void setupHelpMenu() {
-		myHelpButton = new HelpButton();
-		myHelpButton.setOnAction(
-		        new EventHandler<ActionEvent>() {
-		            @Override
-		            public void handle(ActionEvent event) {
-		                Stage stage = new Stage();
-			        	   	WebView web = new WebView();
-			        	   	web.getEngine().load("https://www2.cs.duke.edu/courses/compsci308/spring18/assign/03_slogo/commands.php");
-			        	   	Scene scene = new Scene(web);
-			        	   	stage.setScene(scene);
-			        	   	stage.show();
-		            }
-		      });
-		myHelpButton.setMaxWidth(Double.MAX_VALUE);
-		this.getChildren().add(myHelpButton);
+	public static final String ACTVAR_KEY = "ActiveVariables";
+	private  ListView<VariableManager> varsDisplay;
+	private CommandTreeInterpreter interpreter;
+
+	
+	public CustomVarsMenu(CommandTreeInterpreter i) {
+		varsDisplay = new ListView<VariableManager>();
+		interpreter = i;
+		i.addListener(this);
+		
+		this.setText("Variables");
+		this.setExpanded(false);
+		this.setContent(varsDisplay);
 	}
+
+	@Override
+	public void update() {
+		ObservableList<VariableManager> myvars =FXCollections.observableArrayList (
+			    interpreter.getVariables());
+		varsDisplay.setItems(myvars);		
+	}
+
 }

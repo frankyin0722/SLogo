@@ -2,23 +2,31 @@ package visual_elements;
 
 import java.util.ResourceBundle;
 
+import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
 import visual_elements.menu_managers.CustomVarsMenu;
 import visual_elements.menu_managers.HelpMenu;
 import visual_elements.menu_managers.LanguageMenu;
-import visual_elements.menu_managers.VariableMenu;
 
 public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;
 	private ResourceBundle myResources;
-	public ControlPanelRight() {
+	private CommandTreeInterpreter interpreter;
+	
+	public ControlPanelRight(CommandTreeInterpreter i, ResourceBundle resources) {
+		interpreter = i;
+
 		initializeMenus();
 	}
 
 	private void initializeMenus() {
 		myLanguageMenu = new LanguageMenu();
 //		this.getChildren().addAll(new VariableMenu(), myLanguageMenu, new CustomVarsMenu());
-		this.getChildren().addAll(new VariableMenu(), myLanguageMenu, new HelpMenu());
+		this.getChildren().addAll(
+//				new VariableMenu(),
+				new CustomVarsMenu(interpreter),
+				myLanguageMenu, 
+				new HelpMenu());
 
 	}
 	
