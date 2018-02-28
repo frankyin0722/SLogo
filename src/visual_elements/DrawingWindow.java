@@ -49,6 +49,7 @@ public class DrawingWindow extends Pane {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initializeColorPicker() {
 		ColorPicker colorPicker = new ColorPicker();
+		colorPicker.setStyle("-fx-color-label-visible: false ;");
 		colorPicker.setOnAction(new EventHandler() {
 			@Override
 			public void handle(Event event) {
