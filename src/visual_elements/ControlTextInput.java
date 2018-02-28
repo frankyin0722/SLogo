@@ -7,6 +7,8 @@ import buttons.ResetButton;
 
 import buttons.RunButton;
 import interpreter.CommandTreeInterpreter;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,10 +24,12 @@ public class ControlTextInput extends HBox {
 	private ResetButton myResetButton;
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle myResources;
+	private Visualization myVisualization;
 	
-	public ControlTextInput(Turtle turtle, ResourceBundle resources) {
+	public ControlTextInput(Turtle turtle, Visualization visualization) {
 		myTurtle = turtle;
-		myResources = resources;
+		myVisualization = visualization;
+		myResources = visualization.getLanguage();
 		interpreter = new CommandTreeInterpreter(myTurtle);
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
@@ -59,10 +63,15 @@ public class ControlTextInput extends HBox {
     }
     
 	private void inputToParser() {
-		System.out.print("we are here");
+		getLanguage();
 		Parser parser = new Parser(interpreter);
 		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), "resources.languages/English"));
 		resetCommandWindow();
+	}
+	
+	private void getLanguage() {
+		myResources = myVisualization.getLanguage();
+
 	}
 		
 	private void resetCommandWindow() {

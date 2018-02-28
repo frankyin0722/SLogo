@@ -46,9 +46,9 @@ public class Visualization {
 	private void initializeAll() {
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		myControlTextInput = new ControlTextInput(myDefaultTurtle, myResources);
 		myControlPanelRight = new ControlPanelRight();
-		myResources = myControlPanelRight.getLanguage();
+		changeLanguage();
+		myControlTextInput = new ControlTextInput(myDefaultTurtle, this);
 		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
 	}
 
@@ -83,12 +83,17 @@ public class Visualization {
 //	}
 	
 	
-	public void updateLanguage() {
+	public void changeLanguage() {
 		myResources = myControlPanelRight.getLanguage();
 	}
 	
+	public ResourceBundle getLanguage() {
+		changeLanguage();
+		return myResources;
+	}
 	
 	public Scene getScene() {
 		return myScene;
 	}
+	
 }
