@@ -5,8 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 public class CustomVarsMenu extends VBox {
@@ -22,11 +21,11 @@ public class CustomVarsMenu extends VBox {
 		            @Override
 		            public void handle(ActionEvent event) {
 		                Stage stage = new Stage();
-		                VBox helpBox = new VBox(20);
-		                helpBox.getChildren().add(new CustomVarsMenuContent());
-		                Scene dialogScene = new Scene(helpBox, 300, 200);
-		                stage.setScene(dialogScene);
-		                stage.show();
+			        	   	WebView web = new WebView();
+			        	   	web.getEngine().load("https://www2.cs.duke.edu/courses/compsci308/spring18/assign/03_slogo/commands.php");
+			        	   	Scene scene = new Scene(web);
+			        	   	stage.setScene(scene);
+			        	   	stage.show();
 		            }
 		      });
 		myHelpButton.setMaxWidth(Double.MAX_VALUE);
