@@ -39,6 +39,7 @@ public class ControlTextInput extends HBox {
 	public ControlTextInput(Turtle turtle, ResourceBundle resources) {
 		myTurtle = turtle;
 		myResources = resources;
+		System.out.println(resources);
 		interpreter = new CommandTreeInterpreter(myTurtle);
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
@@ -73,9 +74,9 @@ public class ControlTextInput extends HBox {
     }
     
 	private void inputToParser() {
-		System.out.print("we are here");
 		Parser parser = new Parser(interpreter);
-		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), "resources.languages/English"));
+		System.out.println(myResources);
+		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), myResources));
 		resetCommandWindow();
 	}
 		

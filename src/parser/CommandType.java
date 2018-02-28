@@ -26,7 +26,7 @@ public class CommandType implements CommandTypes {
 	private List<String> userInput;
 	private List<CommandNode> myRoots;
 	private CommandNode myRoot;
-	private PatternManager SomePatternManager = new PatternManager();;
+	private PatternManager SomePatternManager = new PatternManager();
 	
 	public CommandType (List<String> input, TreeGenerator treeGenerator) {
 		myTreeGenerator = treeGenerator;
@@ -36,7 +36,7 @@ public class CommandType implements CommandTypes {
 		//System.out.println(userInput);
 	}
 	
-	public void initialize(String language) {
+	public void initialize(ResourceBundle language) {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
 		// check if it's user-defined method (Variable), if yes, deal with it differently 
 		String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));

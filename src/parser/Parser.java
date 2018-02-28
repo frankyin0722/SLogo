@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.collections.ObservableList;
+import sun.security.tools.keytool.Resources;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -19,7 +20,7 @@ import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 public class Parser implements TreeGenerator{
-	private static final String Syntax = "resources.languages/Syntax";
+	private static final ResourceBundle Syntax = Resources.getBundle("resources.languages/Syntax");
 	private HashMap<Pattern, CommandTypes> inputHandlerMap;
 	private List<String> userInput;
 	private int currentIndex = 0;
@@ -27,14 +28,14 @@ public class Parser implements TreeGenerator{
 	private int ListEndIndex = 0;
 	private PatternManager SomePatternManager = new PatternManager();
 	private CommandType commandInitializer; 
-	private String usedLanguage;
+	private ResourceBundle usedLanguage;
 	private CommandTreeInterpreter myInterpreter;
 	
 	public Parser(CommandTreeInterpreter interpreter) {
 		myInterpreter = interpreter;
 	}
 	
-	public List<CommandNode> generateCommandTree(String input, String language) {
+	public List<CommandNode> generateCommandTree(String input, ResourceBundle language) {
 		try {
 			currentIndex = 0;
 			usedLanguage = language;
