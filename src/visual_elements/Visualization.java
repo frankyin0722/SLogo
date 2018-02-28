@@ -3,13 +3,9 @@ package visual_elements;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import interpreter.CommandTreeInterpreter;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -32,21 +28,23 @@ public class Visualization {
 	private BorderPane myPane;
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
+	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
 	private ControlPanelLeft myControlPanelLeft;
 	private Turtle myDefaultTurtle;
+	
 	public Visualization() {
 		myPane = new BorderPane();
 		initializeAll();
 		initializeLayout();
-//		setupLanguageObservable();
 	}
 	
 	private void initializeAll() {
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		myControlTextInput = new ControlTextInput(myDefaultTurtle, myResources);
+		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
+		myControlTextInput = new ControlTextInput(interpreter, myResources);
 		myControlPanelRight = new ControlPanelRight();
 		myResources = myControlPanelRight.getLanguage();
 		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
@@ -60,33 +58,12 @@ public class Visualization {
 		myPane.setRight(myControlPanelRight);
 		myPane.setLeft(myControlPanelLeft);
 		
-//		myPane.setCenter(new DrawingWindow());
-//		myPane.setBottom(new ControlTextInput());
-//		myPane.setRight(new ControlPanelRight());
-//		myPane.setLeft(new ControlPanelLeft(myResources));
-		
 		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}
-	
-//	@SuppressWarnings({ "rawtypes", "unchecked" })
-//	private void setupLanguageObservable() {
-//        List<ResourceBundle> list = new ArrayList<>();
-//        list.add(myResources);
-//        ObservableList<ResourceBundle> observableList = FXCollections.observableList(list);
-//        observableList.addListener(new ListChangeListener() {
-//            @Override
-//            public void onChanged(ListChangeListener.Change change) {
-//            		System.out.print("changed languauge in vis!");
-//                myResources = observableList.get(0);
-//            }
-//        });
-//	}
-	
 	
 	public void updateLanguage() {
 		myResources = myControlPanelRight.getLanguage();
 	}
-	
 	
 	public Scene getScene() {
 		return myScene;
