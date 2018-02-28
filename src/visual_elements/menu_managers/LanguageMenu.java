@@ -1,4 +1,4 @@
-package menu_managers;
+package visual_elements.menu_managers;
 
 import java.io.File;
 import java.util.ResourceBundle;
@@ -22,6 +22,7 @@ public class LanguageMenu extends TitledPane {
 	
 	private void setupLanguageMenu() {
 		this.setText(myResources.getString(LANGUAGE_MENU_KEY));
+		this.setExpanded(false);
 	}
 	
 	private void setupButtonBox() {

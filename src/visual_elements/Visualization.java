@@ -3,13 +3,9 @@ package visual_elements;
 
 
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import interpreter.CommandTreeInterpreter;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -32,15 +28,16 @@ public class Visualization {
 	private BorderPane myPane;
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
+	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
 	private ControlPanelLeft myControlPanelLeft;
 	private Turtle myDefaultTurtle;
+	
 	public Visualization() {
 		myPane = new BorderPane();
 		initializeAll();
 		initializeLayout();
-//		setupLanguageObservable();
 	}
 	
 	private void initializeAll() {
@@ -48,7 +45,11 @@ public class Visualization {
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
 		myControlPanelRight = new ControlPanelRight();
 		changeLanguage();
-		myControlTextInput = new ControlTextInput(myDefaultTurtle, this);
+		
+		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
+		myControlTextInput = new ControlTextInput(interpreter, myResources);
+		
+//		myControlTextInput = new ControlTextInput(myDefaultTurtle, this);
 		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
 	}
 
@@ -59,11 +60,6 @@ public class Visualization {
 		myPane.setBottom(myControlTextInput);
 		myPane.setRight(myControlPanelRight);
 		myPane.setLeft(myControlPanelLeft);
-		
-//		myPane.setCenter(new DrawingWindow());
-//		myPane.setBottom(new ControlTextInput());
-//		myPane.setRight(new ControlPanelRight());
-//		myPane.setLeft(new ControlPanelLeft(myResources));
 		
 		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}
@@ -90,6 +86,10 @@ public class Visualization {
 	public ResourceBundle getLanguage() {
 		changeLanguage();
 		return myResources;
+	}
+	
+	public void updateLanguage() {
+		myResources = myControlPanelRight.getLanguage();
 	}
 	
 	public Scene getScene() {

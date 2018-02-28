@@ -1,4 +1,4 @@
-package menu_managers;
+package visual_elements.menu_managers;
 
 import java.io.File;
 import java.io.IOException;
@@ -49,6 +49,7 @@ public class TurtleMenu extends TitledPane {
 	
 	private void setupPane(ResourceBundle resources) {
 		this.setText(resources.getString(TURTLE_MENU_KEY));
+		this.setExpanded(false);
 	}
 	
 	private void setupTurtleSelection() {

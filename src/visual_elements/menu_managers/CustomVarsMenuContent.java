@@ -1,4 +1,4 @@
-package menu_managers;
+package visual_elements.menu_managers;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,19 +13,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 
 @SuppressWarnings("rawtypes")
-public class HelpMenuContent extends VBox {
-	public HelpMenuContent() {
-		readTextFile();
-//		setupTurtleCommandsTable();
-		
+public class CustomVarsMenuContent extends VBox {
+	public CustomVarsMenuContent() {
+//		setupTurtleCommandsTable();		
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void setupTurtleCommandsTable(ObservableList<CommandInfo> details) {
 		TableView<CommandInfo> turtleCommands = new TableView<>();
 		turtleCommands.setEditable(true);
-		TableColumn<CommandInfo, String> nameCol = new TableColumn<>("Name");
-		TableColumn<CommandInfo, String> descripCol = new TableColumn<>("Description");
+		TableColumn nameCol = new TableColumn("Name");
+        TableColumn descripCol = new TableColumn("Description");
+        nameCol.prefWidthProperty().bind(turtleCommands.widthProperty().divide(2));
+        descripCol.prefWidthProperty().bind(turtleCommands.widthProperty().divide(2));
         turtleCommands.getColumns().addAll(nameCol, descripCol);
         
         nameCol.setCellValueFactory(data -> data.getValue().nameProperty());

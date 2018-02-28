@@ -1,4 +1,4 @@
-package menu_managers;
+package visual_elements.menu_managers;
 
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -16,6 +16,8 @@ public class HistoryMenu extends TitledPane{
 		historyDisplay = new TableView<String>();
 		currentHistory = new ArrayList<String>();
 		this.setText(resources.getString(HISTORY_KEY));
+		this.setExpanded(false);
+
 	}
 	
 	public void clearHistory() {

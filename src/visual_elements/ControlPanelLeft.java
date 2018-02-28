@@ -3,10 +3,10 @@ package visual_elements;
 import java.util.ResourceBundle;
 
 import javafx.scene.layout.VBox;
-import menu_managers.HistoryMenu;
-import menu_managers.PenColorMenu;
-import menu_managers.TurtleMenu;
 import turtle.Turtle;
+import visual_elements.menu_managers.HistoryMenu;
+import visual_elements.menu_managers.PenColorMenu;
+import visual_elements.menu_managers.TurtleMenu;
 
 public class ControlPanelLeft extends VBox {
 //	private TurtleMenu myTurtleMenu;
