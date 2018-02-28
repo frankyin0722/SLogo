@@ -34,11 +34,27 @@ public class Parser implements TreeGenerator{
 		myInterpreter = interpreter;
 	}
 	
+	private void parseInput(String input) {
+		List<String> parsebylines = Arrays.asList(input.split("\n"));
+		List<String> commentsprocessedout = new ArrayList<String>();
+		userInput = new ArrayList<String>();
+		for (int i = 0; i < parsebylines.size(); i++) {
+			if (parsebylines.get(i).indexOf("#")==-1) {
+				commentsprocessedout.add(parsebylines.get(i).trim());
+			}
+		}
+		for (int i = 0; i < commentsprocessedout.size(); i++) {
+			List<String> parsebyword = Arrays.asList(commentsprocessedout.get(i).split("\\s+"));
+			userInput.addAll(parsebyword);
+		}
+	}
+	
 	public List<CommandNode> generateCommandTree(String input, String language) {
 		try {
 			currentIndex = 0;
 			usedLanguage = language;
-			userInput = Arrays.asList(input.split("\\s+"));
+			//userInput = Arrays.asList(input.split("\\s+"));
+			parseInput(input);
 			generateInputHandlerMap();
 			commandInitializer.initialize(language);
 			System.out.println("loooook here!!!: "+getIndex());
