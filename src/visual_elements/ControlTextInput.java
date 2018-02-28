@@ -15,7 +15,7 @@ import turtle.Turtle;
 import visual_elements.menu_managers.LanguageMenu;
 
 public class ControlTextInput extends HBox {
-	private Turtle myTurtle;
+
 	private CommandWindow myCommandWindow;
 	private RunButton myRunButton;
 	private ClearButton myClearButton;
@@ -23,16 +23,14 @@ public class ControlTextInput extends HBox {
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle myResources;
 	
-	public ControlTextInput(Turtle turtle, ResourceBundle resources) {
-		myTurtle = turtle;
+	public ControlTextInput(CommandTreeInterpreter i, ResourceBundle resources) {
 		myResources = resources;
-		interpreter = new CommandTreeInterpreter(myTurtle);
+		interpreter = i;
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(
 				myCommandWindow,
 				buttonBox());
 		setButtonAction();
-		interpreter = new CommandTreeInterpreter(myTurtle);
 	}
 
 	private VBox buttonBox() {
@@ -59,7 +57,6 @@ public class ControlTextInput extends HBox {
     }
     
 	private void inputToParser() {
-		System.out.print("we are here");
 		Parser parser = new Parser(interpreter);
 		interpreter.interpretAllTrees(parser.generateCommandTree(myCommandWindow.getText(), "resources.languages/English"));
 		resetCommandWindow();
@@ -70,6 +67,6 @@ public class ControlTextInput extends HBox {
 	}
 	
 	private void resetTurtle() {
-		myTurtle.resetTurtle();
+		interpreter.getCurrentTurtle().resetTurtle();
 	}
 }

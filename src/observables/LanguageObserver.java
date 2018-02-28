@@ -2,7 +2,7 @@ package observables;
 
 import javafx.beans.value.ObservableValue;
 
-public class LanguageObserver implements Observer {
+public class LanguageObserver implements Listener {
 	@SuppressWarnings("rawtypes")
 	private ObservableValue ov = null;
 	public LanguageObserver(@SuppressWarnings("rawtypes") ObservableValue ov) {
@@ -10,11 +10,8 @@ public class LanguageObserver implements Observer {
 	}
 	
 	@Override
-	public void update(Observable obs, Object obj) {
-		System.out.print("At LanguaugeObserver");
-		System.out.print(obj.toString());
-		System.out.print(obs.hasChanged());
-//		obs = obj;
+	public void update(Speaker s) {
+
 		
 	}
 
