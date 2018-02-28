@@ -97,6 +97,7 @@ public class Turtle extends Group {
     public void resetTurtle() {
     		newX = 0;
     		newY = 0;
+    		setDirection(0);
     		update();
     		clearLines();
     }
