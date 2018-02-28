@@ -12,6 +12,8 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
+import javafx.collections.ObservableList;
+import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
 import variables.Variable;
@@ -25,6 +27,8 @@ public class CommandTreeInterpreter {
 	private HashMap<String, CommandNode> userDefinedCommands;
 	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 0;
+	private ArrayList<String> history;
+	private List<Listener> theseListeners;
 	
 	public CommandTreeInterpreter(Turtle turtle) {
 		myCommandManager = new CommandManager();
@@ -34,6 +38,8 @@ public class CommandTreeInterpreter {
 		myTurtles.add(turtle);
 		userDefinedCommands = new HashMap<String, CommandNode>();
 		userDefinedCommandParameters = new HashMap<String, List<CommandNode>>();
+		history = new ArrayList<String>();
+		theseListeners = new ArrayList<Listener>();
 	}
 	
 	public void interpretAllTrees(List<CommandNode> myRoots) {
@@ -210,4 +216,22 @@ public class CommandTreeInterpreter {
 	public HashMap<String, List<CommandNode>> getUserCommandParameters(){
         return userDefinedCommandParameters;
     }
+	
+	public void addToHistory(String command) {
+		history.add(command);
+		notifyListeners();
+	}
+
+	private void notifyListeners() {
+		for(Listener l:theseListeners) {
+			l.update();
+		}
+	}
+
+	public void addListener(Listener l) {
+		theseListeners.add(l);
+	}
+	public ArrayList<String> getHistory(){
+		return history;
+	}
 }

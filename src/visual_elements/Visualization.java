@@ -49,8 +49,7 @@ public class Visualization {
 		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
 		myControlTextInput = new ControlTextInput(interpreter, this);
 		
-//		myControlTextInput = new ControlTextInput(myDefaultTurtle, this);
-		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
 	}
 
 	private void initializeLayout() {		
