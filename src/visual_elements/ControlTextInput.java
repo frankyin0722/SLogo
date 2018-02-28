@@ -36,8 +36,9 @@ public class ControlTextInput extends HBox {
 	private ResourceBundle myResources;
 	private Visualization myVisualization;
 	
-	public ControlTextInput(CommandTreeInterpreter i, ResourceBundle resources) {
-		myResources = resources;
+	public ControlTextInput(CommandTreeInterpreter i, Visualization visualization) {
+		myVisualization = visualization;
+		myResources = myVisualization.getLanguage();
 		interpreter = i;
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(

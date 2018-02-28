@@ -47,7 +47,7 @@ public class Visualization {
 		changeLanguage();
 		
 		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
-		myControlTextInput = new ControlTextInput(interpreter, myResources);
+		myControlTextInput = new ControlTextInput(interpreter, this);
 		
 //		myControlTextInput = new ControlTextInput(myDefaultTurtle, this);
 		myControlPanelLeft = new ControlPanelLeft(myDefaultTurtle, myResources);
