@@ -138,7 +138,9 @@ public class CommandTreeInterpreter {
 				//System.out.println(node.getCommandName());
 				//System.out.println(myVariables.checkVariable(node.getCommandName()));
 				if (!myVariables.checkVariable(node.getCommandName())) {
-					node.setNodeValue((double) 0.0); 
+					
+					Variable newvar = new Variable((double) 0);
+					myVariables.addVariable(newvar, node.getCommandName());
 				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
 				//System.out.println("currentNode value: " + node.getNodeValue());
