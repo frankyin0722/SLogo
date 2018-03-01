@@ -45,14 +45,9 @@ public class CommandType implements CommandTypes {
 		}
 	}
 	
-	public boolean checkUserDefinedMethodValidity(String commandName) {
-		return (!parametersMapping.containsKey(getCommandFromLanguageBundle(commandName)));
-	}
-	
 	private boolean checkUserDefinedCommandValidity(String command) {
 		try {
 			String com = getCommandFromLanguageBundle(command);
-			
 			return !parametersMapping.containsKey(com);
 		} catch (CommandException e){
 			return true;

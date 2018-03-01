@@ -73,6 +73,7 @@ public class Parser implements TreeGenerator{
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError3")), "CommandMessageError2");
 			return;
 		}
+		
 	}
 	
 	private void generateInputHandlerMap() {
