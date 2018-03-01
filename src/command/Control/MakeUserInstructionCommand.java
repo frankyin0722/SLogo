@@ -27,7 +27,7 @@ public class MakeUserInstructionCommand implements Command {
 	@Override
 	public double execute() {
 		if (!successfullyCreated) {
-			//Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
 			System.out.println("User Defined Command Initialization Failed: Command Already Exists!");
 			return 0;
 		}
