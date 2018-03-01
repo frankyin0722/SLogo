@@ -10,7 +10,9 @@ public class ArctangentCommand implements Command{
 	public ArctangentCommand (double expr1){
 		input1 = Math.toRadians(expr1);
 	}
-	
+	/**
+	 * returns the arctangent
+	 */
 	public double execute(){
 		return Math.atan(input1);
 	}

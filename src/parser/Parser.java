@@ -68,8 +68,10 @@ public class Parser implements TreeGenerator{
 			System.err.println("Error in parsing: No Input Command Found! ");
 		} catch (IndexOutOfBoundsException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError4");
+			throw new CommandException(Resources.getString("CommandHeaderError"));
 		} catch (CommandException e) {
-			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError3")), "CommandMessageError2");
+			return;
 		}
 		
 	}
