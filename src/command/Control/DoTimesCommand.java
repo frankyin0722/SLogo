@@ -16,7 +16,7 @@ public class DoTimesCommand implements Command{
 		myParameters = parameterParent.getNodeChildren();
 		mySubCommands = subCommandsParent.getNodeChildren();
 	}
-
+	
 	@Override
 	public double execute() {
 		myInterpreter.getVariables().setVariable((double) 0.0, myParameters.get(0).getCommandName());
@@ -25,7 +25,7 @@ public class DoTimesCommand implements Command{
 		int end = (int) myParameters.get(1).getNodeValue();
 		
 		for (int i = 0; i < end; i++) { 
-			double newvalue = (double) i + 1;
+			double newvalue = (double) var.getValue() + 1;
 			var.setValue(newvalue); 
 			//System.out.println(myInterpreter.getVariables().getVariable(myParameters.get(0).getCommandName()).getValue());
 			for (int j = 0; j < mySubCommands.size(); j++) {
