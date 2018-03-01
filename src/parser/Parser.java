@@ -63,7 +63,7 @@ public class Parser implements TreeGenerator{
 			while (getIndex() < userInput.size()) {
 				commandInitializer.initialize(language);
 				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
-//				myInterpreter.iterateUDC(myInterpreter.getUserCommands());
+				myInterpreter.iterateUDC(myInterpreter.getUserCommands());
 			}
 		} catch (NullPointerException e) {
 			System.err.println("Error in parsing: No Input Command Found! ");
