@@ -17,9 +17,6 @@ public class VariableType implements CommandTypes{
 		node.addChild(child);
 		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();
-		/*if (myTreeGenerator.getIndex() <= userInput.size()) {
-			myTreeGenerator.recurse(node);
-		}*/
 	}
 	
 	public String whichType() {

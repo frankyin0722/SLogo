@@ -11,6 +11,7 @@ public class RepeatCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private int myNumTimes;
 	private List<CommandNode> mySubCommands;
+	private static String repcount = ":repcount";
 
 	public RepeatCommand(CommandNode numTimes, CommandNode subCommandsParent, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
@@ -35,14 +36,12 @@ public class RepeatCommand implements Command{
 	}
 	
 	private void repcountUpdate(double count) {
-		if (myInterpreter.getVariables().checkVariable(":repcount")) {
-			myInterpreter.getVariables().setVariable(count, ":repcount");
+		if (myInterpreter.getVariables().checkVariable(repcount)) {
+			myInterpreter.getVariables().setVariable(count, repcount);
 		}
 		else {
-			
 			Variable newvar = new Variable((double) 1);
-			
-			myInterpreter.getVariables().addVariable(newvar, ":repcount");
+			myInterpreter.getVariables().addVariable(newvar, repcount);
 		}
 	}
 	

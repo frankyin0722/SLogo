@@ -11,6 +11,7 @@ public class HelpButton extends Button {
 	
 	private static final String HELP_PAGE = "https://www2.cs.duke.edu/courses/compsci308/spring18/assign/03_slogo/commands.php";
 	public HelpButton() {
+		
 		this.setText("Default Commands");
 		setupWebLink();
 	}

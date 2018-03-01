@@ -17,7 +17,7 @@ public class HistoryMenu extends TitledPane implements Listener {
 	public HistoryMenu(CommandTreeInterpreter i, ResourceBundle resources) {
 		historyDisplay = new ListView<String>();
 		interpreter = i;
-		i.addListener(this);
+		interpreter.addListener(this);
 		
 		this.setText(resources.getString(HISTORY_KEY));
 		this.setExpanded(false);

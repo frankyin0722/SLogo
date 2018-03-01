@@ -30,9 +30,7 @@ public class PatternManager {
 	  * Adds the given resource file to this language's recognized types
 	  */
 	 public void addPatterns (ResourceBundle syntax) {
-		 //
 	     ResourceBundle resources = syntax;
-	     //
 	     Enumeration<String> iter = resources.getKeys();
 	     while (iter.hasMoreElements()) {
 	         String key = iter.nextElement();
