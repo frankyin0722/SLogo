@@ -10,7 +10,7 @@ import visual_elements.menu_managers.PenColorMenu;
 import visual_elements.menu_managers.TurtleMenu;
 
 public class ControlPanelLeft extends VBox {
-//	private TurtleMenu myTurtleMenu;
+
 	private Turtle myTurtle;
 	private CommandTreeInterpreter interpreter;
 	
