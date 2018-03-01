@@ -63,6 +63,7 @@ public class Parser implements TreeGenerator{
 				System.out.println("Next command index: " + getIndex());
 				commandInitializer.initialize(language);
 				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
+//				myInterpreter.iterateUDC(myInterpreter.getUserCommands());
 			}
 			System.out.println("parser ends");
 			//return commandInitializer.getRoot();

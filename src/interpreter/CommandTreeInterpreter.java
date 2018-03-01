@@ -28,7 +28,10 @@ public class CommandTreeInterpreter {
 	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 0;
 	private ArrayList<String> history;
+	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
+	private List<Listener> activeUDCListener;
+
 	
 	public CommandTreeInterpreter(Turtle turtle) {
 		myCommandManager = new CommandManager();
@@ -40,6 +43,8 @@ public class CommandTreeInterpreter {
 		userDefinedCommandParameters = new HashMap<String, List<CommandNode>>();
 		history = new ArrayList<String>();
 		theseListeners = new ArrayList<Listener>();
+		activeUDC = new HashMap<>();
+		activeUDCListener = new ArrayList<Listener>();
 	}
 	
 	public void interpretAllTrees(List<CommandNode> myRoots) {
@@ -70,7 +75,6 @@ public class CommandTreeInterpreter {
 		System.out.println(myRoot.getCommandType());
 		System.out.println(myRoot.getNodeChildren().size());
 		
-		
 		if (myRoot.getNodeChildren().size()!=0) {
 			//if (!myRoot.getCommandType().equals("UserDefined")) {
 				for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
@@ -85,7 +89,7 @@ public class CommandTreeInterpreter {
 						Parameters.add(myRoot.getNodeChildren().get(i));
 					}
 					else {
-						//System.out.println("!!!");
+						//System.out.println("!!!");						
 						System.out.println("new print statement: " + myRoot.getNodeChildren().get(i).getCommandName());
 						interpretTree(myRoot.getNodeChildren().get(i));
 						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
@@ -123,11 +127,10 @@ public class CommandTreeInterpreter {
 					}
 					System.out.println(":expr value: " + myVariables.getVariable(para.get(i).getCommandName()).getValue());
 				}
-				
 				System.out.println("inside my list: " + userDefinedCommands.get(node.getCommandName()).getCommandName());
 				CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
 				interpretTree(storedMethod);
-				node.setNodeValue(storedMethod.getNodeValue());
+				node.setNodeValue(storedMethod.getNodeValue());				
 				break;
 			case "Turtle":
 				Parameters.add(myTurtles.get(currentTurtle));
@@ -236,4 +239,44 @@ public class CommandTreeInterpreter {
 	public ArrayList<String> getHistory(){
 		return history;
 	}
+	
+	public void iterateUDC(HashMap<String, CommandNode> map) {
+		System.out.print("XXXXX at iterateUDC");
+		for (String key: map.keySet()) {
+			CommandNode command = map.get(key);
+			addToActiveUDC(key, iterateNode(command));
+		}
+	}
+		
+	public String iterateNode(CommandNode node) {
+		return node.getCommandName();
+	}
+	
+	public void addToActiveUDC(String commandName, String commandAction) {
+		if (activeUDC.get(commandName) == null) {
+			activeUDC.put(commandName, commandAction);
+			System.out.print("XXXXX addToActive UDC" + commandName + commandAction);
+			notifyUDCListeners();
+		}
+	}
+	
+	public void addUDCListener(Listener l) {
+		activeUDCListener.add(l);
+	}
+	
+	public void notifyUDCListeners() {
+		for (Listener l: activeUDCListener) {
+			l.update();
+		}
+	}
+	
+	public HashMap<String, String> getActiveUDC() {
+		return activeUDC;
+	}
+	
+	public List<Listener> getActiveUDCListener() {
+		return activeUDCListener;
+	}
+
+
 }

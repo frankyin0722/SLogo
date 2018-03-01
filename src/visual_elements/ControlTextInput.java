@@ -73,6 +73,12 @@ public class ControlTextInput extends HBox {
 		Parser parser = new Parser(interpreter);
 		parser.generateCommandTree(myCommandWindow.getText(), myResources);
 		interpreter.addToHistory(myCommandWindow.getText());
+		if(myCommandWindow.getText().substring(0, 2).equals("to")) {
+			System.out.print("XXXXXXXXXXXXX here!");
+			interpreter.addToActiveUDC(myCommandWindow.getText().split("to ")[1].split(":")[0],
+					myCommandWindow.getText().split("to ")[1].split(":")[1]);
+
+		}
 		resetCommandWindow();
 	}
 	
