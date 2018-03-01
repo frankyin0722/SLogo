@@ -45,14 +45,9 @@ public class CommandType implements CommandTypes {
 		}
 	}
 	
-	public boolean checkUserDefinedMethodValidity(String commandName) {
-		return (!parametersMapping.containsKey(getCommandFromLanguageBundle(commandName)));
-	}
-	
 	private boolean checkUserDefinedCommandValidity(String command) {
 		try {
 			String com = getCommandFromLanguageBundle(command);
-			
 			return !parametersMapping.containsKey(com);
 		} catch (CommandException e){
 			return true;
@@ -68,8 +63,8 @@ public class CommandType implements CommandTypes {
 				return pattern.getKey();
 			}
 		}
-		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
-		throw new CommandException("Invalid Syntax");
+		//Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+		throw new CommandException("No such command existing in default or user-defined.");
 	}
 	
 	private void makeParametersMapping() {

@@ -170,7 +170,15 @@ public class CommandTreeInterpreter {
 	public void addListener(Listener l) {
 		theseListeners.add(l);
 	}
+	
 	public ArrayList<String> getHistory(){
 		return history;
 	}
+	
+	public void printExistingCommands() {
+		for (String commandname : userDefinedCommands.keySet()) {
+			CommandNode methodRoot = userDefinedCommands.get(commandname);
+		}
+	}
+	
 }
