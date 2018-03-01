@@ -69,8 +69,11 @@ public class CommandType implements CommandTypes {
 		
 	}
 	
-	private String getCommandFromLanguageBundle(String input) {
-		System.out.println("contains command? : " + myTreeGenerator.getInterpreter().getUserCommands().containsKey(input));
+	public boolean checkUserDefinedMethodValidity(String commandName) {
+		return (!parametersMapping.containsKey(getCommandFromLanguageBundle(commandName)));
+	}
+	
+	/*private String getOnlyDefaultCommand(String input) {
 		for (Entry<String, Pattern> pattern : languagePatternMapping) {
 			if (SomePatternManager.match(input, pattern.getValue())) {
 				System.out.println(pattern.getKey());
@@ -78,10 +81,32 @@ public class CommandType implements CommandTypes {
 				
 			}
 		}
+		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+		throw new CommandException("Invalid Syntax");
+	}*/
+	
+	private boolean checkUserDefinedCommandValidity(String command) {
+		try {
+			String com = getCommandFromLanguageBundle(command);
+			System.out.println("current command: "+com);
+			return !parametersMapping.containsKey(com);
+		} catch (CommandException e){
+			return true;
+		}
+	}
+	
+	private String getCommandFromLanguageBundle(String input) {
 		if (myTreeGenerator.getInterpreter().getUserCommands().containsKey(input)) {
 			return input;
 		}
-		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+		for (Entry<String, Pattern> pattern : languagePatternMapping) {
+			if (SomePatternManager.match(input, pattern.getValue())) {
+				System.out.println("language convert to command: "+pattern.getKey());
+				return pattern.getKey();
+				
+			}
+		}
+		//Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
 		throw new CommandException("Invalid Syntax");
 	}
 	
@@ -133,11 +158,15 @@ public class CommandType implements CommandTypes {
 	@Override
 	public void recurse(CommandNode node) {
 		if (node.getCommandName().equals("MakeUserInstruction")) {
-				CommandNode child = new CommandNode("UserDefined", userInput.get(myTreeGenerator.getIndex()), null, 0); 
-				node.addChild(child);
-				myTreeGenerator.printNode(child);
-				myTreeGenerator.increaseIndex();
+			CommandNode child = new CommandNode("UserDefined", userInput.get(myTreeGenerator.getIndex()), null, 0); 
+			if (checkUserDefinedCommandValidity(userInput.get(myTreeGenerator.getIndex()))) {
+				 System.out.println("this line gets executed!");
+				 child.setNodeValue(1); // if command already exists by default, then node value = 0 
 			}
+			node.addChild(child);
+			myTreeGenerator.printNode(child);
+			myTreeGenerator.increaseIndex();
+		}
 		else {
 			String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); // which parsed item the recursion is currently looking at 
 			/*if (userDefinedInstruction) { // if the command type is user-defined command
