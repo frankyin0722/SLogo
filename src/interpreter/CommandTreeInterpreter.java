@@ -189,7 +189,8 @@ public class CommandTreeInterpreter {
 //		System.out.print("XXXXX at iterateUDC");
 		for (String key: map.keySet()) {
 			CommandNode command = map.get(key);
-			addToActiveUDC(key, iterateNode(command));
+			addToActiveUDC(key, "");
+//			addToActiveUDC(key, iterateNode(command));
 		}
 	}
 		
