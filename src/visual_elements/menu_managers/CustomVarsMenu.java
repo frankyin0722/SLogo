@@ -40,8 +40,8 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		valCol = new VBox();	
 		keyView = new ListView<String>();
 		valView = new ListView<Object>();
-//		keyCol.getChildren().add(keyView);
-//		valCol.getChildren().add(valView);
+		keyCol.getChildren().add(keyView);
+		valCol.getChildren().add(valView);
 		varsDisplay.getChildren().addAll(keyCol, valCol);
 		this.setContent(varsDisplay);
 	}
@@ -67,8 +67,6 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 	
 	@Override
 	public void update() {
-//		ObservableList<VariableManager> myvars =FXCollections.observableArrayList (
-//			    interpreter.getVariables());
 		VariableManager myvars = interpreter.getVariables();
 		setupTable(myvars);
 	}
