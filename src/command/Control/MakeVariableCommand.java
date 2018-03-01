@@ -32,9 +32,6 @@ public class MakeVariableCommand implements Command {
 			myInterpreter.getVariables().addVariable(currentVariable, variable.getCommandName());
 		}
 		variable.setNodeValue(myValue);
-		
-		
-		
 	}
 	
 }

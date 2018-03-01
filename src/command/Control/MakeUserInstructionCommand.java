@@ -15,6 +15,7 @@ public class MakeUserInstructionCommand implements Command {
 	private List<CommandNode> mySubCommands;
 	private CommandTreeInterpreter myInterpreter;
 	private boolean successfullyCreated;
+	private static String BracketType = "Bracket";
 	
 	public MakeUserInstructionCommand (CommandNode commandName, CommandNode variables, CommandNode subCommands, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
@@ -30,7 +31,7 @@ public class MakeUserInstructionCommand implements Command {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError2")), "CommandMessageError3");
 			return 0;
 		}
-		CommandNode methodRoot = new CommandNode("Bracket", myCommandName, null, 0);
+		CommandNode methodRoot = new CommandNode(BracketType, myCommandName, null, 0);
 		for (CommandNode subcommand : mySubCommands) {
 			methodRoot.addChild(subcommand);
 		}

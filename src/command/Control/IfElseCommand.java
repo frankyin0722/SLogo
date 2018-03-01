@@ -26,7 +26,6 @@ public class IfElseCommand implements Command {
 	
 	@Override
 	public double execute() {
-		
 		if (myExpression) {
 			for (int i = 0; i < mySubCommandsTrue.size(); i++) {
 				myInterpreter.interpretTree(mySubCommandsTrue.get(i));
