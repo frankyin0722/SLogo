@@ -42,13 +42,13 @@ public class CommandTreeInterpreter {
 		theseListeners = new ArrayList<Listener>();
 	}
 	
-	public void interpretAllTrees(List<CommandNode> myRoots) {
+	/*public void interpretAllTrees(List<CommandNode> myRoots) {
 		//mergeMethods(myMethods);
 		//
 		for (int i = 0; i < myRoots.size(); i++) {
 			interpretTree(myRoots.get(i));
 		}
-	}
+	}*/
 	
 	/*private void mergeMethods(HashMap<String, CommandNode> newmethods) {
 		for (String key : newmethods.keySet()) {
@@ -154,7 +154,10 @@ public class CommandTreeInterpreter {
 				//
 				break;
 			case "Bracket":
-				node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+				if (node.getNodeChildren().size()!=0) {
+					node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+				}
+				node.setNodeValue(0.0);
 				break;
 			default: 
 				createCommand(node, Parameters);

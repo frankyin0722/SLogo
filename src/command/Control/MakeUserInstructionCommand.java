@@ -28,7 +28,6 @@ public class MakeUserInstructionCommand implements Command {
 	public double execute() {
 		if (!successfullyCreated) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError2")), "CommandMessageError3");
-			
 			return 0;
 		}
 		CommandNode methodRoot = new CommandNode("Bracket", myCommandName, null, 0);
