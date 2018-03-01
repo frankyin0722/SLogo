@@ -69,6 +69,10 @@ public class CommandType implements CommandTypes {
 		
 	}
 	
+	public boolean checkUserDefinedMethodValidity(String commandName) {
+		return (!parametersMapping.containsKey(getCommandFromLanguageBundle(commandName)));
+	}
+	
 	private String getCommandFromLanguageBundle(String input) {
 		System.out.println("contains command? : " + myTreeGenerator.getInterpreter().getUserCommands().containsKey(input));
 		for (Entry<String, Pattern> pattern : languagePatternMapping) {
@@ -133,11 +137,14 @@ public class CommandType implements CommandTypes {
 	@Override
 	public void recurse(CommandNode node) {
 		if (node.getCommandName().equals("MakeUserInstruction")) {
-				CommandNode child = new CommandNode("UserDefined", userInput.get(myTreeGenerator.getIndex()), null, 0); 
-				node.addChild(child);
-				myTreeGenerator.printNode(child);
-				myTreeGenerator.increaseIndex();
+			CommandNode child = new CommandNode("UserDefined", userInput.get(myTreeGenerator.getIndex()), null, 1); 
+			if (parametersMapping.containsKey(getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())))) {
+				 child.setNodeValue(0); // if command already exists by default, then node value = 0 
 			}
+			node.addChild(child);
+			myTreeGenerator.printNode(child);
+			myTreeGenerator.increaseIndex();
+		}
 		else {
 			String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); // which parsed item the recursion is currently looking at 
 			/*if (userDefinedInstruction) { // if the command type is user-defined command

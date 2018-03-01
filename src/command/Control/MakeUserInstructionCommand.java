@@ -11,23 +11,23 @@ public class MakeUserInstructionCommand implements Command {
 	private List<CommandNode> myVariables;
 	private List<CommandNode> mySubCommands;
 	private CommandTreeInterpreter myInterpreter;
+	private boolean successfullyCreated;
 	
 	public MakeUserInstructionCommand (CommandNode commandName, CommandNode variables, CommandNode subCommands, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myVariables = variables.getNodeChildren();
 		mySubCommands = subCommands.getNodeChildren();
 		myCommandName = commandName.getCommandName();
+		successfullyCreated = (commandName.getNodeValue()==1 ? true : false);
 	}
 	
 	@Override
 	public double execute() {
 		System.out.println("got into makeuserintruction class");
-		/*if (myInterpreter.getVariables().checkVariable(myCommandName)) {
-			System.out.println("Failed to create user-defined method: method name already exists in variables");
-			return 0.0; // if the commandName is already a variable, fails 
-		}*/
-		
-		// TO-DO: if method already exists in default, then return 0.0 
+		if (!successfullyCreated) {
+			System.out.println("User Defined Command Initialization Failed: Command Already Exists!");
+			return 0;
+		}
 		System.out.println("my parameter size:!! " + myVariables.size());
 		CommandNode methodRoot = new CommandNode("Bracket", myCommandName, null, 0);
 		for (CommandNode subcommand : mySubCommands) {
