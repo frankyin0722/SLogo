@@ -25,8 +25,9 @@ public class CommandType implements CommandTypes {
 	private TreeGenerator myTreeGenerator;
 	private List<String> userInput;
 	private List<CommandNode> myRoots;
-	private CommandNode myRoot;
-	private PatternManager SomePatternManager = new PatternManager();
+	private CommandNode myCurrentRoot;
+	private PatternManager SomePatternManager = new PatternManager();;
+
 	
 	public CommandType (List<String> input, TreeGenerator treeGenerator) {
 		myTreeGenerator = treeGenerator;
@@ -39,17 +40,18 @@ public class CommandType implements CommandTypes {
 	public void initialize(ResourceBundle language) {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
 		// check if it's user-defined method (Variable), if yes, deal with it differently 
+		System.out.println("frank is here already!!!");
 		String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
 		System.out.println("look here: "+nodeValue);
 		//userDefinedInstruction = nodeValue.equals(userDefinedCommand);
 		
-		myRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
-		myRoots.add(myRoot);
-		myTreeGenerator.printNode(myRoot);
+		myCurrentRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
+		myRoots.add(myCurrentRoot);
+		myTreeGenerator.printNode(myCurrentRoot);
 		myTreeGenerator.increaseIndex();
-		System.out.println(getNumParameterNeeded(nodeValue));
+		System.out.println("needed number of parameters: " + getNumParameterNeeded(nodeValue));
 		for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
-			myTreeGenerator.recurse(myRoot);
+			myTreeGenerator.recurse(myCurrentRoot);
 		}
 		
 		/*if (userDefinedInstruction) { // if the current method is MakeUserInstruction 
@@ -67,7 +69,11 @@ public class CommandType implements CommandTypes {
 		
 	}
 	
-	private String getCommandFromLanguageBundle(String input) {
+	public boolean checkUserDefinedMethodValidity(String commandName) {
+		return (!parametersMapping.containsKey(getCommandFromLanguageBundle(commandName)));
+	}
+	
+	/*private String getOnlyDefaultCommand(String input) {
 		for (Entry<String, Pattern> pattern : languagePatternMapping) {
 			if (SomePatternManager.match(input, pattern.getValue())) {
 				System.out.println(pattern.getKey());
@@ -75,10 +81,32 @@ public class CommandType implements CommandTypes {
 				
 			}
 		}
+		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+		throw new CommandException("Invalid Syntax");
+	}*/
+	
+	private boolean checkUserDefinedCommandValidity(String command) {
+		try {
+			String com = getCommandFromLanguageBundle(command);
+			System.out.println("current command: "+com);
+			return !parametersMapping.containsKey(com);
+		} catch (CommandException e){
+			return true;
+		}
+	}
+	
+	private String getCommandFromLanguageBundle(String input) {
 		if (myTreeGenerator.getInterpreter().getUserCommands().containsKey(input)) {
 			return input;
 		}
-		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+		for (Entry<String, Pattern> pattern : languagePatternMapping) {
+			if (SomePatternManager.match(input, pattern.getValue())) {
+				System.out.println("language convert to command: "+pattern.getKey());
+				return pattern.getKey();
+				
+			}
+		}
+		//Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
 		throw new CommandException("Invalid Syntax");
 	}
 	
@@ -93,12 +121,14 @@ public class CommandType implements CommandTypes {
 	}
 	
 	private int getNumParameterNeeded(String key) {
+		
 		if (parametersMapping.containsKey(key)) {
 			return Integer.parseInt(parametersMapping.get(key)[parameterIndex]);
 		}
 		if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(key)) {
+			//System.out.println("dash parameter size: " + myTreeGenerator.getInterpreter().getUserCommandParameters().size());
 			//return myTreeGenerator.getInterpreter().getUserCommandParameters().size();
-			return 1; // one bracket around all parameters of user-defined commands 
+			return myTreeGenerator.getInterpreter().getUserCommandParameters().get(key).size(); // one bracket around all parameters of user-defined commands 
 		}
 		return 0;
 	}
@@ -127,20 +157,36 @@ public class CommandType implements CommandTypes {
 	
 	@Override
 	public void recurse(CommandNode node) {
-		String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); // which parsed item the recursion is currently looking at 
-		/*if (userDefinedInstruction) { // if the command type is user-defined command
-			// userDefinedInstruction = false;
-			createUserDefinedInstruction(node, currentValue);
-			return;
-		}*/
-		CommandNode child = new CommandNode(getCommandCategory(currentValue), currentValue, null, 0);
-		myTreeGenerator.printNode(child);
-		myTreeGenerator.increaseIndex();
-		node.addChild(child);
-		for (int i = 0; i < getNumParameterNeeded(currentValue); i++) {
-			myTreeGenerator.recurse(child);
+		if (node.getCommandName().equals("MakeUserInstruction")) {
+			CommandNode child = new CommandNode("UserDefined", userInput.get(myTreeGenerator.getIndex()), null, 0); 
+			if (checkUserDefinedCommandValidity(userInput.get(myTreeGenerator.getIndex()))) {
+				 System.out.println("this line gets executed!");
+				 child.setNodeValue(1); // if command already exists by default, then node value = 0 
+			}
+			node.addChild(child);
+			myTreeGenerator.printNode(child);
+			myTreeGenerator.increaseIndex();
+		}
+		else {
+			String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); // which parsed item the recursion is currently looking at 
+			/*if (userDefinedInstruction) { // if the command type is user-defined command
+				// userDefinedInstruction = false;
+				createUserDefinedInstruction(node, currentValue);
+				return;
+			}*/
+			CommandNode child = new CommandNode(getCommandCategory(currentValue), currentValue, null, 0);
+			myTreeGenerator.printNode(child);
+			myTreeGenerator.increaseIndex();
+			node.addChild(child);
+			for (int i = 0; i < getNumParameterNeeded(currentValue); i++) {
+				myTreeGenerator.recurse(child);
+			}
 		}
 	} 
+	
+	public CommandNode getCurrentRoot() {
+		return myCurrentRoot;
+	}
 	
 	public List<CommandNode> getRoot() {
 		return myRoots;

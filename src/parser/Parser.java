@@ -36,26 +36,42 @@ public class Parser implements TreeGenerator{
 		myInterpreter = interpreter;
 	}
 	
-	public List<CommandNode> generateCommandTree(String input, ResourceBundle language) {
+	private void parseInput(String input) {
+		List<String> parsebylines = Arrays.asList(input.split("\n"));
+		List<String> commentsprocessedout = new ArrayList<String>();
+		userInput = new ArrayList<String>();
+		for (int i = 0; i < parsebylines.size(); i++) {
+			if (parsebylines.get(i).indexOf("#")==-1 && !parsebylines.get(i).equals("")) {
+				commentsprocessedout.add(parsebylines.get(i).trim());
+			}
+		}
+		for (int i = 0; i < commentsprocessedout.size(); i++) {
+			List<String> parsebyword = Arrays.asList(commentsprocessedout.get(i).split("\\s+"));
+			userInput.addAll(parsebyword);
+		}
+	}
+	
+	public void generateCommandTree(String input, ResourceBundle language) {
 		try {
 			currentIndex = 0;
 			usedLanguage = language;
-			userInput = Arrays.asList(input.split("\\s+"));
+			//userInput = Arrays.asList(input.split("\\s+"));
+			parseInput(input);
 			generateInputHandlerMap();
-			commandInitializer.initialize(language);
 			System.out.println("loooook here!!!: "+getIndex());
 			while (getIndex() < userInput.size()) {
 				System.out.println("Next command index: " + getIndex());
 				commandInitializer.initialize(language);
+				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
 			}
 			System.out.println("parser ends");
-			return commandInitializer.getRoot();
+			//return commandInitializer.getRoot();
 		} catch (NullPointerException e) {
 			System.err.println("Error in parsing: No Input Command Found! ");
 		} catch (IndexOutOfBoundsException e) {
 			System.err.println("Error in parsing: Unmatched Number of Brackets!");
 		}
-		return null;
+		//return null;
 	}
 	
 	private void generateInputHandlerMap() {
@@ -92,7 +108,7 @@ public class Parser implements TreeGenerator{
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
-		if (!root.getCommandName().equals("MakeUserInstruction") && myInterpreter.getUserCommands().containsKey(userInput.get(currentIndex))) {
+		/*if (!root.getCommandName().equals("MakeUserInstruction") && myInterpreter.getUserCommands().containsKey(userInput.get(currentIndex))) {
 			// if it is not MakeUserInstruction command, consider already-existing commands as commands;
 			// if it is MakeUserInstruction command, consider already-existing commands as variables to be assigned with user-defined methods 
 			CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
@@ -101,8 +117,8 @@ public class Parser implements TreeGenerator{
 			CommandTypes parameter = new ListStartType(userInput, this);
 			increaseIndex();
 			parameter.recurse(userdefinedmethod);
-		}
-		else {
+		}*/
+		//else {
 			for (Pattern pattern : inputHandlerMap.keySet()) {
 				if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 					CommandTypes cmdType = inputHandlerMap.get(pattern);
@@ -111,7 +127,7 @@ public class Parser implements TreeGenerator{
 					break;
 				}
 			}
-		}
+		//}
 	}
 	
 	@Override
