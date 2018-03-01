@@ -45,8 +45,8 @@ public class Visualization {
 		setLanguage(DEFAULT_LANGUAGE);
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		myControlPanelRight = new ControlPanelRight();		
 		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
 	}

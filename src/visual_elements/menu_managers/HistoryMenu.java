@@ -1,6 +1,5 @@
 package visual_elements.menu_managers;
 
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
