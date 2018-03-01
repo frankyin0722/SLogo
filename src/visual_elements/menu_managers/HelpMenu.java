@@ -8,9 +8,15 @@ import java.net.URL;
 import alerts.Alerts;
 import alerts.CommandException;
 import alerts.Resources;
+import buttons.HelpButton;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 public class HelpMenu extends TitledPane {
 	public static final String COMMANDS_WEBSITE = "https://www2.cs.duke.edu/courses/compsci308/current/assign/03_slogo/commands.php";
@@ -18,6 +24,25 @@ public class HelpMenu extends TitledPane {
 		setupHelpMenu();
 		setupContent();
 	}
+	
+	
+//	private void setupHelpMenu() {
+//		myHelpButton = new HelpButton();
+//		myHelpButton.setOnAction(
+//		        new EventHandler<ActionEvent>() {
+//		            @Override
+//		            public void handle(ActionEvent event) {
+//		                Stage stage = new Stage();
+//			        	   	WebView web = new WebView();
+//			        	   	web.getEngine().load("https://www2.cs.duke.edu/courses/compsci308/spring18/assign/03_slogo/commands.php");
+//			        	   	Scene scene = new Scene(web);
+//			        	   	stage.setScene(scene);
+//			        	   	stage.show();
+//		            }
+//		      });
+//		myHelpButton.setMaxWidth(Double.MAX_VALUE);
+//		this.getChildren().add(myHelpButton);
+//	}
 	
 	private void setupHelpMenu() {
 		this.setText("Help");
@@ -38,10 +63,7 @@ public class HelpMenu extends TitledPane {
 		commands.setOnAction(e -> showWebsite());
 		vbox.getChildren().add(commands);
 	}
-	
-	private void setupCustomVars(VBox vbox) {
-		vbox.getChildren().add(new CustomVarsMenu());
-	}
+
 	
 	private void showWebsite() {
 		openWebpage(COMMANDS_WEBSITE);
