@@ -10,7 +10,6 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import observables.Listener;
-import variables.Variable;
 import variables.VariableManager;
 
 public class CustomVarsMenu extends TitledPane implements Listener {

@@ -12,7 +12,6 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
-import javafx.collections.ObservableList;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
