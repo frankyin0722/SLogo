@@ -160,6 +160,10 @@ public class CommandTreeInterpreter {
 		history.add(command);
 		notifyListeners();
 	}
+	
+	public ArrayList<String> getHistory(){
+		return history;
+	}
 
 	private void notifyListeners() {
 		for(Listener l:theseListeners) {
@@ -169,10 +173,6 @@ public class CommandTreeInterpreter {
 
 	public void addListener(Listener l) {
 		theseListeners.add(l);
-	}
-	
-	public ArrayList<String> getHistory(){
-		return history;
 	}
 	
 	public void printExistingCommands() {
