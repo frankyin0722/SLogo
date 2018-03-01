@@ -186,7 +186,7 @@ public class CommandTreeInterpreter {
 	}
 	
 	public void iterateUDC(HashMap<String, CommandNode> map) {
-		System.out.print("XXXXX at iterateUDC");
+//		System.out.print("XXXXX at iterateUDC");
 		for (String key: map.keySet()) {
 			CommandNode command = map.get(key);
 			addToActiveUDC(key, iterateNode(command));
@@ -198,11 +198,11 @@ public class CommandTreeInterpreter {
 	}
 	
 	public void addToActiveUDC(String commandName, String commandAction) {
-		if (activeUDC.get(commandName) == null) {
+//		if (activeUDC.get(commandName) == null) {
 			activeUDC.put(commandName, commandAction);
-			System.out.print("XXXXX addToActive UDC" + commandName + commandAction);
+//			System.out.print("XXXXX addToActive UDC" + commandName + commandAction);
 			notifyUDCListeners();
-		}
+//		}
 	}
 	
 	public void addUDCListener(Listener l) {
