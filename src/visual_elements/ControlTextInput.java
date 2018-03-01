@@ -42,7 +42,7 @@ public class ControlTextInput extends HBox {
 				myCommandWindow,
 				buttonBox());
 		setButtonAction();
-		setupKeyInput();
+		//setupKeyInput();
 	}
 
 	private VBox buttonBox() {
@@ -89,45 +89,45 @@ public class ControlTextInput extends HBox {
 		interpreter.getCurrentTurtle().resetTurtle();
 	}
 	
-	private void setupKeyInput() {
-		// How to respond to both keys pressed together:
-		PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
-		shiftAndEnterPressed.addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> obs, Boolean werePressed, Boolean arePressed) {
-		        System.out.println("Shift and enter pressed together");
-		        pause.setOnFinished(e -> inputToParser());
-		        pause.playFromStart();
-			}
-		});
-
-//		// Wire up properties to key events:
-//		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
+//	private void setupKeyInput() {
+//		// How to respond to both keys pressed together:
+//		PauseTransition pause = new PauseTransition(Duration.seconds(0.15));
+//		shiftAndEnterPressed.addListener(new ChangeListener<Boolean>() {
+//			@Override
+//			public void changed(ObservableValue<? extends Boolean> obs, Boolean werePressed, Boolean arePressed) {
+//		        
+//		        pause.setOnFinished(e -> inputToParser());
+//		        pause.playFromStart();
+//			}
+//		});
+//
+////		// Wire up properties to key events:
+////		this.setOnKeyPressed(new EventHandler<KeyEvent>() {
+////		    @Override
+////		    public void handle(KeyEvent ke) {
+////		        if (ke.getCode() == KeyCode.SHIFT) {
+////		        		System.out.print("shift_on");
+////		            shiftPressed.set(true);
+////		        } else if (ke.getCode() == KeyCode.ENTER) {
+////	        			System.out.print("enter_on");
+////		            enterPressed.set(true);
+////		        }
+////		    }
+////		});
+//
+//		this.setOnKeyReleased(new EventHandler<KeyEvent>() {
 //		    @Override
 //		    public void handle(KeyEvent ke) {
 //		        if (ke.getCode() == KeyCode.SHIFT) {
-//		        		System.out.print("shift_on");
-//		            shiftPressed.set(true);
+//	        		System.out.print("shift_off");
+//		        		shiftPressed.set(true);
 //		        } else if (ke.getCode() == KeyCode.ENTER) {
-//	        			System.out.print("enter_on");
-//		            enterPressed.set(true);
+//	        		System.out.print("enter_off");
+//		        		enterPressed.set(true);
 //		        }
 //		    }
 //		});
-
-		this.setOnKeyReleased(new EventHandler<KeyEvent>() {
-		    @Override
-		    public void handle(KeyEvent ke) {
-		        if (ke.getCode() == KeyCode.SHIFT) {
-	        		System.out.print("shift_off");
-		        		shiftPressed.set(true);
-		        } else if (ke.getCode() == KeyCode.ENTER) {
-	        		System.out.print("enter_off");
-		        		enterPressed.set(true);
-		        }
-		    }
-		});
-	}
+//	}
 
 
 }

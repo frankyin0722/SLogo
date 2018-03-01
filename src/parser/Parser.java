@@ -8,6 +8,10 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import alerts.Alerts;
+import alerts.CommandException;
+import alerts.Resources;
+
 //import sun.security.tools.keytool.Resources;
 
 import interpreter.CommandTreeInterpreter;
@@ -58,18 +62,19 @@ public class Parser implements TreeGenerator{
 			//userInput = Arrays.asList(input.split("\\s+"));
 			parseInput(input);
 			generateInputHandlerMap();
-			System.out.println("loooook here!!!: "+getIndex());
+			
 			while (getIndex() < userInput.size()) {
-				System.out.println("Next command index: " + getIndex());
+				
 				commandInitializer.initialize(language);
 				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
 			}
-			System.out.println("parser ends");
+			
 			//return commandInitializer.getRoot();
 		} catch (NullPointerException e) {
 			System.err.println("Error in parsing: No Input Command Found! ");
 		} catch (IndexOutOfBoundsException e) {
-			System.err.println("Error in parsing: Unmatched Number of Brackets!");
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError4");
+			throw new CommandException(Resources.getString("CommandHeaderError"));
 		}
 		//return null;
 	}
@@ -86,7 +91,7 @@ public class Parser implements TreeGenerator{
 					Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
 					CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
 					if (type.equals("Command")) {
-						System.out.println(type);
+						
 						commandInitializer = new CommandType(userInput, (TreeGenerator) this);
 						inputHandlerMap.put(pattern.getValue(), commandInitializer);
 					} else {
@@ -112,7 +117,7 @@ public class Parser implements TreeGenerator{
 			// if it is not MakeUserInstruction command, consider already-existing commands as commands;
 			// if it is MakeUserInstruction command, consider already-existing commands as variables to be assigned with user-defined methods 
 			CommandNode userdefinedmethod = new CommandNode("UserDefined", userInput.get(currentIndex), null, 0);
-			System.out.println("!!!!!!" + userInput.get(currentIndex));
+			
 			root.addChild(userdefinedmethod);
 			CommandTypes parameter = new ListStartType(userInput, this);
 			increaseIndex();
@@ -122,7 +127,7 @@ public class Parser implements TreeGenerator{
 			for (Pattern pattern : inputHandlerMap.keySet()) {
 				if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 					CommandTypes cmdType = inputHandlerMap.get(pattern);
-					System.out.println(cmdType.toString());
+					
 					cmdType.recurse(root);
 					break;
 				}
@@ -155,11 +160,11 @@ public class Parser implements TreeGenerator{
 	}
 	
 	public void printNode(CommandNode node) {
-		System.out.println("Type is: " + node.getCommandType());
-		System.out.println(node.getCommandName());
-		System.out.println("Root value is: " + node.getNodeValue());
-		System.out.println("Current index is: " + getIndex());
-		System.out.println();
+		
+		
+		
+		
+		
 	}
 	
 }

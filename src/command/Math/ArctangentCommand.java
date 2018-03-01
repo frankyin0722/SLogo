@@ -1,7 +1,9 @@
 package command.Math;
 
 import command.Command;
-
+/**
+ * takes the arctangent of one parameter
+ */
 public class ArctangentCommand implements Command{
 	private double input1;
 	

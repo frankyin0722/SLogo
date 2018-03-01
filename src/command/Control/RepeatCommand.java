@@ -39,9 +39,9 @@ public class RepeatCommand implements Command{
 			myInterpreter.getVariables().setVariable(count, ":repcount");
 		}
 		else {
-			System.out.println("add :repcount");
+			
 			Variable newvar = new Variable((double) 1);
-			System.out.println(newvar.getValue());
+			
 			myInterpreter.getVariables().addVariable(newvar, ":repcount");
 		}
 	}

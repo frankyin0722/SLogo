@@ -12,7 +12,7 @@ public class CommandManager {
 	public Class<?> createCommand(String commandCategory, String command){
 		Class<?> commandType = null;
 		try {
-			System.out.println("command" + "." + commandCategory + "." + command + "Command");
+			
 			commandType = Class.forName("command" + "." + commandCategory + "." + command + "Command");
 		}
 		catch (ClassNotFoundException e){

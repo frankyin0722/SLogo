@@ -27,7 +27,7 @@ public class DoTimesCommand implements Command{
 		for (int i = 0; i < end; i++) { 
 			double newvalue = (double) var.getValue() + 1;
 			var.setValue(newvalue); 
-			//System.out.println(myInterpreter.getVariables().getVariable(myParameters.get(0).getCommandName()).getValue());
+			//
 			for (int j = 0; j < mySubCommands.size(); j++) {
 				myInterpreter.interpretTree(mySubCommands.get(j));
 			}
