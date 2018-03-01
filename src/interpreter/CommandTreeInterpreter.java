@@ -74,6 +74,8 @@ public class CommandTreeInterpreter {
 							interpretTree(myRoot.getNodeChildren().get(i));
 							//System.out.println("if statement variable value: "+myRoot.getNodeValue());
 						}
+						System.out.println("herehere"+myRoot.getNodeChildren().get(i).getCommandName());
+						System.out.println("herehere"+myRoot.getNodeChildren().get(i).getCommandType());
 						Parameters.add(myRoot.getNodeChildren().get(i));
 					}
 					else {
@@ -103,15 +105,15 @@ public class CommandTreeInterpreter {
 			case "UserDefined":
 				List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
 				System.out.println("user-defined parameter size: " + para.size());
-				if (node.getNodeChildren().get(0).getNodeChildren().size()!=para.size()) {
+				/*if (node.getNodeChildren().get(0).getNodeChildren().size()!=para.size()) {
 					throw new IllegalArgumentException("Error in executing user-defined method: Unmatched Number of Parameters!");
-				}
+				}*/
 				for (int i = 0; i < para.size(); i++) {
 					if (myVariables.checkVariable(para.get(i).getCommandName())) {
-						myVariables.setVariable(node.getNodeChildren().get(0).getNodeChildren().get(i).getNodeValue(), para.get(i).getCommandName());
+						myVariables.setVariable((double) Parameters.get(i), para.get(i).getCommandName());
 					}
 					else {
-						myVariables.addVariable(new Variable((double) node.getNodeChildren().get(0).getNodeChildren().get(i).getNodeValue()), para.get(i).getCommandName());
+						myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
 					}
 					System.out.println(":expr value: " + myVariables.getVariable(para.get(i).getCommandName()).getValue());
 				}
