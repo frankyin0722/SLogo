@@ -52,7 +52,8 @@ public class HelpMenu extends TitledPane {
 	private void setupContent() {
 		VBox vbox = new VBox();
 		vbox.setFillWidth(true);
-		setupWebLink(vbox);
+//		setupWebLink(vbox);
+		setupCustomVars(vbox);
 		this.setContent(vbox);
 	}
 	
