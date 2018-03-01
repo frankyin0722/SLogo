@@ -18,19 +18,19 @@ public class ParserTester {
 		String language = "resources.languages/English";
 		
 		//List<CommandNode> myroots = myparser.generateCommandTree(userinput, language);
-		System.out.println("!!!");
-		//System.out.println(myparser.getMethods().containsKey(":expr"));
+		
+		//
 		/*for (int i = 0; i < myroots.size(); i++) {
-			System.out.println(myroots.get(i).getCommandName());
+			
 		}*/
-		//System.out.println(myroots.get(1).getNodeChildren().size());
+		//
 		/*for (int i = 0 ; i < myroots.get(1).getNodeChildren().size(); i++) {
-			System.out.println(myroots.get(i).getNodeChildren().get(i).getCommandName());
+			
 		}*/
 		
 		
 		/*tree.interpretAllTrees(myroots);
-		System.out.println(tree.getUserCommands().containsKey(":command"));
+		
 		myparser.printNode(tree.getUserCommands().get(":command"));
 		for (CommandNode child : tree.getUserCommands().get(":command").getNodeChildren()) {
 			myparser.printNode(child);
@@ -69,19 +69,19 @@ public class ParserTester {
 //		String language = "resources.languages/English";
 //		
 //		List<CommandNode> myroots = myparser.generateCommandTree(userinput, language);
-//		System.out.println("!!!");
-//		//System.out.println(myparser.getMethods().containsKey(":expr"));
+//		
+//		//
 //		/*for (int i = 0; i < myroots.size(); i++) {
-//			System.out.println(myroots.get(i).getCommandName());
+//			
 //		}*/
-//		//System.out.println(myroots.get(1).getNodeChildren().size());
+//		//
 //		/*for (int i = 0 ; i < myroots.get(1).getNodeChildren().size(); i++) {
-//			System.out.println(myroots.get(i).getNodeChildren().get(i).getCommandName());
+//			
 //		}*/
 //		
 //		
 //		tree.interpretAllTrees(myroots);
-//		System.out.println(tree.getUserCommands().containsKey(":command"));
+//		
 //		myparser.printNode(tree.getUserCommands().get(":command"));
 //		for (CommandNode child : tree.getUserCommands().get(":command").getNodeChildren()) {
 //			myparser.printNode(child);

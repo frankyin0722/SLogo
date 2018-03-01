@@ -28,7 +28,7 @@ public class DrawingWindow extends Pane {
 //		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
 //			add(new ForwardCommand(myTurtle,50));
 //			add(new RightCommand(myTurtle,90));}});
-//		System.out.println(testing.execute());
+//		
 //		this.getChildren().addAll(testing());
 //		root.getChildren().addAll(this);
 		initializeColorPicker();

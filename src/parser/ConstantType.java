@@ -13,7 +13,7 @@ public class ConstantType implements CommandTypes{
 	
 	public void recurse(CommandNode node) {
 		String currentValue = userInput.get(myTreeGenerator.getIndex()); // which parsed item the recursion is currently looking at 
-		//System.out.println(myTreeGenerator.getIndex());
+		//
 		CommandNode child = new CommandNode("Constant", "Constant", null, Double.parseDouble(currentValue));
 		node.addChild(child);
 		myTreeGenerator.printNode(child);

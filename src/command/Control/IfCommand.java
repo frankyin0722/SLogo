@@ -24,7 +24,7 @@ public class IfCommand implements Command {
 	
 	@Override
 	public double execute() {
-		System.out.println("expression: " + myExpression);
+		
 		if (myExpression) {
 			for (int i = 0; i < mySubCommands.size(); i++) {
 				myInterpreter.interpretTree(mySubCommands.get(i));

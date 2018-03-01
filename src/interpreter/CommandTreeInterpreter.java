@@ -44,7 +44,7 @@ public class CommandTreeInterpreter {
 	
 	public void interpretAllTrees(List<CommandNode> myRoots) {
 		//mergeMethods(myMethods);
-		//System.out.println("existing :expr command?: " + getUserCommands().containsKey(":expr"));
+		//
 		for (int i = 0; i < myRoots.size(); i++) {
 			interpretTree(myRoots.get(i));
 		}
@@ -66,9 +66,9 @@ public class CommandTreeInterpreter {
 	
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
-		System.out.println(myRoot.getCommandName());
-		System.out.println(myRoot.getCommandType());
-		System.out.println(myRoot.getNodeChildren().size());
+		
+		
+		
 		
 		
 		if (myRoot.getNodeChildren().size()!=0) {
@@ -78,18 +78,18 @@ public class CommandTreeInterpreter {
 						//MakeUserInstructionCase(myRoot);
 						if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction")) {
 							interpretTree(myRoot.getNodeChildren().get(i));
-							//System.out.println("if statement variable value: "+myRoot.getNodeValue());
+							//
 						}
-						System.out.println("herehere"+myRoot.getNodeChildren().get(i).getCommandName());
-						System.out.println("herehere"+myRoot.getNodeChildren().get(i).getCommandType());
+						
+						
 						Parameters.add(myRoot.getNodeChildren().get(i));
 					}
 					else {
-						//System.out.println("!!!");
-						System.out.println("new print statement: " + myRoot.getNodeChildren().get(i).getCommandName());
+						//
+						
 						interpretTree(myRoot.getNodeChildren().get(i));
 						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
-						//System.out.println("if statement variable value: "+myRoot.getNodeValue());
+						//
 					}
 				}
 			//}
@@ -110,7 +110,7 @@ public class CommandTreeInterpreter {
 		switch (node.getCommandType()) {
 			case "UserDefined":
 				List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
-				System.out.println("user-defined parameter size: " + para.size());
+				
 				/*if (node.getNodeChildren().get(0).getNodeChildren().size()!=para.size()) {
 					throw new IllegalArgumentException("Error in executing user-defined method: Unmatched Number of Parameters!");
 				}*/
@@ -121,10 +121,10 @@ public class CommandTreeInterpreter {
 					else {
 						myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
 					}
-					System.out.println(":expr value: " + myVariables.getVariable(para.get(i).getCommandName()).getValue());
+					
 				}
 				
-				System.out.println("inside my list: " + userDefinedCommands.get(node.getCommandName()).getCommandName());
+				
 				CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
 				interpretTree(storedMethod);
 				node.setNodeValue(storedMethod.getNodeValue());
@@ -143,15 +143,15 @@ public class CommandTreeInterpreter {
 				if (userDefinedCommands.containsKey(node.getCommandName())) {
 					// run user command
 				}
-				//System.out.println(node.getCommandName());
-				//System.out.println(myVariables.checkVariable(node.getCommandName()));
+				//
+				//
 				if (!myVariables.checkVariable(node.getCommandName())) {
 					
 					Variable newvar = new Variable((double) 0);
 					myVariables.addVariable(newvar, node.getCommandName());
 				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
-				//System.out.println("currentNode value: " + node.getNodeValue());
+				//
 				break;
 			case "Bracket":
 				node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
@@ -178,13 +178,13 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			//System.out.println(thisCommand.toString());
+			//
 			try {
-				//System.out.println(thisCommand.toString());
-				//System.out.println(parameters);
+				//
+				//
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
-				System.out.println(node.getCommandName() + ": " + node.getNodeValue());
+				
 			}
 			catch (IllegalAccessException | InvocationTargetException e) {
 				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
