@@ -75,6 +75,9 @@ public class Parser implements TreeGenerator{
 		} catch (IndexOutOfBoundsException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError4");
 			throw new CommandException(Resources.getString("CommandHeaderError"));
+		} catch (CommandException e) {
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError3")), "CommandMessageError2");
+			return;
 		}
 		//return null;
 	}

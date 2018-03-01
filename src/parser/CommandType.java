@@ -106,8 +106,8 @@ public class CommandType implements CommandTypes {
 				
 			}
 		}
-		Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
-		throw new CommandException("Invalid Syntax");
+
+		throw new CommandException("No command in language");
 	}
 	
 	private void makeParametersMapping() {

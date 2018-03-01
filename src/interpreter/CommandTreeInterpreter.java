@@ -175,7 +175,7 @@ public class CommandTreeInterpreter {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError1");
-			throw new CommandException("Invalid Syntax");
+			return;
 		}
 		
 		Method thisExecution = null;
