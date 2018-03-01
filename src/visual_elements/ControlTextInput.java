@@ -76,7 +76,7 @@ public class ControlTextInput extends HBox {
 		if(myCommandWindow.getText().substring(0, 2).equals("to")) {
 //			interpreter.addToActiveUDC(myCommandWindow.getText().split("to ")[1].split(":")[0],
 //					myCommandWindow.getText().split("to ")[1].split(":")[1]);
-			interpreter.addToActiveUDC(myCommandWindow.getText().split("to ")[1].split(":")[0],"");
+			interpreter.addToActiveUDC(myCommandWindow.getText().split("to ")[1].split(" ")[0],"");
 
 		}
 		resetCommandWindow();
