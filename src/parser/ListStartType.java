@@ -20,13 +20,9 @@ public class ListStartType implements CommandTypes{
 		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();
 		while (!userInput.get(myTreeGenerator.getIndex()).equals("]")) {
-			
-			
 			myTreeGenerator.recurse(child);
 		}
-		
 		myTreeGenerator.increaseIndex();
-		
 		myTreeGenerator.increaseListEndIndex();
 	}
 	
