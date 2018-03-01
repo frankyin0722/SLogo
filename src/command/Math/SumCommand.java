@@ -1,7 +1,9 @@
 package command.Math;
 
 import command.Command;
-
+/**
+ * takes the sum of two parameters
+ */
 public class SumCommand implements Command{
 	private double input1;
 	private double input2;
@@ -10,7 +12,9 @@ public class SumCommand implements Command{
 		input1 = expr1;
 		input2 = expr2;
 	}
-	
+	/**
+	 * returns the sum
+	 */
 	public double execute(){
 		return (input1+input2);
 	}

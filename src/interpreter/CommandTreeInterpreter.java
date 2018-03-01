@@ -12,7 +12,6 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
-import javafx.collections.ObservableList;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
@@ -47,87 +46,37 @@ public class CommandTreeInterpreter {
 		activeUDCListener = new ArrayList<Listener>();
 	}
 	
-	public void interpretAllTrees(List<CommandNode> myRoots) {
-		//mergeMethods(myMethods);
-		//System.out.println("existing :expr command?: " + getUserCommands().containsKey(":expr"));
-		for (int i = 0; i < myRoots.size(); i++) {
-			interpretTree(myRoots.get(i));
-		}
-	}
-	
-	/*private void mergeMethods(HashMap<String, CommandNode> newmethods) {
-		for (String key : newmethods.keySet()) {
-			if (!myVariables.checkVariable(key)) {
-				if (!userDefinedCommands.containsKey(key)) {
-					userDefinedCommands.put(key, newmethods.get(key));
+	public void interpretTree(CommandNode myRoot) {
+		List<Object> Parameters = new ArrayList<>();
+		if (myRoot.getNodeChildren().size()!=0) {
+			for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
+				if (myRoot.getCommandType().equals("Control")) {
+					if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction")) {
+						interpretTree(myRoot.getNodeChildren().get(i));
+					}
+					Parameters.add(myRoot.getNodeChildren().get(i));
 				}
 				else {
-					userDefinedCommands.replace(key, newmethods.get(key));
+					interpretTree(myRoot.getNodeChildren().get(i));
+					Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
 				}
 			}
 		}
-		
-	}*/
-	
-	public void interpretTree(CommandNode myRoot) {
-		List<Object> Parameters = new ArrayList<>();
-		System.out.println(myRoot.getCommandName());
-		System.out.println(myRoot.getCommandType());
-		System.out.println(myRoot.getNodeChildren().size());
-		
-		if (myRoot.getNodeChildren().size()!=0) {
-			//if (!myRoot.getCommandType().equals("UserDefined")) {
-				for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
-					if (myRoot.getCommandType().equals("Control")) {
-						//MakeUserInstructionCase(myRoot);
-						if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction")) {
-							interpretTree(myRoot.getNodeChildren().get(i));
-							//System.out.println("if statement variable value: "+myRoot.getNodeValue());
-						}
-						System.out.println("herehere"+myRoot.getNodeChildren().get(i).getCommandName());
-						System.out.println("herehere"+myRoot.getNodeChildren().get(i).getCommandType());
-						Parameters.add(myRoot.getNodeChildren().get(i));
-					}
-					else {
-						//System.out.println("!!!");						
-						System.out.println("new print statement: " + myRoot.getNodeChildren().get(i).getCommandName());
-						interpretTree(myRoot.getNodeChildren().get(i));
-						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
-						//System.out.println("if statement variable value: "+myRoot.getNodeValue());
-					}
-				}
-			//}
-		}
 		updateNodeValue(myRoot, Parameters);
 	}
-	
-	/*private void MakeUserInstructionCase(CommandNode myRoot) {
-		if (userDefinedCommands.containsKey(myRoot.getNodeChildren().get(0).getCommandName())) {
-			myRoot.setNodeValue(1);
-		}
-		else {
-			myRoot.setNodeValue(0);
-		}
-	}*/
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
 			case "UserDefined":
 				List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
-				System.out.println("user-defined parameter size: " + para.size());
-				/*if (node.getNodeChildren().get(0).getNodeChildren().size()!=para.size()) {
-					throw new IllegalArgumentException("Error in executing user-defined method: Unmatched Number of Parameters!");
-				}*/
 				for (int i = 0; i < para.size(); i++) {
 					if (myVariables.checkVariable(para.get(i).getCommandName())) {
 						myVariables.setVariable((double) Parameters.get(i), para.get(i).getCommandName());
 					}
 					else {
 						myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
-					}
-					System.out.println(":expr value: " + myVariables.getVariable(para.get(i).getCommandName()).getValue());
+					}	
 				}
-				System.out.println("inside my list: " + userDefinedCommands.get(node.getCommandName()).getCommandName());
 				CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
 				interpretTree(storedMethod);
 				node.setNodeValue(storedMethod.getNodeValue());				
@@ -143,21 +92,17 @@ public class CommandTreeInterpreter {
 			case "Constant":
 				break;
 			case "Variable":
-				if (userDefinedCommands.containsKey(node.getCommandName())) {
-					// run user command
-				}
-				//System.out.println(node.getCommandName());
-				//System.out.println(myVariables.checkVariable(node.getCommandName()));
 				if (!myVariables.checkVariable(node.getCommandName())) {
-					
 					Variable newvar = new Variable((double) 0);
 					myVariables.addVariable(newvar, node.getCommandName());
 				}
 				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
-				//System.out.println("currentNode value: " + node.getNodeValue());
 				break;
 			case "Bracket":
-				node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+				if (node.getNodeChildren().size()!=0) {
+					node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+				}
+				node.setNodeValue(0.0);
 				break;
 			default: 
 				createCommand(node, Parameters);
@@ -168,26 +113,19 @@ public class CommandTreeInterpreter {
 	private void createCommand(CommandNode node, List<Object> parameters) {
 		Class<?> commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandName());
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
-		
 		Command thisCommand = null;
-		
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError1");
-			throw new CommandException("Invalid Syntax");
+			return;
 		}
-		
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			//System.out.println(thisCommand.toString());
 			try {
-				//System.out.println(thisCommand.toString());
-				//System.out.println(parameters);
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
-				System.out.println(node.getCommandName() + ": " + node.getNodeValue());
 			}
 			catch (IllegalAccessException | InvocationTargetException e) {
 				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
@@ -226,6 +164,10 @@ public class CommandTreeInterpreter {
 		history.add(command);
 		notifyListeners();
 	}
+	
+	public ArrayList<String> getHistory(){
+		return history;
+	}
 
 	private void notifyListeners() {
 		for(Listener l:theseListeners) {
@@ -236,8 +178,11 @@ public class CommandTreeInterpreter {
 	public void addListener(Listener l) {
 		theseListeners.add(l);
 	}
-	public ArrayList<String> getHistory(){
-		return history;
+	
+	public void printExistingCommands() {
+		for (String commandname : userDefinedCommands.keySet()) {
+			CommandNode methodRoot = userDefinedCommands.get(commandname);
+		}
 	}
 	
 	public void iterateUDC(HashMap<String, CommandNode> map) {
@@ -277,6 +222,5 @@ public class CommandTreeInterpreter {
 	public List<Listener> getActiveUDCListener() {
 		return activeUDCListener;
 	}
-
 
 }

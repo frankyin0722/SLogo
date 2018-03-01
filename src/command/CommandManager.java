@@ -8,12 +8,14 @@ import java.util.HashMap;
  *
  */
 public class CommandManager {
+	private static String commandEnd = "Command";
+	private static String commandPackage = "command";
 	
 	public Class<?> createCommand(String commandCategory, String command){
 		Class<?> commandType = null;
 		try {
-			System.out.println("command" + "." + commandCategory + "." + command + "Command");
-			commandType = Class.forName("command" + "." + commandCategory + "." + command + "Command");
+			
+			commandType = Class.forName(commandPackage + "." + commandCategory + "." + command + commandEnd);
 		}
 		catch (ClassNotFoundException e){
 			System.err.println("Error initializing Command Object: Given Command Not Found. Please Enter A Correct Command!");

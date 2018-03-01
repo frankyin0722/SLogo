@@ -11,6 +11,9 @@ public class ForCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<CommandNode> myParameters;
 	private List<CommandNode> mySubCommands;
+	private static int START_INDEX = 1;
+	private static int END_INDEX = 2;
+	private static int INCREMENT_INDEX = 3;
 	
 	public ForCommand(CommandNode parameterParent, CommandNode subCommandsParent, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
@@ -22,9 +25,9 @@ public class ForCommand implements Command{
 		myInterpreter.getVariables().setVariable((double) myParameters.get(0).getNodeValue(), myParameters.get(0).getCommandName());
 		Variable var = myInterpreter.getVariables().getVariable(myParameters.get(0).getCommandName());
 		
-		int start = (int) myParameters.get(1).getNodeValue();
-		int end = (int) myParameters.get(2).getNodeValue();
-		int increment = (int) myParameters.get(3).getNodeValue();
+		int start = (int) myParameters.get(START_INDEX).getNodeValue();
+		int end = (int) myParameters.get(END_INDEX).getNodeValue();
+		int increment = (int) myParameters.get(INCREMENT_INDEX).getNodeValue();
 		
 		for (int i = start; i < end; i = i + increment) {
 			for (int j = 0; j < mySubCommands.size(); j++) {

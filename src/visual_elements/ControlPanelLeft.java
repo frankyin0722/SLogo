@@ -11,7 +11,7 @@ import visual_elements.menu_managers.TurtleMenu;
 import visual_elements.menu_managers.UserCommandsMenu;
 
 public class ControlPanelLeft extends VBox {
-//	private TurtleMenu myTurtleMenu;
+
 	private Turtle myTurtle;
 	private CommandTreeInterpreter interpreter;
 	

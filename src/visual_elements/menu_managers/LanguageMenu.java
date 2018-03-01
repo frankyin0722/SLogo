@@ -51,7 +51,7 @@ public class LanguageMenu extends TitledPane {
 	
 	private void setLanguage(String language) {
 		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-		System.out.print("Current langauge is "+language+"\n");
+		
 	}
 
 	public ResourceBundle getLanguage() {

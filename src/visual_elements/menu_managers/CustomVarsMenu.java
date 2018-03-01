@@ -1,34 +1,73 @@
 package visual_elements.menu_managers;
 
-import buttons.HelpButton;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
+import java.util.ArrayList;
 
-public class CustomVarsMenu extends VBox {
-	private HelpButton myHelpButton;
-	public CustomVarsMenu() {
-		setupHelpMenu();
-	}
+import interpreter.CommandTreeInterpreter;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import observables.Listener;
+import variables.VariableManager;
+
+public class CustomVarsMenu extends TitledPane implements Listener {
 	
-	private void setupHelpMenu() {
-		myHelpButton = new HelpButton();
-		myHelpButton.setOnAction(
-		        new EventHandler<ActionEvent>() {
-		            @Override
-		            public void handle(ActionEvent event) {
-		                Stage stage = new Stage();
-			        	   	WebView web = new WebView();
-			        	   	web.getEngine().load("https://www2.cs.duke.edu/courses/compsci308/spring18/assign/03_slogo/commands.php");
-			        	   	Scene scene = new Scene(web);
-			        	   	stage.setScene(scene);
-			        	   	stage.show();
-		            }
-		      });
-		myHelpButton.setMaxWidth(Double.MAX_VALUE);
-		this.getChildren().add(myHelpButton);
+	public static final String ACTVAR_KEY = "ActiveVariables";
+	private HBox varsDisplay;
+	private VBox keyCol;
+	private VBox valCol;
+	private ListView<String> keyView;
+	private ListView<Object> valView;
+	private CommandTreeInterpreter interpreter;
+
+	
+	public CustomVarsMenu(CommandTreeInterpreter i) {
+		interpreter = i;
+		interpreter.addListener(this);
+		initializeTable();
+		
+		this.setText("Variables");
+		this.setExpanded(false);
 	}
+
+	private void initializeTable() {
+		varsDisplay = new HBox();
+		varsDisplay.setPrefWidth(USE_PREF_SIZE);
+		keyCol = new VBox();
+		valCol = new VBox();	
+		keyView = new ListView<String>();
+		valView = new ListView<Object>();
+		keyCol.getChildren().add(keyView);
+		valCol.getChildren().add(valView);
+		varsDisplay.getChildren().addAll(keyCol, valCol);
+		this.setContent(varsDisplay);
+	}
+
+	private void setupTable(VariableManager myvars) {	
+		ObservableList<String> tempkeys = FXCollections.observableArrayList(new ArrayList<String>(myvars.getNames()));
+		ArrayList<Object> tempvals = new ArrayList<Object>();
+		for(String s : tempkeys) {
+			tempvals.add(myvars.getVar(s).getValue()); 
+		}
+		
+		keyCol.getChildren().remove(keyView);
+		valCol.getChildren().remove(valView);
+		
+		keyView = new ListView<String>(tempkeys);
+		valView = new ListView<Object>(
+				FXCollections.observableArrayList(tempvals));
+		
+		keyCol.getChildren().add(keyView);
+		valCol.getChildren().add(valView);
+	}
+
+	
+	@Override
+	public void update() {
+		VariableManager myvars = interpreter.getVariables();
+		setupTable(myvars);
+	}
+
 }

@@ -20,8 +20,8 @@ public class CollectionsDemo {
  
             @Override
             public void onChanged(ListChangeListener.Change change) {
-                System.out.println("Detected a change! ");
-                System.out.println(observableList.get(0));
+                
+                
             }
         });
  
@@ -36,7 +36,7 @@ public class CollectionsDemo {
         // Nothing will be printed as a result of the next line.
         list.add("item two");
  
-        System.out.println("Size: "+observableList.size());
+        
  
     }
 }
