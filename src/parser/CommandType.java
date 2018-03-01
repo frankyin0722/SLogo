@@ -25,13 +25,9 @@ public class CommandType implements CommandTypes {
 	private TreeGenerator myTreeGenerator;
 	private List<String> userInput;
 	private List<CommandNode> myRoots;
-<<<<<<< HEAD
 	private CommandNode myCurrentRoot;
 	private PatternManager SomePatternManager = new PatternManager();;
-=======
-	private CommandNode myRoot;
-	private PatternManager SomePatternManager = new PatternManager();
->>>>>>> a03818c1630b8d23b4edf5efbcc2d232f6e099ae
+
 	
 	public CommandType (List<String> input, TreeGenerator treeGenerator) {
 		myTreeGenerator = treeGenerator;

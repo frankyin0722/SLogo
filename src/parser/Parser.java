@@ -36,7 +36,6 @@ public class Parser implements TreeGenerator{
 		myInterpreter = interpreter;
 	}
 	
-<<<<<<< HEAD
 	private void parseInput(String input) {
 		List<String> parsebylines = Arrays.asList(input.split("\n"));
 		List<String> commentsprocessedout = new ArrayList<String>();
@@ -52,10 +51,7 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
-	public void generateCommandTree(String input, String language) {
-=======
-	public List<CommandNode> generateCommandTree(String input, ResourceBundle language) {
->>>>>>> a03818c1630b8d23b4edf5efbcc2d232f6e099ae
+	public void generateCommandTree(String input, ResourceBundle language) {
 		try {
 			currentIndex = 0;
 			usedLanguage = language;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package parser;
 
 import java.util.List;
@@ -50,7 +49,6 @@ public class ParserTester {
 	}
 }
 
-=======
 //package parser;
 //
 //import java.util.List;
@@ -101,5 +99,3 @@ public class ParserTester {
 //		}
 //	}
 //}
-//
->>>>>>> a03818c1630b8d23b4edf5efbcc2d232f6e099ae
