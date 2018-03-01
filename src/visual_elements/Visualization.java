@@ -21,6 +21,7 @@ import turtle.Turtle;
  */
 public class Visualization {
 	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
+	public static final String DEFAULT_LANGUAGE = "English";
 	public static final int INITIAL_SCENE_WIDTH = 1000;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
 	
@@ -41,14 +42,12 @@ public class Visualization {
 	}
 	
 	private void initializeAll() {
+		setLanguage(DEFAULT_LANGUAGE);
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		myControlPanelRight = new ControlPanelRight();
-		changeLanguage();
-		
 		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
 	}
 
@@ -77,6 +76,9 @@ public class Visualization {
 //        });
 //	}
 	
+	private void setLanguage(String language) {
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+	}
 	
 	public void changeLanguage() {
 		myResources = myControlPanelRight.getLanguage();
@@ -85,10 +87,6 @@ public class Visualization {
 	public ResourceBundle getLanguage() {
 		changeLanguage();
 		return myResources;
-	}
-	
-	public void updateLanguage() {
-		myResources = myControlPanelRight.getLanguage();
 	}
 	
 	public Scene getScene() {
