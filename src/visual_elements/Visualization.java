@@ -26,7 +26,7 @@ import turtle.Turtle;
 public class Visualization {
 	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
 	public static final String DEFAULT_LANGUAGE = "English";
-	public static final int INITIAL_SCENE_WIDTH = 1000;
+	public static final int INITIAL_SCENE_WIDTH = 1200;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
 	
 	private Scene myScene;

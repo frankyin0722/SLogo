@@ -36,7 +36,7 @@ public class ControlTextInput extends HBox {
 				myCommandWindow,
 				buttonBox());
 		setButtonAction();
-//		this.setAlignment(Pos.BOTTOM_CENTER);
+		this.setAlignment(Pos.BOTTOM_CENTER);
 		//setupKeyInput();
 	}
 
