@@ -25,12 +25,6 @@ public class DrawingWindow extends Pane {
 		setupInitialCanvas();
 		setupTurtle();
 		myTurtle.changeX(myTurtle.getX() + 300);
-//		Command testing = new RepeatCommand(4, new ArrayList<Command>(){{
-//			add(new ForwardCommand(myTurtle,50));
-//			add(new RightCommand(myTurtle,90));}});
-//		
-//		this.getChildren().addAll(testing());
-//		root.getChildren().addAll(this);
 		initializeColorPicker();
 	}
 	
@@ -41,6 +35,7 @@ public class DrawingWindow extends Pane {
 	}
 	
 	private void setupTurtle() {
+
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT,0);
 		this.getChildren().add(myTurtle);

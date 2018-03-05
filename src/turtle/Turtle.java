@@ -29,6 +29,9 @@ public class Turtle extends Group {
 		myImage.setFitHeight(height);
 		getChildren().add(myImage);
 	}
+	public Turtle() {
+		super();
+	}
 	 //returns the turtle's pen
     public Pen getPen() {
     		return pen;

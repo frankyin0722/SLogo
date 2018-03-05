@@ -21,23 +21,25 @@ import variables.VariableManager;
 public class CommandTreeInterpreter {
 	private CommandManager myCommandManager;
 	private VariableManager myVariables;
-	private int currentTurtle;
 	private List<Turtle> myTurtles;
 	private HashMap<String, CommandNode> userDefinedCommands;
 	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
-	private static int defaultTurtle = 0;
+	private static int defaultTurtle = 1;
 	private ArrayList<String> history;
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
+	private List<Integer> activeTurtles;
 
 	
-	public CommandTreeInterpreter(Turtle turtle) {
+	public CommandTreeInterpreter(List<Turtle> turtles) {
 		myCommandManager = new CommandManager();
 		myVariables = new VariableManager();
-		currentTurtle = defaultTurtle;
 		myTurtles = new ArrayList<>();
-		myTurtles.add(turtle);
+		myTurtles.addAll(turtles);
+		activeTurtles = new ArrayList<Integer>() {{
+			add(defaultTurtle);
+		}};
 		userDefinedCommands = new HashMap<String, CommandNode>();
 		userDefinedCommandParameters = new HashMap<String, List<CommandNode>>();
 		history = new ArrayList<String>();
@@ -82,7 +84,7 @@ public class CommandTreeInterpreter {
 				node.setNodeValue(storedMethod.getNodeValue());				
 				break;
 			case "Turtle":
-				Parameters.add(myTurtles.get(currentTurtle));
+				Parameters.add(getCurrentTurtles());
 				createCommand(node, Parameters);
 				break;
 			case "Control":
@@ -140,12 +142,22 @@ public class CommandTreeInterpreter {
 		return myTurtles;
 	}
 	
-	public Turtle getCurrentTurtle() {
-		return myTurtles.get(currentTurtle);
+	public List<Turtle> getCurrentTurtles() {
+		List<Turtle> selectedTurtles = new ArrayList<>();
+		for (int i = 0; i < activeTurtles.size();i ++) {
+			selectedTurtles.add(myTurtles.get(activeTurtles.get(i)-1));
+		}
+		return selectedTurtles;
 	}
 	
-	public void setCurrentTurtle(int index) {
-		currentTurtle = index;
+	public void setCurrentTurtles(int[] indices) {
+		List<Integer> selectedActive = new ArrayList<>();
+		for (int i = 0; i < indices.length; i++) {
+			if (myTurtles.get(indices[i]-1)!=null) {
+				selectedActive.add(indices[i]);
+			}
+		}
+		activeTurtles = selectedActive;
 	}
 	
 	public VariableManager getVariables() {
@@ -186,10 +198,11 @@ public class CommandTreeInterpreter {
 	}
 	
 	public void iterateUDC(HashMap<String, CommandNode> map) {
-		System.out.print("XXXXX at iterateUDC");
+//		System.out.print("XXXXX at iterateUDC");
 		for (String key: map.keySet()) {
 			CommandNode command = map.get(key);
-			addToActiveUDC(key, iterateNode(command));
+			addToActiveUDC(key, "");
+//			addToActiveUDC(key, iterateNode(command));
 		}
 	}
 		
@@ -198,11 +211,11 @@ public class CommandTreeInterpreter {
 	}
 	
 	public void addToActiveUDC(String commandName, String commandAction) {
-		if (activeUDC.get(commandName) == null) {
+//		if (activeUDC.get(commandName) == null) {
 			activeUDC.put(commandName, commandAction);
-			System.out.print("XXXXX addToActive UDC" + commandName + commandAction);
+//			System.out.print("XXXXX addToActive UDC" + commandName + commandAction);
 			notifyUDCListeners();
-		}
+//		}
 	}
 	
 	public void addUDCListener(Listener l) {
