@@ -2,6 +2,7 @@ package visual_elements;
 
 import java.util.ResourceBundle;
 import buttons.ClearButton;
+import buttons.LoadFileButton;
 import buttons.ResetButton;
 import buttons.RunButton;
 import interpreter.CommandTreeInterpreter;
@@ -12,6 +13,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import parser.Parser;
 
 public class ControlTextInput extends HBox {
@@ -23,6 +25,7 @@ public class ControlTextInput extends HBox {
 	private RunButton myRunButton;
 	private ClearButton myClearButton;
 	private ResetButton myResetButton;
+	private LoadFileButton myLoadFileButton;
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle myResources;
 	private Visualization myVisualization;
@@ -45,13 +48,15 @@ public class ControlTextInput extends HBox {
 		buttons.setFillWidth(true);
 		myRunButton = new RunButton();
 		myClearButton = new ClearButton();
+		myLoadFileButton = new LoadFileButton();
 		myResetButton = new ResetButton();
 		addButton(buttons, myRunButton);
 		addButton(buttons, myClearButton);
+		addButton(buttons, myLoadFileButton);
 		addButton(buttons, myResetButton);
 		return buttons;
 	}
-
+	
     private void addButton(VBox buttonBox, Button button) {
         button.setMaxWidth(Double.MAX_VALUE);
         buttonBox.getChildren().add(button);
@@ -60,6 +65,7 @@ public class ControlTextInput extends HBox {
     private void setButtonAction() {
     		myRunButton.setOnAction(e -> inputToParser());
     		myClearButton.setOnAction(e -> resetCommandWindow());
+    		myLoadFileButton.setOnAction(e -> myLoadFileButton.loadFile(myCommandWindow));
     		myResetButton.setOnAction(e -> resetTurtle());
     }
     
@@ -89,6 +95,7 @@ public class ControlTextInput extends HBox {
 	private void resetTurtle() {
 		interpreter.getCurrentTurtle().resetTurtle();
 	}
+	
 	
 //	private void setupKeyInput() {
 //		// How to respond to both keys pressed together:
