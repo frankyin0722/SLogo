@@ -1,17 +1,19 @@
 package turtle;
 
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 
 public class Pen {
 	private Color color;
 	private boolean up;
-	
+	private double width;
 	public Pen() {
-		this(Color.BLACK, false);
+		this(Color.BLACK, false, 1);
 	}
-	public Pen(Color c, boolean up) {
+	public Pen(Color c, boolean up, double width) {
 		color = c;
 		this.up = up;
+		width = 1;
 	}
 	//returns if the pen is up
     public boolean PenUp() {
@@ -32,5 +34,24 @@ public class Pen {
     public Color getColor() {
     		return color;
     }
-
+    
+    //changes the width of the pen
+    public void setWidth(double newWidth) {
+    		width = newWidth;
+    }
+    //make a line
+    public void update(Line line) {
+    		line.setStrokeWidth(width);
+    		line.setStroke(color);
+    }
+    //prints current state
+    @Override
+    public String toString() {
+    		String result = "";
+    		result+="Pen Properties:\n";
+    		result+="Color: " + color + "\n";
+    		result+="Width: " + width + "\n";
+    		result+="Pen Up? " + (up?"Yes":"No") + "\n";
+    		return result;
+    }
 }
