@@ -3,6 +3,7 @@ package visual_elements;
 
 
 
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
@@ -49,7 +50,9 @@ public class Visualization {
 		setLanguage(DEFAULT_LANGUAGE);
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		interpreter = new CommandTreeInterpreter(myDefaultTurtle);
+		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
+			add(myDefaultTurtle);
+		}});
 		myControlPanelRight = new ControlPanelRight(interpreter, myResources);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);

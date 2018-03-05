@@ -14,6 +14,6 @@ public class YCoordinateCommand implements Command {
 	}
 	
 	public double execute(){
-		return myTurtle.getY();
+		return -1*myTurtle.getY();
 	}
 }
