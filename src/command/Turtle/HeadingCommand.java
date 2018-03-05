@@ -9,6 +9,6 @@ public class HeadingCommand implements Command{
 		myTurtle = turtle;
 	}
 	public double execute(){
-		return myTurtle.getDirection();
+		return Math.toDegrees(myTurtle.getDirection());
 	}
 }
