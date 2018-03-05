@@ -15,7 +15,8 @@ public class Turtle extends Group {
 	private double oldY;
 	private double newX;
 	private double newY;
-	public Turtle(Image image, double x, double y, double width, double height) {
+	private double ID;
+	public Turtle(Image image, double x, double y, double width, double height, int ID) {
 		super();
 		zeroX = x- width/2;
 		zeroY = y - height/2;
@@ -28,8 +29,8 @@ public class Turtle extends Group {
 		myImage.setFitHeight(height);
 		getChildren().add(myImage);
 	}
-	public Turtle(Image image) {
-		this(image, 0, 0, 100, 100);
+	public Turtle() {
+		super();
 	}
 	 //returns the turtle's pen
     public Pen getPen() {
@@ -100,5 +101,17 @@ public class Turtle extends Group {
     		pen.setPen(false);
     		update();
     		clearLines();
+    }
+    public String currentState() {
+    		String result = "";
+    		result+="Turtle Properties:\n";
+    		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
+    		result+="Heading: " + Math.toDegrees(direction) + "\n";
+    		result+="ID: " + ID + "\n";
+    		result+="Pen Properties:\n";
+    		result+="Up or Down? " + (pen.PenUp()?"Up":"Down");
+    		result+="Color: " + pen.getColor();
+    		
+    		return result;
     }
 }

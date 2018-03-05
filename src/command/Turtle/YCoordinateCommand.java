@@ -9,6 +9,6 @@ public class YCoordinateCommand implements Command {
 		myTurtle = turtle;
 	}
 	public double execute(){
-		return myTurtle.getY();
+		return -1 * myTurtle.getY();
 	}
 }

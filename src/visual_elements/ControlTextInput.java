@@ -5,19 +5,13 @@ import buttons.ClearButton;
 import buttons.ResetButton;
 import buttons.RunButton;
 import interpreter.CommandTreeInterpreter;
-import javafx.animation.PauseTransition;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import parser.Parser;
 
 public class ControlTextInput extends HBox {
@@ -42,6 +36,7 @@ public class ControlTextInput extends HBox {
 				myCommandWindow,
 				buttonBox());
 		setButtonAction();
+		this.setAlignment(Pos.BOTTOM_CENTER);
 		//setupKeyInput();
 	}
 
