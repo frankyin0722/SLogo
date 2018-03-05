@@ -8,6 +8,7 @@ import turtle.Turtle;
 import visual_elements.menu_managers.HistoryMenu;
 import visual_elements.menu_managers.PenColorMenu;
 import visual_elements.menu_managers.TurtleMenu;
+import visual_elements.menu_managers.UserCommandsMenu;
 
 public class ControlPanelLeft extends VBox {
 
@@ -23,6 +24,7 @@ public class ControlPanelLeft extends VBox {
 	private void initializeMenus(ResourceBundle resources) {
 		this.getChildren().addAll(
 				new HistoryMenu(interpreter, resources), 
+				new UserCommandsMenu(interpreter, resources),
 				new TurtleMenu(resources, myTurtle), 
 				new PenColorMenu(resources, myTurtle.getPen()));
 	}

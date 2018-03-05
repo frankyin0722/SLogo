@@ -63,8 +63,8 @@ public class CommandType implements CommandTypes {
 				return pattern.getKey();
 			}
 		}
-		//Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
-		throw new CommandException("No such command existing in default or user-defined.");
+
+		throw new CommandException("No command in language");
 	}
 	
 	private void makeParametersMapping() {

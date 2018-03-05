@@ -63,13 +63,16 @@ public class Parser implements TreeGenerator{
 			while (getIndex() < userInput.size()) {
 				commandInitializer.initialize(language);
 				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
+				myInterpreter.iterateUDC(myInterpreter.getUserCommands());
 			}
 		} catch (NullPointerException e) {
 			System.err.println("Error in parsing: No Input Command Found! ");
 		} catch (IndexOutOfBoundsException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError4");
+			throw new CommandException(Resources.getString("CommandHeaderError"));
 		} catch (CommandException e) {
-			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError2");
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError3")), "CommandMessageError2");
+			return;
 		}
 		
 	}
