@@ -50,10 +50,10 @@ public class LoadFileButton extends Button {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));
 			while ((line = br.readLine()) != null) {
-				lines.add(line);
-				br.close();
-				return lines;
+				lines.add(line + "\n");
 			}
+			br.close();
+			return lines;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.err.print("Could not read file");
