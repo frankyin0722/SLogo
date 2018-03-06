@@ -95,6 +95,10 @@ public class CommandTreeInterpreter {
 					}	
 				}
 				CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
+				if (storedMethod==null) {
+					Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError5");
+					throw new CommandException(Resources.getString("CommandHeaderError"));
+				}
 				interpretTree(storedMethod);
 				node.setNodeValue(storedMethod.getNodeValue());				
 				break;
