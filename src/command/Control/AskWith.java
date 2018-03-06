@@ -3,10 +3,11 @@ package command.Control;
 import java.util.ArrayList;
 import java.util.List;
 
+import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 
-public class AskWith {
+public class AskWith implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<Integer> myTemporaryActiveTurtleIndices;
 	private CommandNode myCondition;

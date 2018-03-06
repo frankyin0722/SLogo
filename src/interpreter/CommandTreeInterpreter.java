@@ -55,7 +55,7 @@ public class CommandTreeInterpreter {
 		if (myRoot.getNodeChildren().size()!=0) {
 			for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
 				if (myRoot.getCommandType().equals("Control")) {
-					if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith")) {
+					if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith") && !myRoot.getCommandName().equals("Define")) {
 						interpretTree(myRoot.getNodeChildren().get(i));
 					}
 					Parameters.add(myRoot.getNodeChildren().get(i));

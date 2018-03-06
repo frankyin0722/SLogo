@@ -3,11 +3,12 @@ package command.Control;
 import java.util.ArrayList;
 import java.util.List;
 
+import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import turtle.Turtle;
 
-public class Tell {
+public class Tell implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<CommandNode> myActiveTurtles;
 	
