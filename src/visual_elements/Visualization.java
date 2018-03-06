@@ -58,6 +58,7 @@ public class Visualization extends BorderPane {
 		this.setBottom(myControlTextInput);
 		this.setRight(myControlPanelRight);
 		this.setLeft(myControlPanelLeft);
+		this.setWidth(Double.MAX_VALUE);
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
 	}
 	

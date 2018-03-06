@@ -13,6 +13,7 @@ public class TabButton extends Button {
 	
 	public TabButton(TabPane currentView) {
 		myTabs = currentView;
+		this.setText("+");
 		initializeAction();
 	}
 
@@ -21,13 +22,16 @@ public class TabButton extends Button {
 		this.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				Tab newTab = new Tab(
-						"Canvas "+(myTabs.getTabs().size()+1));
-				newTab.setContent(new Visualization());
-				myTabs.getTabs().add(newTab);
-				myTabs.getSelectionModel().select(newTab);
+				createTab();
 			}
 		});
 	}
 	
+	public void createTab() {
+		Tab newTab = new Tab(
+				"Canvas "+(myTabs.getTabs().size()+1));
+		newTab.setContent(new Visualization());
+		myTabs.getTabs().add(newTab);
+		myTabs.getSelectionModel().select(newTab);
+	}
 }

@@ -10,7 +10,7 @@ public class TabView {
 	private TabPane tabs;
 	private AnchorPane myAnchor;
 	private Scene myScene;
-	public static final int INITIAL_SCENE_WIDTH = 1200;
+	public static final int INITIAL_SCENE_WIDTH = 1250;
 	public static final int INITIAL_SCENE_HEIGHT = 700;
 	
 	public TabView() {
@@ -21,7 +21,8 @@ public class TabView {
 		tabs = new TabPane();
 		myAnchor = new AnchorPane();
 		TabButton newTab = new TabButton(tabs);
-		
+		AnchorPane.setRightAnchor(newTab, 10.0);
+		newTab.createTab();
 		myAnchor.getChildren().addAll(tabs, newTab);
 		
 		myScene = new Scene(myAnchor,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
