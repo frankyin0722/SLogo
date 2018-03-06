@@ -55,7 +55,7 @@ public class CommandType implements CommandTypes {
 	}
 	
 	private String getCommandFromLanguageBundle(String input) {
-		if (myTreeGenerator.getInterpreter().getUserCommands().containsKey(input)) {
+		if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(input)) {
 			return input;
 		}
 		for (Entry<String, Pattern> pattern : languagePatternMapping) {
@@ -93,7 +93,7 @@ public class CommandType implements CommandTypes {
 			return parametersMapping.get(key)[categoryIndex];
 		} catch (NullPointerException e){
 			try {
-				if (myTreeGenerator.getInterpreter().getUserCommands().containsKey(key)) {
+				if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(key)) {
 					return "UserDefined";
 				}
 				return null;
@@ -106,7 +106,7 @@ public class CommandType implements CommandTypes {
 	
 	@Override
 	public void recurse(CommandNode node) {
-		if (node.getCommandName().equals("MakeUserInstruction")) {
+		if (node.getCommandName().equals("MakeUserInstruction") || node.getCommandName().equals("Define")) {
 			CommandNode child = new CommandNode("UserDefined", userInput.get(myTreeGenerator.getIndex()), null, 0); 
 			if (checkUserDefinedCommandValidity(userInput.get(myTreeGenerator.getIndex()))) {
 				 
