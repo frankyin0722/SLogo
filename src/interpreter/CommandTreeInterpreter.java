@@ -100,6 +100,7 @@ public class CommandTreeInterpreter {
 					throw new CommandException(Resources.getString("CommandHeaderError"));
 				}
 				interpretTree(storedMethod);
+				System.out.println("user defined command value: " + storedMethod.getNodeValue());
 				node.setNodeValue(storedMethod.getNodeValue());				
 				break;
 			case "Turtle":
@@ -130,9 +131,12 @@ public class CommandTreeInterpreter {
 				break;
 			case "Bracket":
 				if (node.getNodeChildren().size()!=0) {
+					System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 					node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 				}
-				node.setNodeValue(0.0);
+				else {
+					node.setNodeValue(0.0);
+				}
 				break;
 			default: 
 				createCommand(node, Parameters);
@@ -161,7 +165,7 @@ public class CommandTreeInterpreter {
 				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
 			}
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
-			System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+			System.err.println("Error executing commands1: " + thisCommand.getClass().getName() + ".execute()");
 		} 
 		
 	}
