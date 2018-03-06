@@ -19,6 +19,14 @@ public class CommandWindow extends VBox {
 		this.getChildren().add(myTextArea);
 	}
 	
+	public void setText(String text) {
+		myTextArea.setText(text);
+	}
+	
+	public void addText(String text) {
+		myTextArea.appendText(text);
+	}
+	
 	public String getText() {
 		return myTextArea.getText();
 	}
