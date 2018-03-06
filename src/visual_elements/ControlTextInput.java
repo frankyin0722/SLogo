@@ -51,10 +51,12 @@ public class ControlTextInput extends HBox {
 		myRunButton = new RunButton();
 		myClearButton = new ClearButton();
 		myLoadFileButton = new LoadFileButton();
+		mySaveFileButton = new SaveFileButton();
 		myResetButton = new ResetButton();
 		addButton(buttons, myRunButton);
 		addButton(buttons, myClearButton);
 		addButton(buttons, myLoadFileButton);
+		addButton(buttons, mySaveFileButton);
 		addButton(buttons, myResetButton);
 		return buttons;
 	}
@@ -68,7 +70,7 @@ public class ControlTextInput extends HBox {
     		myRunButton.setOnAction(e -> inputToParser());
     		myClearButton.setOnAction(e -> resetCommandWindow());
     		myLoadFileButton.setOnAction(e -> myLoadFileButton.loadFile(myCommandWindow));
-    		//mySaveFileButton.setOnAction(e -> mySaveFileButton.save(interpreter));
+    		mySaveFileButton.setOnAction(e -> mySaveFileButton.save(interpreter));
     		myResetButton.setOnAction(e -> resetTurtle());
     }
     
