@@ -68,7 +68,7 @@ public class ControlTextInput extends HBox {
     		myRunButton.setOnAction(e -> inputToParser());
     		myClearButton.setOnAction(e -> resetCommandWindow());
     		myLoadFileButton.setOnAction(e -> myLoadFileButton.loadFile(myCommandWindow));
-    		mySaveFileButton.setOnAction(e -> mySaveFileButton.save(interpreter));
+    		//mySaveFileButton.setOnAction(e -> mySaveFileButton.save(interpreter));
     		myResetButton.setOnAction(e -> resetTurtle());
     }
     

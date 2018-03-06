@@ -8,7 +8,7 @@ public class Pen {
 	private boolean up;
 	private double width;
 	public Pen() {
-		this(Color.BLACK, false, 1);
+		this(Color.BLACK, false, 2);
 	}
 	public Pen(Color c, boolean up, double width) {
 		color = c;
@@ -40,9 +40,10 @@ public class Pen {
     		width = newWidth;
     }
     //make a line
-    public void update(Line line) {
+    public Line update(Line line) {
     		line.setStrokeWidth(width);
     		line.setStroke(color);
+    		return line;
     }
     //prints current state
     @Override
