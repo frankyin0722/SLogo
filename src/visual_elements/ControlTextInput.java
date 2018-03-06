@@ -96,7 +96,7 @@ public class ControlTextInput extends HBox {
 	}
 	
 	private void resetTurtle() {
-		interpreter.getCurrentTurtles().stream().forEach(t -> t.resetTurtle());
+		interpreter.getCurrentAvailableTurtles().stream().forEach(t -> t.resetTurtle());
 	}
 	
 	
