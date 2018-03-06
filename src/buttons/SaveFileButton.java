@@ -1,18 +1,40 @@
 package buttons;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import alerts.Alerts;
 import interpreter.CommandTreeInterpreter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import variables.VariableManager;
+import visual_elements.CommandWindow;
 
 public class SaveFileButton extends Button {
+	private Document myDocument;
 	public SaveFileButton() {
 		this.setText("Save");
 	}
+	
 	public void save(CommandTreeInterpreter interpreter) {
 		this.setOnAction(
 				new EventHandler<ActionEvent>() {
@@ -21,9 +43,70 @@ public class SaveFileButton extends Button {
 						FileChooser fc = new FileChooser();
 						Stage stage = new Stage();
 						fc.setInitialDirectory(new File("./data/examples"));
-						fc.setTitle("Open Resource File");
+						fc.setTitle("Save File");
 						File file = fc.showSaveDialog(stage);
+						
+						try {
+							saveXMLFile(file.getCanonicalPath(), interpreter);
+						} catch (Exception e) {
+							Alerts.createAlert(null, "change");
+						}
 					}
 			});
 	}
+	private void makeDoc(CommandTreeInterpreter interpreter) throws ParserConfigurationException {
+		DocumentBuilderFactory docFact = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder = docFact.newDocumentBuilder();
+		myDocument = docBuilder.newDocument();
+		List<String> history = interpreter.getHistory();
+		
+		//recordVariables(interpreter);
+		//recordCommands(interpreter);
+		
+	}
+	 /**
+     * Helper method to add an element to the root for creating the XML file
+     * @param elementName
+     * @param elementData
+     * @param root
+     */
+	private void addElement(String elementName, String elementData, Element root) {
+        Element elem = myDocument.createElement(elementName);
+        elem.appendChild(myDocument.createTextNode(elementData));
+        root.appendChild(elem);
+    }
+//	private void recordVariables(CommandTreeInterpreter interpreter) {
+//		Element dataElement = myDocument.createElement("data");
+//	    myDocument.appendChild(dataElement);
+//		VariableManager manager = interpreter.getVariables();
+//		for(String name: manager.getNames()) {
+//			addElement("Variable", name +"-" +  String.valueOf((double)manager.getVariable(name).getValue()), dataElement);
+//		}
+//	}
+	 /**
+     * Method to save the XML file to the correct filePath, and then notify the user of its success
+     * with a javafx Alert
+     * modified from cell society 
+     * @param filePath
+     * @throws TransformerException
+     * @throws IOException
+     */
+    public void saveXMLFile(String filePath, CommandTreeInterpreter interpreter) throws TransformerException, IOException {
+        TransformerFactory tfact = TransformerFactory.newInstance();
+        Transformer transformer = tfact.newTransformer();
+        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        StringWriter stringWriter = new StringWriter();
+        StreamResult result = new StreamResult(stringWriter);
+        DOMSource source = new DOMSource(myDocument);
+        transformer.transform(source, result);
+        List<String> history = interpreter.getHistory();
+        for(String str: history) {
+        		stringWriter.write(str+"\n");
+        }
+        FileWriter fileWriter = new FileWriter(filePath);
+        fileWriter.write(stringWriter.toString());
+        fileWriter.close();
+        Alerts.XMLCreated(filePath);
+    }
 }
