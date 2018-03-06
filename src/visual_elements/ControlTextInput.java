@@ -92,11 +92,10 @@ public class ControlTextInput extends HBox {
 		myCommandWindow.clearText();
 	}
 	
-	/*private void resetTurtle() {
-		interpreter.getCurrentTurtle().resetTurtle();
-	}*/
-	
-	
+	private void resetTurtle() {
+		interpreter.getCurrentActiveTurtles().stream().forEach(x -> x.resetTurtle());
+	}
+
 //	private void setupKeyInput() {
 //		// How to respond to both keys pressed together:
 //		PauseTransition pause = new PauseTransition(Duration.seconds(0.15));

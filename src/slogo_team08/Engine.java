@@ -3,21 +3,21 @@ package slogo_team08;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import visual_elements.Visualization;
+import visual_elements.TabView;
 public class Engine {
 
 	public Stage myStage;
 	public Group myRoot;
 	private Scene myScene;
-	private Visualization myVis;
+	private TabView slogoView;
 	
 
 	
 	public void initializeSimulation(Stage primaryStage) {
 		myStage = primaryStage;
-		myVis = new Visualization();
-		myScene = myVis.getScene();
-		
+
+		slogoView = new TabView();
+		myScene = slogoView.getScene();
 		myStage.setScene(myScene);
 //		myStage.setMaximized(true);
 //		myStage.setFullScreen(true);
