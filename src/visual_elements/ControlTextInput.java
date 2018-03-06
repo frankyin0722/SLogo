@@ -5,6 +5,7 @@ import buttons.ClearButton;
 import buttons.LoadFileButton;
 import buttons.ResetButton;
 import buttons.RunButton;
+import buttons.SaveFileButton;
 import interpreter.CommandTreeInterpreter;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -26,6 +27,7 @@ public class ControlTextInput extends HBox {
 	private ClearButton myClearButton;
 	private ResetButton myResetButton;
 	private LoadFileButton myLoadFileButton;
+	private SaveFileButton mySaveFileButton;
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle myResources;
 	private Visualization myVisualization;
@@ -66,7 +68,8 @@ public class ControlTextInput extends HBox {
     		myRunButton.setOnAction(e -> inputToParser());
     		myClearButton.setOnAction(e -> resetCommandWindow());
     		myLoadFileButton.setOnAction(e -> myLoadFileButton.loadFile(myCommandWindow));
-    		//myResetButton.setOnAction(e -> resetTurtle());
+    		//mySaveFileButton.setOnAction(e -> mySaveFileButton.save(interpreter));
+    		myResetButton.setOnAction(e -> resetTurtle());
     }
     
 	private void inputToParser() {
@@ -93,7 +96,8 @@ public class ControlTextInput extends HBox {
 	}
 	
 	private void resetTurtle() {
-		interpreter.getCurrentActiveTurtles().stream().forEach(x -> x.resetTurtle());
+
+		interpreter.getCurrentAvailableTurtles().stream().forEach(t -> t.resetTurtle());
 	}
 
 //	private void setupKeyInput() {
