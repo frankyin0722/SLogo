@@ -9,37 +9,23 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 
-public class MakeUserInstructionCommand implements Command {
+public class DefineCommand implements Command{
 	private String myCommandName;
 	private List<CommandNode> myVariables;
-	private List<CommandNode> mySubCommands;
 	private CommandTreeInterpreter myInterpreter;
 	private boolean successfullyCreated;
-	private static String BracketType = "Bracket";
 	
-	public MakeUserInstructionCommand (CommandNode commandName, CommandNode variables, CommandNode subCommands, CommandTreeInterpreter tree) {
+	public DefineCommand(CommandNode commandName, CommandNode variables, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myVariables = variables.getNodeChildren();
-		mySubCommands = subCommands.getNodeChildren();
 		myCommandName = commandName.getCommandName();
 		successfullyCreated = (commandName.getNodeValue()==1 ? true : false);
 	}
 	
-	@Override
 	public double execute() {
 		if (!successfullyCreated) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError2")), "CommandMessageError3");
 			return 0;
-		}
-		CommandNode methodRoot = new CommandNode(BracketType, myCommandName, null, 0);
-		for (CommandNode subcommand : mySubCommands) {
-			methodRoot.addChild(subcommand);
-		}
-		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
-			myInterpreter.getUserCommands().replace(myCommandName, methodRoot);
-		}
-		else {
-			myInterpreter.getUserCommands().put(myCommandName, methodRoot);
 		}
 		if (myInterpreter.getUserCommandParameters().containsKey(myCommandName)) {
 			myInterpreter.getUserCommandParameters().replace(myCommandName, myVariables);
@@ -47,7 +33,10 @@ public class MakeUserInstructionCommand implements Command {
 		else {
 			myInterpreter.getUserCommandParameters().put(myCommandName, myVariables);
 		}
+		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
+			myInterpreter.getUserCommands().remove(myCommandName); // remove the old user-defined command if it exists
+		}
+		System.out.println("successfully define:" + myInterpreter.getUserCommandParameters().get(myCommandName).size());
 		return 1.0;
 	}
-	
 }

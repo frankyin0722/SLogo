@@ -66,7 +66,7 @@ public class ControlTextInput extends HBox {
     		myRunButton.setOnAction(e -> inputToParser());
     		myClearButton.setOnAction(e -> resetCommandWindow());
     		myLoadFileButton.setOnAction(e -> myLoadFileButton.loadFile(myCommandWindow));
-    		myResetButton.setOnAction(e -> resetTurtle());
+    		//myResetButton.setOnAction(e -> resetTurtle());
     }
     
 	private void inputToParser() {
@@ -92,9 +92,9 @@ public class ControlTextInput extends HBox {
 		myCommandWindow.clearText();
 	}
 	
-	private void resetTurtle() {
+	/*private void resetTurtle() {
 		interpreter.getCurrentTurtle().resetTurtle();
-	}
+	}*/
 	
 	
 //	private void setupKeyInput() {
