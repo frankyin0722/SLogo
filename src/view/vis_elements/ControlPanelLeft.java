@@ -1,14 +1,14 @@
-package visual_elements;
+package view.vis_elements;
 
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
 import turtle.Turtle;
-import visual_elements.menu_managers.HistoryMenu;
-import visual_elements.menu_managers.PenColorMenu;
-import visual_elements.menu_managers.TurtleMenu;
-import visual_elements.menu_managers.UserCommandsMenu;
+import view.menus.HistoryMenu;
+import view.menus.PenColorMenu;
+import view.menus.TurtleMenu;
+import view.menus.UserCommandsMenu;
 
 public class ControlPanelLeft extends VBox {
 

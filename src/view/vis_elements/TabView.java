@@ -1,4 +1,4 @@
-package visual_elements;
+package view.vis_elements;
 
 import buttons.TabButton;
 import javafx.scene.Scene;
@@ -11,7 +11,7 @@ public class TabView {
 	private AnchorPane myAnchor;
 	private Scene myScene;
 	public static final int INITIAL_SCENE_WIDTH = 1250;
-	public static final int INITIAL_SCENE_HEIGHT = 700;
+	public static final int INITIAL_SCENE_HEIGHT = 725;
 	
 	public TabView() {
 		initializePanes();
@@ -24,7 +24,6 @@ public class TabView {
 		AnchorPane.setRightAnchor(newTab, 10.0);
 		newTab.createTab();
 		myAnchor.getChildren().addAll(tabs, newTab);
-		
 		myScene = new Scene(myAnchor,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 	}
 

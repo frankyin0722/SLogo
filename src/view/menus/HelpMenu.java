@@ -1,4 +1,4 @@
-package visual_elements.menu_managers;
+package view.menus;
 
 import buttons.HelpButton;
 import javafx.scene.control.TitledPane;

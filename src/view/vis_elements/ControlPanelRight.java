@@ -1,12 +1,12 @@
-package visual_elements;
+package view.vis_elements;
 
 import java.util.ResourceBundle;
-
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
-import visual_elements.menu_managers.CustomVarsMenu;
-import visual_elements.menu_managers.HelpMenu;
-import visual_elements.menu_managers.LanguageMenu;
+import view.canvas.DrawingWindow;
+import view.menus.CustomVarsMenu;
+import view.menus.HelpMenu;
+import view.menus.LanguageMenu;
 import visual_elements.menu_managers.TurtleSelectionMenu;
 
 public class ControlPanelRight extends VBox {

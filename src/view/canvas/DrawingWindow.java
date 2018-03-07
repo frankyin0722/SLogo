@@ -1,4 +1,4 @@
-package visual_elements;
+package view.canvas;
 
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import turtle.Turtle;
 import observables.Listener;
 
 public class DrawingWindow extends Pane {
-	public static final double INITIAL_WIDTH = 700;
+	public static final double INITIAL_WIDTH = 695;
 	public static final double INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;

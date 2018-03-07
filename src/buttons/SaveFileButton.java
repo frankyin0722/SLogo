@@ -27,7 +27,7 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import variables.VariableManager;
-import visual_elements.CommandWindow;
+import view.vis_elements.CommandWindow;
 
 public class SaveFileButton extends Button {
 	private Document myDocument;
