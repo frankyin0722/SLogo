@@ -3,6 +3,7 @@ package visual_elements.menu_managers;
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
