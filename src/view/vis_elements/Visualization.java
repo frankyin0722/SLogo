@@ -1,4 +1,4 @@
-package view;
+package view.vis_elements;
 
 
 
@@ -13,6 +13,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
+import view.canvas.ScrollingDrawingWindow;
 
 /**
  * @author elizabethshulman
