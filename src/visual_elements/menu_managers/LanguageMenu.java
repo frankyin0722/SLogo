@@ -1,10 +1,13 @@
 package visual_elements.menu_managers;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.VBox;
 
 public class LanguageMenu extends TitledPane {
 	public static final String LANGUAGE_MENU_KEY = "LanguageMenu";
@@ -26,19 +29,31 @@ public class LanguageMenu extends TitledPane {
 	}
 	
 	private void setupButtonBox() {
-		VBox buttons = new VBox();
-		buttons.setFillWidth(true);
-		setupAllButtons(buttons);
-		this.setContent(buttons);
+//		VBox buttons = new VBox();
+		ListView<Button> buttonDisplay = new ListView<Button>();
+		buttonDisplay.setItems(FXCollections.observableArrayList(setupAllButtons()));
+		this.setContent(buttonDisplay);
 	}
 	
-	private void setupAllButtons(VBox vbox) {
+//	private void setupAllButtons(VBox vbox) {
+//		File languageFile = new File(DEFAULT_RESOURCE_FOLDER);
+//		for (File f: languageFile.listFiles()) {
+//			if (!f.getName().equals("Syntax.properties")) {
+//				vbox.getChildren().add(setupButton(f.getName().split(".properties")[0]));
+//			}
+//		}
+//	}
+	
+	
+	private ArrayList<Button> setupAllButtons() {
+		ArrayList<Button> buttonList = new ArrayList<Button>();
 		File languageFile = new File(DEFAULT_RESOURCE_FOLDER);
 		for (File f: languageFile.listFiles()) {
 			if (!f.getName().equals("Syntax.properties")) {
-				vbox.getChildren().add(setupButton(f.getName().split(".properties")[0]));
+				buttonList.add(setupButton(f.getName().split(".properties")[0]));
 			}
 		}
+		return buttonList;
 	}
 	
 	private Button setupButton(String language) {

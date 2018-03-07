@@ -8,8 +8,6 @@ import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -24,14 +22,10 @@ import turtle.Turtle;
  * Initializes and arranges each of the elements within the scene
  * 
  */
-public class Visualization {
+public class Visualization extends BorderPane {
 	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
 	public static final String DEFAULT_LANGUAGE = "English";
-	public static final int INITIAL_SCENE_WIDTH = 1200;
-	public static final int INITIAL_SCENE_HEIGHT = 700;
 	
-	private Scene myScene;
-	private BorderPane myPane;
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
 	private DrawingWindow myDrawingWindow;
@@ -42,7 +36,6 @@ public class Visualization {
 	private Turtle myDefaultTurtle;
 	
 	public Visualization() {
-		myPane = new BorderPane();
 		initializeAll();
 		initializeLayout();
 	}
@@ -61,15 +54,14 @@ public class Visualization {
 	}
 	
 	private void initializeLayout() {		
-		myPane.setPadding(new Insets(20,20,20,20));
-		myPane.setTop(new InfoTop());
-		myPane.setCenter(myScrollingDrawingWindow);
-		myPane.setBottom(myControlTextInput);
-		myPane.setRight(myControlPanelRight);
-		myPane.setLeft(myControlPanelLeft);
-		myPane.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
-		
-		myScene = new Scene(myPane,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
+		this.setPadding(new Insets(20,20,20,20));
+//		this.setTop(new InfoTop());
+		this.setCenter(myScrollingDrawingWindow);
+		this.setBottom(myControlTextInput);
+		this.setRight(myControlPanelRight);
+		this.setLeft(myControlPanelLeft);
+		this.setWidth(Double.MAX_VALUE);
+		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
 	}
 	
 	private void setLanguage(String language) {
@@ -84,9 +76,5 @@ public class Visualization {
 		changeLanguage();
 		return myResources;
 	}
-	
-	public Scene getScene() {
-		return myScene;
-	}
-	
+
 }

@@ -40,10 +40,6 @@ public class VariableManager {
     public Set<String> getNames(){
     		return variables.keySet();
     }
-    
-    public Variable getVar(String key) {
-    		return variables.get(key);
-    }
 
     // this method returns a class type that is used to create variables, no need for now
 //    public Class<?> createVariable(){

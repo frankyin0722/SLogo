@@ -14,7 +14,7 @@ import turtle.Turtle;
 import observables.Listener;
 
 public class DrawingWindow extends Pane {
-	public static final double INITIAL_WIDTH = 1000;
+	public static final double INITIAL_WIDTH = 700;
 	public static final double INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;
@@ -41,7 +41,7 @@ public class DrawingWindow extends Pane {
 	
 	private void setupTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
-		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT,0);
+		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT);
 		this.getChildren().add(myTurtle);
 	}
 	

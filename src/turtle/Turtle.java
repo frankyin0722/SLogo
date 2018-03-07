@@ -1,8 +1,12 @@
 package turtle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 public class Turtle extends Group {
@@ -15,8 +19,14 @@ public class Turtle extends Group {
 	private double oldY;
 	private double newX;
 	private double newY;
-	private double ID;
-	public Turtle(Image image, double x, double y, double width, double height, int ID) {
+	private List<Color> colors = new ArrayList<Color>() {{
+		add(Color.GREEN);
+		add(Color.GREY);
+	}};
+	private List<Image> images = new ArrayList<Image>();
+	private int shapeIndex = 0;
+	private int colorIndex = 0;
+	public Turtle(Image image, double x, double y, double width, double height) {
 		super();
 		zeroX = x- width/2;
 		zeroY = y - height/2;
@@ -43,7 +53,7 @@ public class Turtle extends Group {
     		myImage.setY(newY + zeroY);
     		if(!pen.PenUp()) {
     			Line line = new Line(oldX + zeroX, oldY + zeroY, myImage.getX() + (myImage.getFitWidth() / 2), myImage.getY()+ (myImage.getFitHeight() / 2));
-    			line.setStroke(pen.getColor());
+    			pen.update(line);
     			getChildren().add(line);
     		}
     		oldX = newX;
@@ -102,16 +112,32 @@ public class Turtle extends Group {
     		update();
     		clearLines();
     }
-    public String currentState() {
+    @Override
+    public String toString() {
     		String result = "";
     		result+="Turtle Properties:\n";
     		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
     		result+="Heading: " + Math.toDegrees(direction) + "\n";
-    		result+="ID: " + ID + "\n";
-    		result+="Pen Properties:\n";
-    		result+="Up or Down? " + (pen.PenUp()?"Up":"Down");
-    		result+="Color: " + pen.getColor();
-    		
+    		result+= pen.toString();
     		return result;
     }
+    
+    public double getShapeIndex() {
+    		return shapeIndex;
+    }
+    
+    public double getColorIndex() {
+    		return colorIndex;
+    }
+    public void setShape(int index) {
+    		shapeIndex = index;
+    		myImage.setImage(images.get(index));
+    		//throw error if out of bounds
+    }
+    public void setColorByIndex(int index) {
+    		colorIndex = index;
+    		pen.setColor(colors.get(index));
+    		//throw error if oob
+    }
+    
 }
