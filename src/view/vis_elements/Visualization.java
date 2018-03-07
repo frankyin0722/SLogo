@@ -1,4 +1,4 @@
-package view;
+package view.vis_elements;
 
 
 
@@ -13,6 +13,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
+import view.canvas.ScrollingDrawingWindow;
 
 /**
  * @author elizabethshulman
@@ -59,6 +60,7 @@ public class Visualization extends BorderPane {
 		this.setRight(myControlPanelRight);
 		this.setLeft(myControlPanelLeft);
 		this.setWidth(Double.MAX_VALUE);
+		this.setHeight(Double.MAX_VALUE);
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
 	}
 	

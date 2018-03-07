@@ -1,4 +1,4 @@
-package menus;
+package view.menus;
 
 import buttons.HelpButton;
 import javafx.scene.control.TitledPane;

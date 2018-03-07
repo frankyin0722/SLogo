@@ -1,4 +1,4 @@
-package menus;
+package view.menus;
 
 import javafx.scene.control.TitledPane;
 
