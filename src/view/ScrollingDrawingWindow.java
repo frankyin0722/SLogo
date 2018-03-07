@@ -18,8 +18,11 @@ public class ScrollingDrawingWindow extends ScrollPane {
 		this.setContent(myDrawingWindow);
 		this.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		this.setHbarPolicy(ScrollBarPolicy.ALWAYS);
+
 		myDrawingWindow.setPrefSize(5000,5000);
 		myDrawingWindow.setManaged(false);
+		this.setHvalue(0.5);
+		this.setVvalue(0.5);
 		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
 	}
 	
