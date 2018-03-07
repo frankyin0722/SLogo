@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import javafx.scene.image.Image;
+import view.canvas.DrawingWindow;
 
 public class TurtleController {
 	private List<Turtle> turtles;
@@ -12,24 +13,31 @@ public class TurtleController {
 	private double myHeight;
 	private double turtleWidth;
 	private double turtleHeight;
+	private DrawingWindow turtlePane;
 	private Image image;
 	private List<Boolean> active;
 	
-	public TurtleController(Image image, double x, double y, double width, double height) {
+	public TurtleController(Image image, double x, double y, double width, double height, DrawingWindow internalCanvas) {
 		myWidth = width;
 		myHeight = height;
 		turtleWidth = x;
 		turtleHeight = y;
-		turtles.add(new Turtle(image, x, y, width, height));
-		active.add(true);
+		turtles = new ArrayList<Turtle>();
+		active = new ArrayList<Boolean>();
+		turtlePane = internalCanvas;
+		turtlePane.getChildren().addAll(turtles);
+		makeNewTurtles(1);
 	}
 	
 	// makes num new turtles
 	public void makeNewTurtles(int num) {
 		IntStream.range(0,num)
 			.forEach( i -> {
-				turtles.add(new Turtle(image, turtleWidth, turtleHeight, myWidth, myHeight));
+				Turtle newTurtle = new Turtle(image, turtleWidth, turtleHeight, myWidth, myHeight);
+				turtles.add(newTurtle);
+				turtlePane.getChildren().add(newTurtle);
 				active.add(true);
+				System.out.println("turtlemade");
 			});
 	}
 	
