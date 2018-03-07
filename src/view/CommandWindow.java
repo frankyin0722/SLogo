@@ -15,7 +15,7 @@ public class CommandWindow extends VBox {
 	private void setupTextArea() {
 		myTextArea = new TextArea();
 		myTextArea.setPromptText("Enter commands");
-		myTextArea.setPrefRowCount(5);
+		myTextArea.setPrefRowCount(7);
 		this.getChildren().add(myTextArea);
 	}
 	
