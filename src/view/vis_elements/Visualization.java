@@ -57,6 +57,8 @@ public class Visualization extends BorderPane implements IVisualConstants {
 				myScrollingDrawingWindow.getInternalCanvas());
 		myDefaultTurtle = myTurtles.getTurtle(0);
 		
+		this.getChildren().add(myTurtles);
+		
 		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
 			add(myDefaultTurtle);
 		}});
@@ -76,7 +78,7 @@ public class Visualization extends BorderPane implements IVisualConstants {
 		this.setLeft(myControlPanelLeft);
 		this.setWidth(Double.MAX_VALUE);
 		this.setHeight(Double.MAX_VALUE);
-		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
+		this.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 	}
 	
 	private void setLanguage(String language) {

@@ -20,8 +20,8 @@ public class DrawingWindow extends Pane implements IVisualConstants {
 
 	public DrawingWindow() {
 		setupInitialCanvas();
-//		setupTurtle();
-//		myTurtle.changeX(myTurtle.getX() + 300);
+		setupTurtle();
+		myTurtle.changeX(myTurtle.getX() + 300);
 		initializeColorPicker();
 	}
 	

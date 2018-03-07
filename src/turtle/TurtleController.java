@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import view.canvas.DrawingWindow;
 
-public class TurtleController {
+public class TurtleController extends Group {
 	private List<Turtle> turtles;
 	private double myWidth;
 	private double myHeight;
@@ -25,7 +26,6 @@ public class TurtleController {
 		turtles = new ArrayList<Turtle>();
 		active = new ArrayList<Boolean>();
 		turtlePane = internalCanvas;
-		turtlePane.getChildren().addAll(turtles);
 		makeNewTurtles(1);
 	}
 	
@@ -35,8 +35,8 @@ public class TurtleController {
 			.forEach( i -> {
 				Turtle newTurtle = new Turtle(image, turtleWidth, turtleHeight, myWidth, myHeight);
 				turtles.add(newTurtle);
-				turtlePane.getChildren().add(newTurtle);
 				active.add(true);
+				turtlePane.getChildren().add(newTurtle);
 				System.out.println("turtlemade");
 			});
 	}

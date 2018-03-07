@@ -4,8 +4,8 @@ import javafx.scene.paint.Color;
 
 public interface IVisualConstants {
 
-	public static final int INITIAL_SCENE_WIDTH = 1250;
-	public static final int INITIAL_SCENE_HEIGHT = 725;
+	public static final int INITIAL_SCENE_WIDTH = 1235;
+	public static final int INITIAL_SCENE_HEIGHT = 710;
 	public static final double EXTERNAL_CANVAS_WIDTH = 695;
 	public static final double EXTERNAL_CANVAS_HEIGHT = 500;
 	public static final double INTERNAL_CANVAS_WIDTH = 5000;
