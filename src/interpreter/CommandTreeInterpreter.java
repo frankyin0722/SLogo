@@ -94,14 +94,19 @@ public class CommandTreeInterpreter {
 						myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
 					}	
 				}
-				CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
+				List<Object> paramForUserDefinedCommand = new ArrayList<Object>();
+				String myDefinedCommandName = node.getCommandName();
+				paramForUserDefinedCommand.add(myDefinedCommandName);
+				paramForUserDefinedCommand.add(this);
+				createCommand(node,paramForUserDefinedCommand);
+				/*CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
 				if (storedMethod==null) {
 					Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError5");
 					throw new CommandException(Resources.getString("CommandHeaderError"));
 				}
 				interpretTree(storedMethod);
 				System.out.println("user defined command value: " + storedMethod.getNodeValue());
-				node.setNodeValue(storedMethod.getNodeValue());				
+				node.setNodeValue(storedMethod.getNodeValue());			*/	
 				break;
 			case "Turtle":
 				int individualParameterSize = node.getNodeChildren().size();
@@ -145,7 +150,13 @@ public class CommandTreeInterpreter {
 	}
 
 	private void createCommand(CommandNode node, List<Object> parameters) {
-		Class<?> commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandName());
+		Class<?> commandClass = null;
+		if (!node.getCommandType().equals("UserDefined")) {
+			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandName());
+		}
+		else {
+			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
+		}
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		Command thisCommand = null;
 		try {
