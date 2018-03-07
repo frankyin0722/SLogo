@@ -50,7 +50,7 @@ public class TurtleSelectionMenu extends VBox {
 		sp.getChildren().add(turtle.getImageView());
 		hbox.getChildren().addAll(cb, sp);
 //		hbox.getChildren().add(turtle);
-		dw.getChildren().add(turtle);
+		dw.addTurtle(turtle);
 		this.getChildren().add(hbox);
 	}
 	

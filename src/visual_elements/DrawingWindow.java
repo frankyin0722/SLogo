@@ -29,7 +29,7 @@ public class DrawingWindow extends Pane {
 	public DrawingWindow() {
 		setupInitialCanvas();
 		setupTurtle();
-		myTurtle.changeX(myTurtle.getX() + 300);
+//		myTurtle.changeX(myTurtle.getX() + 300);
 		initializeColorPicker();
 	}
 	
