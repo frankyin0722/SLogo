@@ -1,3 +1,4 @@
+define tree [ :length :angle :depth :scale ]
 to tree [ :length :angle :depth :scale ]
 [
   ifelse equal? :depth 1 

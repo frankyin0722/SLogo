@@ -13,7 +13,7 @@ public class Pen {
 	public Pen(Color c, boolean up, double width) {
 		color = c;
 		this.up = up;
-		width = 1;
+		this.width = width;
 	}
 	//returns if the pen is up
     public boolean PenUp() {
@@ -28,11 +28,6 @@ public class Pen {
     //sets pen color
     public void setColor(Color color) {
     		this.color = color;
-    }
-
-    //returns color of the pen
-    public Color getColor() {
-    		return color;
     }
     
     //changes the width of the pen

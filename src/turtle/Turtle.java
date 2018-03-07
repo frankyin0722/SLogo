@@ -19,7 +19,10 @@ public class Turtle extends Group {
 	private double oldY;
 	private double newX;
 	private double newY;
-	private List<Color> colors = new ArrayList<Color>();
+	private List<Color> colors = new ArrayList<Color>() {{
+		add(Color.GREEN);
+		add(Color.GREY);
+	}};
 	private List<Image> images = new ArrayList<Image>();
 	private int shapeIndex = 0;
 	private int colorIndex = 0;

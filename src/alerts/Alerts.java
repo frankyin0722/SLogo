@@ -1,5 +1,5 @@
 package alerts;
-
+//modified from cell society
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
@@ -18,4 +18,22 @@ public class Alerts {
             alert.close();
         }
     }
+	public static void XMLCreated(String filepath) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(Resources.getString("XMLSuccess"));
+		alert.setContentText("filler");
+		Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            alert.close();
+        }
+	}
+	public static void XMLRead(String filepath) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(Resources.getString("XMLSuccess2"));
+		alert.setContentText("filler");
+		Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            alert.close();
+        }
+	}
 }

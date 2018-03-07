@@ -49,7 +49,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		ObservableList<String> tempkeys = FXCollections.observableArrayList(new ArrayList<String>(myvars.getNames()));
 		ArrayList<Object> tempvals = new ArrayList<Object>();
 		for(String s : tempkeys) {
-			tempvals.add(myvars.getVar(s).getValue()); 
+			tempvals.add(myvars.getVariable(s).getValue()); 
 		}
 		
 		keyCol.getChildren().remove(keyView);

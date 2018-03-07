@@ -24,10 +24,12 @@ public class RepeatCommand implements Command{
 		for (int i = 0; i < myNumTimes; i++) {
 			repcountUpdate((double) i+1);
 			for(CommandNode subCommand: mySubCommands) {
+				System.out.println("i was hereeee");
 				myInterpreter.interpretTree(subCommand);
 			}
 		}
 		if (mySubCommands.size() != 0) {
+			System.out.println(mySubCommands.get(mySubCommands.size()-1).getNodeValue());
 			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
 		}
 		else {
