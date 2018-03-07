@@ -93,6 +93,9 @@ public class CommandTreeInterpreter {
 					else {
 						myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
 					}	
+					if (i==2) {
+						System.out.println("current depth value: "+Parameters.get(i));
+					}
 				}
 				List<Object> paramForUserDefinedCommand = new ArrayList<Object>();
 				String myDefinedCommandName = node.getCommandName();
