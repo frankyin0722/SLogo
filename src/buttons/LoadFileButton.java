@@ -15,7 +15,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import visual_elements.CommandWindow;
+import view.CommandWindow;
 
 public class LoadFileButton extends Button {
 	public LoadFileButton() {
