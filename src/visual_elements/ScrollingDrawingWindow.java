@@ -27,4 +27,8 @@ public class ScrollingDrawingWindow extends ScrollPane{
 		return myDrawingWindow.getDefaultTurtle();
 	}
 	
+	public DrawingWindow getDrawingWindow() {
+		return myDrawingWindow;
+	}
+	
 }

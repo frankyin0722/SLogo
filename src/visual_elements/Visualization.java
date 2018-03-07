@@ -34,6 +34,7 @@ public class Visualization {
 	private BorderPane myPane;
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
+	private DrawingWindow myDrawingWindow;
 	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
@@ -49,11 +50,12 @@ public class Visualization {
 	private void initializeAll() {
 		setLanguage(DEFAULT_LANGUAGE);
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
+		myDrawingWindow = myScrollingDrawingWindow.getDrawingWindow();
 		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
 		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
 			add(myDefaultTurtle);
 		}});
-		myControlPanelRight = new ControlPanelRight(interpreter, myResources);		
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myDrawingWindow);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
 	}
@@ -86,4 +88,5 @@ public class Visualization {
 	public Scene getScene() {
 		return myScene;
 	}
+	
 }

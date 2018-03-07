@@ -1,6 +1,9 @@
 package visual_elements;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.ColorPicker;
@@ -8,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
+import observables.Listener;
 
 public class DrawingWindow extends Pane {
 	public static final double INITIAL_WIDTH = 1000;
@@ -20,6 +24,7 @@ public class DrawingWindow extends Pane {
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	
 	private Turtle myTurtle;
+	private List<Listener> myListeners;
 
 	public DrawingWindow() {
 		setupInitialCanvas();
@@ -35,7 +40,6 @@ public class DrawingWindow extends Pane {
 	}
 	
 	private void setupTurtle() {
-
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(TURTLE_IMAGE));
 		myTurtle = new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT,0);
 		this.getChildren().add(myTurtle);
@@ -63,6 +67,7 @@ public class DrawingWindow extends Pane {
 				"-fx-background-color: " + hex + ";"
 				);
 	}
+	
 	
 	public Turtle getDefaultTurtle() {
 		return myTurtle;
