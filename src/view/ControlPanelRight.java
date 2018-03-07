@@ -1,12 +1,12 @@
-package visual_elements;
+package view;
 
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
-import visual_elements.menu_managers.CustomVarsMenu;
-import visual_elements.menu_managers.HelpMenu;
-import visual_elements.menu_managers.LanguageMenu;
+import menus.CustomVarsMenu;
+import menus.HelpMenu;
+import menus.LanguageMenu;
 
 public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;

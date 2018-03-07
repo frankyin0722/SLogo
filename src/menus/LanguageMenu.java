@@ -1,4 +1,4 @@
-package visual_elements.menu_managers;
+package menus;
 
 import java.io.File;
 import java.util.ArrayList;

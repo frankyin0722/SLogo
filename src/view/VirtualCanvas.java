@@ -1,4 +1,4 @@
-package visual_elements;
+package view;
 
 import javafx.scene.Group;
 import javafx.scene.control.ScrollBar;

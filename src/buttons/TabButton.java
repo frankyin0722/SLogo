@@ -5,7 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import visual_elements.Visualization;
+import view.Visualization;
 
 public class TabButton extends Button {
 	

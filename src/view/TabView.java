@@ -1,4 +1,4 @@
-package visual_elements;
+package view;
 
 import buttons.TabButton;
 import javafx.scene.Scene;
