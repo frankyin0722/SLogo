@@ -68,6 +68,9 @@ public class DrawingWindow extends Pane {
 				);
 	}
 	
+	public void addTurtle(Turtle turtle) {
+		this.getChildren().add(turtle);
+	}
 	
 	public Turtle getDefaultTurtle() {
 		return myTurtle;
