@@ -16,6 +16,7 @@ public class EqualCommand implements Command {
 	 * returns 1 if equal, else 0
 	 */
 	public double execute(){
+		System.out.println("equal result: "+ ((input1 == input2) ? 1:0));
 		return (input1 == input2) ? 1:0;
 	}
 	

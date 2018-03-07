@@ -1,3 +1,4 @@
+define example [ :x ] 
 to example [ :x ]
 [
   if greater? :x 10
