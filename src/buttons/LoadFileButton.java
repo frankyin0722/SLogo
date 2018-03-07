@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import alerts.Alerts;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -34,6 +35,11 @@ public class LoadFileButton extends Button {
 						if (file != null) {
 							openFile(cw, file);
 						}
+						try {
+							Alerts.XMLRead(file.getCanonicalPath());
+						} catch (IOException e) {
+							Alerts.createAlert(new NullPointerException(), "filler");
+						}
 					}
 			});
 		}
@@ -55,7 +61,6 @@ public class LoadFileButton extends Button {
 			br.close();
 			return lines;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.err.print("Could not read file");
 		}
 		return null;

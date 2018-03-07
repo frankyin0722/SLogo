@@ -84,7 +84,7 @@ public class SaveFileButton extends Button {
         List<String> history = interpreter.getHistory();
         FileWriter fileWriter = new FileWriter(filePath);
         for(String str: history) {
-        		fileWriter.write(str);
+        		fileWriter.write(str+"\n");
         }
         fileWriter.close();
         Alerts.XMLCreated(filePath);
