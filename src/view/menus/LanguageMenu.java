@@ -14,7 +14,7 @@ public class LanguageMenu extends TitledPane {
 	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
 	public static final String DEFAULT_RESOURCE_FOLDER = "./src/resources/languages/";
 	public static final String DEFAULT_LANGUAGE = "English";
-	public ResourceBundle myResources;
+	private ResourceBundle myResources;
 
 	public LanguageMenu() {
 		setLanguage(DEFAULT_LANGUAGE);
