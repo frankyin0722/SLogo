@@ -35,7 +35,10 @@ public class Parser implements TreeGenerator{
 	private static String WhiteSpaceType = "Whitespace";
 	private static List<String> UnwantedCommandTypes = new ArrayList<String>() {{
 		add("ListEnd");
-		//add()
+		add("GroupEnd");
+		add("Comment");
+		add("NewLine");
+		add("Whitespace");
 	}};
 	public Parser(CommandTreeInterpreter interpreter) {
 		myInterpreter = interpreter;
@@ -106,7 +109,7 @@ public class Parser implements TreeGenerator{
 	}
 	
 	private boolean existingCommandTypes(String type) {
-		return (!type.equals("ListEnd") && !type.equals("GroupEnd") && !type.equals("Comment") && !type.equals("Newline") && !type.equals("Whitespace"));
+		return !UnwantedCommandTypes.contains(type);
 	}
 	
 	@Override
