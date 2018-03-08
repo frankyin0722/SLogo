@@ -8,11 +8,11 @@ import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import turtle.Turtle;
 
-public class Tell implements Command{
+public class TellCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<CommandNode> myActiveTurtles;
 	
-	public Tell(CommandNode parentNode, CommandTreeInterpreter tree) {
+	public TellCommand(CommandNode parentNode, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myActiveTurtles = new ArrayList<>();
 		for (int i = 0; i < parentNode.getNodeChildren().size(); i++) {

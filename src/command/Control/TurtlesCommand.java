@@ -3,10 +3,10 @@ package command.Control;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 
-public class Turtles implements Command{
+public class TurtlesCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	
-	public Turtles(CommandTreeInterpreter tree) {
+	public TurtlesCommand(CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 	}
 	

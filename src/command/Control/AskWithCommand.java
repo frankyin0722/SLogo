@@ -7,26 +7,29 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 
-public class Ask implements Command{
+public class AskWithCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<Integer> myTemporaryActiveTurtleIndices;
+	private CommandNode myCondition;
 	private List<CommandNode> mySubCommands;
 	private List<Integer> myOldActiveTurtleIndices;
 	
-	public Ask(CommandNode temporaryactiveparent, CommandNode subcommandsParent, CommandTreeInterpreter tree) {
+	public AskWithCommand(CommandNode condition, CommandNode subcommandsParent, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
+		myCondition = condition.getNodeChildren().get(0);
 		myTemporaryActiveTurtleIndices = new ArrayList<>();
 		mySubCommands = subcommandsParent.getNodeChildren();
 		myOldActiveTurtleIndices = myInterpreter.getCurrentActiveTurtleIndices();
-		for (int i = 0; i < temporaryactiveparent.getNodeChildren().size(); i++) {
-			int turtleindex = (int) temporaryactiveparent.getNodeChildren().get(i).getNodeValue();
-			if (turtleindex>=1 && turtleindex<=myInterpreter.getCurrentAvailableTurtles().size()) {
-				myTemporaryActiveTurtleIndices.add((int) temporaryactiveparent.getNodeChildren().get(i).getNodeValue());
-			}
-		}
 	}
 	
 	public double execute() {
+		for (int i = 1; i <= myInterpreter.getCurrentAvailableTurtles().size(); i++) { // creates an active list of turtles that satisfies the condition 
+			myInterpreter.setCurrentActiveTurtleIndex(i);
+			myInterpreter.interpretTree(myCondition);
+			if (myCondition.getNodeValue()!=0) {
+				myTemporaryActiveTurtleIndices.add(myInterpreter.getCurrentActiveTurtleIndex());
+			}
+		}
 		myInterpreter.setCurrentActiveTurtleIndices(myTemporaryActiveTurtleIndices);
 		for (int i = 0; i < mySubCommands.size(); i++) {
 			myInterpreter.interpretTree(mySubCommands.get(i));
