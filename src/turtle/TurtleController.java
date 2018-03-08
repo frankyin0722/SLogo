@@ -37,7 +37,6 @@ public class TurtleController {
 		myHeight = height;
 		turtleWidth = x;
 		turtleHeight = y;
-		turtles = new ArrayList<>();
 		turtles.add(new Turtle(image, x, y, width, height));
 		active.add(true);
 		myDrawingWindow.addTurtles(turtles);
@@ -104,6 +103,10 @@ public class TurtleController {
 			}
 		}
 		return temp;
+	}
+	
+	public List<Turtle> getAllTurtles() {
+		return turtles;
 	}
 	
 	public void setupListener(DrawingWindow dw) {

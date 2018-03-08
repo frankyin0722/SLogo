@@ -3,6 +3,7 @@ package view.vis_elements;
 import java.util.ResourceBundle;
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
+import turtle.TurtleController;
 import view.canvas.DrawingWindow;
 import view.menus.CustomVarsMenu;
 import view.menus.HelpMenu;
@@ -14,12 +15,12 @@ public class ControlPanelRight extends VBox {
 	private ResourceBundle myResources;
 	private CommandTreeInterpreter interpreter;
 	
-	public ControlPanelRight(CommandTreeInterpreter i, ResourceBundle resources, DrawingWindow dw) {
+	public ControlPanelRight(CommandTreeInterpreter i, ResourceBundle resources, TurtleController tc) {
 		interpreter = i;
-		initializeMenus(dw);
+		initializeMenus(tc);
 	}
 
-	private void initializeMenus(DrawingWindow dw) {
+	private void initializeMenus(TurtleController tc) {
 //		myLanguageMenu = new LanguageMenu();
 //		this.getChildren().addAll(new VariableMenu(), myLanguageMenu, new CustomVarsMenu());
 		this.getChildren().addAll(
@@ -27,7 +28,7 @@ public class ControlPanelRight extends VBox {
 				new CustomVarsMenu(interpreter),
 				myLanguageMenu = new LanguageMenu(),
 				new HelpMenu(),
-				new TurtleSelectionMenu(dw));
+				new TurtleSelectionMenu(tc));
 	}
 	
 	public ResourceBundle getLanguage() {

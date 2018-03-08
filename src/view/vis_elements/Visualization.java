@@ -59,7 +59,7 @@ public class Visualization extends BorderPane {
 //			add(myDefaultTurtle);
 //		}});
 		interpreter = new CommandTreeInterpreter(myTurtles);
-		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myDrawingWindow);		
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myTurtleController);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtles, myResources);
 	}
