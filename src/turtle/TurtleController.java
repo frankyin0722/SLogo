@@ -38,13 +38,13 @@ public class TurtleController extends Group {
 		myHeight = height;
 		turtleWidth = x;
 		turtleHeight = y;
+		addActiveTurtle(image, x, y, width, height);
 		myImage = image;
 		Turtle newTurtle = new Turtle(image, x, y, width, height);
 		turtles.add(newTurtle);
 		active.add(true);
 		notifyListeners();
-		//addActiveTurtle(image, x, y, width, height);
-		//addTestTurtle();
+
 	}
 	
 	private void setupTurtleController(DrawingWindow dw) {

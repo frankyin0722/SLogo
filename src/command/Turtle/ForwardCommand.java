@@ -16,6 +16,7 @@ public class ForwardCommand implements Command{
 		myTurtle.changeX(myTurtle.getX() + Math.sin(myTurtle.getDirection())*myMovement);
 		myTurtle.changeY(myTurtle.getY() - Math.cos(myTurtle.getDirection())*myMovement);
 		myTurtle.update();
+		System.out.println("fd gets executed:" + myMovement);
 		return myMovement;
 	}
 	
