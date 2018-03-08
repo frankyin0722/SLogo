@@ -6,18 +6,18 @@ import java.util.ResourceBundle;
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
 import turtle.Turtle;
+import turtle.TurtleController;
 import view.menus.HistoryMenu;
 import view.menus.PenColorMenu;
 import view.menus.TurtleMenu;
 import view.menus.UserCommandsMenu;
 
 public class ControlPanelLeft extends VBox {
-
-	private List<Turtle> myTurtles;
+	private TurtleController myTurtleController;
 	private CommandTreeInterpreter interpreter;
 	
-	public ControlPanelLeft(CommandTreeInterpreter i, List<Turtle> turtles, ResourceBundle resources) {
-		myTurtles = turtles;
+	public ControlPanelLeft(CommandTreeInterpreter i, TurtleController tc, ResourceBundle resources) {
+		myTurtleController = tc;
 		interpreter = i;
 		initializeMenus(resources);
 	}
@@ -26,7 +26,7 @@ public class ControlPanelLeft extends VBox {
 		this.getChildren().addAll(
 				new HistoryMenu(interpreter, resources), 
 				new UserCommandsMenu(interpreter, resources),
-				new TurtleMenu(resources, myTurtles), 
-				new PenColorMenu(resources, myTurtles));
+				new TurtleMenu(resources, myTurtleController), 
+				new PenColorMenu(resources, myTurtleController));
 	}
 }

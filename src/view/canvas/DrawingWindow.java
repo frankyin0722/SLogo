@@ -96,7 +96,6 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 		ObservableList<Turtle> turtles =FXCollections.observableArrayList (
 				myTurtleController.getActiveTurtles());
 		updateTurtles(turtles);
-//		updatePreviousTurtles(turtles);
 	}
 	
 	private void updateTurtles(ObservableList<Turtle> turtles) {

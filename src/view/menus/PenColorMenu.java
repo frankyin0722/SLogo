@@ -9,13 +9,16 @@ import javafx.scene.control.TitledPane;
 import javafx.scene.paint.Color;
 import turtle.Pen;
 import turtle.Turtle;
+import turtle.TurtleController;
 
 public class PenColorMenu extends TitledPane {
 	private List<Pen> myPens;
+	private TurtleController myTurtleController;
 	private ColorPicker cp;
 	
-	public PenColorMenu(ResourceBundle resources, List<Turtle> turtles) {
-		myPens = getActivePens(turtles);
+	public PenColorMenu(ResourceBundle resources, TurtleController tc) {
+		myTurtleController = tc;
+//		myPens = getActivePens(myTurtleController.getActiveTurtles());
 		setupDefaultMenu();
 		setupTitledPane();
 		setupPenAction();
@@ -36,10 +39,11 @@ public class PenColorMenu extends TitledPane {
 	}
 	
 	private void setupPenAction() {
-		cp.setOnAction(e -> changePenColor(myPens));
+		cp.setOnAction(e -> changePenColor());
 	}
 	
-	private void changePenColor(List<Pen> pens) {
+	private void changePenColor() {
+		List<Pen> pens = getActivePens(myTurtleController.getActiveTurtles());
 		for (Pen p: pens) {
 			p.setColor(cp.getValue());
 		}

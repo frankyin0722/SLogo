@@ -60,9 +60,9 @@ public class Visualization extends BorderPane implements IVisualConstants {
 		//myTurtles = myTurtleController.getActiveTurtles();
 		
 		interpreter = new CommandTreeInterpreter(myTurtleController);
-		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myTurtleController);		
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtleController.getAllTurtles(), myResources);
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtleController, myResources);
 	}
 	
 	private void initializeLayout() {		

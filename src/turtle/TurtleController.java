@@ -40,7 +40,7 @@ public class TurtleController {
 		turtleWidth = x;
 		turtleHeight = y;
 		addActiveTurtle(image, x, y, width, height);
-		addTestTurtle();
+		addActiveTurtle(image, x-100, y-100, width, height);
 	}
 	
 	private void setupTurtleController(DrawingWindow dw) {
@@ -125,6 +125,7 @@ public class TurtleController {
 		for (int i=0; i<turtles.size(); i++) {
 			if (turtles.get(i).equals(offTurtle)) {
 				active.set(i, !active.get(i));
+				turtles.get(i).setOpaque(active.get(i));
 			}
 		}
 		notifyListeners();

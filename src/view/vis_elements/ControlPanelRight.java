@@ -15,12 +15,12 @@ public class ControlPanelRight extends VBox {
 	private ResourceBundle myResources;
 	private CommandTreeInterpreter interpreter;
 	
-	public ControlPanelRight(CommandTreeInterpreter i, ResourceBundle resources, TurtleController tc) {
+	public ControlPanelRight(CommandTreeInterpreter i, ResourceBundle resources) {
 		interpreter = i;
-		initializeMenus(tc);
+		initializeMenus();
 	}
 
-	private void initializeMenus(TurtleController tc) {
+	private void initializeMenus() {
 //		myLanguageMenu = new LanguageMenu();
 //		this.getChildren().addAll(new VariableMenu(), myLanguageMenu, new CustomVarsMenu());
 		this.getChildren().addAll(
@@ -28,7 +28,6 @@ public class ControlPanelRight extends VBox {
 				new CustomVarsMenu(interpreter),
 				myLanguageMenu = new LanguageMenu(),
 				new HelpMenu()
-//				new TurtleSelectionMenu(tc)
 				);
 	}
 	

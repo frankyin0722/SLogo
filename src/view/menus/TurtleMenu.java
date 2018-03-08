@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import turtle.Turtle;
+import turtle.TurtleController;
 
 public class TurtleMenu extends TitledPane {
 	
@@ -19,10 +20,10 @@ public class TurtleMenu extends TitledPane {
 	public static final String TURTLE_MENU_KEY = "TurtleMenu";
 	private List<Button> myTurtleButtons;
 	private VBox myTurtleList;
-	private List<Turtle> myTurtles;
+	private TurtleController myTurtleController;
 	
-	public TurtleMenu(ResourceBundle resources, List<Turtle> turtles) {
-		myTurtles = turtles;
+	public TurtleMenu(ResourceBundle resources, TurtleController tc) {
+		myTurtleController = tc;
 		setupPane(resources);
 		setupTurtleSelection();
 	}
@@ -55,7 +56,7 @@ public class TurtleMenu extends TitledPane {
 	}
 	
 	private void changeTurtleImage(Image img) {
-		for (Turtle t: myTurtles) {
+		for (Turtle t: myTurtleController.getActiveTurtles()) {
 			t.setImage(img);
 		}
 	}
