@@ -39,10 +39,8 @@ public class TurtleController {
 		myHeight = height;
 		turtleWidth = x;
 		turtleHeight = y;
-		turtles = new ArrayList<>();
-		turtles.add(new Turtle(image, x, y, width, height));
-		active.add(true);
-		myDrawingWindow.addTurtles(turtles);
+		addActiveTurtle(image, x, y, width, height);
+		addTestTurtle();
 	}
 	
 	private void setupTurtleController(DrawingWindow dw) {
@@ -53,6 +51,14 @@ public class TurtleController {
 		setupListener(dw);
 	}
 	
+	private void addActiveTurtle(Image image, double x, double y, double width, double height) {
+		Turtle newTurtle = new Turtle(image, x, y, width, height);
+		turtles.add(newTurtle);
+		active.add(true);
+		notifyListeners();
+
+	}
+	
 	private Turtle defaultTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
 		return new Turtle(turtleImage, INITIAL_WIDTH/2, INITIAL_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
@@ -60,7 +66,7 @@ public class TurtleController {
 	
 	private Turtle testTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-		return new Turtle(turtleImage, INITIAL_WIDTH/2-100, INITIAL_HEIGHT/2-100, TURTLE_WIDTH, TURTLE_HEIGHT);
+		return new Turtle(turtleImage, 2500-100, 2500-100, TURTLE_WIDTH, TURTLE_HEIGHT);
 	}
 		
 	private void addDefaultTurtle() {
@@ -109,6 +115,10 @@ public class TurtleController {
 			}
 		}
 		return temp;
+	}
+	
+	public List<Turtle> getAllTurtles() {
+		return turtles;
 	}
 	
 	public void setupListener(DrawingWindow dw) {
