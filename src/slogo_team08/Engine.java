@@ -10,7 +10,7 @@ public class Engine {
 	private Scene myScene;
 	private TabView slogoView;
 	
-
+	public Engine() {}
 	
 	public void initializeSimulation(Stage primaryStage) {
 		myStage = primaryStage;
