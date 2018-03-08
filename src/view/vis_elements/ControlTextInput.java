@@ -1,6 +1,7 @@
 package view.vis_elements;
 
 import java.util.ResourceBundle;
+
 import buttons.ClearButton;
 import buttons.LoadFileButton;
 import buttons.ResetButton;
@@ -14,7 +15,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import parser.Parser;
 
 public class ControlTextInput extends HBox {

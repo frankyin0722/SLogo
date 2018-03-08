@@ -1,8 +1,5 @@
 package parser;
 
-import java.util.List;
-
-import interpreter.CommandTreeInterpreter;
 import turtle.Turtle;
 
 public class ParserTester {

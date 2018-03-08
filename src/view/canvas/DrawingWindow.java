@@ -8,15 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import observables.Listener;
 import turtle.Turtle;
 import turtle.TurtleController;
 import view.IVisualConstants;
-import observables.Listener;
 
 public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 	public static final double INITIAL_WIDTH = 695;
