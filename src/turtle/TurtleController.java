@@ -40,7 +40,7 @@ public class TurtleController {
 		turtleWidth = x;
 		turtleHeight = y;
 		addActiveTurtle(image, x, y, width, height);
-		addTestTurtle();
+		//addTestTurtle();
 	}
 	
 	private void setupTurtleController(DrawingWindow dw) {
