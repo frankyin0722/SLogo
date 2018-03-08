@@ -35,7 +35,7 @@ public class HistoryMenu extends TitledPane implements Listener {
 	private void initializeMenu() {
 		callHistoryOnClick();
 		this.setText(myResources.getString(HISTORY_KEY));
-		this.setExpanded(true);
+		this.setExpanded(false);
 		this.setContent(historyDisplay);
 	}
 	

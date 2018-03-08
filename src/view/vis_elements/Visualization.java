@@ -31,7 +31,6 @@ import view.canvas.ScrollingDrawingWindow;
 public class Visualization extends BorderPane implements IVisualConstants {
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
-	private DrawingWindow myDrawingWindow;
 	private TurtleController myTurtleController;
 	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
@@ -50,8 +49,6 @@ public class Visualization extends BorderPane implements IVisualConstants {
 		setLanguage(DEFAULT_LANGUAGE);
 		
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
-		myDrawingWindow = myScrollingDrawingWindow.getDrawingWindow();
-//		myTurtleController = new TurtleController(myDrawingWindow);
 		myTurtleController = new TurtleController(
 				new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE)),
 				INTERNAL_CANVAS_WIDTH/2,
@@ -62,11 +59,7 @@ public class Visualization extends BorderPane implements IVisualConstants {
 
 		myTurtles = myTurtleController.getActiveTurtles();
 		
-//		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-//		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
-//			add(myDefaultTurtle);
-//		}});
-		interpreter = new CommandTreeInterpreter(myTurtleController);
+		interpreter = new CommandTreeInterpreter(myTurtles);
 		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myTurtleController);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtles, myResources);
