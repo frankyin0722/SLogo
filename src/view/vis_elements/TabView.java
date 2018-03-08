@@ -20,6 +20,8 @@ public class TabView implements IVisualConstants {
 	
 	private void initializePanes() {
 		tabs = new TabPane();
+		TabDragFunctionality dragsupport = new TabDragFunctionality();
+		dragsupport.addSupport(tabs);
 		myAnchor = new AnchorPane();
 		TabButton plusButton = new TabButton(tabs);
 		AnchorPane.setRightAnchor(plusButton, 10.0);
