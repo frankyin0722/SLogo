@@ -47,6 +47,7 @@ public class CommandType implements CommandTypes {
 			myCurrentRoot = new CommandNode("Bracket", "[", null, 0);
 			myRoots.add(myCurrentRoot);
 			myTreeGenerator.recurse(myCurrentRoot);
+			System.out.println("num command inside: "+myCurrentRoot.getNodeChildren().size());
 		}
 	}
 	
