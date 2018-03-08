@@ -22,22 +22,18 @@ public class TellCommand implements Command{
 	
 	public double execute() {
 		int maxIndex = 0; 
-		TurtleController currentAvailableTurtles = myInterpreter.getCurrentAvailableTurtles();
+		TurtleController myTurtleController = myInterpreter.getTurtleController();
 		List<Integer> newCurrentActiveTurtles = new ArrayList<>();
 		for (int i = 0; i < myActiveTurtles.size(); i++) {
 			if (myActiveTurtles.get(i).getNodeValue() >= maxIndex) {
 				maxIndex = (int) myActiveTurtles.get(i).getNodeValue();
 			}
 		}
-		currentAvailableTurtles.makeNewTurtles(maxIndex - currentAvailableTurtles.size() + 1);
-		for (int i = currentAvailableTurtles.size(); i < maxIndex; i++) {
-			//Turtle newturtle = new Turtle();
-			//currentAvailableTurtles.add(newturtle);
-		}
+		myTurtleController.makeNewTurtles(maxIndex - myTurtleController.size() + 1);
 		for (CommandNode active : myActiveTurtles) {
 			newCurrentActiveTurtles.add((int) active.getNodeValue());
 		}
-		myInterpreter.setCurrentActiveTurtleIndices(newCurrentActiveTurtles);
+		myTurtleController.resetActiveTurtles(newCurrentActiveTurtles);
 		return myActiveTurtles.get(myActiveTurtles.size()-1).getNodeValue();
 	} 
 }

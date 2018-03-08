@@ -54,8 +54,7 @@ public class TurtleController {
 	private void addActiveTurtle(Image image, double x, double y, double width, double height) {
 		Turtle newTurtle = new Turtle(image, x, y, width, height);
 		turtles.add(newTurtle);
-		Boolean bool = true;
-		active.add(bool);
+		active.add(true);
 		notifyListeners();
 
 	}
@@ -104,7 +103,10 @@ public class TurtleController {
 	
 	public void resetActiveTurtles(List<Integer> newindices) {
 		for(int i = 0; i < turtles.size(); i++) {
-			active.get(i) = false;
+			active.set(i, false);
+		}
+		for(int i = 0; i < newindices.size(); i++) {
+			active.set(i, true);
 		}
 	}
 	

@@ -27,11 +27,11 @@ public class AskCommand implements Command{
 	}
 	
 	public double execute() {
-		myInterpreter.setCurrentActiveTurtleIndices(myTemporaryActiveTurtleIndices);
+		myInterpreter.getTurtleController().resetActiveTurtles(myTemporaryActiveTurtleIndices);
 		for (int i = 0; i < mySubCommands.size(); i++) {
 			myInterpreter.interpretTree(mySubCommands.get(i));
 		}
-		myInterpreter.setCurrentActiveTurtleIndices(myOldActiveTurtleIndices);
+		myInterpreter.getTurtleController().resetActiveTurtles(myOldActiveTurtleIndices);
 		if (mySubCommands.size() != 0) {
 			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
 		}

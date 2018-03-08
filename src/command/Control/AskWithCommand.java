@@ -6,6 +6,7 @@ import java.util.List;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
+import turtle.TurtleController;
 
 public class AskWithCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
@@ -23,6 +24,7 @@ public class AskWithCommand implements Command{
 	}
 	
 	public double execute() {
+		TurtleController myTurtleController = myInterpreter.getTurtleController();
 		for (int i = 1; i <= myInterpreter.getCurrentAvailableTurtles().size(); i++) { // creates an active list of turtles that satisfies the condition 
 			myInterpreter.setCurrentActiveTurtleIndex(i);
 			myInterpreter.interpretTree(myCondition);
@@ -30,11 +32,11 @@ public class AskWithCommand implements Command{
 				myTemporaryActiveTurtleIndices.add(myInterpreter.getCurrentActiveTurtleIndex());
 			}
 		}
-		myInterpreter.setCurrentActiveTurtleIndices(myTemporaryActiveTurtleIndices);
+		myTurtleController.resetActiveTurtles(myTemporaryActiveTurtleIndices);
 		for (int i = 0; i < mySubCommands.size(); i++) {
 			myInterpreter.interpretTree(mySubCommands.get(i));
 		}
-		myInterpreter.setCurrentActiveTurtleIndices(myOldActiveTurtleIndices);
+		myTurtleController.resetActiveTurtles(myOldActiveTurtleIndices);
 		if (mySubCommands.size() != 0) {
 			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
 		}
