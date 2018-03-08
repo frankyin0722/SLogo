@@ -35,12 +35,19 @@ public class CommandType implements CommandTypes {
 	
 	public void initialize(ResourceBundle language) {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
-		String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
-		myCurrentRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
-		myRoots.add(myCurrentRoot);
-		myTreeGenerator.printNode(myCurrentRoot);
-		myTreeGenerator.increaseIndex();
-		for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
+		if (!userInput.get(myTreeGenerator.getIndex()).equals("(")) {
+			String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
+			myCurrentRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
+			myRoots.add(myCurrentRoot);
+			myTreeGenerator.printNode(myCurrentRoot);
+			myTreeGenerator.increaseIndex();
+			for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
+				myTreeGenerator.recurse(myCurrentRoot);
+			}
+		}
+		else {
+			myCurrentRoot = new CommandNode("Bracket", "[", null, 0);
+			myRoots.add(myCurrentRoot);
 			myTreeGenerator.recurse(myCurrentRoot);
 		}
 	}
