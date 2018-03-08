@@ -27,8 +27,9 @@ public class ControlPanelRight extends VBox {
 //				new VariableMenu(),
 				new CustomVarsMenu(interpreter),
 				myLanguageMenu = new LanguageMenu(),
-				new HelpMenu(),
-				new TurtleSelectionMenu(tc));
+				new HelpMenu()
+//				new TurtleSelectionMenu(tc)
+				);
 	}
 	
 	public ResourceBundle getLanguage() {
