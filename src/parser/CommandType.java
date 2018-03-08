@@ -12,9 +12,8 @@ import java.util.regex.Pattern;
 import alerts.CommandException;
 
 public class CommandType implements CommandTypes {
-	private static final int parameterIndex = 0; // stored in the 0th index of the array
-	private static final int categoryIndex = 1; // stored in the 1st index of the array 
-	private static final String userDefinedCommand = "MakeUserInstruction";
+	private static final int PARAMETERINDEX = 0; // stored in the 0th index of the array
+	private static final int CATEGORYINDEX = 1; // stored in the 1st index of the array 
 	private Map<String, String[]> parametersMapping;
 	private List<Entry<String, Pattern>> languagePatternMapping;
 	private TreeGenerator myTreeGenerator;
@@ -86,7 +85,7 @@ public class CommandType implements CommandTypes {
 	private int getNumParameterNeeded(String key) {
 		
 		if (parametersMapping.containsKey(key)) {
-			return Integer.parseInt(parametersMapping.get(key)[parameterIndex]);
+			return Integer.parseInt(parametersMapping.get(key)[PARAMETERINDEX]);
 		}
 		if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(key)) {
 			return myTreeGenerator.getInterpreter().getUserCommandParameters().get(key).size(); // one bracket around all parameters of user-defined commands 
@@ -96,7 +95,7 @@ public class CommandType implements CommandTypes {
 	
 	private String getCommandCategory(String key) {
 		try {
-			return parametersMapping.get(key)[categoryIndex];
+			return parametersMapping.get(key)[CATEGORYINDEX];
 		} catch (NullPointerException e){
 			try {
 				if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(key)) {
