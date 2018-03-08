@@ -36,6 +36,7 @@ public class TellCommand implements Command{
 		}
 		System.out.println("i got here");
 		myTurtleController.resetActiveTurtles(newCurrentActiveTurtles);
+		System.out.println(myActiveTurtles.get(myActiveTurtles.size()-1).getNodeValue());
 		return myActiveTurtles.get(myActiveTurtles.size()-1).getNodeValue();
 	} 
 }

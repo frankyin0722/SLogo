@@ -110,8 +110,11 @@ public class TurtleController {
 			active.set(i, false);
 		}
 		for(int i = 0; i < newindices.size(); i++) {
-			active.set(i, true);
+			if (newindices.get(i)>=1) {
+				active.set(newindices.get(i)-1, true);
+			}
 		}
+		System.out.println(active);
 	}
 	
 	//get Turtle at index
