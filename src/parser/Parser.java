@@ -79,21 +79,24 @@ public class Parser implements TreeGenerator{
 			String type = pattern.getKey();
 			try {
 				if (existingCommandTypes(type)) {
-					Class<?> myInstance = Class.forName("parser." + type
-							+ "Type");
-					Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
-					CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
-					if (type.equals("Command")) {
-						
-						commandInitializer = new CommandType(userInput, (TreeGenerator) this);
-						inputHandlerMap.put(pattern.getValue(), commandInitializer);
-					} else {
-						inputHandlerMap.put(pattern.getValue(), myCommandTypes);
-					}
+					createInputTypes(pattern, type);
 				}
 			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
 				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!!!");
 			}
+		}
+	}
+	private void createInputTypes(Entry<String, Pattern> pattern, String type) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> myInstance = Class.forName("parser." + type
+				+ "Type");
+		Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
+		CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
+		if (type.equals("Command")) {
+			
+			commandInitializer = new CommandType(userInput, (TreeGenerator) this);
+			inputHandlerMap.put(pattern.getValue(), commandInitializer);
+		} else {
+			inputHandlerMap.put(pattern.getValue(), myCommandTypes);
 		}
 	}
 	
