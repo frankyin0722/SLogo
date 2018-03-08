@@ -54,7 +54,8 @@ public class TurtleController {
 	private void addActiveTurtle(Image image, double x, double y, double width, double height) {
 		Turtle newTurtle = new Turtle(image, x, y, width, height);
 		turtles.add(newTurtle);
-		active.add(true);
+		Boolean bool = true;
+		active.add(bool);
 		notifyListeners();
 
 	}
@@ -101,6 +102,12 @@ public class TurtleController {
 		turtles.stream().forEach(t -> t.resetTurtle());
 	}
 	
+	public void resetActiveTurtles(List<Integer> newindices) {
+		for(int i = 0; i < turtles.size(); i++) {
+			active.get(i) = false;
+		}
+	}
+	
 	//get Turtle at index
 	public Turtle getTurtle(int index) {
 		return turtles.get(index);
@@ -112,6 +119,16 @@ public class TurtleController {
 		for(int i = 0; i < turtles.size(); i++) {
 			if(active.get(i)) {
 				temp.add(turtles.get(i));
+			}
+		}
+		return temp;
+	}
+	
+	public List<Integer> getActiveTurtleIndices(){
+		List<Integer> temp = new ArrayList<Integer>();
+		for(int i = 0; i < turtles.size(); i++) {
+			if (active.get(i)) {
+				temp.add(i+1);
 			}
 		}
 		return temp;

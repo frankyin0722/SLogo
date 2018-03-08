@@ -57,9 +57,9 @@ public class Visualization extends BorderPane implements IVisualConstants {
 				TURTLE_HEIGHT,
 				myScrollingDrawingWindow.getInternalCanvas());
 
-		myTurtles = myTurtleController.getActiveTurtles();
+		//myTurtles = myTurtleController.getActiveTurtles();
 		
-		interpreter = new CommandTreeInterpreter(myTurtles);
+		interpreter = new CommandTreeInterpreter(myTurtleController);
 		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myTurtleController);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtles, myResources);
