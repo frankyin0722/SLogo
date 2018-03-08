@@ -134,4 +134,7 @@ public class TurtleController {
 			l.update();
 		}
 	}
+	public int size() {
+		return turtles.size();
+	}
 }

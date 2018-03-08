@@ -6,7 +6,7 @@ import java.util.List;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
-import turtle.Turtle;
+import turtle.TurtleController;
 
 public class TellCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
@@ -22,13 +22,14 @@ public class TellCommand implements Command{
 	
 	public double execute() {
 		int maxIndex = 0; 
-		List<Turtle> currentAvailableTurtles = myInterpreter.getCurrentAvailableTurtles();
+		TurtleController currentAvailableTurtles = myInterpreter.getCurrentAvailableTurtles();
 		List<Integer> newCurrentActiveTurtles = new ArrayList<>();
 		for (int i = 0; i < myActiveTurtles.size(); i++) {
 			if (myActiveTurtles.get(i).getNodeValue() >= maxIndex) {
 				maxIndex = (int) myActiveTurtles.get(i).getNodeValue();
 			}
 		}
+		currentAvailableTurtles.makeNewTurtles(maxIndex - currentAvailableTurtles.size() + 1);
 		for (int i = currentAvailableTurtles.size(); i < maxIndex; i++) {
 			//Turtle newturtle = new Turtle();
 			//currentAvailableTurtles.add(newturtle);

@@ -25,6 +25,11 @@ public class VariableManager {
 
     //adds a new variable. returns DuplicatedVariableException if the variable already exists
     public void addVariable(Variable var, String name) {
+//    		if(name.charAt(0) == ':') {
+//    			variables.put(name.substring(1), var);
+//    		} else{
+//    			variables.put(name, var);
+//    		}
     		variables.put(name, var);
     }
     
@@ -39,6 +44,12 @@ public class VariableManager {
     // returns the names of all active variables
     public Set<String> getNames(){
     		return variables.keySet();
+    }
+    
+    public void changeKey(String oldkey, String newkey) {
+    		Variable oldvariable = variables.get(oldkey);
+    		variables.remove(oldkey);
+    		addVariable(oldvariable, newkey);
     }
 
     // this method returns a class type that is used to create variables, no need for now

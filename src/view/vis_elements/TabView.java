@@ -20,11 +20,13 @@ public class TabView implements IVisualConstants {
 	
 	private void initializePanes() {
 		tabs = new TabPane();
+		TabDragFunctionality dragsupport = new TabDragFunctionality();
+		dragsupport.addSupport(tabs);
 		myAnchor = new AnchorPane();
-		TabButton newTab = new TabButton(tabs);
-		AnchorPane.setRightAnchor(newTab, 10.0);
-		newTab.createTab();
-		myAnchor.getChildren().addAll(tabs, newTab);
+		TabButton plusButton = new TabButton(tabs);
+		AnchorPane.setRightAnchor(plusButton, 10.0);
+		plusButton.createTab();
+		myAnchor.getChildren().addAll(tabs, plusButton);
 		myScene = new Scene(myAnchor,INITIAL_SCENE_WIDTH,INITIAL_SCENE_HEIGHT);
 		myAnchor.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 	}
