@@ -1,9 +1,10 @@
 package parser;
-import java.util.Enumeration;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -15,13 +16,6 @@ import alerts.Resources;
 //import sun.security.tools.keytool.Resources;
 
 import interpreter.CommandTreeInterpreter;
-import javafx.collections.ObservableList;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 public class Parser implements TreeGenerator{
 	private static final ResourceBundle Syntax = ResourceBundle.getBundle("resources.languages/Syntax");
@@ -34,7 +28,18 @@ public class Parser implements TreeGenerator{
 	private CommandType commandInitializer; 
 	private ResourceBundle usedLanguage;
 	private CommandTreeInterpreter myInterpreter;
-	
+	private static String ListEndType = "ListEnd";
+	private static String GroupEndType = "GroupEnd";
+	private static String CommentType = "Comment";
+	private static String NewLineType = "NewLine";
+	private static String WhiteSpaceType = "Whitespace";
+	private static List<String> UnwantedCommandTypes = new ArrayList<String>() {{
+		add("ListEnd");
+		add("GroupEnd");
+		add("Comment");
+		add("NewLine");
+		add("Whitespace");
+	}};
 	public Parser(CommandTreeInterpreter interpreter) {
 		myInterpreter = interpreter;
 	}
@@ -85,17 +90,7 @@ public class Parser implements TreeGenerator{
 			String type = pattern.getKey();
 			try {
 				if (existingCommandTypes(type)) {
-					Class<?> myInstance = Class.forName("parser." + type
-							+ "Type");
-					Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
-					CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
-					if (type.equals("Command")) {
-						
-						commandInitializer = new CommandType(userInput, (TreeGenerator) this);
-						inputHandlerMap.put(pattern.getValue(), commandInitializer);
-					} else {
-						inputHandlerMap.put(pattern.getValue(), myCommandTypes);
-					}
+					createInputTypes(pattern, type);
 				}
 			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
 				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!!!");
@@ -103,8 +98,22 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
+	private void createInputTypes(Entry<String, Pattern> pattern, String type) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		Class<?> myInstance = Class.forName("parser." + type
+				+ "Type");
+		Constructor<?> constructor = myInstance.getConstructor(new Class[] { List.class, TreeGenerator.class });
+		CommandTypes myCommandTypes = (CommandTypes) constructor.newInstance(userInput, (TreeGenerator) this);
+		if (type.equals("Command")) {
+			
+			commandInitializer = new CommandType(userInput, (TreeGenerator) this);
+			inputHandlerMap.put(pattern.getValue(), commandInitializer);
+		} else {
+			inputHandlerMap.put(pattern.getValue(), myCommandTypes);
+		}
+	}
+	
 	private boolean existingCommandTypes(String type) {
-		return (!type.equals("ListEnd") && !type.equals("GroupEnd") && !type.equals("Comment") && !type.equals("Newline") && !type.equals("Whitespace"));
+		return !UnwantedCommandTypes.contains(type);
 	}
 	
 	@Override

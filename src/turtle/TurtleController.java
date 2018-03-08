@@ -2,14 +2,13 @@ package turtle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import observables.Listener;
 import view.canvas.DrawingWindow;
 
-public class TurtleController {
+public class TurtleController extends Group {
 	public static final double INITIAL_WIDTH = 700;
 	public static final double INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
@@ -24,13 +23,13 @@ public class TurtleController {
 	private double turtleWidth;
 	private double turtleHeight;
 	private DrawingWindow turtlePane;
-	private Image image;
+	private Image myImage;
 	private List<Boolean> active;
 	
 	public TurtleController(DrawingWindow dw) {
 		setupTurtleController(dw);
-		addDefaultTurtle();
-		addTestTurtle();
+		//addDefaultTurtle();
+		//addTestTurtle();
 	}
 	
 	public TurtleController(Image image, double x, double y, double width, double height, DrawingWindow dw) {
@@ -40,7 +39,12 @@ public class TurtleController {
 		turtleWidth = x;
 		turtleHeight = y;
 		addActiveTurtle(image, x, y, width, height);
-		addActiveTurtle(image, x-100, y-100, width, height);
+		myImage = image;
+		Turtle newTurtle = new Turtle(image, x, y, width, height);
+		turtles.add(newTurtle);
+		active.add(true);
+		notifyListeners();
+
 	}
 	
 	private void setupTurtleController(DrawingWindow dw) {
@@ -85,18 +89,10 @@ public class TurtleController {
 			
 	// makes num new turtles
 	public void makeNewTurtles(int num) {
-		IntStream.range(0,num)
-			.forEach( i -> {
-				System.out.println("new turtle created");
-				Turtle newTurtle = new Turtle(image, turtleWidth, turtleHeight, myWidth, myHeight);
-				System.out.println("making turtle step 1");
-				turtles.add(newTurtle);
-				System.out.println("making turtle step 2");
-				active.add(true);
-				turtlePane.getChildren().add(newTurtle);
-				System.out.println("making turtle step 3");
-				System.out.println("turtlemade");
-			});
+		for(int i = 0; i < num; i++) {
+			addActiveTurtle(myImage, turtleWidth, turtleHeight, myWidth, myHeight);
+		}
+		
 	}
 	
 	//reset all turtles
@@ -133,7 +129,7 @@ public class TurtleController {
 	
 	//get activeTurtles
 	public List<Turtle> getActiveTurtles(){
-		List<Turtle> temp = new ArrayList<Turtle>();
+		List<Turtle> temp = new ArrayList<>();
 		for(int i = 0; i < turtles.size(); i++) {
 			if(active.get(i)) {
 				temp.add(turtles.get(i));
@@ -143,7 +139,7 @@ public class TurtleController {
 	}
 	
 	public List<Integer> getActiveTurtleIndices(){
-		List<Integer> temp = new ArrayList<Integer>();
+		List<Integer> temp = new ArrayList<>();
 		for(int i = 0; i < turtles.size(); i++) {
 			if (active.get(i)) {
 				temp.add(i+1);

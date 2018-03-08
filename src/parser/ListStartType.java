@@ -15,7 +15,8 @@ public class ListStartType implements CommandTypes{
 	public void recurse(CommandNode node) {
 		String currentValue = userInput.get(myTreeGenerator.getIndex()); // which parsed item the recursion is currently looking at 
 		myTreeGenerator.increaseListStartIndex();
-		CommandNode child = new CommandNode("Bracket", currentValue + ":" + BracketNum++, null, 0);
+		CommandNode child = new CommandNode("Bracket", currentValue + ":" + BracketNum, null, 0);
+		BracketNum++;
 		node.addChild(child); 
 		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();

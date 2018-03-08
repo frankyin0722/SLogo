@@ -1,7 +1,5 @@
 package command;
 
-import java.util.HashMap;
-
 /**
  * Class contains factory method to return a Command class type for reflection purposes
  * @author FY

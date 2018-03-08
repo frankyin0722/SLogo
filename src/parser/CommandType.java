@@ -9,21 +9,24 @@ import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import alerts.Alerts;
 import alerts.CommandException;
-import alerts.Resources;
 
 public class CommandType implements CommandTypes {
-	private static final int parameterIndex = 0; // stored in the 0th index of the array
-	private static final int categoryIndex = 1; // stored in the 1st index of the array 
-	private static final String userDefinedCommand = "MakeUserInstruction";
+	private static final int PARAMETERINDEX = 0; // stored in the 0th index of the array
+	private static final int CATEGORYINDEX = 1; // stored in the 1st index of the array 
 	private Map<String, String[]> parametersMapping;
 	private List<Entry<String, Pattern>> languagePatternMapping;
 	private TreeGenerator myTreeGenerator;
 	private List<String> userInput;
 	private List<CommandNode> myRoots;
 	private CommandNode myCurrentRoot;
-	private PatternManager SomePatternManager = new PatternManager();;
+	private PatternManager SomePatternManager = new PatternManager();
+	private static String GroupStartCommand = "(";
+	private static String ListStartName = "[";
+	private static String ListStartType = "Bracket";
+	private static String DefineCommand = "Define";
+	private static String MakeUserInstructionCommand = "MakeUserInstruction";
+	private static String UserDefinedType = "UserDefined";
 
 	
 	public CommandType (List<String> input, TreeGenerator treeGenerator) {
@@ -35,7 +38,7 @@ public class CommandType implements CommandTypes {
 	
 	public void initialize(ResourceBundle language) {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
-		if (!userInput.get(myTreeGenerator.getIndex()).equals("(")) {
+		if (!isGroupStartCommand(userInput.get(myTreeGenerator.getIndex()))) {
 			String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
 			myCurrentRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
 			myRoots.add(myCurrentRoot);
@@ -46,10 +49,14 @@ public class CommandType implements CommandTypes {
 			}
 		}
 		else {
-			myCurrentRoot = new CommandNode("Bracket", "[", null, 0);
+			myCurrentRoot = new CommandNode(ListStartType, ListStartName, null, 0);
 			myRoots.add(myCurrentRoot);
 			myTreeGenerator.recurse(myCurrentRoot);
 		}
+	}
+	
+	private boolean isGroupStartCommand(String value) {
+		return value.equals(GroupStartCommand);
 	}
 	
 	private boolean checkUserDefinedCommandValidity(String command) {
@@ -85,9 +92,8 @@ public class CommandType implements CommandTypes {
 	}
 	
 	private int getNumParameterNeeded(String key) {
-		
 		if (parametersMapping.containsKey(key)) {
-			return Integer.parseInt(parametersMapping.get(key)[parameterIndex]);
+			return Integer.parseInt(parametersMapping.get(key)[PARAMETERINDEX]);
 		}
 		if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(key)) {
 			return myTreeGenerator.getInterpreter().getUserCommandParameters().get(key).size(); // one bracket around all parameters of user-defined commands 
@@ -97,7 +103,7 @@ public class CommandType implements CommandTypes {
 	
 	private String getCommandCategory(String key) {
 		try {
-			return parametersMapping.get(key)[categoryIndex];
+			return parametersMapping.get(key)[CATEGORYINDEX];
 		} catch (NullPointerException e){
 			try {
 				if (myTreeGenerator.getInterpreter().getUserCommandParameters().containsKey(key)) {
@@ -113,18 +119,17 @@ public class CommandType implements CommandTypes {
 	
 	@Override
 	public void recurse(CommandNode node) {
-		if (node.getCommandName().equals("MakeUserInstruction") || node.getCommandName().equals("Define")) {
-			CommandNode child = new CommandNode("UserDefined", userInput.get(myTreeGenerator.getIndex()), null, 0); 
+		if (node.getCommandName().equals(MakeUserInstructionCommand) || node.getCommandName().equals(DefineCommand)) {
+			CommandNode child = new CommandNode(UserDefinedType, userInput.get(myTreeGenerator.getIndex()), null, 0); 
 			if (checkUserDefinedCommandValidity(userInput.get(myTreeGenerator.getIndex()))) {
-				 
-				 child.setNodeValue(1); // if command already exists by default, then node value = 0 
+				 child.setNodeValue(1); 
 			}
 			node.addChild(child);
 			myTreeGenerator.printNode(child);
 			myTreeGenerator.increaseIndex();
 		}
 		else {
-			String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); // which parsed item the recursion is currently looking at 
+			String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); 
 			CommandNode child = new CommandNode(getCommandCategory(currentValue), currentValue, null, 0);
 			myTreeGenerator.printNode(child);
 			myTreeGenerator.increaseIndex();
