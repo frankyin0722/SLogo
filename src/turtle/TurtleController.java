@@ -88,10 +88,14 @@ public class TurtleController {
 	public void makeNewTurtles(int num) {
 		IntStream.range(0,num)
 			.forEach( i -> {
+				System.out.println("new turtle created");
 				Turtle newTurtle = new Turtle(image, turtleWidth, turtleHeight, myWidth, myHeight);
+				System.out.println("making turtle step 1");
 				turtles.add(newTurtle);
+				System.out.println("making turtle step 2");
 				active.add(true);
 				turtlePane.getChildren().add(newTurtle);
+				System.out.println("making turtle step 3");
 				System.out.println("turtlemade");
 			});
 	}

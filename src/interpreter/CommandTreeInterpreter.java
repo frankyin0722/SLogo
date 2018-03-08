@@ -39,10 +39,6 @@ public class CommandTreeInterpreter {
 		myCommandManager = new CommandManager();
 		myVariables = new VariableManager();
 		myTurtleController = turtlecontroller;
-		/*activeTurtles = new ArrayList<Integer>() {{
-			add(defaultTurtle);
-		}};*/
-		
 		currentTurtle = defaultTurtle;
 		userDefinedCommands = new HashMap<String, CommandNode>();
 		userDefinedCommandParameters = new HashMap<String, List<CommandNode>>();
@@ -104,14 +100,6 @@ public class CommandTreeInterpreter {
 				paramForUserDefinedCommand.add(myDefinedCommandName);
 				paramForUserDefinedCommand.add(this);
 				createCommand(node,paramForUserDefinedCommand);
-				/*CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
-				if (storedMethod==null) {
-					Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError5");
-					throw new CommandException(Resources.getString("CommandHeaderError"));
-				}
-				interpretTree(storedMethod);
-				System.out.println("user defined command value: " + storedMethod.getNodeValue());
-				node.setNodeValue(storedMethod.getNodeValue());			*/	
 				break;
 			case "Turtle":
 				int individualParameterSize = node.getNodeChildren().size();
