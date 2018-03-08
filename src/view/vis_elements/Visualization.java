@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
 import turtle.TurtleController;
+import view.IVisualConstants;
 import view.canvas.DrawingWindow;
 import view.canvas.ScrollingDrawingWindow;
 
@@ -28,9 +29,6 @@ import view.canvas.ScrollingDrawingWindow;
  * 
  */
 public class Visualization extends BorderPane implements IVisualConstants {
-
-
-	
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
 	private DrawingWindow myDrawingWindow;
@@ -53,7 +51,15 @@ public class Visualization extends BorderPane implements IVisualConstants {
 		
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDrawingWindow = myScrollingDrawingWindow.getDrawingWindow();
-		myTurtleController = new TurtleController(myDrawingWindow);
+//		myTurtleController = new TurtleController(myDrawingWindow);
+		myTurtleController = new TurtleController(
+				new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE)),
+				INTERNAL_CANVAS_WIDTH/2,
+				INTERNAL_CANVAS_HEIGHT/2,
+				TURTLE_WIDTH,
+				TURTLE_HEIGHT,
+				myScrollingDrawingWindow.getInternalCanvas());
+
 		myTurtles = myTurtleController.getActiveTurtles();
 		
 //		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();

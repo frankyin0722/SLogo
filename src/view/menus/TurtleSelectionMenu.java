@@ -31,6 +31,7 @@ public class TurtleSelectionMenu extends VBox implements Listener{
 	public TurtleSelectionMenu(TurtleController tc) {
 		myTurtleController = tc;
 		setupMenu();
+//		setupListener();
 //		setupHomeLocation(dw);
 //		addTurtle(dw);
 	}
@@ -42,26 +43,25 @@ public class TurtleSelectionMenu extends VBox implements Listener{
 	}
 	
 	
-	private void addTurtle(DrawingWindow dw) {
-		HBox hbox = new HBox();
-		StackPane sp = new StackPane();
-		CheckBox cb = new CheckBox();
-		Turtle turtle = defaultTurtle();
-		sp.getChildren().add(turtle.getImageView());
-		hbox.getChildren().addAll(cb, sp);
-		dw.addTurtle(turtle);
-		this.getChildren().add(hbox);
-	}
-	
-	private Turtle defaultTurtle() {
-		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-		return new Turtle(turtleImage, INITIAL_WIDTH, INITIAL_HEIGHT, TURTLE_WIDTH, TURTLE_HEIGHT);
-	}
+//	private void addTurtle(DrawingWindow dw) {
+//		HBox hbox = new HBox();
+//		StackPane sp = new StackPane();
+//		CheckBox cb = new CheckBox();
+//		Turtle turtle = defaultTurtle();
+//		sp.getChildren().add(turtle.getImageView());
+//		hbox.getChildren().addAll(cb, sp);
+//		dw.addTurtle(turtle);
+//		this.getChildren().add(hbox);
+//	}
+//	
+//	private void setupListener();
 
 	@Override
 	public void update() {
 		ObservableList<Turtle> turtles =FXCollections.observableArrayList (
 				myTurtleController.getActiveTurtles());
 	}
+	
+	
 	
 }

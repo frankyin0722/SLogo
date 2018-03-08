@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
 import turtle.TurtleController;
+import view.IVisualConstants;
 import observables.Listener;
 
 public class DrawingWindow extends Pane implements Listener, IVisualConstants {
