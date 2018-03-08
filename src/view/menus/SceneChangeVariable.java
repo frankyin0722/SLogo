@@ -4,13 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import variables.Variable;
 
 public class SceneChangeVariable extends Stage {
 
@@ -18,7 +17,6 @@ public class SceneChangeVariable extends Stage {
 	private Button submit;
 	private String type;
 	private String prevKey;
-	private Variable prevVal;
 	private CustomVarsMenu myBase;
 	private SceneChangeVariable currentStage;
 	
@@ -48,24 +46,36 @@ public class SceneChangeVariable extends Stage {
 	private void setSubmitFunctionality() {
 		submit.setOnAction(
 				new EventHandler<ActionEvent>() {
+					
 					@Override
 					public void handle(ActionEvent click) {
 						if(type.equalsIgnoreCase("key")) {
-							myBase.getVariableManager().changeKey(prevKey, ":" + newInfo.getText());
-						} else if(type.equalsIgnoreCase("val")) {
-							System.out.println(newInfo.getText());
-							System.out.println(prevKey);
-							try {
-								myBase.getVariableManager().setVariable(Double.parseDouble(newInfo.getText()), prevKey);
-							} catch (NumberFormatException e) {
-								Alert alert = new Alert(AlertType.ERROR, "New variable must be of type Double", ButtonType.OK);
-								alert.showAndWait();
-							}
+							keyResponse();
+						} else if(type.equalsIgnoreCase("value")) {
+							valResponse();
 						}
 						myBase.update();
 						currentStage.close();
 					}
+					
 				});
 	}
 
+	private void keyResponse() {
+		try {
+			myBase.getVariableManager().changeKey(prevKey, ":" + newInfo.getText());
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(AlertType.ERROR, "Invalid Key format", ButtonType.OK);
+			alert.showAndWait();
+		}
+	}
+	
+	private void valResponse() {
+		try {
+			myBase.getVariableManager().setVariable(Double.parseDouble(newInfo.getText()), prevKey);
+		} catch (NumberFormatException e) {
+			Alert alert = new Alert(AlertType.ERROR, "New variable must be of type Double", ButtonType.OK);
+			alert.showAndWait();
+		}
+	}
 }

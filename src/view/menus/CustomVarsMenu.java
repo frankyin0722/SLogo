@@ -79,7 +79,6 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 	}
 	
 	private void updateKey(String key) {
-		System.out.println(myvars.getVariable(key).getValue());
 		SceneChangeVariable keystage = new SceneChangeVariable("key", key, this);
 		update();
 	}
@@ -95,7 +94,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 	
 	private void updateVal(int index) {
 		keyView.getSelectionModel().select(index);
-		SceneChangeVariable varstage = new SceneChangeVariable("val",
+		SceneChangeVariable varstage = new SceneChangeVariable("value",
 				keyView.getSelectionModel().getSelectedItem(),
 				this);
 		update();
