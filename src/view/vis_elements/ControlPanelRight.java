@@ -7,7 +7,7 @@ import view.canvas.DrawingWindow;
 import view.menus.CustomVarsMenu;
 import view.menus.HelpMenu;
 import view.menus.LanguageMenu;
-import visual_elements.menu_managers.TurtleSelectionMenu;
+import view.menus.TurtleSelectionMenu;
 
 public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;

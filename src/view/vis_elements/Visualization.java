@@ -4,6 +4,7 @@ package view.vis_elements;
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
@@ -13,6 +14,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
+import turtle.TurtleController;
+import view.canvas.DrawingWindow;
 import view.canvas.ScrollingDrawingWindow;
 
 /**
@@ -30,11 +33,14 @@ public class Visualization extends BorderPane {
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
 	private DrawingWindow myDrawingWindow;
+	private TurtleController myTurtleController;
 	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
 	private ControlPanelLeft myControlPanelLeft;
 	private Turtle myDefaultTurtle;
+	private List<Turtle> myTurtles;
+	
 	
 	public Visualization() {
 		initializeAll();
@@ -45,13 +51,17 @@ public class Visualization extends BorderPane {
 		setLanguage(DEFAULT_LANGUAGE);
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDrawingWindow = myScrollingDrawingWindow.getDrawingWindow();
-		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
-			add(myDefaultTurtle);
-		}});
+		myTurtleController = new TurtleController(myDrawingWindow);
+		myTurtles = myTurtleController.getActiveTurtles();
+		
+//		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
+//		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
+//			add(myDefaultTurtle);
+//		}});
+		interpreter = new CommandTreeInterpreter(myTurtles);
 		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myDrawingWindow);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtles, myResources);
 	}
 	
 	private void initializeLayout() {		

@@ -1,4 +1,4 @@
-package visual_elements.menu_managers;
+package view.menus;
 
 import java.awt.Checkbox;
 import java.awt.List;
@@ -13,7 +13,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import turtle.Turtle;
-import visual_elements.DrawingWindow;
+import view.canvas.DrawingWindow;
 public class TurtleSelectionMenu extends VBox {
 	public static final double INITIAL_WIDTH = 700;
 	public static final double INITIAL_HEIGHT = 500;
@@ -26,8 +26,8 @@ public class TurtleSelectionMenu extends VBox {
 	private DoubleProperty myHomeHeight;
 	public TurtleSelectionMenu(DrawingWindow dw) {
 		setupMenu();
-		setupHomeLocation(dw);
-		addTurtle(dw);
+//		setupHomeLocation(dw);
+//		addTurtle(dw);
 	}
 	
 	private void setupMenu() {
@@ -46,16 +46,15 @@ public class TurtleSelectionMenu extends VBox {
 		StackPane sp = new StackPane();
 		CheckBox cb = new CheckBox();
 		Turtle turtle = defaultTurtle();
-		
 		sp.getChildren().add(turtle.getImageView());
 		hbox.getChildren().addAll(cb, sp);
-//		hbox.getChildren().add(turtle);
 		dw.addTurtle(turtle);
 		this.getChildren().add(hbox);
 	}
 	
 	private Turtle defaultTurtle() {
 		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-		return new Turtle(turtleImage, INITIAL_WIDTH / 2, INITIAL_HEIGHT / 2, TURTLE_WIDTH, TURTLE_HEIGHT);
+		return new Turtle(turtleImage, INITIAL_WIDTH, INITIAL_HEIGHT, TURTLE_WIDTH, TURTLE_HEIGHT);
 	}
+	
 }
