@@ -3,7 +3,6 @@ package view.vis_elements;
 
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -13,11 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import turtle.Turtle;
 import turtle.TurtleController;
 import view.IVisualConstants;
-import view.canvas.DrawingWindow;
 import view.canvas.ScrollingDrawingWindow;
 
 /**

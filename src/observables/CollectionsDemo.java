@@ -1,10 +1,11 @@
 package observables;
 
-import java.util.List;
 import java.util.ArrayList;
-import javafx.collections.ObservableList;
-import javafx.collections.ListChangeListener;
+import java.util.List;
+
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
  
 public class CollectionsDemo {
  

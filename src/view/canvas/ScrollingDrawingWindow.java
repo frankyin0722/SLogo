@@ -1,7 +1,6 @@
 package view.canvas;
 
 import javafx.scene.control.ScrollPane;
-import turtle.Turtle;
 import view.IVisualConstants;
 
 public class ScrollingDrawingWindow extends ScrollPane implements IVisualConstants {

@@ -1,14 +1,13 @@
 package view.vis_elements;
 
 import java.util.ResourceBundle;
+
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
 import turtle.TurtleController;
-import view.canvas.DrawingWindow;
 import view.menus.CustomVarsMenu;
 import view.menus.HelpMenu;
 import view.menus.LanguageMenu;
-import view.menus.TurtleSelectionMenu;
 
 public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;
