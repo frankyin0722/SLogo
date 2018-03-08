@@ -102,14 +102,16 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 		for (Turtle t: turtles) {
 			if (!this.getChildren().contains(t)) {
 				this.getChildren().add(t);
-				t.setOnMouseClicked(e -> changeTurtleStatus(t));
+				t.setOnMouseClicked(e -> changeTurtleStatus(t, e));
 			}
 		}
 	}
 	
-	private void changeTurtleStatus(Turtle t) {
+	private void changeTurtleStatus(Turtle t, Event e) {
 		myTurtleController.changeTurtleStatus(t);
 	}
+	
+
 //	private void updateTurtles(ObservableList<Turtle> turtles) {
 //		for (Turtle t: turtles) {
 //			if (!turtleInList(myPreviousTurtles, t)) {
