@@ -1,18 +1,23 @@
-package visual_elements;
+package view.vis_elements;
 
 
 
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
+import turtle.TurtleController;
+import view.canvas.DrawingWindow;
+import view.canvas.ScrollingDrawingWindow;
 
 /**
  * @author elizabethshulman
@@ -22,17 +27,21 @@ import turtle.Turtle;
  * Initializes and arranges each of the elements within the scene
  * 
  */
-public class Visualization extends BorderPane {
-	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
-	public static final String DEFAULT_LANGUAGE = "English";
+public class Visualization extends BorderPane implements IVisualConstants {
+
+
 	
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
+	private DrawingWindow myDrawingWindow;
+	private TurtleController myTurtleController;
 	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
 	private ControlPanelLeft myControlPanelLeft;
 	private Turtle myDefaultTurtle;
+	private List<Turtle> myTurtles;
+	
 	
 	public Visualization() {
 		initializeAll();
@@ -41,14 +50,20 @@ public class Visualization extends BorderPane {
 	
 	private void initializeAll() {
 		setLanguage(DEFAULT_LANGUAGE);
+		
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
-		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
-		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
-			add(myDefaultTurtle);
-		}});
-		myControlPanelRight = new ControlPanelRight(interpreter, myResources);		
+		myDrawingWindow = myScrollingDrawingWindow.getDrawingWindow();
+		myTurtleController = new TurtleController(myDrawingWindow);
+		myTurtles = myTurtleController.getActiveTurtles();
+		
+//		myDefaultTurtle = myScrollingDrawingWindow.getDefaultTurtle();
+//		interpreter = new CommandTreeInterpreter(new ArrayList<Turtle>() {{
+//			add(myDefaultTurtle);
+//		}});
+		interpreter = new CommandTreeInterpreter(myTurtles);
+		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myDrawingWindow);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		myControlPanelLeft = new ControlPanelLeft(interpreter, myDefaultTurtle, myResources);
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtles, myResources);
 	}
 	
 	private void initializeLayout() {		
@@ -59,7 +74,8 @@ public class Visualization extends BorderPane {
 		this.setRight(myControlPanelRight);
 		this.setLeft(myControlPanelLeft);
 		this.setWidth(Double.MAX_VALUE);
-		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
+		this.setHeight(Double.MAX_VALUE);
+		this.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 	}
 	
 	private void setLanguage(String language) {
@@ -74,4 +90,5 @@ public class Visualization extends BorderPane {
 		changeLanguage();
 		return myResources;
 	}
+
 }

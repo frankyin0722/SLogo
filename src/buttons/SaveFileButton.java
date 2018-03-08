@@ -27,7 +27,7 @@ import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import variables.VariableManager;
-import visual_elements.CommandWindow;
+import view.vis_elements.CommandWindow;
 
 public class SaveFileButton extends Button {
 	private Document myDocument;
@@ -45,7 +45,6 @@ public class SaveFileButton extends Button {
 						fc.setInitialDirectory(new File("./data/examples"));
 						fc.setTitle("Save File");
 						File file = fc.showSaveDialog(stage);
-						
 						try {
 							saveXMLFile(file.getCanonicalPath(), interpreter);
 						} catch (Exception e) {
@@ -54,27 +53,17 @@ public class SaveFileButton extends Button {
 					}
 			});
 	}
-	private void makeDoc(CommandTreeInterpreter interpreter) throws ParserConfigurationException {
-		DocumentBuilderFactory docFact = DocumentBuilderFactory.newInstance();
-		DocumentBuilder docBuilder = docFact.newDocumentBuilder();
-		myDocument = docBuilder.newDocument();
-		List<String> history = interpreter.getHistory();
-		
-		//recordVariables(interpreter);
-		//recordCommands(interpreter);
-		
-	}
-	 /**
-     * Helper method to add an element to the root for creating the XML file
-     * @param elementName
-     * @param elementData
-     * @param root
-     */
-	private void addElement(String elementName, String elementData, Element root) {
-        Element elem = myDocument.createElement(elementName);
-        elem.appendChild(myDocument.createTextNode(elementData));
-        root.appendChild(elem);
-    }
+//	 /**
+//     * Helper method to add an element to the root for creating the XML file
+//     * @param elementName
+//     * @param elementData
+//     * @param root
+//     */
+//	private void addElement(String elementName, String elementData, Element root) {
+//        Element elem = myDocument.createElement(elementName);
+//        elem.appendChild(myDocument.createTextNode(elementData));
+//        root.appendChild(elem);
+//    }
 //	private void recordVariables(CommandTreeInterpreter interpreter) {
 //		Element dataElement = myDocument.createElement("data");
 //	    myDocument.appendChild(dataElement);
@@ -92,20 +81,11 @@ public class SaveFileButton extends Button {
      * @throws IOException
      */
     public void saveXMLFile(String filePath, CommandTreeInterpreter interpreter) throws TransformerException, IOException {
-        TransformerFactory tfact = TransformerFactory.newInstance();
-        Transformer transformer = tfact.newTransformer();
-        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        StringWriter stringWriter = new StringWriter();
-        StreamResult result = new StreamResult(stringWriter);
-        DOMSource source = new DOMSource(myDocument);
-        transformer.transform(source, result);
         List<String> history = interpreter.getHistory();
-        for(String str: history) {
-        		stringWriter.write(str+"\n");
-        }
         FileWriter fileWriter = new FileWriter(filePath);
-        fileWriter.write(stringWriter.toString());
+        for(String str: history) {
+        		fileWriter.write(str+"\n");
+        }
         fileWriter.close();
         Alerts.XMLCreated(filePath);
     }

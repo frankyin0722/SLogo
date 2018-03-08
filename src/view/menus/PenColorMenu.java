@@ -1,18 +1,21 @@
-package visual_elements.menu_managers;
+package view.menus;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.TitledPane;
 import javafx.scene.paint.Color;
 import turtle.Pen;
+import turtle.Turtle;
 
 public class PenColorMenu extends TitledPane {
-	private Pen myPen;
+	private List<Pen> myPens;
 	private ColorPicker cp;
 	
-	public PenColorMenu(ResourceBundle resources, Pen pen) {
-		myPen = pen;
+	public PenColorMenu(ResourceBundle resources, List<Turtle> turtles) {
+		myPens = getActivePens(turtles);
 		setupDefaultMenu();
 		setupTitledPane();
 		setupPenAction();
@@ -33,11 +36,21 @@ public class PenColorMenu extends TitledPane {
 	}
 	
 	private void setupPenAction() {
-		cp.setOnAction(e -> changePenColor(myPen));
+		cp.setOnAction(e -> changePenColor(myPens));
 	}
 	
-	private void changePenColor(Pen pen) {
-		pen.setColor(cp.getValue());
+	private void changePenColor(List<Pen> pens) {
+		for (Pen p: pens) {
+			p.setColor(cp.getValue());
+		}
+	}
+	
+	public List<Pen> getActivePens(List<Turtle> turtles) {
+		List<Pen> pens = new ArrayList<Pen>();
+		for (Turtle t: turtles) {
+			pens.add(t.getPen());
+		}
+		return pens;
 	}
 	
 }

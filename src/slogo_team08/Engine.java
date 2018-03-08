@@ -3,7 +3,7 @@ package slogo_team08;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import visual_elements.TabView;
+import view.vis_elements.TabView;
 public class Engine {
 
 	public Stage myStage;

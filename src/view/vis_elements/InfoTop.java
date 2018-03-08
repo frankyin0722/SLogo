@@ -1,4 +1,4 @@
-package visual_elements;
+package view.vis_elements;
 
 
 import javafx.geometry.Pos;

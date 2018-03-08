@@ -27,4 +27,13 @@ public class Alerts {
             alert.close();
         }
 	}
+	public static void XMLRead(String filepath) {
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(Resources.getString("XMLSuccess2"));
+		alert.setContentText("filler");
+		Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            alert.close();
+        }
+	}
 }

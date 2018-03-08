@@ -1,4 +1,4 @@
-package visual_elements;
+package view;
 
 public interface StandardSystemView {
 	  

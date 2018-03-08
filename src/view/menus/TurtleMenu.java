@@ -1,4 +1,4 @@
-package visual_elements.menu_managers;
+package view.menus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +19,10 @@ public class TurtleMenu extends TitledPane {
 	public static final String TURTLE_MENU_KEY = "TurtleMenu";
 	private List<Button> myTurtleButtons;
 	private VBox myTurtleList;
-	private Turtle myTurtle;
+	private List<Turtle> myTurtles;
 	
-	public TurtleMenu(ResourceBundle resources, Turtle turtle) {
-		myTurtle = turtle;
+	public TurtleMenu(ResourceBundle resources, List<Turtle> turtles) {
+		myTurtles = turtles;
 		setupPane(resources);
 		setupTurtleSelection();
 	}
@@ -55,7 +55,9 @@ public class TurtleMenu extends TitledPane {
 	}
 	
 	private void changeTurtleImage(Image img) {
-		myTurtle.setImage(img);
+		for (Turtle t: myTurtles) {
+			t.setImage(img);
+		}
 	}
 	
 	public List<Button> getTurtleButtons() {

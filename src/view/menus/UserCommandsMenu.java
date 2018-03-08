@@ -1,4 +1,4 @@
-package visual_elements.menu_managers;
+package view.menus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
