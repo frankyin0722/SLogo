@@ -32,4 +32,8 @@ public class ScrollingDrawingWindow extends ScrollPane implements IVisualConstan
 		return myDrawingWindow;
 	}
 	
+	public DrawingWindow getDrawingWindow() {
+		return myDrawingWindow;
+	}
+	
 }

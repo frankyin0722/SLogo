@@ -129,6 +129,10 @@ public class Turtle extends Group {
     public double getColorIndex() {
     		return colorIndex;
     }
+    
+    public ImageView getImageView() {
+    		return myImage;
+    }
     public void setShape(int index) {
     		shapeIndex = index;
     		myImage.setImage(images.get(index));
