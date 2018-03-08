@@ -7,9 +7,7 @@ import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;

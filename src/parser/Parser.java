@@ -1,9 +1,10 @@
 package parser;
-import java.util.Enumeration;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -15,13 +16,6 @@ import alerts.Resources;
 //import sun.security.tools.keytool.Resources;
 
 import interpreter.CommandTreeInterpreter;
-import javafx.collections.ObservableList;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.regex.Pattern;
 
 public class Parser implements TreeGenerator{
 	private static final ResourceBundle Syntax = ResourceBundle.getBundle("resources.languages/Syntax");

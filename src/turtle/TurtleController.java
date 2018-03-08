@@ -89,8 +89,9 @@ public class TurtleController extends Group {
 			
 	// makes num new turtles
 	public void makeNewTurtles(int num) {
-		for(int i = 0; i < num; i++)
+		for(int i = 0; i < num; i++) {
 			addActiveTurtle(myImage, turtleWidth, turtleHeight, myWidth, myHeight);
+		}
 		
 	}
 	
@@ -127,7 +128,7 @@ public class TurtleController extends Group {
 	
 	//get activeTurtles
 	public List<Turtle> getActiveTurtles(){
-		List<Turtle> temp = new ArrayList<Turtle>();
+		List<Turtle> temp = new ArrayList<>();
 		for(int i = 0; i < turtles.size(); i++) {
 			if(active.get(i)) {
 				temp.add(turtles.get(i));
@@ -137,7 +138,7 @@ public class TurtleController extends Group {
 	}
 	
 	public List<Integer> getActiveTurtleIndices(){
-		List<Integer> temp = new ArrayList<Integer>();
+		List<Integer> temp = new ArrayList<>();
 		for(int i = 0; i < turtles.size(); i++) {
 			if (active.get(i)) {
 				temp.add(i+1);

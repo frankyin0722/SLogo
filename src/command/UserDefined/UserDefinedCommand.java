@@ -1,14 +1,11 @@
 package command.UserDefined;
 
-import java.util.List;
-
 import alerts.Alerts;
 import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
-import variables.Variable;
 
 public class UserDefinedCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;

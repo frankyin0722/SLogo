@@ -3,9 +3,8 @@ package alerts;
 import java.util.Optional;
 
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
-import alerts.Resources;
+import javafx.scene.control.ButtonType;
 
 public class Alerts {
 	public static void createAlert(Exception e, String message) {
