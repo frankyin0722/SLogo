@@ -11,6 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+/**
+ * user can enter double value variable name
+ * @author elizabethshulman
+ *
+ */
 public class SceneChangeVariable extends Stage {
 
 	private TextField newInfo;
