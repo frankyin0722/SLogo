@@ -19,7 +19,8 @@ public class GroupStartType implements CommandTypes{
 	
 	public void recurse(CommandNode node) {
 		String currentValue = userInput.get(myTreeGenerator.getIndex()); // which parsed item the recursion is currently looking at 
-		CommandNode child = new CommandNode("GroupBracket", currentValue + ":" + BracketNum++, null, 0);
+		CommandNode child = new CommandNode("GroupBracket", currentValue + ":" + BracketNum, null, 0);
+		BracketNum++;
 		node.addChild(child); 
 		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();
@@ -34,7 +35,6 @@ public class GroupStartType implements CommandTypes{
 		if (child.getNodeChildren().size()!=0) {
 			CommandNode unlimitedCommand = child.getNodeChildren().get(0); // get the first command that has unlimited property 
 			int paramSize = unlimitedCommand.getNodeChildren().size();
-			System.out.println("group command parameter number: "+paramSize);
 			List<CommandNode> parameters = new ArrayList<CommandNode>();
 			for (int i = 1; i < child.getNodeChildren().size(); i++) {
 				parameters.add(child.getNodeChildren().get(i));
@@ -58,10 +58,6 @@ public class GroupStartType implements CommandTypes{
 					paraCounter++;
 				}
 				child.addChild(otherCommand);
-			}
-			for (int i = 0; i < child.getNodeChildren().size(); i++) {
-				System.out.println(child.getNodeChildren().get(i).getCommandName());
-				System.out.println(child.getNodeChildren().get(i).getNodeChildren().get(0).getNodeValue());
 			}
 		}
 	}
