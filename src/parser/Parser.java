@@ -97,6 +97,7 @@ public class Parser implements TreeGenerator{
 			}
 		}
 	}
+	
 	private void createInputTypes(Entry<String, Pattern> pattern, String type) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		Class<?> myInstance = Class.forName("parser." + type
 				+ "Type");
