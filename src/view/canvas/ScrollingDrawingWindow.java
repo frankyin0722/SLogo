@@ -2,12 +2,11 @@ package view.canvas;
 
 import javafx.scene.control.ScrollPane;
 import turtle.Turtle;
+import view.IVisualConstants;
 
-public class ScrollingDrawingWindow extends ScrollPane {
+public class ScrollingDrawingWindow extends ScrollPane implements IVisualConstants {
 	
 	private DrawingWindow myDrawingWindow;
-	public static final double INITIAL_WIDTH = 695;
-	public static final double INITIAL_HEIGHT = 500;
 	
 	public ScrollingDrawingWindow() {
 		myDrawingWindow = new DrawingWindow();
@@ -19,15 +18,18 @@ public class ScrollingDrawingWindow extends ScrollPane {
 		this.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		this.setHbarPolicy(ScrollBarPolicy.ALWAYS);
 
-		myDrawingWindow.setPrefSize(5000,5000);
 		myDrawingWindow.setManaged(false);
 		this.setHvalue(0.5);
 		this.setVvalue(0.5);
-		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
+		this.setPrefSize(EXTERNAL_CANVAS_WIDTH, EXTERNAL_CANVAS_HEIGHT);
 	}
 	
-	public Turtle getDefaultTurtle() {
-		return myDrawingWindow.getDefaultTurtle();
+//	public Turtle getDefaultTurtle() {
+//		return myDrawingWindow.getDefaultTurtle();
+//	}
+	
+	public DrawingWindow getInternalCanvas() {
+		return myDrawingWindow;
 	}
 	
 	public DrawingWindow getDrawingWindow() {

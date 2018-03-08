@@ -146,6 +146,21 @@ public class CommandTreeInterpreter {
 					node.setNodeValue(0.0);
 				}
 				break;
+			case "GroupBracket":
+				if (node.getNodeChildren().size()!=0) {
+					//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+					double totalValue = 0;
+					System.out.println(node.getNodeChildren().size());
+					for (CommandNode sub : node.getNodeChildren()) {
+						totalValue = totalValue + sub.getNodeValue();
+					}
+					node.setNodeValue(totalValue);
+				}
+				else {
+					node.setNodeValue(0.0);
+				}
+				System.out.println(node.getNodeValue());
+				break;
 			default: 
 				createCommand(node, Parameters);
 				break;

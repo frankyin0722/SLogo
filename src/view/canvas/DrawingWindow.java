@@ -23,9 +23,8 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;
 //	public static final String IMAGE_PATH = "./images/";
-	public static final String FRANKLIN_IMAGE = "franklin.jpg";
-	public static final String TURTLE_IMAGE = "cute_turtle.png";
-	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
+//	public static final String FRANKLIN_IMAGE = "franklin.jpg";
+//	public static final String TURTLE_IMAGE = "cute_turtle.png";
 	
 	private Turtle myTurtle;
 	private TurtleController myTurtleController;
@@ -39,7 +38,7 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 	}
 	
 	private void setupInitialCanvas() {
-		this.setPrefSize(INITIAL_WIDTH, INITIAL_HEIGHT);
+		this.setPrefSize(INTERNAL_CANVAS_WIDTH, INTERNAL_CANVAS_HEIGHT);
 		this.setMaxSize(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
 		this.setBackgroundColor(INITIAL_COLOR);
 	}

@@ -13,11 +13,11 @@ public class IfElseCommand implements Command {
 	private List<CommandNode> mySubCommandsFalse;
 	
 	public IfElseCommand (CommandNode expression, CommandNode subCommandsParentTrue, CommandNode subCommandsParentFalse, CommandTreeInterpreter tree) {
-		if (expression.getNodeValue() != 0) {
-			myExpression = true;
+		if (expression.getNodeValue() == 0) {
+			myExpression = false;
 		}
 		else {
-			myExpression = false;
+			myExpression = true;
 		}
 		mySubCommandsTrue = subCommandsParentTrue.getNodeChildren();
 		mySubCommandsFalse = subCommandsParentFalse.getNodeChildren();
@@ -33,6 +33,7 @@ public class IfElseCommand implements Command {
 			return returnValue(mySubCommandsTrue);
 		}
 		else {
+			System.out.println("false tree gets interpreter!");
 			for (int i = 0; i < mySubCommandsFalse.size(); i++) {
 				myInterpreter.interpretTree(mySubCommandsFalse.get(i));
 			}

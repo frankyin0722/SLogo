@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -26,9 +27,9 @@ import view.canvas.ScrollingDrawingWindow;
  * Initializes and arranges each of the elements within the scene
  * 
  */
-public class Visualization extends BorderPane {
-	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
-	public static final String DEFAULT_LANGUAGE = "English";
+public class Visualization extends BorderPane implements IVisualConstants {
+
+
 	
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
@@ -49,6 +50,7 @@ public class Visualization extends BorderPane {
 	
 	private void initializeAll() {
 		setLanguage(DEFAULT_LANGUAGE);
+		
 		myScrollingDrawingWindow = new ScrollingDrawingWindow();
 		myDrawingWindow = myScrollingDrawingWindow.getDrawingWindow();
 		myTurtleController = new TurtleController(myDrawingWindow);
@@ -73,7 +75,7 @@ public class Visualization extends BorderPane {
 		this.setLeft(myControlPanelLeft);
 		this.setWidth(Double.MAX_VALUE);
 		this.setHeight(Double.MAX_VALUE);
-		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, null, null)));
+		this.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 	}
 	
 	private void setLanguage(String language) {

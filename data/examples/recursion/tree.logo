@@ -17,3 +17,4 @@ to tree [ :length :angle :depth :scale ]
      bk :length
   ]
 ]
+tree 50 20 11 1 
