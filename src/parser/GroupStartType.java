@@ -26,7 +26,11 @@ public class GroupStartType implements CommandTypes{
 		while (!userInput.get(myTreeGenerator.getIndex()).equals(")")) {
 			myTreeGenerator.recurse(child);
 		}
-		System.out.println("group child size: "+child.getNodeChildren().size());
+		reconstructGroupTreeNode(child);
+		myTreeGenerator.increaseIndex();
+	}
+	
+	private void reconstructGroupTreeNode(CommandNode child) {
 		if (child.getNodeChildren().size()!=0) {
 			CommandNode unlimitedCommand = child.getNodeChildren().get(0); // get the first command that has unlimited property 
 			int paramSize = unlimitedCommand.getNodeChildren().size();
@@ -37,17 +41,13 @@ public class GroupStartType implements CommandTypes{
 			}
 			int groupChildSize = child.getNodeChildren().size();
 			int otherCommandNum = (groupChildSize-1)/paramSize;
-			for (int i = child.getNodeChildren().size()-1; i >= 1 ; i--) { // ??? 
+			for (int i = child.getNodeChildren().size()-1; i >= 1 ; i--) {
 				child.getNodeChildren().remove(i);
 			}
-			System.out.println("group child size after loop: "+child.getNodeChildren().size());
-			if (((groupChildSize-1) % paramSize)!=0) { // check unlimited parameter validity (size match)
+			if (((groupChildSize-1) % paramSize)!=0) { 
 				Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError6");
-				//System.out.println("!!!");
 				return;
 			}
-			
-			System.out.println("rest command number: "+otherCommandNum);
 			for (int i = 0; i < otherCommandNum; i++) {
 				CommandNode otherCommand = new CommandNode(unlimitedCommand.getCommandType(),unlimitedCommand.getCommandName(),null,0);
 				int paraCounter = 0;
@@ -59,9 +59,7 @@ public class GroupStartType implements CommandTypes{
 			}
 			
 		}
-		myTreeGenerator.increaseIndex();
 	}
-
 	@Override
 	public String whichType() {
 		return "GroupStart";
