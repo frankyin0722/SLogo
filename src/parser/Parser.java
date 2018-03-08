@@ -62,6 +62,7 @@ public class Parser implements TreeGenerator{
 			generateInputHandlerMap();
 			while (getIndex() < userInput.size()) {
 				commandInitializer.initialize(language);
+				System.out.println("parsing done");
 				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
 				myInterpreter.iterateUDC(myInterpreter.getUserCommands());
 			}
@@ -97,7 +98,7 @@ public class Parser implements TreeGenerator{
 					}
 				}
 			} catch (InstantiationException | InvocationTargetException| IllegalAccessException | NoSuchMethodException | IllegalArgumentException | ClassNotFoundException e) {
-				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!");
+				System.err.println("Error parsing the user-input command: Given Command Not Found. Please Enter A Correct Command!!!");
 			}
 		}
 	}
@@ -113,7 +114,8 @@ public class Parser implements TreeGenerator{
 		}
 		for (Pattern pattern : inputHandlerMap.keySet()) {
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
-				CommandTypes cmdType = inputHandlerMap.get(pattern);				
+				CommandTypes cmdType = inputHandlerMap.get(pattern);
+				System.out.println(cmdType);
 				cmdType.recurse(root);
 				break;
 			}
