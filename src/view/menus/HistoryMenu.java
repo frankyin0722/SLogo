@@ -29,13 +29,16 @@ public class HistoryMenu extends TitledPane implements Listener {
 		interpreter = i;
 		interpreter.addListener(this);
 		myResources = resources;
-		callHistoryOnClick();
-		
-		this.setText(resources.getString(HISTORY_KEY));
-		this.setExpanded(false);
-		this.setContent(historyDisplay);
+		initializeMenu();
 	}
 
+	private void initializeMenu() {
+		callHistoryOnClick();
+		this.setText(myResources.getString(HISTORY_KEY));
+		this.setExpanded(true);
+		this.setContent(historyDisplay);
+	}
+	
 	@Override
 	public void update() {
 		ObservableList<String> history =FXCollections.observableArrayList (
@@ -49,8 +52,7 @@ public class HistoryMenu extends TitledPane implements Listener {
 			public void handle (MouseEvent click) {
 			Parser parser = new Parser(interpreter);
 			String repeatCommand = historyDisplay.getSelectionModel().getSelectedItem();
-			parser.generateCommandTree(
-					repeatCommand, myResources);
+			parser.generateCommandTree(repeatCommand, myResources);
 			interpreter.addToHistory(repeatCommand);
 			}
 		});
