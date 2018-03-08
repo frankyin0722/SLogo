@@ -29,13 +29,19 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 	
 	private Turtle myTurtle;
 	private TurtleController myTurtleController;
-	private List<Listener> myListeners;
+	private List<Turtle> myPreviousTurtles;
+//	private List<Listener> myListeners;
 
 	public DrawingWindow() {
+		setupDrawingWindow();
 		setupInitialCanvas();
 //		setupTurtle();
 //		myTurtle.changeX(myTurtle.getX() + 300);
 		initializeColorPicker();
+	}
+	
+	private void setupDrawingWindow() {
+		myPreviousTurtles = new ArrayList<>();
 	}
 	
 	private void setupInitialCanvas() {
@@ -90,14 +96,47 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 		ObservableList<Turtle> turtles =FXCollections.observableArrayList (
 				myTurtleController.getActiveTurtles());
 		updateTurtles(turtles);
+//		updatePreviousTurtles(turtles);
 	}
 	
 	private void updateTurtles(ObservableList<Turtle> turtles) {
 		for (Turtle t: turtles) {
 			if (!this.getChildren().contains(t)) {
 				this.getChildren().add(t);
+				t.setOnMouseClicked(e -> changeTurtleStatus(t));
 			}
 		}
 	}
+	
+	private void changeTurtleStatus(Turtle t) {
+		myTurtleController.changeTurtleStatus(t);
+	}
+//	private void updateTurtles(ObservableList<Turtle> turtles) {
+//		for (Turtle t: turtles) {
+//			if (!turtleInList(myPreviousTurtles, t)) {
+//				this.getChildren().add(t);
+//			}
+//		}
+//		for (Turtle t: myPreviousTurtles) {
+//			if (!turtleInList(turtles, t)) {
+//			}
+//		}
+//	}
+//	
+//	private boolean turtleInList(List<Turtle> list, Turtle obj) {
+//		for (Turtle o: list) {
+//			if (o.equals(obj)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+//	
+//	private void updatePreviousTurtles(ObservableList<Turtle> turtles) {
+//		myPreviousTurtles.clear();
+//		for (Turtle t: turtles) {
+//			myPreviousTurtles.add(t);
+//		}
+//	}
 }
 	

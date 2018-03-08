@@ -51,12 +51,11 @@ public class TurtleController {
 		setupListener(dw);
 	}
 	
-	private void addActiveTurtle(Image image, double x, double y, double width, double height) {
+	public void addActiveTurtle(Image image, double x, double y, double width, double height) {
 		Turtle newTurtle = new Turtle(image, x, y, width, height);
 		turtles.add(newTurtle);
 		active.add(true);
 		notifyListeners();
-
 	}
 	
 	private Turtle defaultTurtle() {
@@ -120,6 +119,15 @@ public class TurtleController {
 	//get Turtle at index
 	public Turtle getTurtle(int index) {
 		return turtles.get(index);
+	}
+	
+	public void changeTurtleStatus(Turtle offTurtle) {
+		for (int i=0; i<turtles.size(); i++) {
+			if (turtles.get(i).equals(offTurtle)) {
+				active.set(i, !active.get(i));
+			}
+		}
+		notifyListeners();
 	}
 	
 	//get activeTurtles
