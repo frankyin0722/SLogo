@@ -10,7 +10,7 @@ public class HeadingCommand implements Command{
 	
 	public HeadingCommand(CommandTreeInterpreter tree){
 		myInterpreter = tree;
-		myTurtle = myInterpreter.getCurrentAvailableTurtles().get(myInterpreter.getCurrentActiveTurtleIndex()-1);
+		myTurtle = myInterpreter.getCurrentAvailableTurtles().getTurtle(myInterpreter.getCurrentActiveTurtleIndex()-1);
 	}
 	
 	public double execute(){

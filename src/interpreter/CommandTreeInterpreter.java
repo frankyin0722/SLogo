@@ -15,13 +15,14 @@ import command.CommandManager;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
+import turtle.TurtleController;
 import variables.Variable;
 import variables.VariableManager;
 
 public class CommandTreeInterpreter {
 	private CommandManager myCommandManager;
 	private VariableManager myVariables;
-	private List<Turtle> myTurtles;
+	private TurtleController myTurtles;
 	private HashMap<String, CommandNode> userDefinedCommands;
 	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 1;
@@ -33,11 +34,10 @@ public class CommandTreeInterpreter {
 	private int currentTurtle; 
 
 	
-	public CommandTreeInterpreter(List<Turtle> turtles) {
+	public CommandTreeInterpreter(TurtleController turtles) {
 		myCommandManager = new CommandManager();
 		myVariables = new VariableManager();
-		myTurtles = new ArrayList<>();
-		myTurtles.addAll(turtles);
+		myTurtles = turtles;
 		activeTurtles = new ArrayList<Integer>() {{
 			add(defaultTurtle);
 		}};
@@ -120,7 +120,7 @@ public class CommandTreeInterpreter {
 						individualParameter.add(Parameters.get(paramCount));
 						paramCount++;
 					}
-					individualParameter.add(myTurtles.get(activeTurtles.get(i)-1));
+					individualParameter.add(myTurtles.getTurtle(activeTurtles.get(i)-1));
 					createCommand(node,individualParameter);
 				}
 				break;
@@ -202,7 +202,7 @@ public class CommandTreeInterpreter {
 	public List<Turtle> getCurrentActiveTurtles() {
 		List<Turtle> selectedTurtles = new ArrayList<>();
 		for (int i = 0; i < activeTurtles.size();i ++) {
-			selectedTurtles.add(myTurtles.get(activeTurtles.get(i)-1));
+			selectedTurtles.add(myTurtles.getTurtle(activeTurtles.get(i)-1));
 		}
 		return selectedTurtles;
 	}
@@ -215,7 +215,7 @@ public class CommandTreeInterpreter {
 		activeTurtles = newactiveindices;
 	}
 	
-	public List<Turtle> getCurrentAvailableTurtles() {
+	public TurtleController getCurrentAvailableTurtles() {
 		return myTurtles;
 	}
 	
