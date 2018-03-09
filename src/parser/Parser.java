@@ -28,16 +28,11 @@ public class Parser implements TreeGenerator{
 	private CommandType commandInitializer; 
 	private ResourceBundle usedLanguage;
 	private CommandTreeInterpreter myInterpreter;
-	private static String ListEndType = "ListEnd";
-	private static String GroupEndType = "GroupEnd";
-	private static String CommentType = "Comment";
-	private static String NewLineType = "NewLine";
-	private static String WhiteSpaceType = "Whitespace";
 	private static List<String> UnwantedCommandTypes = new ArrayList<String>() {{
 		add("ListEnd");
 		add("GroupEnd");
 		add("Comment");
-		add("NewLine");
+		add("Newline");
 		add("Whitespace");
 	}};
 	public Parser(CommandTreeInterpreter interpreter) {
@@ -154,7 +149,7 @@ public class Parser implements TreeGenerator{
 	public CommandTreeInterpreter getInterpreter() {
 		return myInterpreter;
 	}
-
+	//a way to turn a node into a easily viewable string. not done yet
 	@Override
 	public void printNode(CommandNode node) {
 		

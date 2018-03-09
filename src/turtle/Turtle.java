@@ -77,13 +77,11 @@ public class Turtle extends Group {
     public void changeX(double newX) {
     		oldX = myImage.getX() + (myImage.getFitWidth()/ 2) - zeroX;
     		this.newX = newX;
-    		System.out.println("x" + this.newX);
     }
     //modifies y, remembers old yvalue
     public void changeY(double newY) {
     		oldY = myImage.getY() + (myImage.getFitHeight()/2) - zeroY;
     		this.newY = newY;
-    		System.out.println("y" + this.newY);
     }
     //deletes all lines of the turtle
     public void clearLines() {
