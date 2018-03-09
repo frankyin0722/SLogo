@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import observables.Listener;
 import view.canvas.DrawingWindow;
 
-public class TurtleController extends Group {
+public class TurtleController extends Group implements Listener {
 	public static final double INITIAL_WIDTH = 700;
 	public static final double INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
@@ -22,7 +22,6 @@ public class TurtleController extends Group {
 	private double myHeight;
 	private double turtleWidth;
 	private double turtleHeight;
-	private DrawingWindow turtlePane;
 	private Image myImage;
 	private List<Boolean> active;
 	
@@ -52,6 +51,7 @@ public class TurtleController extends Group {
 	
 	public void addActiveTurtle(Image image, double x, double y, double width, double height) {
 		Turtle newTurtle = new Turtle(image, x, y, width, height);
+		newTurtle.addListener(this);
 		turtles.add(newTurtle);
 		active.add(true);
 		notifyListeners();
@@ -119,6 +119,14 @@ public class TurtleController extends Group {
 		return temp;
 	}
 	
+	public List<String> getAllTurtleInfo() {
+		List<String> info = new ArrayList<>();
+		for (Turtle t: turtles) {
+			info.add(t.toString());
+		}
+		return info;
+	}
+	
 	public List<Turtle> getAllTurtles() {
 		return turtles;
 	}
@@ -130,17 +138,22 @@ public class TurtleController extends Group {
 	public void addTurtleListener(Listener l) {
 		turtleListeners.add(l);
 	}
-	
 	private void notifyListeners() {
 		for(Listener l: turtleListeners) {
 			l.update();
 		}
 	}
+
 	public int size() {
 		return turtles.size();
 	}
-	
+		
 	public DrawingWindow getDrawingWindow() {
 		return myDrawingWindow;
+	}
+
+	@Override
+	public void update() {
+		notifyListeners();
 	}
 }

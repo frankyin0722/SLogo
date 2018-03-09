@@ -8,10 +8,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import observables.Listener;
 
 public class Turtle extends Group {
 	private Pen pen = new Pen();
-//	private ImageView myImage;
+	private List<Listener> myListeners;
 	private DraggableImageView myImage;
 	private double direction = 0;
 	private double zeroX;
@@ -39,6 +40,7 @@ public class Turtle extends Group {
 		oldY = 0;
 		myImage.setFitWidth(width);
 		myImage.setFitHeight(height);
+		myListeners = new ArrayList<>();
 		getChildren().add(myImage);
 	}
 	public Turtle() {
@@ -61,6 +63,7 @@ public class Turtle extends Group {
     		oldX = newX;
     		oldY = newY;
     		myImage.toFront();
+    		notifyListeners();
     }
 
     //check the direction the turtle is facing in radians
@@ -72,6 +75,8 @@ public class Turtle extends Group {
     public void setDirection(double direction) {
     		this.direction = direction;
     		myImage.setRotate(Math.toDegrees(direction));
+    		notifyListeners();
+
     }
     //modifies x, remembers old xvalue
     public void changeX(double newX) {
@@ -147,8 +152,16 @@ public class Turtle extends Group {
     		pen.setColor(colors.get(index));
     		//throw error if oob
     }
-    public void inform() {
-    	
+    
+    public void addListener(Listener l) {
+    		myListeners.add(l);
+    		pen.addListener(l);
+    }
+    
+    public void notifyListeners() {
+    		for (Listener l: myListeners) {
+    			l.update();
+    		}
     }
     
     public void setOpaque(boolean active) {
