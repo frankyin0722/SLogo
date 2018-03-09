@@ -23,6 +23,8 @@ public class PenMenu extends TitledPane implements Listener {
 		myTurtles = tc;
 		initializeTitledPane();
 		setupPenChangers();
+//		myTurtles.addTurtleListener(this);  //this is what breaks the sliders
+
 	}
 	
 	private void initializeTitledPane() {
@@ -38,6 +40,7 @@ public class PenMenu extends TitledPane implements Listener {
 	private void setupPenChangers() {
 		allTurtles = myTurtles.getAllTurtles();
 		penModifiers.clear();
+		penModifiers.add(new HBoxPenChanger());
 		allTurtles.forEach(turtle -> penModifiers.add(
 				new HBoxPenChanger(turtle, myTurtles.getAllTurtles().indexOf(turtle))));
 		penDisplay.setItems(FXCollections.observableArrayList(penModifiers));
