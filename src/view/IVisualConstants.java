@@ -18,6 +18,8 @@ public interface IVisualConstants {
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
 	public static final String DEFAULT_LANGUAGE = "English";
+	public static final String DEFAULT_COLOR_PALETTE = "BasicRainbowPalette";
+	public static final String COLOR_RESOURCE_PACKAGE = "resources.colors/";
 
 
 }

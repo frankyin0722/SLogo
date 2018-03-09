@@ -33,7 +33,6 @@ public class Visualization extends BorderPane implements IVisualConstants {
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
 	private ControlPanelLeft myControlPanelLeft;
-	private Turtle myDefaultTurtle;
 	private List<Turtle> myTurtles;
 	
 	

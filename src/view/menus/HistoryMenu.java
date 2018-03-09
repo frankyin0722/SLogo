@@ -19,7 +19,6 @@ import parser.Parser;
  */
 public class HistoryMenu extends TitledPane implements Listener {
 	
-	public static final String HISTORY_KEY = "History";
 	private ListView<String> historyDisplay;
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle myResources;
@@ -34,7 +33,7 @@ public class HistoryMenu extends TitledPane implements Listener {
 
 	private void initializeMenu() {
 		callHistoryOnClick();
-		this.setText(myResources.getString(HISTORY_KEY));
+		this.setText("History");
 		this.setExpanded(false);
 		this.setContent(historyDisplay);
 	}
