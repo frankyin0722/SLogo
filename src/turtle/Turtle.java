@@ -119,10 +119,10 @@ public class Turtle extends Group {
     		update();
     		clearLines();
     }
-    @Override
-    public String toString() {
+    
+    public String toString(int i) {
     		String result = "";
-    		result+="Turtle Properties:\n";
+    		result+="Turtle ID: " + Integer.toString(i) + "\n";
     		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
     		result+="Heading: " + Math.toDegrees(direction) + "\n";
     		result+= pen.toString();

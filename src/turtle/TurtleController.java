@@ -121,8 +121,10 @@ public class TurtleController extends Group implements Listener {
 	
 	public List<String> getAllTurtleInfo() {
 		List<String> info = new ArrayList<>();
+		int index = 1;
 		for (Turtle t: turtles) {
-			info.add(t.toString());
+			info.add(t.toString(index));
+			index +=1;
 		}
 		return info;
 	}
