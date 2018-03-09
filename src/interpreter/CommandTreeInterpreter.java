@@ -125,7 +125,7 @@ public class CommandTreeInterpreter {
 				myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
 			}	
 			if (i==2) {
-				System.out.println("current depth value: "+Parameters.get(i));
+				//System.out.println("current depth value: "+Parameters.get(i));
 			}
 		}
 		List<Object> paramForUserDefinedCommand = new ArrayList<>();
@@ -161,7 +161,7 @@ public class CommandTreeInterpreter {
 	
 	private void updateBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
-			System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 			node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 		}
 		else {
@@ -173,7 +173,7 @@ public class CommandTreeInterpreter {
 		if (node.getNodeChildren().size()!=0) {
 			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 			double totalValue = 0;
-			System.out.println(node.getNodeChildren().size());
+			//System.out.println(node.getNodeChildren().size());
 			for (CommandNode sub : node.getNodeChildren()) {
 				totalValue = totalValue + sub.getNodeValue();
 			}
@@ -182,7 +182,7 @@ public class CommandTreeInterpreter {
 		else {
 			node.setNodeValue(0.0);
 		}
-		System.out.println(node.getNodeValue());
+		//System.out.println(node.getNodeValue());
 	}
 	
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {

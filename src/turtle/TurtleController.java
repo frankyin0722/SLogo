@@ -72,7 +72,7 @@ public class TurtleController extends Group implements Listener {
 				active.set(newindices.get(i)-1, true);
 			}
 		}
-		System.out.println(active);
+		//System.out.println(active);
 	}
 	
 	//get Turtle at index

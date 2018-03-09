@@ -63,7 +63,7 @@ public class Parser implements TreeGenerator{
 			generateInputHandlerMap();
 			while (getIndex() < userInput.size()) {
 				commandInitializer.initialize(language);
-				System.out.println("parsing done");
+				//System.out.println("parsing done");
 				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
 				myInterpreter.iterateUDC(myInterpreter.getUserCommands());
 			}
@@ -120,7 +120,7 @@ public class Parser implements TreeGenerator{
 		for (Pattern pattern : inputHandlerMap.keySet()) {
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				System.out.println(cmdType);
+				//System.out.println(cmdType);
 				cmdType.recurse(root);
 				break;
 			}
