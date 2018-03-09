@@ -23,7 +23,6 @@ public class CommandTreeInterpreter {
 	private CommandManager myCommandManager;
 	private VariableManager myVariables;
 	private TurtleController myTurtleController;
-	//private List<Turtle> myTurtles;
 	private HashMap<String, CommandNode> userDefinedCommands;
 	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 1;
@@ -31,7 +30,6 @@ public class CommandTreeInterpreter {
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
-	//private List<Integer> activeTurtles;
 	private int currentTurtle; 
 
 	
@@ -81,9 +79,9 @@ public class CommandTreeInterpreter {
 		updateNodeValue(myRoot, Parameters);
 	}
 	
-	/*private ControlCommandParameterFilter(int paramIndex, CommandNode commandNode, ) {
+	private void ControlCommandParameterFilter(int paramIndex, CommandNode commandNode) {
 		
-	}*/
+	}
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
@@ -202,9 +200,6 @@ public class CommandTreeInterpreter {
 		return myTurtleController.getActiveTurtleIndices();
 	}
 	
-	/*public void setCurrentActiveTurtleIndices(List<Integer> newactiveindices) {
-		activeTurtles = newactiveindices;
-	}*/
 	public TurtleController getTurtleController() {
 		return myTurtleController;
 	}
@@ -251,11 +246,9 @@ public class CommandTreeInterpreter {
 	}
 	
 	public void iterateUDC(HashMap<String, CommandNode> map) {
-//		System.out.print("XXXXX at iterateUDC");
 		for (String key: map.keySet()) {
 			CommandNode command = map.get(key);
 			addToActiveUDC(key, "");
-//			addToActiveUDC(key, iterateNode(command));
 		}
 	}
 		
@@ -272,11 +265,8 @@ public class CommandTreeInterpreter {
 	}
 	
 	public void addToActiveUDC(String commandName, String commandAction) {
-//		if (activeUDC.get(commandName) == null) {
 			activeUDC.put(commandName, commandAction);
-//			System.out.print("XXXXX addToActive UDC" + commandName + commandAction);
 			notifyUDCListeners();
-//		}
 	}
 	
 	public void addUDCListener(Listener l) {
