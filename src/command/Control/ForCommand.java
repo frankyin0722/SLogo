@@ -29,7 +29,7 @@ public class ForCommand implements Command{
 		int end = (int) myParameters.get(END_INDEX).getNodeValue();
 		int increment = (int) myParameters.get(INCREMENT_INDEX).getNodeValue();
 		
-		for (int i = start; i < end; i = i + increment) {
+		for (int i = start; i <= end; i = i + increment) {
 			for (int j = 0; j < mySubCommands.size(); j++) {
 				myInterpreter.interpretTree(mySubCommands.get(j));
 			}

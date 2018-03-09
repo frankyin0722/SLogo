@@ -16,10 +16,6 @@ public class EqualCommand implements Command {
 	 * returns 1 if equal, else 0
 	 */
 	public double execute(){
-		if (((input1 == input2) ? 1:0)==1) {
-			System.out.println("evaluates to 1!!!!!!!!!");
-		}
-		System.out.println("equal result: "+ ((input1 == input2) ? 1:0));
 		return (Math.abs(input1-input2)<delta) ? 1:0;
 	}
 	

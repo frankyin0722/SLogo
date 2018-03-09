@@ -14,6 +14,6 @@ public class IsShowingCommand implements Command {
 	}
 	
 	public double execute(){
-		return myTurtle.isVisible()?1:0;
+		return myTurtle.checkVisibility()?1:0;
 	}
 }
