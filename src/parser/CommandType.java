@@ -1,6 +1,7 @@
 package parser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -149,7 +150,7 @@ public class CommandType implements CommandTypes {
 	}
 	
 	public List<String> getUserInput(){
-		return userInput;
+		return Collections.unmodifiableList(userInput);
 	}
 
 	@Override
