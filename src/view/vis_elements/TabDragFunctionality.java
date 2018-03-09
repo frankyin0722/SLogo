@@ -25,6 +25,8 @@ public class TabDragFunctionality {
 	    private static final AtomicLong idGenerator = new AtomicLong();
 	
 	    private final String draggingID = "DraggingTabPaneSupport-"+idGenerator.incrementAndGet() ;
+	    
+	    public TabDragFunctionality() {}
 	
 	    public void addSupport(TabPane tabPane) {
 	        tabPane.getTabs().forEach(this::addDragHandlers);

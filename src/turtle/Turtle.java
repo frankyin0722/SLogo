@@ -145,5 +145,8 @@ public class Turtle extends Group {
     		pen.setColor(colors.get(index));
     		//throw error if oob
     }
+    public void inform() {
+    	
+    }
     
 }

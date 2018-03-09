@@ -35,7 +35,7 @@ public class GroupStartType implements CommandTypes{
 		if (child.getNodeChildren().size()!=0) {
 			CommandNode unlimitedCommand = child.getNodeChildren().get(0); // get the first command that has unlimited property 
 			int paramSize = unlimitedCommand.getNodeChildren().size();
-			List<CommandNode> parameters = new ArrayList<CommandNode>();
+			List<CommandNode> parameters = new ArrayList<>();
 			for (int i = 1; i < child.getNodeChildren().size(); i++) {
 				parameters.add(child.getNodeChildren().get(i));
 			}

@@ -10,14 +10,13 @@ import java.util.List;
 import alerts.Alerts;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import view.vis_elements.CommandWindow;
 
-public class LoadFileButton extends Button {
+public class LoadFileButton extends BaseButton {
 	public LoadFileButton() {
-		this.setText("Load File");
+		super("Load File");
 	}
 	
 	public void loadFile(CommandWindow cw) {
@@ -49,7 +48,7 @@ public class LoadFileButton extends Button {
     }
 	
 	private List<String> readFile(File file) {
-		List<String> lines = new ArrayList<String>();
+		List<String> lines = new ArrayList<>();
 		String line;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));

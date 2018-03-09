@@ -13,14 +13,13 @@ import alerts.Alerts;
 import interpreter.CommandTreeInterpreter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class SaveFileButton extends Button {
+public class SaveFileButton extends BaseButton {
 	private Document myDocument;
 	public SaveFileButton() {
-		this.setText("Save");
+		super("Save");
 	}
 	
 	public void save(CommandTreeInterpreter interpreter) {

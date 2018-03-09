@@ -46,7 +46,7 @@ public class Parser implements TreeGenerator{
 	
 	private void parseInput(String input) {
 		List<String> parsebylines = Arrays.asList(input.split("\n"));
-		List<String> commentsprocessedout = new ArrayList<String>();
+		List<String> commentsprocessedout = new ArrayList<>();
 		userInput = new ArrayList<String>();
 		for (int i = 0; i < parsebylines.size(); i++) {
 			if (parsebylines.get(i).indexOf("#")==-1 && !parsebylines.get(i).equals("")) {

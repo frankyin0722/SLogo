@@ -14,9 +14,10 @@ import javafx.scene.paint.Color;
 import observables.Listener;
 import turtle.Turtle;
 import turtle.TurtleController;
-import view.IVisualConstants;
+import observables.Listener;
+import slogo_team08.IConstants;
 
-public class DrawingWindow extends Pane implements Listener, IVisualConstants {
+public class DrawingWindow extends Pane implements Listener, IConstants {
 	public static final double INITIAL_WIDTH = 695;
 	public static final double INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;
@@ -35,7 +36,6 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 		setupInitialCanvas();
 //		setupTurtle();
 //		myTurtle.changeX(myTurtle.getX() + 300);
-		initializeColorPicker();
 	}
 	
 	private void setupDrawingWindow() {
@@ -48,20 +48,7 @@ public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 		this.setBackgroundColor(INITIAL_COLOR);
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void initializeColorPicker() {
-		ColorPicker colorPicker = new ColorPicker();
-		colorPicker.setStyle("-fx-color-label-visible: false ;");
-		colorPicker.setOnAction(new EventHandler() {
-			@Override
-			public void handle(Event event) {
-				setBackgroundColor(colorPicker.getValue());
-			}
-		});
-		this.getChildren().add(colorPicker);
-	}
-		
-	private void setBackgroundColor(Color color) {
+	public void setBackgroundColor(Color color) {
 		String hex = String.format( "#%02X%02X%02X",
 	            (int)( color.getRed() * 255 ),
 	            (int)( color.getGreen() * 255 ),

@@ -12,9 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import slogo_team08.IConstants;
 import turtle.Turtle;
 import turtle.TurtleController;
-import view.IVisualConstants;
 import view.canvas.ScrollingDrawingWindow;
 
 /**
@@ -25,17 +25,14 @@ import view.canvas.ScrollingDrawingWindow;
  * Initializes and arranges each of the elements within the scene
  * 
  */
-public class Visualization extends BorderPane implements IVisualConstants {
+public class Visualization extends BorderPane implements IConstants {
 	private ResourceBundle myResources;
-	private ScrollingDrawingWindow myScrollingDrawingWindow;
+	private ScrollingDrawingWindow myExternalCanvas;
 	private TurtleController myTurtleController;
 	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
-	private ControlPanelLeft myControlPanelLeft;
-	private Turtle myDefaultTurtle;
-	private List<Turtle> myTurtles;
-	
+	private ControlPanelLeft myControlPanelLeft;	
 	
 	public Visualization() {
 		initializeAll();
@@ -45,27 +42,27 @@ public class Visualization extends BorderPane implements IVisualConstants {
 	private void initializeAll() {
 		setLanguage(DEFAULT_LANGUAGE);
 		
-		myScrollingDrawingWindow = new ScrollingDrawingWindow();
+		myExternalCanvas = new ScrollingDrawingWindow();
 		myTurtleController = new TurtleController(
 				new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE)),
 				INTERNAL_CANVAS_WIDTH/2,
 				INTERNAL_CANVAS_HEIGHT/2,
 				TURTLE_WIDTH,
 				TURTLE_HEIGHT,
-				myScrollingDrawingWindow.getInternalCanvas());
+				myExternalCanvas.getInternalCanvas());
 
 		//myTurtles = myTurtleController.getActiveTurtles();
 		
 		interpreter = new CommandTreeInterpreter(myTurtleController);
-		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myTurtleController);		
+		myControlPanelRight = new ControlPanelRight(interpreter);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtleController.getAllTurtles(), myResources);
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myResources);
 	}
 	
 	private void initializeLayout() {		
 		this.setPadding(new Insets(20,20,20,20));
 //		this.setTop(new InfoTop());
-		this.setCenter(myScrollingDrawingWindow);
+		this.setCenter(myExternalCanvas);
 		this.setBottom(myControlTextInput);
 		this.setRight(myControlPanelRight);
 		this.setLeft(myControlPanelLeft);
