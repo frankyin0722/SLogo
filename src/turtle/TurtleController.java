@@ -92,6 +92,7 @@ public class TurtleController extends Group {
 		for (int i=0; i<turtles.size(); i++) {
 			if (turtles.get(i).equals(offTurtle)) {
 				active.set(i, !active.get(i));
+				turtles.get(i).setOpaque(active.get(i));
 			}
 		}
 		notifyListeners();

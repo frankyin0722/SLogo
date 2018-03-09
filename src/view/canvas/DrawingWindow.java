@@ -81,21 +81,22 @@ public class DrawingWindow extends Pane implements Listener, IConstants {
 		ObservableList<Turtle> turtles =FXCollections.observableArrayList (
 				myTurtleController.getActiveTurtles());
 		updateTurtles(turtles);
-//		updatePreviousTurtles(turtles);
 	}
 	
 	private void updateTurtles(ObservableList<Turtle> turtles) {
 		for (Turtle t: turtles) {
 			if (!this.getChildren().contains(t)) {
 				this.getChildren().add(t);
-				t.setOnMouseClicked(e -> changeTurtleStatus(t));
+				t.setOnMouseClicked(e -> {
+					if (e.getClickCount() == 1) {
+						myTurtleController.changeTurtleStatus(t);
+					}
+				});
 			}
 		}
 	}
 	
-	private void changeTurtleStatus(Turtle t) {
-		myTurtleController.changeTurtleStatus(t);
-	}
+
 //	private void updateTurtles(ObservableList<Turtle> turtles) {
 //		for (Turtle t: turtles) {
 //			if (!turtleInList(myPreviousTurtles, t)) {

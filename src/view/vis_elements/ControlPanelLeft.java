@@ -11,10 +11,10 @@ import view.menus.TurtleMenu;
 import view.menus.UserCommandsMenu;
 
 public class ControlPanelLeft extends VBox {
-
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle resources;
 	
+
 	public ControlPanelLeft(CommandTreeInterpreter i, ResourceBundle r) {
 		interpreter = i;
 		resources = r;
@@ -25,7 +25,7 @@ public class ControlPanelLeft extends VBox {
 		this.getChildren().addAll(
 				new HistoryMenu(interpreter, resources), 
 				new UserCommandsMenu(interpreter, resources),
-				new TurtleMenu(resources, interpreter.getCurrentActiveTurtles()), 
+				new TurtleMenu(resources, interpreter.getTurtleController()), 
 				new PenMenu(resources, interpreter.getTurtleController()),
 				new ColorPaletteMenu("GreenPalette"));
 	}

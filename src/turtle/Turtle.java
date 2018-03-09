@@ -11,7 +11,8 @@ import javafx.scene.shape.Line;
 
 public class Turtle extends Group {
 	private Pen pen = new Pen();
-	private ImageView myImage;
+//	private ImageView myImage;
+	private DraggableImageView myImage;
 	private double direction = 0;
 	private double zeroX;
 	private double zeroY;
@@ -30,7 +31,8 @@ public class Turtle extends Group {
 		super();
 		zeroX = x- width/2;
 		zeroY = y - height/2;
-		myImage = new ImageView(image);
+		myImage = new DraggableImageView(this, image);
+//		myImage = new ImageView(image);
 		myImage.setX(zeroX);
 		oldX = 0;
 		myImage.setY(zeroY);
@@ -149,4 +151,8 @@ public class Turtle extends Group {
     	
     }
     
+    public void setOpaque(boolean active) {
+    		if (active) myImage.setOpacity(1.0);
+    		if (!active) myImage.setOpacity(0.5);
+    }
 }

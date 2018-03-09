@@ -12,6 +12,7 @@ public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;
 	private CommandTreeInterpreter interpreter;
 	
+
 	public ControlPanelRight(CommandTreeInterpreter i) {
 		interpreter = i;
 		initializeMenus();
@@ -27,7 +28,6 @@ public class ControlPanelRight extends VBox {
 				new CustomVarsMenu(interpreter),
 				myLanguageMenu,
 				new HelpMenu(interpreter)
-//				new TurtleSelectionMenu(tc)
 				);
 	}
 
