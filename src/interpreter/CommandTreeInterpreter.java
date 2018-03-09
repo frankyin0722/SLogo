@@ -131,7 +131,7 @@ public class CommandTreeInterpreter {
 				System.out.println("current depth value: "+Parameters.get(i));
 			}
 		}
-		List<Object> paramForUserDefinedCommand = new ArrayList<Object>();
+		List<Object> paramForUserDefinedCommand = new ArrayList<>();
 		String myDefinedCommandName = node.getCommandName();
 		paramForUserDefinedCommand.add(myDefinedCommandName);
 		paramForUserDefinedCommand.add(this);
@@ -141,7 +141,7 @@ public class CommandTreeInterpreter {
 		int individualParameterSize = node.getNodeChildren().size();
 		int paramCount = 0; 
 		for (int i = 0; i < myTurtleController.getActiveTurtleIndices().size(); i++) {
-			List<Object> individualParameter = new ArrayList<Object>();
+			List<Object> individualParameter = new ArrayList<>();
 			for (int j = 0; j < individualParameterSize; j++) {
 				individualParameter.add(Parameters.get(paramCount));
 				paramCount++;

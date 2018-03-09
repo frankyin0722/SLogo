@@ -13,7 +13,7 @@ public class CollectionsDemo {
 	public static void main(String[] args) {
  
         // Use Java Collections to create the List.
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
  
         // Now add observability by wrapping it with ObservableList.
     ObservableList<String> observableList = FXCollections.observableList(list);
