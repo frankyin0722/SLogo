@@ -137,7 +137,10 @@ public class CommandTreeInterpreter {
 	
 	private void updateTurtle(CommandNode node, List<Object> Parameters) {
 		int individualParameterSize = node.getNodeChildren().size();
-		int totalParamPairNum = Parameters.size()/individualParameterSize;
+		int totalParamPairNum = 0;
+		if (individualParameterSize!=0) {
+			totalParamPairNum = Parameters.size()/individualParameterSize;
+		}
 		for (int i = 0; i < myTurtleController.getActiveTurtleIndices().size(); i++) {
 			List<Object> individualParameter = new ArrayList<>();
 			for (int j = 0; j < individualParameterSize; j++) {
