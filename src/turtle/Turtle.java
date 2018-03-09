@@ -165,7 +165,7 @@ public class Turtle extends Group {
     }
     
     public void setOpaque(boolean active) {
-    		if (active) myImage.setOpacity(1.0);
-    		if (!active) myImage.setOpacity(0.5);
-    }
+		myImage.setOpacity(active?1:0.5);
+}
+
 }
