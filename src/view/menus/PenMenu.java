@@ -5,12 +5,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import observables.Listener;
-import turtle.Pen;
 import turtle.Turtle;
 import turtle.TurtleController;
 import view.supplements.HBoxPenChanger;
