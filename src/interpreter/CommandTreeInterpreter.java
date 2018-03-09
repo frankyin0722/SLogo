@@ -53,23 +53,10 @@ public class CommandTreeInterpreter {
 		for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
 			switch (myRoot.getCommandType()) {
 			case "Control":
-				if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith") && !myRoot.getCommandName().equals("Define")) {
-					interpretTree(myRoot.getNodeChildren().get(i));
-				}
-				Parameters.add(myRoot.getNodeChildren().get(i));
+				interpretControl(i, myRoot, Parameters);
 				break;
 			case "Turtle":
-				for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
-					currentTurtle = myTurtleController.getActiveTurtleIndices().get(t); // 0 index refers to 1 turtle 
-					interpretTree(myRoot.getNodeChildren().get(i));
-					Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
-				}
-				if (myTurtleController.getActiveTurtleIndices().size()==0) {
-					currentTurtle = 0;
-				}
-				else {
-					currentTurtle = myTurtleController.getActiveTurtleIndices().get(0); // reset the current turtle to be the first in active turtle list 
-				}
+				interpretTurtle(i, myRoot, Parameters);
 				break;
 			default:
 				interpretTree(myRoot.getNodeChildren().get(i));
@@ -80,7 +67,25 @@ public class CommandTreeInterpreter {
 	
 		updateNodeValue(myRoot, Parameters);
 	}
-	
+	private void interpretControl(int i, CommandNode myRoot, List<Object> Parameters) {
+		if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith") && !myRoot.getCommandName().equals("Define")) {
+			interpretTree(myRoot.getNodeChildren().get(i));
+		}
+		Parameters.add(myRoot.getNodeChildren().get(i));
+	}
+	private void interpretTurtle(int i, CommandNode myRoot, List<Object> Parameters) {
+		for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
+			currentTurtle = myTurtleController.getActiveTurtleIndices().get(t); // 0 index refers to 1 turtle 
+			interpretTree(myRoot.getNodeChildren().get(i));
+			Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
+		}
+		if (myTurtleController.getActiveTurtleIndices().size()==0) {
+			currentTurtle = 0;
+		}
+		else {
+			currentTurtle = myTurtleController.getActiveTurtleIndices().get(0); // reset the current turtle to be the first in active turtle list 
+		}
+	}
 	/*private ControlCommandParameterFilter(int paramIndex, CommandNode commandNode, ) {
 		
 	}*/
