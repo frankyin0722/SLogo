@@ -10,9 +10,7 @@ public class DraggableImageView extends ImageView {
         super(image);
         this.setOnMouseClicked(e -> {
         		if (e.getClickCount() == 2) {
-        			
         			turtle.setDirection(turtle.getDirection() + Math.PI/2);
-        			turtle.update();
         		}
         });
         this.setOnMousePressed(e -> {
