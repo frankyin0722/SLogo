@@ -6,11 +6,9 @@ import turtle.Turtle;
 
 public class ShowTurtleCommand implements Command{
 	private Turtle myTurtle;
-	private CommandTreeInterpreter myInterpreter;
 	
-	public ShowTurtleCommand(CommandTreeInterpreter tree){
-		myInterpreter = tree;
-		myTurtle = myInterpreter.getCurrentAvailableTurtles().get(myInterpreter.getCurrentActiveTurtleIndex()-1);
+	public ShowTurtleCommand(Turtle turtle){
+		myTurtle = turtle;
 	}
 	
 	public double execute(){
