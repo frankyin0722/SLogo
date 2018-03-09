@@ -28,8 +28,6 @@ public class TurtleController extends Group {
 	
 	public TurtleController(DrawingWindow dw) {
 		setupTurtleController(dw);
-		//addDefaultTurtle();
-		//addTestTurtle();
 	}
 	
 	public TurtleController(Image image, double x, double y, double width, double height, DrawingWindow dw) {
@@ -38,8 +36,8 @@ public class TurtleController extends Group {
 		myHeight = height;
 		turtleWidth = x;
 		turtleHeight = y;
-		addActiveTurtle(image, x, y, width, height);
 		myImage = image;
+		addActiveTurtle(image, x, y, width, height);
 		notifyListeners();
 
 	}
@@ -58,31 +56,7 @@ public class TurtleController extends Group {
 		active.add(true);
 		notifyListeners();
 	}
-	
-	private Turtle defaultTurtle() {
-		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-		return new Turtle(turtleImage, INITIAL_WIDTH/2, INITIAL_HEIGHT/2, TURTLE_WIDTH, TURTLE_HEIGHT);
-	}
-	
-	private Turtle testTurtle() {
-		Image turtleImage = new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_IMAGE));
-		return new Turtle(turtleImage, 2500-100, 2500-100, TURTLE_WIDTH, TURTLE_HEIGHT);
-	}
-		
-	private void addDefaultTurtle() {
-		Turtle defaultTurtle = defaultTurtle();
-		turtles.add(defaultTurtle);
-		active.add(true);
-		notifyListeners();
-	}
-	
-	private void addTestTurtle() {
-		Turtle testTurtle = testTurtle();
-		turtles.add(testTurtle);
-		active.add(true);
-		notifyListeners();
 
-	}
 			
 	// makes num new turtles
 	public void makeNewTurtles(int num) {
