@@ -105,35 +105,13 @@ public class CommandTreeInterpreter {
 			case "Constant":
 				break;
 			case "Variable":
-				if (!myVariables.checkVariable(node.getCommandName())) {
-					Variable newvar = new Variable((double) 0);
-					myVariables.addVariable(newvar, node.getCommandName());
-				}
-				node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
+				updateVariable(node, Parameters);
 				break;
 			case "Bracket":
-				if (node.getNodeChildren().size()!=0) {
-					System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
-					node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
-				}
-				else {
-					node.setNodeValue(0.0);
-				}
+				updateBracket(node, Parameters);
 				break;
 			case "GroupBracket":
-				if (node.getNodeChildren().size()!=0) {
-					//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
-					double totalValue = 0;
-					System.out.println(node.getNodeChildren().size());
-					for (CommandNode sub : node.getNodeChildren()) {
-						totalValue = totalValue + sub.getNodeValue();
-					}
-					node.setNodeValue(totalValue);
-				}
-				else {
-					node.setNodeValue(0.0);
-				}
-				System.out.println(node.getNodeValue());
+				updateGroupBracket(node, Parameters);
 				break;
 			default: 
 				createCommand(node, Parameters);
@@ -171,6 +149,37 @@ public class CommandTreeInterpreter {
 			individualParameter.add(myTurtleController.getTurtle(myTurtleController.getActiveTurtleIndices().get(i)-1));
 			createCommand(node,individualParameter);
 		}
+	}
+	private void updateVariable(CommandNode node, List<Object> Parameters) {
+		if (!myVariables.checkVariable(node.getCommandName())) {
+			Variable newvar = new Variable((double) 0);
+			myVariables.addVariable(newvar, node.getCommandName());
+		}
+		node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
+	}
+	private void updateBracket(CommandNode node, List<Object> Parameters) {
+		if (node.getNodeChildren().size()!=0) {
+			System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+			node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+		}
+		else {
+			node.setNodeValue(0.0);
+		}
+	}
+	private void updateGroupBracket(CommandNode node, List<Object> Parameters) {
+		if (node.getNodeChildren().size()!=0) {
+			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+			double totalValue = 0;
+			System.out.println(node.getNodeChildren().size());
+			for (CommandNode sub : node.getNodeChildren()) {
+				totalValue = totalValue + sub.getNodeValue();
+			}
+			node.setNodeValue(totalValue);
+		}
+		else {
+			node.setNodeValue(0.0);
+		}
+		System.out.println(node.getNodeValue());
 	}
 	private void createCommand(CommandNode node, List<Object> parameters) {
 		Class<?> commandClass = null;
