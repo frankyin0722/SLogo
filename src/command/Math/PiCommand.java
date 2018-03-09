@@ -5,10 +5,12 @@ import command.Command;
  * returns the math constant pi
  */
 public class PiCommand implements Command{
-	/**
-	 * no parameters, so no need to store anything
-	 */
-	public PiCommand (){}
+	
+	public PiCommand (){
+		/**
+		 * no parameters, so no need to store anything
+		 */
+	}
 	/**
 	 * returns pi
 	 */
