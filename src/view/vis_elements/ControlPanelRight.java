@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import view.menus.CustomVarsMenu;
 import view.menus.HelpMenu;
 import view.menus.LanguageMenu;
+import view.menus.TurtleInfoMenu;
 
 public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;
@@ -19,15 +20,13 @@ public class ControlPanelRight extends VBox {
 	}
 
 	private void initializeMenus() {
-//		myLanguageMenu = new LanguageMenu();
-//		this.getChildren().addAll(new VariableMenu(), myLanguageMenu, new CustomVarsMenu());
+
 		myLanguageMenu = new LanguageMenu();
-		
 		this.getChildren().addAll(
-//				new VariableMenu(),
 				new CustomVarsMenu(interpreter),
 				myLanguageMenu,
-				new HelpMenu(interpreter)
+				new HelpMenu(interpreter),
+				new TurtleInfoMenu(interpreter.getTurtleController())
 				);
 	}
 

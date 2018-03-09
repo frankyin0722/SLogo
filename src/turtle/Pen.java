@@ -1,12 +1,17 @@
 package turtle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import observables.Listener;
 
 public class Pen {
 	private Color color;
 	private boolean up;
 	private double width;
+	private List<Listener> myListeners;
 	
 	public Pen() {
 		this(Color.BLACK, false, 1);
@@ -16,6 +21,7 @@ public class Pen {
 		color = c;
 		this.up = up;
 		this.width = width;
+		myListeners = new ArrayList<>();
 	}
 	
 	//returns if the pen is up
@@ -26,22 +32,39 @@ public class Pen {
     //sets pen to up for true, down for false
     public void setPen(boolean penUp) {
     		up = penUp;
+    		notifyListeners();
+
     }
 
     //sets pen color
     public void setColor(Color color) {
     		this.color = color;
+    		notifyListeners();
+
     }
     
     //changes the width of the pen
     public void setWidth(double newWidth) {
     		width = newWidth;
+    		notifyListeners();
+
     }
     
     //make a line
     public void update(Line line) {
     		line.setStrokeWidth(width);
     		line.setStroke(color);
+    		notifyListeners();
+    }
+    
+    public void addListener(Listener l) {
+		myListeners.add(l);
+}
+
+    public void notifyListeners() {
+		for (Listener l: myListeners) {
+			l.update();
+		}
     }
     
     //prints current state
