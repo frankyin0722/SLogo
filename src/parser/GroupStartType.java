@@ -41,11 +41,11 @@ public class GroupStartType implements CommandTypes{
 			}
 			int groupChildSize = child.getNodeChildren().size();
 			int otherCommandNum = (groupChildSize-1)/paramSize;
-			System.out.println(otherCommandNum);
+			//System.out.println(otherCommandNum);
 			for (int i = child.getNodeChildren().size()-1; i >= 1 ; i--) {
 				child.getNodeChildren().remove(i);
 			}
-			System.out.println(child.getNodeChildren().size());
+			//System.out.println(child.getNodeChildren().size());
 			if (((groupChildSize-1) % paramSize)!=0) { 
 				Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError6");
 				return;

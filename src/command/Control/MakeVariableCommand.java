@@ -20,6 +20,8 @@ public class MakeVariableCommand implements Command {
 	@Override
 	public double execute() {
 		variableDeclare(myVariable);
+		if(myVariable.getCommandName().equals(":x"))
+			System.out.println("HIHI" + myVariable.getNodeValue() + myVariable.getCommandName());
 		return myVariable.getNodeValue();
 	}
 	

@@ -101,6 +101,10 @@ public class Turtle extends Group {
     
     public void setVisibility(boolean visible) {
     		myImage.setVisible(visible);
+    		System.out.println(myImage.isVisible());
+    }
+    public boolean checkVisibility() {
+    		return myImage.isVisible();
     }
     public void setImage(Image newImage) {
     		myImage.setImage(newImage);
@@ -126,6 +130,7 @@ public class Turtle extends Group {
     		result+="Turtle ID: " + Integer.toString(i) + "\n";
     		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
     		result+="Heading: " + Math.toDegrees(direction) + "\n";
+    		result+="Visible: " + myImage.isVisible() + "\n";
     		result+= pen.toString();
     		return result;
     }
