@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -22,8 +23,6 @@ import view.IVisualConstants;
 
 public class ColorPaletteMenu extends TitledPane implements IVisualConstants {
 
-	private static final String COLOR_RESOURCE_PACKAGE = "resources.colors/";
-	private String colors;
 	private ResourceBundle myResources;
 	private HashMap<Integer, Paint> indexToColor;
 	
@@ -32,11 +31,18 @@ public class ColorPaletteMenu extends TitledPane implements IVisualConstants {
 	}
 		
 	public ColorPaletteMenu(String colorPalette) {
-		colors = colorPalette;
-		myResources = ResourceBundle.getBundle(COLOR_RESOURCE_PACKAGE + colors);
+		initializeFormat(colorPalette);
+	}
+	
+	private void initializeFormat(String colorPalette) {
+		try {
+			myResources = ResourceBundle.getBundle(COLOR_RESOURCE_PACKAGE + colorPalette);
+			buildMenu();
+		} catch (MissingResourceException e) {
+			new Alert(AlertType.ERROR, "Invalid color properties file: Check resource location and name", ButtonType.OK).showAndWait();
+		}
 		this.setText("Default Color Options");
 		this.setExpanded(false);
-		buildMenu();
 	}
 	
 	private void buildMenu() {
@@ -49,10 +55,8 @@ public class ColorPaletteMenu extends TitledPane implements IVisualConstants {
 				indexToColor.put(i, Color.valueOf(myResources.getString(myKeys.get(i))));
 				myColorOptions.add(buildHbox(myKeys.get(i), i));
 			} catch (IllegalArgumentException e) {
-				Alert alert = new Alert(AlertType.INFORMATION, "Illegal Paint Type on "+myKeys.get(i), ButtonType.OK);
-				alert.showAndWait();
+				new Alert(AlertType.INFORMATION, "Illegal Paint Type on " + myKeys.get(i), ButtonType.OK).showAndWait();
 			}
-			
 		}
 		ListView<HBox> colorDisplay = new ListView<HBox>();
 		colorDisplay.setItems(FXCollections.observableArrayList(myColorOptions));
