@@ -40,9 +40,9 @@ public class TurtleController extends Group {
 		turtleHeight = y;
 		addActiveTurtle(image, x, y, width, height);
 		myImage = image;
-		Turtle newTurtle = new Turtle(image, x, y, width, height);
-		turtles.add(newTurtle);
-		active.add(true);
+//		Turtle newTurtle = new Turtle(image, x, y, width, height);
+//		turtles.add(newTurtle);
+//		active.add(true);
 		notifyListeners();
 
 	}
