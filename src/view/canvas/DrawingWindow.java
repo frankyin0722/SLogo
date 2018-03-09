@@ -14,9 +14,10 @@ import javafx.scene.paint.Color;
 import observables.Listener;
 import turtle.Turtle;
 import turtle.TurtleController;
-import view.IVisualConstants;
+import observables.Listener;
+import slogo_team08.IConstants;
 
-public class DrawingWindow extends Pane implements Listener, IVisualConstants {
+public class DrawingWindow extends Pane implements Listener, IConstants {
 	public static final double INITIAL_WIDTH = 695;
 	public static final double INITIAL_HEIGHT = 500;
 	public static final int TURTLE_WIDTH = 25;

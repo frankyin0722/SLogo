@@ -1,8 +1,8 @@
-package view;
+package slogo_team08;
 
 import javafx.scene.paint.Color;
 
-public interface IVisualConstants {
+public interface IConstants {
 
 	public static final int INITIAL_SCENE_WIDTH = 1235;
 	public static final int INITIAL_SCENE_HEIGHT = 710;
@@ -18,6 +18,8 @@ public interface IVisualConstants {
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
 	public static final String DEFAULT_LANGUAGE = "English";
+	public static final String DEFAULT_COLOR_PALETTE = "BasicRainbowPalette";
+	public static final String COLOR_RESOURCE_PACKAGE = "resources.colors/";
 
 
 }
