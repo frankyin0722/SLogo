@@ -20,7 +20,7 @@ public class Alerts {
 	public static void XMLCreated(String filepath) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(Resources.getString("XMLSuccess"));
-		alert.setContentText("filler");
+		alert.setContentText("File created and saved");
 		Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             alert.close();
@@ -29,7 +29,7 @@ public class Alerts {
 	public static void XMLRead(String filepath) {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle(Resources.getString("XMLSuccess2"));
-		alert.setContentText("filler");
+		alert.setContentText("file successfully read");
 		Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK) {
             alert.close();
