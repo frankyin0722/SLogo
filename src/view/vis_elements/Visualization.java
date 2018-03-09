@@ -12,9 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import slogo_team08.IVisualConstants;
 import turtle.Turtle;
 import turtle.TurtleController;
-import view.IVisualConstants;
 import view.canvas.ScrollingDrawingWindow;
 
 /**

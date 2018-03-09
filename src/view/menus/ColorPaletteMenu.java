@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import view.IVisualConstants;
+import slogo_team08.IVisualConstants;
 
 public class ColorPaletteMenu extends TitledPane implements IVisualConstants {
 

@@ -15,8 +15,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import turtle.Turtle;
 import turtle.TurtleController;
-import view.IVisualConstants;
 import observables.Listener;
+import slogo_team08.IVisualConstants;
 
 public class DrawingWindow extends Pane implements Listener, IVisualConstants {
 	public static final double INITIAL_WIDTH = 695;

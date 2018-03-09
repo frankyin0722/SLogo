@@ -1,4 +1,4 @@
-package view;
+package slogo_team08;
 
 import javafx.scene.paint.Color;
 

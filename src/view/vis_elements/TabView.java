@@ -6,7 +6,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import view.IVisualConstants;
+import slogo_team08.IVisualConstants;
 
 public class TabView implements IVisualConstants {
 
