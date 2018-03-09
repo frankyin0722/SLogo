@@ -27,7 +27,7 @@ import view.canvas.ScrollingDrawingWindow;
  */
 public class Visualization extends BorderPane implements IConstants {
 	private ResourceBundle myResources;
-	private ScrollingDrawingWindow myScrollingDrawingWindow;
+	private ScrollingDrawingWindow myExternalCanvas;
 	private TurtleController myTurtleController;
 	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
@@ -42,27 +42,27 @@ public class Visualization extends BorderPane implements IConstants {
 	private void initializeAll() {
 		setLanguage(DEFAULT_LANGUAGE);
 		
-		myScrollingDrawingWindow = new ScrollingDrawingWindow();
+		myExternalCanvas = new ScrollingDrawingWindow();
 		myTurtleController = new TurtleController(
 				new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE)),
 				INTERNAL_CANVAS_WIDTH/2,
 				INTERNAL_CANVAS_HEIGHT/2,
 				TURTLE_WIDTH,
 				TURTLE_HEIGHT,
-				myScrollingDrawingWindow.getInternalCanvas());
+				myExternalCanvas.getInternalCanvas());
 
 		//myTurtles = myTurtleController.getActiveTurtles();
 		
 		interpreter = new CommandTreeInterpreter(myTurtleController);
-		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myTurtleController);		
+		myControlPanelRight = new ControlPanelRight(interpreter);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtleController.getAllTurtles(), myTurtleController, myResources);
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myResources);
 	}
 	
 	private void initializeLayout() {		
 		this.setPadding(new Insets(20,20,20,20));
 //		this.setTop(new InfoTop());
-		this.setCenter(myScrollingDrawingWindow);
+		this.setCenter(myExternalCanvas);
 		this.setBottom(myControlTextInput);
 		this.setRight(myControlPanelRight);
 		this.setLeft(myControlPanelLeft);

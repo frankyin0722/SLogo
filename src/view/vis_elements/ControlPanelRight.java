@@ -4,35 +4,35 @@ import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
-import turtle.TurtleController;
 import view.menus.CustomVarsMenu;
 import view.menus.HelpMenu;
 import view.menus.LanguageMenu;
 
 public class ControlPanelRight extends VBox {
 	private LanguageMenu myLanguageMenu;
-	private ResourceBundle myResources;
 	private CommandTreeInterpreter interpreter;
 	
-	public ControlPanelRight(CommandTreeInterpreter i, ResourceBundle resources, TurtleController tc) {
+	public ControlPanelRight(CommandTreeInterpreter i) {
 		interpreter = i;
-		initializeMenus(tc);
+		initializeMenus();
 	}
 
-	private void initializeMenus(TurtleController tc) {
+	private void initializeMenus() {
 //		myLanguageMenu = new LanguageMenu();
 //		this.getChildren().addAll(new VariableMenu(), myLanguageMenu, new CustomVarsMenu());
+		myLanguageMenu = new LanguageMenu();
+		
 		this.getChildren().addAll(
 //				new VariableMenu(),
 				new CustomVarsMenu(interpreter),
-				myLanguageMenu = new LanguageMenu(),
-				new HelpMenu()
+				myLanguageMenu,
+				new HelpMenu(interpreter)
 //				new TurtleSelectionMenu(tc)
 				);
 	}
-	
+
 	public ResourceBundle getLanguage() {
-		myResources = myLanguageMenu.getLanguage();
-		return myResources;
+		return myLanguageMenu.getLanguage();
 	}
+
 }

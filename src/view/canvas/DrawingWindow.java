@@ -36,7 +36,6 @@ public class DrawingWindow extends Pane implements Listener, IConstants {
 		setupInitialCanvas();
 //		setupTurtle();
 //		myTurtle.changeX(myTurtle.getX() + 300);
-		initializeColorPicker();
 	}
 	
 	private void setupDrawingWindow() {
@@ -49,20 +48,7 @@ public class DrawingWindow extends Pane implements Listener, IConstants {
 		this.setBackgroundColor(INITIAL_COLOR);
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void initializeColorPicker() {
-		ColorPicker colorPicker = new ColorPicker();
-		colorPicker.setStyle("-fx-color-label-visible: false ;");
-		colorPicker.setOnAction(new EventHandler() {
-			@Override
-			public void handle(Event event) {
-				setBackgroundColor(colorPicker.getValue());
-			}
-		});
-		this.getChildren().add(colorPicker);
-	}
-		
-	private void setBackgroundColor(Color color) {
+	public void setBackgroundColor(Color color) {
 		String hex = String.format( "#%02X%02X%02X",
 	            (int)( color.getRed() * 255 ),
 	            (int)( color.getGreen() * 255 ),

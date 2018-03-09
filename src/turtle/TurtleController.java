@@ -138,4 +138,8 @@ public class TurtleController extends Group {
 	public int size() {
 		return turtles.size();
 	}
+	
+	public DrawingWindow getDrawingWindow() {
+		return myDrawingWindow;
+	}
 }
