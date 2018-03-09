@@ -1,6 +1,5 @@
 package slogo_team08;
 
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.vis_elements.TabView;
@@ -10,7 +9,9 @@ public class Engine {
 	private Scene myScene;
 	private TabView slogoView;
 	
-	public Engine() {}
+	public Engine() {
+		//no parameters needed to make a new engine
+	}
 	
 	public void initializeSimulation(Stage primaryStage) {
 		myStage = primaryStage;

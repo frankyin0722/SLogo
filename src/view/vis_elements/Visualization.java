@@ -3,7 +3,6 @@ package view.vis_elements;
 
 
 
-import java.util.List;
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
@@ -13,7 +12,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import slogo_team08.IConstants;
-import turtle.Turtle;
 import turtle.TurtleController;
 import view.canvas.ScrollingDrawingWindow;
 
