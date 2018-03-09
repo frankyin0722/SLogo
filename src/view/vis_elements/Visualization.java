@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import slogo_team08.IVisualConstants;
+import slogo_team08.IConstants;
 import turtle.Turtle;
 import turtle.TurtleController;
 import view.canvas.ScrollingDrawingWindow;
@@ -25,7 +25,7 @@ import view.canvas.ScrollingDrawingWindow;
  * Initializes and arranges each of the elements within the scene
  * 
  */
-public class Visualization extends BorderPane implements IVisualConstants {
+public class Visualization extends BorderPane implements IConstants {
 	private ResourceBundle myResources;
 	private ScrollingDrawingWindow myScrollingDrawingWindow;
 	private TurtleController myTurtleController;

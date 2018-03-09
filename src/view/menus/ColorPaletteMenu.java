@@ -19,9 +19,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import slogo_team08.IVisualConstants;
+import slogo_team08.IConstants;
 
-public class ColorPaletteMenu extends TitledPane implements IVisualConstants {
+public class ColorPaletteMenu extends TitledPane implements IConstants {
 
 	private ResourceBundle myResources;
 	private HashMap<Integer, Paint> indexToColor;

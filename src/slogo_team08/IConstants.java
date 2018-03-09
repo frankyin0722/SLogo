@@ -2,7 +2,7 @@ package slogo_team08;
 
 import javafx.scene.paint.Color;
 
-public interface IVisualConstants {
+public interface IConstants {
 
 	public static final int INITIAL_SCENE_WIDTH = 1235;
 	public static final int INITIAL_SCENE_HEIGHT = 710;
