@@ -14,8 +14,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Engine e = new Engine();
-		e.initializeSimulation(primaryStage);
+		Engine e = new Engine(primaryStage);
 	}
 
 	public static void main(String[] args) {
