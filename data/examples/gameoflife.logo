@@ -15,8 +15,8 @@ to iterate [ ] [
 		set :x 0
 		for [ :i -9 9 9 ] [
 			for [ :j -1 1 1 ] [
-				set :index ( sum :a :i :j )
-				if [ ( and not equal? :index :a not less? :index 1 not greater? :index 81 not equal? 1 + % :index 9 % :a 9 ask [ :index ] [ showing? ] ) ] [
+				set :index ( sum 0 :a :i :j )
+				if [ and and and and not equal? :index :a not less? :index 1 not greater? :index 81 not equal? 1 + % :index 9 % :a 9 ask [ :index ] [ showing? ] ] [
 					set :x + :x 1
 				]
 			]
