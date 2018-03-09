@@ -51,7 +51,7 @@ public class CommandTreeInterpreter {
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
 		for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
-			switch(myRoot.getCommandType()) {
+			switch (myRoot.getCommandType()) {
 			case "Control":
 				if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith") && !myRoot.getCommandName().equals("Define")) {
 					interpretTree(myRoot.getNodeChildren().get(i));
@@ -80,6 +80,10 @@ public class CommandTreeInterpreter {
 	
 		updateNodeValue(myRoot, Parameters);
 	}
+	
+	/*private ControlCommandParameterFilter(int paramIndex, CommandNode commandNode, ) {
+		
+	}*/
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
