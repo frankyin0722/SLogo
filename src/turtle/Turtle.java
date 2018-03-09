@@ -147,6 +147,9 @@ public class Turtle extends Group {
     		pen.setColor(colors.get(index));
     		//throw error if oob
     }
+    public void inform() {
+    	
+    }
     
     public void setOpaque(boolean active) {
     		if (active) myImage.setOpacity(1.0);

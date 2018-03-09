@@ -7,6 +7,7 @@ import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
 import turtle.Turtle;
 import turtle.TurtleController;
+import view.menus.ColorPaletteMenu;
 import view.menus.HistoryMenu;
 import view.menus.PenColorMenu;
 import view.menus.TurtleMenu;
@@ -27,6 +28,7 @@ public class ControlPanelLeft extends VBox {
 				new HistoryMenu(interpreter, resources), 
 				new UserCommandsMenu(interpreter, resources),
 				new TurtleMenu(resources, myTurtleController), 
-				new PenColorMenu(resources, myTurtleController));
+				new PenColorMenu(resources, myTurtleController),
+				new ColorPaletteMenu("BluePalette"));
 	}
 }
