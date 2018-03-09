@@ -49,7 +49,7 @@ public class LoadFileButton extends Button {
     }
 	
 	private List<String> readFile(File file) {
-		List<String> lines = new ArrayList<String>();
+		List<String> lines = new ArrayList<>();
 		String line;
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(file));

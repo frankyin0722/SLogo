@@ -46,7 +46,7 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 	}
 	
 	private void buildMenu() {
-		ArrayList<HBox> myColorOptions = new ArrayList<HBox>();
+		ArrayList<HBox> myColorOptions = new ArrayList<>();
 		indexToColor = new HashMap<Integer, Paint>();
 		List<String> myKeys = Collections.list(myResources.getKeys());
 		
@@ -58,7 +58,7 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 				new Alert(AlertType.INFORMATION, "Illegal Paint Type on " + myKeys.get(i), ButtonType.OK).showAndWait();
 			}
 		}
-		ListView<HBox> colorDisplay = new ListView<HBox>();
+		ListView<HBox> colorDisplay = new ListView<>();
 		colorDisplay.setItems(FXCollections.observableArrayList(myColorOptions));
 		this.setContent(colorDisplay);
 	}

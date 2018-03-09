@@ -51,7 +51,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 
 	private void buildTableContents(VariableManager myvars) {	
 		ObservableList<String> tempkeys = FXCollections.observableArrayList(new ArrayList<String>(myvars.getNames()));
-		ArrayList<Object> tempvals = new ArrayList<Object>();
+		ArrayList<Object> tempvals = new ArrayList<>();
 		for(String s : tempkeys) {
 			tempvals.add(myvars.getVariable(s).getValue()); 
 		}
