@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import alerts.Alerts;
 import alerts.CommandException;
@@ -23,7 +24,6 @@ public class CommandTreeInterpreter {
 	private CommandManager myCommandManager;
 	private VariableManager myVariables;
 	private TurtleController myTurtleController;
-	//private List<Turtle> myTurtles;
 	private HashMap<String, CommandNode> userDefinedCommands;
 	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 1;
@@ -31,7 +31,6 @@ public class CommandTreeInterpreter {
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
-	//private List<Integer> activeTurtles;
 	private int currentTurtle; 
 
 	
@@ -67,6 +66,7 @@ public class CommandTreeInterpreter {
 	
 		updateNodeValue(myRoot, Parameters);
 	}
+
 	private void interpretControl(int i, CommandNode myRoot, List<Object> Parameters) {
 		if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith") && !myRoot.getCommandName().equals("Define")) {
 			interpretTree(myRoot.getNodeChildren().get(i));
@@ -86,9 +86,6 @@ public class CommandTreeInterpreter {
 			currentTurtle = myTurtleController.getActiveTurtleIndices().get(0); // reset the current turtle to be the first in active turtle list 
 		}
 	}
-	/*private ControlCommandParameterFilter(int paramIndex, CommandNode commandNode, ) {
-		
-	}*/
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
@@ -137,6 +134,7 @@ public class CommandTreeInterpreter {
 		paramForUserDefinedCommand.add(this);
 		createCommand(node,paramForUserDefinedCommand);
 	}
+	
 	private void updateTurtle(CommandNode node, List<Object> Parameters) {
 		int individualParameterSize = node.getNodeChildren().size();
 		int paramCount = 0; 
@@ -150,6 +148,7 @@ public class CommandTreeInterpreter {
 			createCommand(node,individualParameter);
 		}
 	}
+	
 	private void updateVariable(CommandNode node, List<Object> Parameters) {
 		if (!myVariables.checkVariable(node.getCommandName())) {
 			Variable newvar = new Variable((double) 0);
@@ -157,6 +156,7 @@ public class CommandTreeInterpreter {
 		}
 		node.setNodeValue((double) myVariables.getVariable(node.getCommandName()).getValue());
 	}
+	
 	private void updateBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
 			System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
@@ -166,6 +166,7 @@ public class CommandTreeInterpreter {
 			node.setNodeValue(0.0);
 		}
 	}
+	
 	private void updateGroupBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
 			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
@@ -181,22 +182,20 @@ public class CommandTreeInterpreter {
 		}
 		System.out.println(node.getNodeValue());
 	}
-	private void createCommand(CommandNode node, List<Object> parameters) {
-		Class<?> commandClass = null;
-		if (!node.getCommandType().equals("UserDefined")) {
-			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandName());
-		}
-		else {
-			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
-		}
+	
+	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		Command thisCommand = null;
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
+			return thisCommand;
 		} catch (IllegalArgumentException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError1");
-			return;
+			return thisCommand; 
 		}
+	}
+	
+	private void invokeExecuteMethod(CommandNode node, Class<?> commandClass, Command thisCommand) {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
@@ -210,6 +209,18 @@ public class CommandTreeInterpreter {
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			System.err.println("Error executing commands1: " + thisCommand.getClass().getName() + ".execute()");
 		} 
+	}
+	
+	private void createCommand(CommandNode node, List<Object> parameters) {
+		Class<?> commandClass = null;
+		if (!node.getCommandType().equals("UserDefined")) {
+			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandName());
+		}
+		else {
+			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
+		}
+		Command thisCommand = createCommandInstance(commandClass, parameters);
+		invokeExecuteMethod(node, commandClass, thisCommand);
 		
 	}
 	
@@ -221,9 +232,6 @@ public class CommandTreeInterpreter {
 		return myTurtleController.getActiveTurtleIndices();
 	}
 	
-	/*public void setCurrentActiveTurtleIndices(List<Integer> newactiveindices) {
-		activeTurtles = newactiveindices;
-	}*/
 	public TurtleController getTurtleController() {
 		return myTurtleController;
 	}
@@ -236,11 +244,11 @@ public class CommandTreeInterpreter {
 		return myVariables;
 	}
 	
-	public HashMap<String, CommandNode> getUserCommands(){
+	public Map<String, CommandNode> getUserCommands(){
         return userDefinedCommands;
     }
 	
-	public HashMap<String, List<CommandNode>> getUserCommandParameters(){
+	public Map<String, List<CommandNode>> getUserCommandParameters(){
         return userDefinedCommandParameters;
     }
 	
@@ -269,12 +277,10 @@ public class CommandTreeInterpreter {
 		}
 	}
 	
-	public void iterateUDC(HashMap<String, CommandNode> map) {
-//		System.out.print("XXXXX at iterateUDC");
+	public void iterateUDC(Map<String, CommandNode> map) {
 		for (String key: map.keySet()) {
 			CommandNode command = map.get(key);
 			addToActiveUDC(key, "");
-//			addToActiveUDC(key, iterateNode(command));
 		}
 	}
 		
@@ -291,11 +297,8 @@ public class CommandTreeInterpreter {
 	}
 	
 	public void addToActiveUDC(String commandName, String commandAction) {
-//		if (activeUDC.get(commandName) == null) {
 			activeUDC.put(commandName, commandAction);
-//			System.out.print("XXXXX addToActive UDC" + commandName + commandAction);
 			notifyUDCListeners();
-//		}
 	}
 	
 	public void addUDCListener(Listener l) {
@@ -308,7 +311,7 @@ public class CommandTreeInterpreter {
 		}
 	}
 	
-	public HashMap<String, String> getActiveUDC() {
+	public Map<String, String> getActiveUDC() {
 		return activeUDC;
 	}
 	
