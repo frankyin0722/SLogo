@@ -6,12 +6,11 @@ import javafx.stage.Stage;
 import view.vis_elements.TabView;
 public class Engine {
 
-	public Stage myStage;
-	public Group myRoot;
+	private Stage myStage;
 	private Scene myScene;
 	private TabView slogoView;
 	
-
+	public Engine() {}
 	
 	public void initializeSimulation(Stage primaryStage) {
 		myStage = primaryStage;

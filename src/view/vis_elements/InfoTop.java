@@ -3,8 +3,6 @@ package view.vis_elements;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class InfoTop extends VBox{

@@ -7,13 +7,13 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 
-public class Ask implements Command{
+public class AskCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<Integer> myTemporaryActiveTurtleIndices;
 	private List<CommandNode> mySubCommands;
 	private List<Integer> myOldActiveTurtleIndices;
 	
-	public Ask(CommandNode temporaryactiveparent, CommandNode subcommandsParent, CommandTreeInterpreter tree) {
+	public AskCommand(CommandNode temporaryactiveparent, CommandNode subcommandsParent, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myTemporaryActiveTurtleIndices = new ArrayList<>();
 		mySubCommands = subcommandsParent.getNodeChildren();
@@ -27,11 +27,11 @@ public class Ask implements Command{
 	}
 	
 	public double execute() {
-		myInterpreter.setCurrentActiveTurtleIndices(myTemporaryActiveTurtleIndices);
+		myInterpreter.getTurtleController().resetActiveTurtles(myTemporaryActiveTurtleIndices);
 		for (int i = 0; i < mySubCommands.size(); i++) {
 			myInterpreter.interpretTree(mySubCommands.get(i));
 		}
-		myInterpreter.setCurrentActiveTurtleIndices(myOldActiveTurtleIndices);
+		myInterpreter.getTurtleController().resetActiveTurtles(myOldActiveTurtleIndices);
 		if (mySubCommands.size() != 0) {
 			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
 		}

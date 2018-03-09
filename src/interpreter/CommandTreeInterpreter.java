@@ -22,7 +22,8 @@ import variables.VariableManager;
 public class CommandTreeInterpreter {
 	private CommandManager myCommandManager;
 	private VariableManager myVariables;
-	private TurtleController myTurtles;
+	private TurtleController myTurtleController;
+	//private List<Turtle> myTurtles;
 	private HashMap<String, CommandNode> userDefinedCommands;
 	private HashMap<String, List<CommandNode>> userDefinedCommandParameters;
 	private static int defaultTurtle = 1;
@@ -30,17 +31,14 @@ public class CommandTreeInterpreter {
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
-	private List<Integer> activeTurtles;
+	//private List<Integer> activeTurtles;
 	private int currentTurtle; 
 
 	
-	public CommandTreeInterpreter(TurtleController turtles) {
+	public CommandTreeInterpreter(TurtleController turtlecontroller) {
 		myCommandManager = new CommandManager();
 		myVariables = new VariableManager();
-		myTurtles = turtles;
-		activeTurtles = new ArrayList<Integer>() {{
-			add(defaultTurtle);
-		}};
+		myTurtleController = turtlecontroller;
 		currentTurtle = defaultTurtle;
 		userDefinedCommands = new HashMap<String, CommandNode>();
 		userDefinedCommandParameters = new HashMap<String, List<CommandNode>>();
@@ -52,35 +50,40 @@ public class CommandTreeInterpreter {
 	
 	public void interpretTree(CommandNode myRoot) {
 		List<Object> Parameters = new ArrayList<>();
-		if (myRoot.getNodeChildren().size()!=0) {
-			for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
-				if (myRoot.getCommandType().equals("Control")) {
-					if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith") && !myRoot.getCommandName().equals("Define")) {
-						interpretTree(myRoot.getNodeChildren().get(i));
-					}
-					Parameters.add(myRoot.getNodeChildren().get(i));
+		for (int i = 0; i < myRoot.getNodeChildren().size(); i ++) {
+			switch (myRoot.getCommandType()) {
+			case "Control":
+				if (i == 0 && !myRoot.getCommandName().equals("MakeUserInstruction") && !myRoot.getCommandName().equals("AskWith") && !myRoot.getCommandName().equals("Define")) {
+					interpretTree(myRoot.getNodeChildren().get(i));
 				}
-				else if (myRoot.getCommandType().equals("Turtle")) {
-					for (int t = 0; t < activeTurtles.size(); t++) {
-						currentTurtle = activeTurtles.get(t); // 0 index refers to 1 turtle 
-						interpretTree(myRoot.getNodeChildren().get(i));
-						Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
-					}
-					if (activeTurtles.size()==0) {
-						currentTurtle = 0;
-					}
-					else {
-						currentTurtle = activeTurtles.get(0); // reset the current turtle to be the first in active turtle list 
-					}
-				}
-				else {
+				Parameters.add(myRoot.getNodeChildren().get(i));
+				break;
+			case "Turtle":
+				for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
+					currentTurtle = myTurtleController.getActiveTurtleIndices().get(t); // 0 index refers to 1 turtle 
 					interpretTree(myRoot.getNodeChildren().get(i));
 					Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
 				}
+				if (myTurtleController.getActiveTurtleIndices().size()==0) {
+					currentTurtle = 0;
+				}
+				else {
+					currentTurtle = myTurtleController.getActiveTurtleIndices().get(0); // reset the current turtle to be the first in active turtle list 
+				}
+				break;
+			default:
+				interpretTree(myRoot.getNodeChildren().get(i));
+				Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
+				break;
 			}
 		}
+	
 		updateNodeValue(myRoot, Parameters);
 	}
+	
+	/*private ControlCommandParameterFilter(int paramIndex, CommandNode commandNode, ) {
+		
+	}*/
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
@@ -102,25 +105,17 @@ public class CommandTreeInterpreter {
 				paramForUserDefinedCommand.add(myDefinedCommandName);
 				paramForUserDefinedCommand.add(this);
 				createCommand(node,paramForUserDefinedCommand);
-				/*CommandNode storedMethod = userDefinedCommands.get(node.getCommandName());
-				if (storedMethod==null) {
-					Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError5");
-					throw new CommandException(Resources.getString("CommandHeaderError"));
-				}
-				interpretTree(storedMethod);
-				System.out.println("user defined command value: " + storedMethod.getNodeValue());
-				node.setNodeValue(storedMethod.getNodeValue());			*/	
 				break;
 			case "Turtle":
 				int individualParameterSize = node.getNodeChildren().size();
 				int paramCount = 0; 
-				for (int i = 0; i < activeTurtles.size(); i++) {
+				for (int i = 0; i < myTurtleController.getActiveTurtleIndices().size(); i++) {
 					List<Object> individualParameter = new ArrayList<Object>();
 					for (int j = 0; j < individualParameterSize; j++) {
 						individualParameter.add(Parameters.get(paramCount));
 						paramCount++;
 					}
-					individualParameter.add(myTurtles.getTurtle(activeTurtles.get(i)-1));
+					individualParameter.add(myTurtleController.getTurtle(myTurtleController.getActiveTurtleIndices().get(i)-1));
 					createCommand(node,individualParameter);
 				}
 				break;
@@ -200,34 +195,23 @@ public class CommandTreeInterpreter {
 	}
 	
 	public List<Turtle> getCurrentActiveTurtles() {
-		List<Turtle> selectedTurtles = new ArrayList<>();
-		for (int i = 0; i < activeTurtles.size();i ++) {
-			selectedTurtles.add(myTurtles.getTurtle(activeTurtles.get(i)-1));
-		}
-		return selectedTurtles;
+		return myTurtleController.getActiveTurtles();
 	}
 	
 	public List<Integer> getCurrentActiveTurtleIndices() {
-		return activeTurtles;
+		return myTurtleController.getActiveTurtleIndices();
 	}
 	
-	public void setCurrentActiveTurtleIndices(List<Integer> newactiveindices) {
+	/*public void setCurrentActiveTurtleIndices(List<Integer> newactiveindices) {
 		activeTurtles = newactiveindices;
-	}
-	
-	public TurtleController getCurrentAvailableTurtles() {
-		return myTurtles;
-	}
-	
-	/*public void setCurrentTurtles(int[] indices) {
-		List<Integer> selectedActive = new ArrayList<>();
-		for (int i = 0; i < indices.length; i++) {
-			if (myTurtles.get(indices[i]-1)!=null) {
-				selectedActive.add(indices[i]);
-			}
-		}
-		activeTurtles = selectedActive;
 	}*/
+	public TurtleController getTurtleController() {
+		return myTurtleController;
+	}
+	
+	public List<Turtle> getCurrentAvailableTurtles() {
+		return myTurtleController.getAllTurtles();
+	}
 	
 	public VariableManager getVariables() {
 		return myVariables;

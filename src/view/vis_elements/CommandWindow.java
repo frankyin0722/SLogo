@@ -4,7 +4,6 @@ package view.vis_elements;
 //import parser.Parser;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
-import turtle.Turtle;
 
 public class CommandWindow extends VBox {
 	private TextArea myTextArea;

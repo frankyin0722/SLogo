@@ -8,11 +8,11 @@ import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import turtle.TurtleController;
 
-public class Tell implements Command{
+public class TellCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<CommandNode> myActiveTurtles;
 	
-	public Tell(CommandNode parentNode, CommandTreeInterpreter tree) {
+	public TellCommand(CommandNode parentNode, CommandTreeInterpreter tree) {
 		myInterpreter = tree;
 		myActiveTurtles = new ArrayList<>();
 		for (int i = 0; i < parentNode.getNodeChildren().size(); i++) {
@@ -22,22 +22,21 @@ public class Tell implements Command{
 	
 	public double execute() {
 		int maxIndex = 0; 
-		TurtleController currentAvailableTurtles = myInterpreter.getCurrentAvailableTurtles();
+		TurtleController myTurtleController = myInterpreter.getTurtleController();
 		List<Integer> newCurrentActiveTurtles = new ArrayList<>();
 		for (int i = 0; i < myActiveTurtles.size(); i++) {
 			if (myActiveTurtles.get(i).getNodeValue() >= maxIndex) {
 				maxIndex = (int) myActiveTurtles.get(i).getNodeValue();
 			}
 		}
-		currentAvailableTurtles.makeNewTurtles(maxIndex - currentAvailableTurtles.size() + 1);
-		for (int i = currentAvailableTurtles.size(); i < maxIndex; i++) {
-			//Turtle newturtle = new Turtle();
-			//currentAvailableTurtles.add(newturtle);
-		}
+		System.out.println("i got here");
+		myTurtleController.makeNewTurtles(maxIndex - myTurtleController.size());
 		for (CommandNode active : myActiveTurtles) {
 			newCurrentActiveTurtles.add((int) active.getNodeValue());
 		}
-		myInterpreter.setCurrentActiveTurtleIndices(newCurrentActiveTurtles);
+		System.out.println("i got here");
+		myTurtleController.resetActiveTurtles(newCurrentActiveTurtles);
+		System.out.println(myActiveTurtles.get(myActiveTurtles.size()-1).getNodeValue());
 		return myActiveTurtles.get(myActiveTurtles.size()-1).getNodeValue();
 	} 
 }
