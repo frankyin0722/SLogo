@@ -38,7 +38,6 @@ public class TurtleController extends Group {
 		turtleHeight = y;
 		myImage = image;
 		addActiveTurtle(image, x, y, width, height);
-
 		notifyListeners();
 
 	}
