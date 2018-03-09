@@ -93,36 +93,10 @@ public class CommandTreeInterpreter {
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
 		switch (node.getCommandType()) {
 			case "UserDefined":
-				List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
-				for (int i = 0; i < para.size(); i++) {
-					if (myVariables.checkVariable(para.get(i).getCommandName())) {
-						myVariables.setVariable((double) Parameters.get(i), para.get(i).getCommandName());
-					}
-					else {
-						myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
-					}	
-					if (i==2) {
-						System.out.println("current depth value: "+Parameters.get(i));
-					}
-				}
-				List<Object> paramForUserDefinedCommand = new ArrayList<Object>();
-				String myDefinedCommandName = node.getCommandName();
-				paramForUserDefinedCommand.add(myDefinedCommandName);
-				paramForUserDefinedCommand.add(this);
-				createCommand(node,paramForUserDefinedCommand);
+				updateUserDefined(node, Parameters);
 				break;
 			case "Turtle":
-				int individualParameterSize = node.getNodeChildren().size();
-				int paramCount = 0; 
-				for (int i = 0; i < myTurtleController.getActiveTurtleIndices().size(); i++) {
-					List<Object> individualParameter = new ArrayList<Object>();
-					for (int j = 0; j < individualParameterSize; j++) {
-						individualParameter.add(Parameters.get(paramCount));
-						paramCount++;
-					}
-					individualParameter.add(myTurtleController.getTurtle(myTurtleController.getActiveTurtleIndices().get(i)-1));
-					createCommand(node,individualParameter);
-				}
+				updateTurtle(node, Parameters);
 				break;
 			case "Control":
 				Parameters.add(this);
@@ -166,7 +140,38 @@ public class CommandTreeInterpreter {
 				break;
 		}
 	}
-
+	private void updateUserDefined(CommandNode node, List<Object> Parameters) {
+		List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
+		for (int i = 0; i < para.size(); i++) {
+			if (myVariables.checkVariable(para.get(i).getCommandName())) {
+				myVariables.setVariable((double) Parameters.get(i), para.get(i).getCommandName());
+			}
+			else {
+				myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
+			}	
+			if (i==2) {
+				System.out.println("current depth value: "+Parameters.get(i));
+			}
+		}
+		List<Object> paramForUserDefinedCommand = new ArrayList<Object>();
+		String myDefinedCommandName = node.getCommandName();
+		paramForUserDefinedCommand.add(myDefinedCommandName);
+		paramForUserDefinedCommand.add(this);
+		createCommand(node,paramForUserDefinedCommand);
+	}
+	private void updateTurtle(CommandNode node, List<Object> Parameters) {
+		int individualParameterSize = node.getNodeChildren().size();
+		int paramCount = 0; 
+		for (int i = 0; i < myTurtleController.getActiveTurtleIndices().size(); i++) {
+			List<Object> individualParameter = new ArrayList<Object>();
+			for (int j = 0; j < individualParameterSize; j++) {
+				individualParameter.add(Parameters.get(paramCount));
+				paramCount++;
+			}
+			individualParameter.add(myTurtleController.getTurtle(myTurtleController.getActiveTurtleIndices().get(i)-1));
+			createCommand(node,individualParameter);
+		}
+	}
 	private void createCommand(CommandNode node, List<Object> parameters) {
 		Class<?> commandClass = null;
 		if (!node.getCommandType().equals("UserDefined")) {
