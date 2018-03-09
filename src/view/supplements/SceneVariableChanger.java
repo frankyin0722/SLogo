@@ -1,4 +1,4 @@
-package view.menus;
+package view.supplements;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,22 +10,23 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import view.menus.CustomVarsMenu;
 
 /**
  * user can enter double value variable name
  * @author elizabethshulman
  *
  */
-public class SceneChangeVariable extends Stage {
+public class SceneVariableChanger extends Stage {
 
 	private TextField newInfo;
 	private Button submit;
 	private String type;
 	private String prevKey;
 	private CustomVarsMenu myBase;
-	private SceneChangeVariable currentStage;
+	private SceneVariableChanger currentStage;
 	
-	public SceneChangeVariable(String keyOrVal, String key, CustomVarsMenu customVarsMenu) {
+	public SceneVariableChanger(String keyOrVal, String key, CustomVarsMenu customVarsMenu) {
 		type = keyOrVal;
 		prevKey = key;
 		myBase = customVarsMenu;

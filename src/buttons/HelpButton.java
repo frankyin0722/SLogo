@@ -7,12 +7,11 @@ import javafx.scene.control.Button;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
-public class HelpButton extends Button {
+public class HelpButton extends BaseButton {
 	
 	private static final String HELP_PAGE = "https://www2.cs.duke.edu/courses/compsci308/spring18/assign/03_slogo/commands.php";
 	public HelpButton() {
-		
-		this.setText("Default Commands");
+		super("Default Commands");
 		setupWebLink();
 	}
 

@@ -25,7 +25,7 @@ public class UserCommandsMenu extends TitledPane implements Listener {
 //		commandsDisplay = new ListView<>();
 		commandsDisplay = new VBox();
 		activeUDC = new HashMap<>();
-		activeUDCListener = new ArrayList<Listener>();
+		activeUDCListener = new ArrayList<>();
 		interpreter = i;
 		i.addUDCListener(this);
 		this.setContent(commandsDisplay);

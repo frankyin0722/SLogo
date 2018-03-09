@@ -29,24 +29,13 @@ public class LanguageMenu extends TitledPane {
 	}
 	
 	private void setupButtonBox() {
-//		VBox buttons = new VBox();
-		ListView<Button> buttonDisplay = new ListView<Button>();
+		ListView<Button> buttonDisplay = new ListView<>();
 		buttonDisplay.setItems(FXCollections.observableArrayList(setupAllButtons()));
 		this.setContent(buttonDisplay);
 	}
 	
-//	private void setupAllButtons(VBox vbox) {
-//		File languageFile = new File(DEFAULT_RESOURCE_FOLDER);
-//		for (File f: languageFile.listFiles()) {
-//			if (!f.getName().equals("Syntax.properties")) {
-//				vbox.getChildren().add(setupButton(f.getName().split(".properties")[0]));
-//			}
-//		}
-//	}
-	
-	
 	private ArrayList<Button> setupAllButtons() {
-		ArrayList<Button> buttonList = new ArrayList<Button>();
+		ArrayList<Button> buttonList = new ArrayList<>();
 		File languageFile = new File(DEFAULT_RESOURCE_FOLDER);
 		for (File f: languageFile.listFiles()) {
 			if (!f.getName().equals("Syntax.properties")) {

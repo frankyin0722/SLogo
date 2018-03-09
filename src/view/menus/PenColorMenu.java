@@ -50,7 +50,7 @@ public class PenColorMenu extends TitledPane {
 	}
 	
 	public List<Pen> getActivePens(List<Turtle> turtles) {
-		List<Pen> pens = new ArrayList<Pen>();
+		List<Pen> pens = new ArrayList<>();
 		for (Turtle t: turtles) {
 			pens.add(t.getPen());
 		}
