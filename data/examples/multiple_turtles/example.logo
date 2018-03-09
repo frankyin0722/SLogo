@@ -7,7 +7,7 @@ fd :x
 
 set :x 10
 # temporarily move 3 different turtles
-ask [ 4 5 6 ]
+tell [ 4 5 6 ]
 # team decision: do all turtles move the same distance or different?
 bk set :x + :x 10
 

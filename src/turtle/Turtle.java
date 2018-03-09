@@ -33,7 +33,6 @@ public class Turtle extends Group {
 		zeroX = x- width/2;
 		zeroY = y - height/2;
 		myImage = new DraggableImageView(this, image);
-//		myImage = new ImageView(image);
 		myImage.setX(zeroX);
 		oldX = 0;
 		myImage.setY(zeroY);
@@ -102,6 +101,10 @@ public class Turtle extends Group {
     
     public void setVisibility(boolean visible) {
     		myImage.setVisible(visible);
+    		System.out.println(myImage.isVisible());
+    }
+    public boolean checkVisibility() {
+    		return myImage.isVisible();
     }
     public void setImage(Image newImage) {
     		myImage.setImage(newImage);
@@ -116,6 +119,8 @@ public class Turtle extends Group {
     		newX = 0;
     		newY = 0;
     		pen.setPen(false);
+    		direction = 0;
+    		myImage.setRotate(Math.toDegrees(direction));
     		update();
     		clearLines();
     }
@@ -125,6 +130,7 @@ public class Turtle extends Group {
     		result+="Turtle ID: " + Integer.toString(i) + "\n";
     		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
     		result+="Heading: " + Math.toDegrees(direction) + "\n";
+    		result+="Visible: " + myImage.isVisible() + "\n";
     		result+= pen.toString();
     		return result;
     }

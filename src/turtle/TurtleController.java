@@ -9,12 +9,6 @@ import observables.Listener;
 import view.canvas.DrawingWindow;
 
 public class TurtleController extends Group implements Listener {
-	public static final double INITIAL_WIDTH = 700;
-	public static final double INITIAL_HEIGHT = 500;
-	public static final int TURTLE_WIDTH = 25;
-	public static final int TURTLE_HEIGHT = 30;
-	public static final String DEFAULT_IMAGE = "cute_turtle.png";
-	
 	private DrawingWindow myDrawingWindow;
 	private List<Turtle> turtles;
 	private List<Listener> turtleListeners;
@@ -38,7 +32,6 @@ public class TurtleController extends Group implements Listener {
 		myImage = image;
 		addActiveTurtle(image, x, y, width, height);
 		notifyListeners();
-
 	}
 	
 	private void setupTurtleController(DrawingWindow dw) {
@@ -63,7 +56,6 @@ public class TurtleController extends Group implements Listener {
 		for(int i = 0; i < num; i++) {
 			addActiveTurtle(myImage, turtleWidth, turtleHeight, myWidth, myHeight);
 		}
-		
 	}
 	
 	//reset all turtles
@@ -80,7 +72,7 @@ public class TurtleController extends Group implements Listener {
 				active.set(newindices.get(i)-1, true);
 			}
 		}
-		System.out.println(active);
+		//System.out.println(active);
 	}
 	
 	//get Turtle at index
