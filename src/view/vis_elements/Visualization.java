@@ -32,9 +32,7 @@ public class Visualization extends BorderPane implements IConstants {
 	private CommandTreeInterpreter interpreter;
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
-	private ControlPanelLeft myControlPanelLeft;
-	private List<Turtle> myTurtles;
-	
+	private ControlPanelLeft myControlPanelLeft;	
 	
 	public Visualization() {
 		initializeAll();
@@ -58,7 +56,7 @@ public class Visualization extends BorderPane implements IConstants {
 		interpreter = new CommandTreeInterpreter(myTurtleController);
 		myControlPanelRight = new ControlPanelRight(interpreter, myResources, myTurtleController);		
 		myControlTextInput = new ControlTextInput(interpreter, this);
-		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtleController.getAllTurtles(), myResources);
+		myControlPanelLeft = new ControlPanelLeft(interpreter, myTurtleController.getAllTurtles(), myTurtleController, myResources);
 	}
 	
 	private void initializeLayout() {		
