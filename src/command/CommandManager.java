@@ -18,7 +18,7 @@ public class CommandManager {
 			commandType = Class.forName(commandPackage + "." + commandCategory + "." + command + commandEnd);
 		}
 		catch (ClassNotFoundException e){
-			Alerts.createAlert(e, "Class not found");
+			Alerts.createAlert(e, "CommandMessageError2");
 			System.err.println("Error initializing Command Object: Given Command Not Found. Please Enter A Correct Command!");
 		}
 		return commandType;
