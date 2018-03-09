@@ -33,7 +33,6 @@ public class Turtle extends Group {
 		zeroX = x- width/2;
 		zeroY = y - height/2;
 		myImage = new DraggableImageView(this, image);
-//		myImage = new ImageView(image);
 		myImage.setX(zeroX);
 		oldX = 0;
 		myImage.setY(zeroY);
@@ -116,6 +115,8 @@ public class Turtle extends Group {
     		newX = 0;
     		newY = 0;
     		pen.setPen(false);
+    		direction = 0;
+    		myImage.setRotate(Math.toDegrees(direction));
     		update();
     		clearLines();
     }
