@@ -75,16 +75,17 @@ public class CommandTreeInterpreter {
 	}
 	private void interpretTurtle(int i, CommandNode myRoot, List<Object> Parameters) {
 		for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
-			currentTurtle = myTurtleController.getActiveTurtleIndices().get(t); // 0 index refers to 1 turtle 
+			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(t)); // 0 index refers to 1 turtle 
 			interpretTree(myRoot.getNodeChildren().get(i));
 			Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
 		}
 		if (myTurtleController.getActiveTurtleIndices().size()==0) {
-			currentTurtle = 0;
+			myTurtleController.setCurrentTurtleIndex(0);
 		}
 		else {
-			currentTurtle = myTurtleController.getActiveTurtleIndices().get(0); // reset the current turtle to be the first in active turtle list 
+			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(0)); // reset the current turtle to be the first in active turtle list 
 		}
+		//System.out.println("current turtle: "+currentTurtle);
 	}
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
@@ -287,7 +288,7 @@ public class CommandTreeInterpreter {
 	}
 		
 	public int getCurrentActiveTurtleIndex() {
-		return currentTurtle;
+		return myTurtleController.getCurrentTurtleIndex();
 	}
 	
 	public void setCurrentActiveTurtleIndex(int index) {
