@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import turtle.Pen;
@@ -15,6 +16,13 @@ public class HBoxPenChanger extends HBox {
 
 	private Pen ourPen;
 	private int index;
+	
+	public HBoxPenChanger() {
+		Text titleText = new  Text(" ID    Color             Pen Width");
+		titleText.setFont(new Font(14));
+		titleText.setFill(Color.DARKBLUE);
+		this.getChildren().add(titleText);
+	}
 	
 	public HBoxPenChanger(Turtle t, int i) {
 		ourPen = t.getPen();
@@ -29,7 +37,7 @@ public class HBoxPenChanger extends HBox {
 	
 	//BUILD TEXT STRING
 	private Text buildTurtleLabel() {
-		Text turtleIndex = new Text(Integer.toString(index));
+		Text turtleIndex = new Text(Integer.toString(index+1));
 		turtleIndex.setFont(new Font(15));
 		return turtleIndex;
 	}
