@@ -52,8 +52,7 @@ public class UserCommandsMenu extends TitledPane implements Listener {
 			}
 		});
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public void update() {
 		ObservableList<String> names = FXCollections.observableArrayList(interpreter.getUserCommands().keySet());
