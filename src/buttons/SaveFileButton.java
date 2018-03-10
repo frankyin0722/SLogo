@@ -4,22 +4,26 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
 import javax.xml.transform.TransformerException;
-
-
 import alerts.Alerts;
 import interpreter.CommandTreeInterpreter;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
+/**
+ * Button for saving history to a file
+ * @author shichengrao
+ *
+ */
 public class SaveFileButton extends BaseButton {
 	public SaveFileButton() {
 		super("Save");
 	}
-	
+	/**
+	 * saves file given data from interpreter
+	 * @param interpreter
+	 */
 	public void save(CommandTreeInterpreter interpreter) {
 		this.setOnAction(
 				new EventHandler<ActionEvent>() {
@@ -38,17 +42,7 @@ public class SaveFileButton extends BaseButton {
 					}
 			});
 	}
-//	 /**
-//     * Helper method to add an element to the root for creating the XML file
-//     * @param elementName
-//     * @param elementData
-//     * @param root
-//     */
-//	private void addElement(String elementName, String elementData, Element root) {
-//        Element elem = myDocument.createElement(elementName);
-//        elem.appendChild(myDocument.createTextNode(elementData));
-//        root.appendChild(elem);
-//    }
+//  This commented out method was the beginning of my attempt to save the current variables and methods directly to an xml file (no need for actual history of commands)
 //	private void recordVariables(CommandTreeInterpreter interpreter) {
 //		Element dataElement = myDocument.createElement("data");
 //	    myDocument.appendChild(dataElement);
