@@ -1,36 +1,41 @@
-package view.menus;
+package buttons;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TitledPane;
+import javafx.stage.Stage;
 import slogo_team08.IConstants;
+import view.vis_elements.Visualization;
 
-public class LanguageMenu extends TitledPane implements IConstants {
+public class LanguageChangeButton extends Button implements IConstants {
 
 	private ResourceBundle myResources;
+	private Visualization vis;
+	Stage languageView;
 
-	public LanguageMenu() {
+	public LanguageChangeButton(Visualization visualization) {
+		vis = visualization;
 		setLanguage(DEFAULT_LANGUAGE);
-		setupLanguageMenu();
-		setupButtonBox();
-	}
-	
-	private void setupLanguageMenu() {
 		this.setText(myResources.getString(LANGUAGE_MENU_KEY));
-		this.setExpanded(false);
+		this.setOnAction(e -> {
+			languageView = new Stage();
+			languageView.setScene(new Scene(setupButtonView()));
+			languageView.showAndWait();
+		});
+		this.setMaxWidth(Double.MAX_VALUE);
 	}
 	
-	private void setupButtonBox() {
+	private ListView<Button> setupButtonView() {
 		ListView<Button> buttonDisplay = new ListView<>();
 		buttonDisplay.setItems(FXCollections.observableArrayList(setupAllButtons()));
-		this.setContent(buttonDisplay);
+		return buttonDisplay;
 	}
-	
+
 	private ArrayList<Button> setupAllButtons() {
 		ArrayList<Button> buttonList = new ArrayList<>();
 		File languageFile = new File(DEFAULT_LANGUAGE_FOLDER);
@@ -42,19 +47,20 @@ public class LanguageMenu extends TitledPane implements IConstants {
 		return buttonList;
 	}
 	
-	private Button setupButton(String language) {
-		Button button = new Button();
-		button.setText(language);
-		button.setOnAction(e -> setLanguage(language));
-		button.setMaxWidth(Double.MAX_VALUE);
+	private BaseButton setupButton(String language) {
+		BaseButton button = new BaseButton(language);
+		button.setOnAction(e -> {
+			setLanguage(language);
+			languageView.close();
+		});
 		return button;
 	}
 	
 	private void setLanguage(String language) {
 		myResources = ResourceBundle.getBundle(LANGUAGE_RESOURCE_PACKAGE + language);
-				
+		vis.setLanguage(language);
 	}
-
+	
 	public ResourceBundle getLanguage() {
 		return myResources;
 	}

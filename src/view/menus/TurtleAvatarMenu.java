@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import turtle.Turtle;
 import turtle.TurtleController;
 
-public class TurtleMenu extends TitledPane {
+public class TurtleAvatarMenu extends TitledPane {
 	
 	public static final int THUMBNAIL_WIDTH = 50;
 	public static final int THUMBNAIL_HEIGHT = 50;
@@ -21,7 +21,7 @@ public class TurtleMenu extends TitledPane {
 	private VBox myTurtleList;
 	private TurtleController myTurtleController;
 	
-	public TurtleMenu(ResourceBundle resources, TurtleController tc) {
+	public TurtleAvatarMenu(ResourceBundle resources, TurtleController tc) {
 		myTurtleController = tc;
 		setupPane(resources);
 		setupTurtleSelection();
@@ -51,7 +51,6 @@ public class TurtleMenu extends TitledPane {
 		button.setOnAction(e -> changeTurtleImage(img));
 		myTurtleButtons.add(button);
 		vbox.getChildren().add(button);
-		
 	}
 	
 	private void changeTurtleImage(Image img) {
