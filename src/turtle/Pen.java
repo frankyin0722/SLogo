@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import observables.Listener;
 
 public class Pen {
-	private Color color;
+	private Paint color;
 	private boolean up;
 	private double width;
 	private List<Listener> myListeners;
@@ -17,7 +18,7 @@ public class Pen {
 		this(Color.BLACK, false, 1);
 	}
 	
-	public Pen(Color c, boolean up, double width) {
+	public Pen(Paint c, boolean up, double width) {
 		color = c;
 		this.up = up;
 		this.width = width;
@@ -37,7 +38,7 @@ public class Pen {
     }
 
     //sets pen color
-    public void setColor(Color color) {
+    public void setColor(Paint color) {
     		this.color = color;
     		notifyListeners();
 
@@ -78,7 +79,7 @@ public class Pen {
     		return result;
     }
     
-    public Color getColor() {
+    public Paint getColor() {
     		return color;
     }
 }
