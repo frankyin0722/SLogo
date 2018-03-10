@@ -1,9 +1,6 @@
 package view.canvas;
 
-
-import java.util.ArrayList;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
@@ -14,12 +11,11 @@ import turtle.Turtle;
 import turtle.TurtleController;
 
 public class DrawingWindow extends Pane implements Listener, IConstants {
-	
-	private Turtle myTurtle;
 	private TurtleController myTurtleController;
 
 	public DrawingWindow() {
 		setupInitialCanvas();
+
 	}
 	
 
@@ -45,10 +41,6 @@ public class DrawingWindow extends Pane implements Listener, IConstants {
 	
 	public void addTurtles(List<Turtle> turtles) {
 		this.getChildren().addAll(turtles);
-	}
-	
-	public Turtle getDefaultTurtle() {
-		return myTurtle;
 	}
 	
 	public void setupListener(TurtleController tc) {

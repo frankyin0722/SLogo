@@ -1,6 +1,7 @@
 package view.vis_elements;
 
 
+import alerts.Resources;
 import interpreter.CommandTreeInterpreter;
 import javafx.scene.layout.VBox;
 import view.menus.ColorPaletteMenu;
@@ -26,7 +27,7 @@ public class ControlPanelRight extends VBox {
 				new CustomVarsMenu(interpreter),
 				new TurtleInfoMenu(interpreter.getTurtleController()),
 				new HelpMenu(interpreter, vis),
-				new ColorPaletteMenu(interpreter,"BluePalette"));
+				new ColorPaletteMenu(interpreter,Resources.getString("PALETTETYPE")));
 	}
 
 }
