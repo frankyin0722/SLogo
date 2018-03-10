@@ -101,7 +101,7 @@ public class Turtle extends Group {
     
     public void setVisibility(boolean visible) {
     		myImage.setVisible(visible);
-    		System.out.println(myImage.isVisible());
+    		notifyListeners();
     }
     public boolean checkVisibility() {
     		return myImage.isVisible();

@@ -7,25 +7,27 @@ import javafx.scene.layout.VBox;
 import view.menus.ColorPaletteMenu;
 import view.menus.HistoryMenu;
 import view.menus.PenMenu;
-import view.menus.TurtleMenu;
+import view.menus.TurtleImageMenu;
 import view.menus.UserCommandsMenu;
 
 public class ControlPanelLeft extends VBox {
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle resources;
+	private CommandWindow myCommandWindow;
 	
 
-	public ControlPanelLeft(CommandTreeInterpreter i, ResourceBundle r) {
+	public ControlPanelLeft(CommandTreeInterpreter i, ResourceBundle r, CommandWindow cw) {
 		interpreter = i;
 		resources = r;
+		myCommandWindow = cw;
 		initializeMenus();
 	}
 
 	private void initializeMenus() {
 		this.getChildren().addAll(
 				new HistoryMenu(interpreter, resources), 
-				new UserCommandsMenu(interpreter, resources),
-				new TurtleMenu(resources, interpreter.getTurtleController()), 
+				new UserCommandsMenu(interpreter, resources, myCommandWindow),
+				new TurtleImageMenu(resources, interpreter.getTurtleController()), 
 				new PenMenu(resources, interpreter.getTurtleController()),
 				new ColorPaletteMenu("GreenPalette"));
 	}
