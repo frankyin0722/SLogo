@@ -21,33 +21,54 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import slogo_team08.IConstants;
-
+/**
+ * Menu to handle default color and color changes
+ * Default colors read from properties files
+ * Users can thus reference colors directly in code
+ * @author elizabethshulman
+ *
+ */
 public class ColorPaletteMenu extends TitledPane implements IConstants {
 
 	private ResourceBundle myResources;
 	private HashMap<Integer, Paint> indexToColor;
 	private CommandTreeInterpreter interpreter;
-	
+	/**
+	 * Constructor takes
+	 * @param i, interpreter
+	 * to later initialize this menu in interpreter
+	 */
 	public ColorPaletteMenu(CommandTreeInterpreter i) {
 		this(i, DEFAULT_COLOR_PALETTE);
 	}
-		
+	/**
+	 * Constructor takes
+	 * @param i, interpreter
+	 * @param colorPalette, default color palette
+	 */
 	public ColorPaletteMenu(CommandTreeInterpreter i, String colorPalette) {
 		interpreter = i;
 		initializeFormat(colorPalette);
 	}
-	
+	/**
+	 * Method visualizes default colors
+	 * Initialized menu
+	 * @param colorPalette
+	 */
 	private void initializeFormat(String colorPalette) {
+		this.setText("Default Color Options");
+		this.setExpanded(false);
 		try {
 			myResources = ResourceBundle.getBundle(COLOR_RESOURCE_PACKAGE + colorPalette);
 			buildMenu();
 		} catch (MissingResourceException e) {
 			new Alert(AlertType.ERROR, "Invalid color properties file: Check resource location and name", ButtonType.OK).showAndWait();
 		}
-		this.setText("Default Color Options");
-		this.setExpanded(false);
 	}
-	
+	/**
+	 * Helper function initializes menu that maps default indicies to 
+	 * default colors. Colors are visualized.
+	 */
 	private void buildMenu() {
 		ArrayList<HBox> myColorOptions = new ArrayList<>();
 		indexToColor = new HashMap<Integer, Paint>();
@@ -66,7 +87,14 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 		colorDisplay.setItems(FXCollections.observableArrayList(myColorOptions));
 		this.setContent(colorDisplay);
 	}
-	
+	/**
+	 * Helper function aligns chosen
+	 * @param key, stated color name
+	 * @param index, index of color
+	 * @return HBox that visualizes color shade and index
+	 * Will be called for every color
+	 * Main purpose for graphic organization
+	 */
 	private HBox buildHbox(String key, int index) {
 		HBox colorOption = new HBox();
 		Rectangle colorSample = new Rectangle(15,15);
@@ -75,7 +103,10 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 				new Text("   " + key + " (" + Integer.toString(index) + ")"));
 		return colorOption;
 	}
-	
+	/**
+	 * Method to
+	 * @return current color for each index
+	 */
 	public Map<Integer,Paint> getIndexToColorMap() {
 		return indexToColor;
 	}
