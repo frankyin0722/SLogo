@@ -2,32 +2,16 @@ package observables;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-public class Speaker {
-	private ObservableList<Listener> observableList;
-	private boolean changed;
+public interface Speaker {
 	
-	public Speaker() {
-		setupObservableList();
-	}
+	public  List<Listener> myListeners = new ArrayList<Listener>();
 	
-	protected void setupObservableList() {
-		observableList = FXCollections.observableList(new ArrayList<>());
-	}
+	public void addListener(Listener l);
 
-	public void addListener(Listener l) {
-		observableList.add(l);
-	}
+	public void removeListener(Listener l);
 
-	public void removeListener(Listener l) {
-		observableList.remove(l);
-	}
-
-	public void notifyListeners() {
-	}
-
+	public void notifyListeners();
 
 }

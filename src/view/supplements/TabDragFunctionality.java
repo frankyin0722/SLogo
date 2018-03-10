@@ -1,4 +1,4 @@
-package view.vis_elements;
+package view.supplements;
 
 
 import java.util.concurrent.atomic.AtomicLong;
@@ -26,9 +26,13 @@ public class TabDragFunctionality {
 	
 	    private final String draggingID = "DraggingTabPaneSupport-"+idGenerator.incrementAndGet() ;
 	    
-	    public TabDragFunctionality() {}
+	    public TabDragFunctionality(TabPane tabs) {
+	    		addSupport(tabs);
+		    enableMovementToEnd(tabs);
+
+	    }
 	
-	    public void addSupport(TabPane tabPane) {
+	    private void addSupport(TabPane tabPane) {
 	        tabPane.getTabs().forEach(this::addDragHandlers);
 	        tabPane.getTabs().addListener((Change<? extends Tab> c) -> {
 	            while (c.next()) {
@@ -41,7 +45,6 @@ public class TabDragFunctionality {
 	            }
 	        });
 	
-	        enableMovementToEnd(tabPane);
 	    }
 	
 	    private void enableMovementToEnd(TabPane tabPane) {

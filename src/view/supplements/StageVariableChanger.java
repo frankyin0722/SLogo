@@ -17,16 +17,16 @@ import view.menus.CustomVarsMenu;
  * @author elizabethshulman
  *
  */
-public class SceneVariableChanger extends Stage {
+public class StageVariableChanger extends Stage {
 
 	private TextField newInfo;
 	private Button submit;
 	private String type;
 	private String prevKey;
 	private CustomVarsMenu myBase;
-	private SceneVariableChanger currentStage;
+	private StageVariableChanger currentStage;
 	
-	public SceneVariableChanger(String keyOrVal, String key, CustomVarsMenu customVarsMenu) {
+	public StageVariableChanger(String keyOrVal, String key, CustomVarsMenu customVarsMenu) {
 		type = keyOrVal;
 		prevKey = key;
 		myBase = customVarsMenu;
