@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import interpreter.CommandTreeInterpreter;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -25,12 +26,14 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 
 	private ResourceBundle myResources;
 	private HashMap<Integer, Paint> indexToColor;
+	private CommandTreeInterpreter interpreter;
 	
-	public ColorPaletteMenu() {
-		this(DEFAULT_COLOR_PALETTE);
+	public ColorPaletteMenu(CommandTreeInterpreter i) {
+		this(i, DEFAULT_COLOR_PALETTE);
 	}
 		
-	public ColorPaletteMenu(String colorPalette) {
+	public ColorPaletteMenu(CommandTreeInterpreter i, String colorPalette) {
+		interpreter = i;
 		initializeFormat(colorPalette);
 	}
 	
@@ -58,6 +61,7 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 				new Alert(AlertType.INFORMATION, "Illegal Paint Type on " + myKeys.get(i), ButtonType.OK).showAndWait();
 			}
 		}
+		interpreter.setPalette(indexToColor);
 		ListView<HBox> colorDisplay = new ListView<>();
 		colorDisplay.setItems(FXCollections.observableArrayList(myColorOptions));
 		this.setContent(colorDisplay);

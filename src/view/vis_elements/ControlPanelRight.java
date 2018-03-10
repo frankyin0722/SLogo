@@ -26,7 +26,7 @@ public class ControlPanelRight extends VBox {
 				new CustomVarsMenu(interpreter),
 				new TurtleInfoMenu(interpreter.getTurtleController()),
 				new HelpMenu(interpreter, vis),
-				new ColorPaletteMenu("BluePalette"));
+				new ColorPaletteMenu(interpreter,"BluePalette"));
 	}
 
 }
