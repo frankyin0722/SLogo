@@ -1,7 +1,9 @@
 package parser;
 
 import java.util.List;
-
+/**
+ * implement the CommandTypes interface and one specific method for the recurse parsing on the liststart type 
+ */
 public class ListStartType implements CommandTypes{
 	private TreeGenerator myTreeGenerator;
 	private List<String> userInput;
@@ -12,6 +14,9 @@ public class ListStartType implements CommandTypes{
 		userInput = input;
 	}
 	
+	/**
+	 * recurses on the liststart type so that all of the sub-commands bracketed together are added as children to one common bracket node 
+	 */
 	public void recurse(CommandNode node) {
 		String currentValue = userInput.get(myTreeGenerator.getIndex()); // which parsed item the recursion is currently looking at 
 		myTreeGenerator.increaseListStartIndex();
@@ -26,6 +31,7 @@ public class ListStartType implements CommandTypes{
 		myTreeGenerator.increaseListEndIndex();
 	}
 	
+	@Override
 	public String whichType() {
 		return "ListStart";
 	}

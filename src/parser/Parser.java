@@ -14,7 +14,9 @@ import alerts.CommandException;
 import alerts.Resources;
 
 import interpreter.CommandTreeInterpreter;
-
+/**
+ * parse the user input command to one or more command trees with a sequential logic of layers so that the interpreter can interpret the tree and execute commands in correct ordering 
+ */
 public class Parser implements TreeGenerator{
 	private static final ResourceBundle Syntax = ResourceBundle.getBundle("resources.languages/Syntax");
 	private HashMap<Pattern, CommandTypes> inputHandlerMap;
@@ -24,7 +26,6 @@ public class Parser implements TreeGenerator{
 	private int ListEndIndex = 0;
 	private PatternManager SomePatternManager = new PatternManager();
 	private CommandType commandInitializer; 
-	private ResourceBundle usedLanguage;
 	private CommandTreeInterpreter myInterpreter;
 	private static List<String> UnwantedCommandTypes = new ArrayList<String>() {{
 		add("ListEnd");
@@ -33,6 +34,7 @@ public class Parser implements TreeGenerator{
 		add("Newline");
 		add("Whitespace");
 	}};
+	
 	public Parser(CommandTreeInterpreter interpreter) {
 		myInterpreter = interpreter;
 	}
@@ -53,10 +55,14 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
+	/**
+	 * generates the command tree from the user input command with respect to the currently selected language environment 
+	 * @param input: user input 
+	 * @param language: language package 
+	 */
 	public void generateCommandTree(String input, ResourceBundle language) {
 		try {
 			currentIndex = 0;
-			usedLanguage = language;
 			parseInput(input);
 			generateInputHandlerMap();
 			while (getIndex() < userInput.size()) {
@@ -107,6 +113,9 @@ public class Parser implements TreeGenerator{
 		return !UnwantedCommandTypes.contains(type);
 	}
 	
+	/**
+	 * determines which command type should be called on the current index of the user input to continue the parsing recursion, and also throws an alert for user if no such command types can be found 
+	 */
 	@Override
 	public void recurse(CommandNode root) {
 		if (currentIndex >= userInput.size()) {
@@ -117,7 +126,6 @@ public class Parser implements TreeGenerator{
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 				findSyntax = true;
 				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				//
 				cmdType.recurse(root);
 				break;
 			}
@@ -128,26 +136,41 @@ public class Parser implements TreeGenerator{
 		}
 	}
 	
+	/**
+	 * increases the current index of the user input command 
+	 */
 	@Override
 	public void increaseIndex() {
 		currentIndex++;
 	}
-
+	
+	/**
+	 * gets the current index of the user input command 
+	 */
 	@Override
 	public int getIndex() {
 		return currentIndex;
 	}
 
+	/**
+	 * increases the liststart index by one so that the layer of brackets can be tracked by user 
+	 */
 	@Override
 	public void increaseListStartIndex() {
 		ListStartIndex++;
 	}
 
+	/**
+	 * increases the listend index by one so that the layer of brackets can be tracked by user 
+	 */
 	@Override
 	public void increaseListEndIndex() {
 		ListEndIndex++;
 	}
 	
+	/**
+	 * passes the interpreter to some commands that need the information stored in the interpreter 
+	 */
 	public CommandTreeInterpreter getInterpreter() {
 		return myInterpreter;
 	}
