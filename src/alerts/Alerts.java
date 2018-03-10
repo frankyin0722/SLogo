@@ -2,8 +2,10 @@ package alerts;
 /**
  * this code is for creating popups. It is adapted from my cellsociety project
  */
+
 /**
  * Class created to make specific alerts for errors that may be thrown throughout the program
+ * @author shichengrao
  */
 import java.util.Optional;
 
