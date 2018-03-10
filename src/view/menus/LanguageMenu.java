@@ -2,6 +2,7 @@ package view.menus;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -34,8 +35,8 @@ public class LanguageMenu extends TitledPane {
 		this.setContent(buttonDisplay);
 	}
 	
-	private ArrayList<Button> setupAllButtons() {
-		ArrayList<Button> buttonList = new ArrayList<>();
+	private List<Button> setupAllButtons() {
+		List<Button> buttonList = new ArrayList<>();
 		File languageFile = new File(DEFAULT_RESOURCE_FOLDER);
 		for (File f: languageFile.listFiles()) {
 			if (!f.getName().equals("Syntax.properties")) {

@@ -11,7 +11,7 @@ public interface IConstants {
 	public static final double INTERNAL_CANVAS_WIDTH = 5000;
 	public static final double INTERNAL_CANVAS_HEIGHT = 5000;
 	
-	public static final String DEFAULT_TURTLE = "cute_turtle.png";
+	public static final String DEFAULT_TURTLE = "resources/images/cute_turtle.png";
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;
 	
