@@ -7,7 +7,9 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import turtle.TurtleController;
-
+/**
+ * sets turtles that will follow commands hereafter 
+ */
 public class TellCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<CommandNode> myActiveTurtles;
@@ -20,6 +22,11 @@ public class TellCommand implements Command{
 		}
 	}
 	
+	/**
+	 * sets turtles that will follow commands hereafter and returns last value in turtles list 
+	 * note: if turtle has not previously existed, it is created and placed at the home location; if more than one turtle is active, commands run return value associated with the last active turtle 
+	 */
+	@Override
 	public double execute() {
 		int maxIndex = 0; 
 		TurtleController myTurtleController = myInterpreter.getTurtleController();

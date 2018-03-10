@@ -8,7 +8,9 @@ import alerts.Resources;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
-
+/**
+ * assigns command(s) given in the second list to the command name using parameters given in first list as variables; when the command is used later in a program, any given values are assigned to variables that can be accessed when the command list is run
+ */
 public class MakeUserInstructionCommand implements Command {
 	private String myCommandName;
 	private List<CommandNode> myVariables;
@@ -25,6 +27,9 @@ public class MakeUserInstructionCommand implements Command {
 		successfullyCreated = (commandName.getNodeValue()==1 ? true : false);
 	}
 	
+	/**
+	 * returns 1 if command is successfully defined, otherwise 0; maps the parameters and the sub-commands to the command name correspondingly 
+	 */
 	@Override
 	public double execute() {
 		if (!successfullyCreated) {

@@ -6,7 +6,9 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import variables.Variable;
-//purely speculative, will likely change a lot, but possible model for control commands
+/**
+ * run command(s) given in the list the value of input number of times
+ */
 public class RepeatCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private int myNumTimes;
@@ -18,7 +20,10 @@ public class RepeatCommand implements Command{
 		myNumTimes = (int) numTimes.getNodeValue();
 		mySubCommands = subCommandsParent.getNodeChildren();
 	}
-
+	
+	/**
+	 * runs command(s) given in the list the value of input number of times and returns the value of the final command executed (or 0 if no commands are executed)
+	 */
 	@Override
 	public double execute() {
 		for (int i = 0; i < myNumTimes; i++) {

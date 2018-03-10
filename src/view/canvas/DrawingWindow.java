@@ -1,6 +1,5 @@
 package view.canvas;
 
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Pane;
@@ -9,21 +8,32 @@ import observables.Listener;
 import slogo_team08.IConstants;
 import turtle.Turtle;
 import turtle.TurtleController;
-
+/**
+ * Pane that displays turtle and lines
+ * Turtles and lines are added to group
+ * @author xlany, elizabethshulman
+ *
+ */
 public class DrawingWindow extends Pane implements Listener, IConstants {
 	private TurtleController myTurtleController;
-
+	/**
+	 * Constructor sets up canvas
+	 */
 	public DrawingWindow() {
 		setupInitialCanvas();
-
 	}
-	
+	/**
+	 * Initializes canvas size and background color
+	 */
 	private void setupInitialCanvas() {
 		this.setPrefSize(INTERNAL_CANVAS_WIDTH, INTERNAL_CANVAS_HEIGHT);
 		this.setMaxSize(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);
 		this.setBackgroundColor(INITIAL_COLOR);
 	}
-	
+	/**
+	 * Method to change background color by
+	 * @param color
+	 */
 	public void setBackgroundColor(Color color) {
 		String hex = String.format( "#%02X%02X%02X",
 	            (int)( color.getRed() * 255 ),
@@ -33,27 +43,29 @@ public class DrawingWindow extends Pane implements Listener, IConstants {
 				"-fx-background-color: " + hex + ";"
 				);
 	}
-	
-	public void addTurtle(Turtle turtle) {
-		this.getChildren().add(turtle.getImageView());
-	}
-	
-	public void addTurtles(List<Turtle> turtles) {
-		this.getChildren().addAll(turtles);
-	}
-	
+	/**
+	 * Methods to make DrawingWindow a listener for
+	 * @param TurtleController tc 
+	 * to easily update new turtles
+	 */
 	public void setupListener(TurtleController tc) {
 		myTurtleController = tc;
 		myTurtleController.addTurtleListener(this);
 	}
-
+	/**
+	 * Listener method: updates on new turtles created in TurtleController
+	 */
 	@Override
 	public void update() {
 		ObservableList<Turtle> turtles =FXCollections.observableArrayList (
 				myTurtleController.getActiveTurtles());
 		updateTurtles(turtles);
 	}
-	
+	/**
+	 * Helper method that adds new turtle from
+	 * @param turtles
+	 * to DrawingWindow for visualization
+	 */
 	private void updateTurtles(ObservableList<Turtle> turtles) {
 		for (Turtle t: turtles) {
 			if (!this.getChildren().contains(t)) {
