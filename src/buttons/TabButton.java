@@ -7,10 +7,20 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import view.vis_elements.Visualization;
 
+/**
+ * 
+ * @author elizabethshulman
+ * 
+ * This class enables a user to create a new workspace within the TabPane. It is conceptually
+ * modeled after standard web browsers.
+ */
 public class TabButton extends Button {
 	
 	private TabPane myTabs;
 	
+	/**
+	 * Instantiate a new button for creating new tabs.
+	 */
 	public TabButton(TabPane currentView) {
 		myTabs = currentView;
 		this.setText("+");
@@ -18,6 +28,9 @@ public class TabButton extends Button {
 	}
 
 
+	/**
+	 * Initialize a new-tab button's response to being clicked by calling for new tab creation
+	 */
 	private void initializeAction() {
 		this.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -27,6 +40,9 @@ public class TabButton extends Button {
 		});
 	}
 	
+	/**
+	 * Creates and places a new tab in the TabPane
+	 */
 	public void createTab() {
 		Tab newTab = new Tab(
 				"Canvas "+(myTabs.getTabs().size()+1));
