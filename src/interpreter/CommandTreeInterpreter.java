@@ -204,7 +204,6 @@ public class CommandTreeInterpreter {
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
 	        try {
-	 
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
 			}
