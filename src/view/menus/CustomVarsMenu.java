@@ -29,6 +29,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 	private ListView<Object> valView;
 	private CommandTreeInterpreter interpreter;
 	private VariableManager myvars;
+	
 	/**
 	 * Constructor takes in
 	 * @param i, interpreter
@@ -41,6 +42,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		this.setText("Variables");
 		this.setExpanded(false);
 	}
+	
 	/**
 	 * Method initializes dual VBoxs to display
 	 * (1) variable name aka key
@@ -58,6 +60,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		varsDisplay.getChildren().addAll(keyCol, valCol);
 		this.setContent(varsDisplay);
 	}
+	
 	/**
 	 * Method adds variables to display boxes and
 	 * sets up key and value changes on click
@@ -75,6 +78,11 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 
 	}
 
+	/**
+	 * Refreshes the key and value variable lists upon update
+	 * @param keylist	List to become ListView for variable keys
+	 * @param vallist	List to become ListView for variable values
+	 */
 	private void resetLists(ObservableList<String> keylist, ArrayList<Object> vallist) {
 		keyCol.getChildren().remove(keyView);
 		valCol.getChildren().remove(valView);
@@ -84,6 +92,9 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		valCol.getChildren().add(valView);
 	}
 	
+	/**
+	 * Enables a key cell to request modification when it is clicked on
+	 */
 	private void setupKeyEvent() {
 		keyView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -93,11 +104,17 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		});
 	}
 	
+	/**
+	 * Enables a variable's key cell to request modification when it is clicked on
+	 */
 	private void updateKey(String key) {
-		StageVariableChanger keystage = new StageVariableChanger("key", key, this);
+		new StageVariableChanger("key", key, this);
 		update();
 	}
 	
+	/**
+	 * Enables a variable's value cell to request modification when it is clicked on
+	 */
 	private void setupValEvent() {
 		valView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -107,19 +124,30 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		});
 	}
 	
+	/**
+	 * Updates the value corresponding to the key at
+	 * @param index
+	 */
 	private void updateVal(int index) {
 		keyView.getSelectionModel().select(index);
-		StageVariableChanger varstage = new StageVariableChanger("value",
+		new StageVariableChanger("value",
 				keyView.getSelectionModel().getSelectedItem(), this);
 		update();
 	}
 	
+	/**
+	 * Updates rows in the menu when new variables are created
+	 */
 	@Override
 	public void update() {
 		myvars = interpreter.getVariables();
 		buildTableContents(myvars);
 	}
 	
+	/**
+	 * Return VariableManager myvars
+	 * @return current VariableManager myvars
+	 */
 	public VariableManager getVariableManager() {
 		return myvars;
 	}

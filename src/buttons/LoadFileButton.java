@@ -13,12 +13,19 @@ import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import view.vis_elements.CommandWindow;
-
+/**
+ * Button for loading a predetermined .logo program into the console
+ * @author shichengrao
+ *
+ */
 public class LoadFileButton extends BaseButton {
 	public LoadFileButton() {
 		super("Load File");
 	}
-	
+	/**
+	 * loads the file onto the given command window
+	 * @param cw
+	 */
 	public void loadFile(CommandWindow cw) {
 		this.setOnAction(
 				new EventHandler<ActionEvent>() {

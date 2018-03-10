@@ -9,16 +9,29 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import turtle.Pen;
 
+/**
+ * 
+ * @author elizabethshulman
+ *
+ * This class generates a pop-up Stage containing a Slider that modifies a given pen's width.
+ */
 public class StagePenChanger extends Stage {
 
 	private Pen myPen;
 	
+	/**
+	 * Initialize a StagePenChanger object
+	 * @param toModify  pen receiving user modifications
+	 */
 	public StagePenChanger(Pen toModify) {
 		myPen = toModify;
 		this.setScene(new Scene(buildSliderBox()));
 		this.setTitle("Modify Width");
 	}
 
+	/**
+	 * Builds an HBox containing a Slider to modify pen width
+	 */
 	private HBox buildSliderBox() {
 		HBox sliderAndButton = new HBox();
 		sliderAndButton.getChildren().add(buildWidthSlider());
