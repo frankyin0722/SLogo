@@ -20,8 +20,6 @@ public class Turtle extends Group {
 	private double oldY;
 	private double newX;
 	private double newY;
-	private int shapeIndex = 0;
-	private int colorIndex = 0;
 	public Turtle(Image image, double x, double y, double width, double height) {
 		super();
 		zeroX = x- width/2;
