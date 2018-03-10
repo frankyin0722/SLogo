@@ -25,7 +25,7 @@ import slogo_team08.IConstants;
 public class ColorPaletteMenu extends TitledPane implements IConstants {
 
 	private ResourceBundle myResources;
-	private HashMap<Integer, Paint> indexToColor;
+	private HashMap<Integer, Color> indexToColor;
 	private CommandTreeInterpreter interpreter;
 	
 	public ColorPaletteMenu(CommandTreeInterpreter i) {
@@ -50,7 +50,7 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 	
 	private void buildMenu() {
 		ArrayList<HBox> myColorOptions = new ArrayList<>();
-		indexToColor = new HashMap<Integer, Paint>();
+		indexToColor = new HashMap<Integer, Color>();
 		List<String> myKeys = Collections.list(myResources.getKeys());
 		
 		for(int i=0; i<myKeys.size(); i++) {
@@ -61,7 +61,7 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 				new Alert(AlertType.INFORMATION, "Illegal Paint Type on " + myKeys.get(i), ButtonType.OK).showAndWait();
 			}
 		}
-		interpreter.setPalette(indexToColor);
+		interpreter.getTurtleController().setPalette(indexToColor);
 		ListView<HBox> colorDisplay = new ListView<>();
 		colorDisplay.setItems(FXCollections.observableArrayList(myColorOptions));
 		this.setContent(colorDisplay);
@@ -76,7 +76,7 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 		return colorOption;
 	}
 	
-	public Map<Integer,Paint> getIndexToColorMap() {
+	public Map<Integer,Color> getIndexToColorMap() {
 		return indexToColor;
 	}
 }

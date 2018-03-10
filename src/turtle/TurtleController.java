@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import alerts.Alerts;
-import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import observables.Listener;
 import view.canvas.DrawingWindow;
 
-public class TurtleController extends Group implements Listener {
+public class TurtleController implements Listener {
 	private DrawingWindow myDrawingWindow;
 	private List<Turtle> turtles;
 	private List<Listener> turtleListeners;
@@ -23,7 +23,7 @@ public class TurtleController extends Group implements Listener {
 	private List<Boolean> active;
 	private int shapeIndex = 0;
 	private int colorIndex = 0;
-	private Map<Integer, Paint> colors;
+	private Map<Integer, Color> colors;
 	private List<Image> shapes;
 	private int currentTurtle;
 	public TurtleController(DrawingWindow dw) {
@@ -186,10 +186,10 @@ public class TurtleController extends Group implements Listener {
  		
  }
 	 public void setColorByIndex(int index) {
-		
 		 try {
 			colorIndex = index;
 	 		for(Turtle turtle: turtles) {
+	 			
 	 			turtle.getPen().setColor(colors.get(index));
 	 		}
 		 }
@@ -204,8 +204,11 @@ public class TurtleController extends Group implements Listener {
 	 public double getColorIndex() {
  		return colorIndex;
 	 }
-	 public void setPalette(Map<Integer,Paint> palette) {
+	 public void setPalette(Map<Integer,Color> palette) {
 		 colors = palette;
+	 }
+	 public void setBackground(int index) {
+		 myDrawingWindow.setBackgroundColor(colors.get(index));
 	 }
 	 public void setImageMenu(List<Image> images) {
 		 shapes = images;
