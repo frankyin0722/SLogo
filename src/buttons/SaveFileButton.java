@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
-import org.w3c.dom.Document;
 
 import alerts.Alerts;
 import interpreter.CommandTreeInterpreter;
@@ -17,7 +16,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class SaveFileButton extends BaseButton {
-	private Document myDocument;
 	public SaveFileButton() {
 		super("Save");
 	}
