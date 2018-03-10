@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 import observables.Listener;
 /**
- *
+ * models the logo turtle, contains information about itself and depends on pen
  */
 public class Turtle extends Group {
 	private Pen pen = new Pen();
@@ -22,6 +22,14 @@ public class Turtle extends Group {
 	private double oldY;
 	private double newX;
 	private double newY;
+	/**
+	 * makes a turtle with the given information
+	 * @param image - visual of the turtle
+	 * @param x - max x of screen
+	 * @param y - max y of screen
+	 * @param width of turtle
+	 * @param height of turtle
+	 */
 	public Turtle(Image image, double x, double y, double width, double height) {
 		super();
 		zeroX = x- width/2;
@@ -36,15 +44,21 @@ public class Turtle extends Group {
 		myListeners = new ArrayList<>();
 		getChildren().add(myImage);
 	}
+	/**
+	 * default turtle contains no information
+	 */
 	public Turtle() {
 		super();
 	}
-	 //returns the turtle's pen
+	 /**
+	  * @return the turtle's pen
+	  */
     public Pen getPen() {
     		return pen;
     }
-
-    //updates turtle's position, updates its list of lines if necessary
+    /**
+     * updates turtle's position, updates its list of lines if necessary
+     */
     public void update() {
     		myImage.setX(newX + zeroX);
     		myImage.setY(newY + zeroY);
@@ -58,57 +72,89 @@ public class Turtle extends Group {
     		myImage.toFront();
     		notifyListeners();
     }
-
-    //check the direction the turtle is facing in radians
+    /**
+     * check the direction the turtle is facing, in radians
+     */
     public double getDirection() {
     		return direction;
     }
-
-    //change the turtle's bearing
+    /**
+     * change the turtle's bearing
+     */
+    
     public void setDirection(double direction) {
     		this.direction = direction;
     		myImage.setRotate(Math.toDegrees(direction));
     		notifyListeners();
 
     }
-    //modifies x, remembers old xvalue
+    /**
+     * modifies x, remembers old xvalue
+     */
     public void changeX(double newX) {
     		oldX = myImage.getX() + (myImage.getFitWidth()/ 2) - zeroX;
     		this.newX = newX;
     }
-    //modifies y, remembers old yvalue
+    /**
+     * modifies y, remembers old xvalue
+     */
     public void changeY(double newY) {
     		oldY = myImage.getY() + (myImage.getFitHeight()/2) - zeroY;
     		this.newY = newY;
     }
-    //deletes all lines of the turtle
+    /**
+     * deletes all lines of the turtle
+     */
     public void clearLines() {
     		getChildren().clear();
     		getChildren().add(myImage);
     }
+    /**
+     * @return x coordinate of center of turtle
+     */
     public double getX() {
 		return myImage.getX() - zeroX;
     }
+    /**
+     * @return y coordinate of center of turtle
+     */
     public double getY() {
 		return myImage.getY() - zeroY;
     }
-    
+    /**
+     * sets the turtle's visibility
+     */
     public void setVisibility(boolean visible) {
     		myImage.setVisible(visible);
     		notifyListeners();
     }
+    /**
+     * checks if turtle is visible
+     */
     public boolean checkVisibility() {
     		return myImage.isVisible();
     }
+    /**
+     * sets the image of the turtle
+     */
     public void setImage(Image newImage) {
     		myImage.setImage(newImage);
     }
+    /**
+     * sets the width of the turtle
+     */
     public void setFitWidth(double width) {
     		myImage.setFitWidth(width);
     }
+    /**
+     * sets the height of the turtle
+     */
     public void setFitHeight(double height) {
     		myImage.setFitHeight(height);
     }
+    /**
+     * resets turtle to state right after it was created
+     */
     public void resetTurtle() {
     		newX = 0;
     		newY = 0;

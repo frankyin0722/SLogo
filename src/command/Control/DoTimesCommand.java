@@ -6,7 +6,9 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import variables.Variable;
-
+/**
+ * run all of the sub-commands in order by a certain number of times 
+ */
 public class DoTimesCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<CommandNode> myParameters;
@@ -18,6 +20,9 @@ public class DoTimesCommand implements Command{
 		mySubCommands = subCommandsParent.getNodeChildren();
 	}
 	
+	/**
+	 * increments the variable by one each iteration, runs all of the sub-commands, and ends when the variable value equals to the end value 
+	 */
 	@Override
 	public double execute() {
 		myInterpreter.getVariables().setVariable((double) 0.0, myParameters.get(0).getCommandName());

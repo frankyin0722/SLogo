@@ -5,7 +5,9 @@ import java.util.List;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
-
+/**
+ * run the commands given in the first list if the condition is evaluated to be true, otherwise run the commands given in the second list
+ */
 public class IfElseCommand implements Command {
 	private CommandTreeInterpreter myInterpreter;
 	private boolean myExpression;
@@ -24,6 +26,9 @@ public class IfElseCommand implements Command {
 		myInterpreter = tree;
 	}
 	
+	/**
+	 * runs the commands by order given in the first list if the condition is evaluated to be true, otherwise runs the commands given in the second list 
+	 */
 	@Override
 	public double execute() {
 		if (myExpression) {
