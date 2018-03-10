@@ -81,7 +81,7 @@ public class CommandTreeInterpreter {
 	}
 	
 	private void interpretTurtle(int i, CommandNode myRoot, List<Object> Parameters) {
-		System.out.println(myTurtleController.getActiveTurtleIndices().size());
+		
 		for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
 			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(t)); // 0 index refers to 1 turtle 
 			interpretTree(myRoot.getNodeChildren().get(i));
@@ -170,7 +170,7 @@ public class CommandTreeInterpreter {
 	
 	private void updateBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
-			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+			//
 			node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 		}
 		else {
@@ -180,9 +180,9 @@ public class CommandTreeInterpreter {
 	
 	private void updateGroupBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
-			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+			//
 			double totalValue = 0;
-			//System.out.println(node.getNodeChildren().size());
+			//
 			for (CommandNode sub : node.getNodeChildren()) {
 				totalValue = totalValue + sub.getNodeValue();
 			}
@@ -191,7 +191,7 @@ public class CommandTreeInterpreter {
 		else {
 			node.setNodeValue(0.0);
 		}
-		//System.out.println(node.getNodeValue());
+		//
 	}
 	
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
@@ -267,9 +267,6 @@ public class CommandTreeInterpreter {
         invokeExecuteMethod(node, commandClass, thisCommand);
 	}
 	
-	private void step(double elapsedTime) {
-		System.out.print("Stepping");
-	}
 	
 	public List<Turtle> getCurrentActiveTurtles() {
 		return myTurtleController.getActiveTurtles();

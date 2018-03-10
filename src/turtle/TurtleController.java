@@ -84,7 +84,7 @@ public class TurtleController extends Group implements Listener {
 			currentTurtle = getActiveTurtleIndices().get(0);
 		}
 		else currentTurtle = 0;
-		//System.out.println(active);
+		//
 	}
 	
 	//get Turtle at index
