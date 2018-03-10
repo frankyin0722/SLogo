@@ -23,7 +23,7 @@ public class TurtleController extends Group implements Listener {
 	private int shapeIndex = 0;
 	private int colorIndex = 0;
 	private Map<Integer, Paint> colors;
-	private Map<Integer, Image> shapes;
+	private List<Image> shapes;
 	private int currentTurtle;
 	public TurtleController(DrawingWindow dw) {
 		setupTurtleController(dw);
@@ -194,5 +194,8 @@ public class TurtleController extends Group implements Listener {
 	 }
 	 public void setPalette(Map<Integer,Paint> palette) {
 		 colors = palette;
+	 }
+	 public void setImageMenu(List<Image> images) {
+		 shapes = images;
 	 }
 }
