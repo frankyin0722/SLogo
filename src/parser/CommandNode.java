@@ -3,9 +3,7 @@ package parser;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * A command node for a tree, holding its value, type, name, and children
- * @author FY
- *
+ * a class built to support the tree structure of parsed commands, able to store the command name, command type, child nodes, and node value 
  */
 public class CommandNode {
 	private String myCommandType;
@@ -26,44 +24,48 @@ public class CommandNode {
 		myChildren = new ArrayList<CommandNode>();
 		myNodeValue = value;
 	}
+	
 	/**
-	 * adds a child to the node's children
-	 * @param child
+	 * adds one command node to this command node as its child 
+	 * @param child: one child node of this command node 
 	 */
 	public void addChild(CommandNode child) {
 		myChildren.add(child);
 	}
+	
 	/**
-	 * 
-	 * @return type of node
+	 * gets the command type of this node 
+	 * @return: string of the command type 
 	 */
 	public String getCommandType() {
 		return myCommandType;
 	}
 	/**
-	 * 
-	 * @return name of command
+	 * gets the name of this node 
+	 * @return: string of the command name 
 	 */
 	public String getCommandName() {
 		return myCommandName;
 	}
+
 	/**
-	 * 
-	 * @return value of node
+	 * gets the value of this node 
+	 * @return: double of the node value 
 	 */
 	public double getNodeValue() {
 		return myNodeValue;
 	}
 	/**
-	 * set node value to newValue
-	 * @param newValue
+	 * sets the value of this node 
+	 * @param newValue: the value that this node is assigned to 
 	 */
 	public void setNodeValue(double newValue) {
 		myNodeValue = newValue;
 	}
+
 	/**
-	 * 
-	 * @return children of node, in a list
+	 * passes the list of all the node's children for command parsing and interpreting purposes 
+	 * @return: the list of all the node's child nodes 
 	 */
 	public List<CommandNode> getNodeChildren() {
 		return myChildren;
