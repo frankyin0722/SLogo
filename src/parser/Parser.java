@@ -44,7 +44,7 @@ public class Parser implements TreeGenerator{
 		List<String> commentsprocessedout = new ArrayList<>();
 		userInput = new ArrayList<String>();
 		for (int i = 0; i < parsebylines.size(); i++) {
-			System.out.println(parsebylines.get(i));
+			
 			if (parsebylines.get(i).indexOf("#")==-1 && !parsebylines.get(i).equals("")) {
 				commentsprocessedout.add(parsebylines.get(i).trim());
 			}
@@ -63,7 +63,7 @@ public class Parser implements TreeGenerator{
 			generateInputHandlerMap();
 			while (getIndex() < userInput.size()) {
 				commandInitializer.initialize(language);
-				//System.out.println("parsing done");
+				//
 				myInterpreter.interpretTree(commandInitializer.getCurrentRoot());
 				myInterpreter.iterateUDC(myInterpreter.getUserCommands());
 			}
@@ -122,7 +122,7 @@ public class Parser implements TreeGenerator{
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
 				findSyntax = true;
 				CommandTypes cmdType = inputHandlerMap.get(pattern);
-				//System.out.println(cmdType);
+				//
 				cmdType.recurse(root);
 				break;
 			}

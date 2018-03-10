@@ -29,14 +29,14 @@ public class TellCommand implements Command{
 				maxIndex = (int) myActiveTurtles.get(i).getNodeValue();
 			}
 		}
-		System.out.println("i got here");
+		
 		myTurtleController.makeNewTurtles(maxIndex - myTurtleController.size());
 		for (CommandNode active : myActiveTurtles) {
 			newCurrentActiveTurtles.add((int) active.getNodeValue());
 		}
-		System.out.println("i got here");
+		
 		myTurtleController.resetActiveTurtles(newCurrentActiveTurtles);
-		System.out.println(myActiveTurtles.get(myActiveTurtles.size()-1).getNodeValue());
+		
 		return myActiveTurtles.get(myActiveTurtles.size()-1).getNodeValue();
 	} 
 }
