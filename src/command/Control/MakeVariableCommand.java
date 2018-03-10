@@ -4,7 +4,9 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import variables.Variable;
-
+/**
+ * assign the value of input to variable, creating the variable if necessary
+ */
 public class MakeVariableCommand implements Command {
 	private CommandTreeInterpreter myInterpreter;
 	private CommandNode myVariable;
@@ -17,6 +19,9 @@ public class MakeVariableCommand implements Command {
 		myValue = assignedvalue.getNodeValue();
 	}
 	
+	/**
+	 * assigns the value of input to variable, and creates the variable if necessary 
+	 */
 	@Override
 	public double execute() {
 		variableDeclare(myVariable);

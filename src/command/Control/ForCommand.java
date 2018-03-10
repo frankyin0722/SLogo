@@ -6,7 +6,9 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import variables.Variable;
-
+/**
+ * runs command(s) for each value specified in the range from start to end, going by increment
+ */
 public class ForCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<CommandNode> myParameters;
@@ -20,6 +22,10 @@ public class ForCommand implements Command{
 		myParameters = parameterParent.getNodeChildren();
 		mySubCommands = subCommandsParent.getNodeChildren();
 	}
+	
+	/**
+	 * assigns variable value upon each iteration, and runs all of the sub-commands
+	 */
 	@Override
 	public double execute() {
 		myInterpreter.getVariables().setVariable((double) myParameters.get(1).getNodeValue(), myParameters.get(0).getCommandName());
