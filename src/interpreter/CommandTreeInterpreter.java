@@ -13,6 +13,7 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
+import javafx.scene.paint.Paint;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
@@ -32,7 +33,6 @@ public class CommandTreeInterpreter {
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
-	
 	/**
 	 * initializes the command manager, the variable manager, the user defined command map, the user define command parameter map, the listeners that notify the front end whenever display needs to be updated  
 	 * @param turtlecontroller: this holds the information of all the turtles that would be created in SLogo 
@@ -207,7 +207,6 @@ public class CommandTreeInterpreter {
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
 	        try {
-	 
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
 			}
@@ -215,6 +214,7 @@ public class CommandTreeInterpreter {
 				Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError8");
 				return;
 			}
+
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError7");
 			return;
@@ -230,6 +230,7 @@ public class CommandTreeInterpreter {
 			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
 		}
 		Command thisCommand = createCommandInstance(commandClass, parameters);
+
         invokeExecuteMethod(node, commandClass, thisCommand);
 	}
 	

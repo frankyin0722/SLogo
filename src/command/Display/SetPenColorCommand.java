@@ -2,7 +2,9 @@ package command.Display;
 
 import command.Command;
 import turtle.TurtleController;
-
+/**
+ * changes the pen color of a turtle
+ */
 public class SetPenColorCommand implements Command{
 	private TurtleController myController;
 	private int colorIndex;
@@ -10,8 +12,12 @@ public class SetPenColorCommand implements Command{
 		myController = controller;
 		colorIndex = (int)index;
 	}
+	/**
+	 * sets the pen color of the turtle to that of the  index specified
+	 */
 	@Override
 	public double execute() {
+		System.out.println("hi");
 		myController.setColorByIndex(colorIndex);
 		return colorIndex;
 	}

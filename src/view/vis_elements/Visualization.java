@@ -48,11 +48,9 @@ public class Visualization extends BorderPane implements IConstants {
 				TURTLE_WIDTH,
 				TURTLE_HEIGHT,
 				myExternalCanvas.getInternalCanvas());
-
-		//myTurtles = myTurtleController.getActiveTurtles();
 		
 		interpreter = new CommandTreeInterpreter(myTurtleController);
-		myControlPanelRight = new ControlPanelRight(interpreter);		
+		myControlPanelRight = new ControlPanelRight(interpreter, this);		
 		myControlTextInput = new ControlTextInput(interpreter, this, myExternalCanvas);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myResources, myControlTextInput.getCommandWindow());
 	}
@@ -69,16 +67,16 @@ public class Visualization extends BorderPane implements IConstants {
 		this.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 	}
 	
-	private void setLanguage(String language) {
-		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+	public void setLanguage(String language) {
+		myResources = ResourceBundle.getBundle(LANGUAGE_RESOURCE_PACKAGE + language);
 	}
-	
-	public void changeLanguage() {
-		myResources = myControlPanelRight.getLanguage();
-	}
+//	
+//	public void changeLanguage() {
+//		myResources = myControlPanelRight.getLanguage();
+//	}
 	
 	public ResourceBundle getLanguage() {
-		changeLanguage();
+//		changeLanguage();
 		return myResources;
 	}
 
