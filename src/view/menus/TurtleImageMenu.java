@@ -26,7 +26,7 @@ public class TurtleImageMenu extends TitledPane {
 	public TurtleImageMenu(ResourceBundle resources, TurtleController tc) {
 		myTurtleController = tc;
 		setupPane(resources);
-		initiateToInterp();
+//		initiateToInterp();
 		setupTurtleSelection();
 	}
 	

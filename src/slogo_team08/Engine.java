@@ -1,5 +1,6 @@
 package slogo_team08;
 
+import javafx.animation.Timeline;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.vis_elements.TabView;
@@ -23,5 +24,8 @@ public class Engine {
 //		myStage.setFullScreen(true);
 		
 		myStage.show();
+		Timeline timeline = new Timeline();
+		timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.setAutoReverse(true);
 	}
 }
