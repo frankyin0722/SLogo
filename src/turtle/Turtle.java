@@ -140,12 +140,21 @@ public class Turtle extends Group {
     public void setImage(Image newImage) {
     		myImage.setImage(newImage);
     }
+    /**
+     * sets the width of the turtle
+     */
     public void setFitWidth(double width) {
     		myImage.setFitWidth(width);
     }
+    /**
+     * sets the height of the turtle
+     */
     public void setFitHeight(double height) {
     		myImage.setFitHeight(height);
     }
+    /**
+     * resets turtle to state right after it was created
+     */
     public void resetTurtle() {
     		newX = 0;
     		newY = 0;
