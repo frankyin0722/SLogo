@@ -4,22 +4,17 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import slogo_team08.IConstants;
 import turtle.Turtle;
 import turtle.TurtleController;
 
-public class TurtleAvatarMenu extends TitledPane {
-	
-	public static final int THUMBNAIL_WIDTH = 50;
-	public static final int THUMBNAIL_HEIGHT = 50;
-	public static final String TURTLE_MENU_KEY = "TurtleMenu";
-	public static final String DEFAULT_IMAGE_PATH = "resources/images/";
-	public static final String DEFAULT_IMAGE_FOLDER = "./src/resources/images/";
+public class TurtleAvatarMenu extends TitledPane implements IConstants {
+
 	private List<Image> myTurtleImages;
 	private List<Button> myTurtleButtons;
 	private VBox myTurtleBox;
@@ -34,18 +29,9 @@ public class TurtleAvatarMenu extends TitledPane {
 	}
 	
 	private void setupPane(ResourceBundle resources) {
-		this.setText(resources.getString(TURTLE_MENU_KEY));
+		this.setText("Change Turtle Image");
 		this.setExpanded(false);
 	}
-	
-//	private void setupTurtleSelection() {
-//		myTurtleBox = new VBox();
-//		myTurtleImages = new ArrayList<>();
-//		myTurtleButtons = new ArrayList<>();
-//		makeButton("resources/images/franklin.jpg", myTurtleBox);
-//		makeButton("resources/images/cute_turtle.png", myTurtleBox);
-//		this.setContent(myTurtleBox);
-//	}
 	
 	private void initiateToInterp() {
 		myTurtleController.setImageMenu(myTurtleImages);
@@ -58,13 +44,12 @@ public class TurtleAvatarMenu extends TitledPane {
 		File imageDir = new File(DEFAULT_IMAGE_FOLDER);
 		for (File f: imageDir.listFiles()) {
 			String name = f.getName();
-			if (name.substring(name.length() - 3,name.length()).equals("png") | 
-					name.substring(name.length() - 3,name.length()).equals("jpg")) {
+			String lastThree = name.substring(name.length() - 3,name.length());
+			if (lastThree.equals("png") | lastThree.equals("jpg")) {
 				makeButton(DEFAULT_IMAGE_PATH+f.getName(), myTurtleBox);
 			}
 		}
 		this.setContent(myTurtleBox);
-
 	}
 	
 	private void makeButton(String filepath, VBox vbox) {
@@ -84,10 +69,5 @@ public class TurtleAvatarMenu extends TitledPane {
 			t.setImage(img);
 		}
 	}
-	
-	public List<Button> getTurtleButtons() {
-		return myTurtleButtons;
-	}
-	
 	
 }

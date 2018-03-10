@@ -15,6 +15,11 @@ public interface IConstants {
 	public static final int TURTLE_WIDTH = 25;
 	public static final int TURTLE_HEIGHT = 30;
 	
+	public static final int THUMBNAIL_WIDTH = 50;
+	public static final int THUMBNAIL_HEIGHT = 50;
+	public static final String DEFAULT_IMAGE_PATH = "resources/images/";
+	public static final String DEFAULT_IMAGE_FOLDER = "./src/resources/images/";
+	
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final String DEFAULT_COLOR_PALETTE = "BasicRainbowPalette";
 	public static final String COLOR_RESOURCE_PACKAGE = "resources.colors/";
