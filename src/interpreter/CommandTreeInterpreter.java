@@ -306,7 +306,9 @@ public class CommandTreeInterpreter {
 	public List<String> getHistory(){
 		return history;
 	}
-	
+	/**
+	 * Method to call update on each listener
+	 */
 	private void notifyListeners() {
 		for(Listener l:theseListeners) {
 			l.update();
@@ -357,27 +359,31 @@ public class CommandTreeInterpreter {
 	public String iterateNode(CommandNode node) {
 		return node.getCommandName();
 	}
-	
+	/**
+	 * Adds to userDefinedCommands by
+	 * @param commandName
+	 * @param commandAction, as defined by name of first node
+	 * Then notifies all UDC listeners
+	 */
 	public void addToActiveUDC(String commandName, String commandAction) {
 			activeUDC.put(commandName, commandAction);
 			notifyUDCListeners();
 	}
-	
+	/**
+	 * Method adds
+	 * @param l, listener
+	 * to list of active UDC Listeners
+	 */
 	public void addUDCListener(Listener l) {
 		activeUDCListener.add(l);
 	}
-	
+	/**
+	 * Method to notify all listeners for new UDC
+	 */
 	public void notifyUDCListeners() {
 		for (Listener l: activeUDCListener) {
 			l.update();
 		}
 	}
-	
-	public Map<String, String> getActiveUDC() {
-		return activeUDC;
-	}
-	
-	public List<Listener> getActiveUDCListener() {
-		return activeUDCListener;
-	}
+
 }
