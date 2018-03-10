@@ -44,6 +44,7 @@ public class Parser implements TreeGenerator{
 		List<String> commentsprocessedout = new ArrayList<>();
 		userInput = new ArrayList<String>();
 		for (int i = 0; i < parsebylines.size(); i++) {
+			System.out.println(parsebylines.get(i));
 			if (parsebylines.get(i).indexOf("#")==-1 && !parsebylines.get(i).equals("")) {
 				commentsprocessedout.add(parsebylines.get(i).trim());
 			}

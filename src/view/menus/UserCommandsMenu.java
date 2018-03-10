@@ -3,33 +3,36 @@ package view.menus;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import javafx.event.EventHandler;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import observables.Listener;
+import parser.CommandNode;
+import view.vis_elements.CommandWindow;
 
 public class UserCommandsMenu extends TitledPane implements Listener {
-	private HashMap<String, String> activeUDC;
-	private List<Listener> activeUDCListener;
 	private 	CommandTreeInterpreter interpreter;
-//	private ListView<String> commandsDisplay;
-	private VBox commandsDisplay;
+	private ListView<String> commandsDisplay;
+	private CommandWindow myCommandWindow;
 
-	public UserCommandsMenu(CommandTreeInterpreter i, ResourceBundle resources) {
+	public UserCommandsMenu(CommandTreeInterpreter i, ResourceBundle resources, CommandWindow cw) {
 		setupMenu();
-//		commandsDisplay = new ListView<>();
-		commandsDisplay = new VBox();
-		activeUDC = new HashMap<>();
-		activeUDCListener = new ArrayList<>();
+		commandsDisplay = new ListView<>();
 		interpreter = i;
+		myCommandWindow = cw;
 		i.addUDCListener(this);
 		this.setContent(commandsDisplay);
-//		activeUDC = i.getActiveUDC();
+		setupMouseEventHandler(myCommandWindow);
 	}
 	
 	private void setupMenu() {
@@ -38,15 +41,31 @@ public class UserCommandsMenu extends TitledPane implements Listener {
 		this.setExpanded(false);
 	}
 	
+	private void setupMouseEventHandler(CommandWindow cw) {
+		commandsDisplay.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle (MouseEvent click) {
+				String repeatCommand = commandsDisplay.getSelectionModel().getSelectedItem();
+				Map<String, List<CommandNode>> para = interpreter.getUserCommandParameters();
+				cw.addText(repeatCommand + " ");
+				cw.addText(paraToString(para.get(repeatCommand)));
+			}
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update() {
-		ObservableMap<String, String> history =FXCollections.observableMap(interpreter.getActiveUDC());
-		System.out.print("XXXXX update " + history.size());
-		commandsDisplay.getChildren().clear();
-		for (String key : history.keySet()) {
-			commandsDisplay.getChildren().add(new Text(key + " " + history.get(key)));
-		    System.out.println(key + " " + history.get(key));
+		ObservableList<String> names = FXCollections.observableArrayList(interpreter.getUserCommands().keySet());
+		commandsDisplay.setItems((ObservableList<String>) names);
+	}
+	
+	private String paraToString(List<CommandNode> list) {
+		String s = "";
+		for (CommandNode c: list) {
+			s += (c.getCommandName() + " ");
 		}
+		return s.substring(0, s.length()-1) + "\n";
 	}
 
 }

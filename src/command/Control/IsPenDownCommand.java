@@ -10,10 +10,13 @@ public class IsPenDownCommand implements Command{
 	
 	public IsPenDownCommand(CommandTreeInterpreter tree){
 		myInterpreter = tree;
-		myTurtle = myInterpreter.getCurrentAvailableTurtles().get(myInterpreter.getCurrentActiveTurtleIndex()-1);
 	}
 	
 	public double execute(){
+		if (myInterpreter.getCurrentActiveTurtleIndex()-1<0 && myInterpreter.getCurrentActiveTurtleIndex()-1>myInterpreter.getCurrentAvailableTurtles().size()){
+			return 0;
+		}
+		myTurtle = myInterpreter.getCurrentAvailableTurtles().get(myInterpreter.getCurrentActiveTurtleIndex()-1);
 		return myTurtle.getPen().PenUp() ? 0: 1;
 	}
 }

@@ -24,6 +24,7 @@ public class TurtleController extends Group implements Listener {
 	private int colorIndex = 0;
 	private Map<Integer, Paint> colors;
 	private Map<Integer, Image> shapes;
+	private int currentTurtle;
 	public TurtleController(DrawingWindow dw) {
 		setupTurtleController(dw);
 	}
@@ -37,6 +38,7 @@ public class TurtleController extends Group implements Listener {
 		myImage = image;
 		addActiveTurtle(image, x, y, width, height);
 		notifyListeners();
+		currentTurtle = 1;
 	}
 	
 	private void setupTurtleController(DrawingWindow dw) {
@@ -77,12 +79,24 @@ public class TurtleController extends Group implements Listener {
 				active.set(newindices.get(i)-1, true);
 			}
 		}
+		if (getActiveTurtleIndices().size()!=0) {
+			currentTurtle = getActiveTurtleIndices().get(0);
+		}
+		else currentTurtle = 0;
 		//System.out.println(active);
 	}
 	
 	//get Turtle at index
 	public Turtle getTurtle(int index) {
 		return turtles.get(index);
+	}
+	
+	public int getCurrentTurtleIndex() {
+		return currentTurtle;
+	}
+	
+	public void setCurrentTurtleIndex(int index) {
+		currentTurtle = index;
 	}
 	
 	public void changeTurtleStatus(Turtle offTurtle) {
