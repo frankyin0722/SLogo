@@ -15,7 +15,7 @@ public class ConstantType implements CommandTypes{
 	}
 	
 	/**
-	 * 
+	 * creates the constant node based on the current user input the parser is looking at, adds it to its parent command node, and increments the index to the next user input 
 	 */
 	public void recurse(CommandNode node) {
 		String currentValue = userInput.get(myTreeGenerator.getIndex());
