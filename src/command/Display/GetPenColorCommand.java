@@ -1,7 +1,6 @@
 package command.Display;
 
 import command.Command;
-import turtle.Turtle;
 import turtle.TurtleController;
 
 public class GetPenColorCommand implements Command {

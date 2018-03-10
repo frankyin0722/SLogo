@@ -16,10 +16,12 @@ public interface IConstants {
 	public static final int TURTLE_HEIGHT = 30;
 	
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
-	public static final String DEFAULT_RESOURCE_PACKAGE = "resources.languages/";
-	public static final String DEFAULT_LANGUAGE = "English";
 	public static final String DEFAULT_COLOR_PALETTE = "BasicRainbowPalette";
 	public static final String COLOR_RESOURCE_PACKAGE = "resources.colors/";
-
+	
+	public static final String DEFAULT_LANGUAGE_FOLDER = "./src/resources/languages/";
+	public static final String LANGUAGE_RESOURCE_PACKAGE = "resources.languages/";
+	public static final String DEFAULT_LANGUAGE = "English";
+	public static final String LANGUAGE_MENU_KEY = "LanguageMenu";
 
 }

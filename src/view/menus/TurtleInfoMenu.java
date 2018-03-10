@@ -3,7 +3,6 @@ package view.menus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import observables.Listener;
 import turtle.TurtleController;
@@ -20,7 +19,7 @@ public class TurtleInfoMenu extends TitledPane implements Listener {
 	
 	private void setupMenu() {
 		this.setText("Turtle Information");
-		this.setExpanded(true);
+		this.setExpanded(false);
 	}
 	
 	private void setupContent() {

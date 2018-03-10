@@ -8,7 +8,9 @@ import alerts.Resources;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
-
+/**
+ * define a 
+ */
 public class DefineCommand implements Command{
 	private String myCommandName;
 	private List<CommandNode> myVariables;
@@ -36,7 +38,7 @@ public class DefineCommand implements Command{
 		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
 			myInterpreter.getUserCommands().remove(myCommandName); // remove the old user-defined command if it exists
 		}
-		//System.out.println("successfully define:" + myInterpreter.getUserCommandParameters().get(myCommandName).size());
+		//
 		return 1.0;
 	}
 }

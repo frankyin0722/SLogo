@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import interpreter.CommandTreeInterpreter;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
@@ -30,7 +29,6 @@ public class TurtleAvatarMenu extends TitledPane {
 		myTurtleController = tc;
 		setupPane(resources);
 		initiateToInterp();
-//		setupTurtleSelection();
 		setupAllButtons();
 		initiateToInterp();
 	}
@@ -40,14 +38,14 @@ public class TurtleAvatarMenu extends TitledPane {
 		this.setExpanded(false);
 	}
 	
-	private void setupTurtleSelection() {
-		myTurtleBox = new VBox();
-		myTurtleImages = new ArrayList<>();
-		myTurtleButtons = new ArrayList<>();
-		makeButton("resources/images/franklin.jpg", myTurtleBox);
-		makeButton("resources/images/cute_turtle.png", myTurtleBox);
-		this.setContent(myTurtleBox);
-	}
+//	private void setupTurtleSelection() {
+//		myTurtleBox = new VBox();
+//		myTurtleImages = new ArrayList<>();
+//		myTurtleButtons = new ArrayList<>();
+//		makeButton("resources/images/franklin.jpg", myTurtleBox);
+//		makeButton("resources/images/cute_turtle.png", myTurtleBox);
+//		this.setContent(myTurtleBox);
+//	}
 	
 	private void initiateToInterp() {
 		myTurtleController.setImageMenu(myTurtleImages);
@@ -77,10 +75,8 @@ public class TurtleAvatarMenu extends TitledPane {
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
 		button.setGraphic(imgview);
 		button.setOnAction(e -> changeTurtleImage(img));
-		myTurtleImages.add(img);
 		myTurtleButtons.add(button);
 		vbox.getChildren().add(button);
-		
 	}
 	
 	private void changeTurtleImage(Image img) {
