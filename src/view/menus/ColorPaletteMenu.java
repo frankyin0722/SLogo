@@ -103,7 +103,10 @@ public class ColorPaletteMenu extends TitledPane implements IConstants {
 				new Text("   " + key + " (" + Integer.toString(index) + ")"));
 		return colorOption;
 	}
-	
+	/**
+	 * Method to
+	 * @return map of current default colors by each index
+	 */
 	public Map<Integer,Color> getIndexToColorMap() {
 		return indexToColor;
 	}
