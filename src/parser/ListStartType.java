@@ -18,7 +18,6 @@ public class ListStartType implements CommandTypes{
 		CommandNode child = new CommandNode("Bracket", currentValue + ":" + BracketNum, null, 0);
 		BracketNum++;
 		node.addChild(child); 
-		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();
 		while (!userInput.get(myTreeGenerator.getIndex()).equals("]")) {
 			myTreeGenerator.recurse(child);

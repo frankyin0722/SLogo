@@ -15,7 +15,6 @@ public class VariableType implements CommandTypes{
 		String currentValue = userInput.get(myTreeGenerator.getIndex());
 		CommandNode child = new CommandNode("Variable", currentValue, null, 0);
 		node.addChild(child);
-		myTreeGenerator.printNode(child);
 		myTreeGenerator.increaseIndex();
 	}
 	
