@@ -1,8 +1,5 @@
 package view.vis_elements;
 
-
-
-
 import java.util.ResourceBundle;
 
 import interpreter.CommandTreeInterpreter;
@@ -16,11 +13,14 @@ import turtle.TurtleController;
 import view.canvas.ScrollingDrawingWindow;
 
 /**
+ * Initializes and arranges each of the elements within the scene
+ * Highest level of front end, and has instances of most major classes
+ * Left and right: ControlPanelLeft, ControlPanelRight
+ * Button: ControlTextInput
+ * Center: ScrollingDrawingWindow
+ * 
  * @author elizabethshulman
  * @author xlany
- * @param scene
- * 
- * Initializes and arranges each of the elements within the scene
  * 
  */
 public class Visualization extends BorderPane implements IConstants {
@@ -31,15 +31,20 @@ public class Visualization extends BorderPane implements IConstants {
 	private ControlTextInput myControlTextInput;
 	private ControlPanelRight myControlPanelRight;
 	private ControlPanelLeft myControlPanelLeft;	
-	
+	/**
+	 * Constructor initializes front-end parts and
+	 * arranges in favorable locations
+	 */
 	public Visualization() {
 		initializeAll();
 		initializeLayout();
 	}
-	
+	/**
+	 * Method to initialize all instance variables of
+	 * relevent classes
+	 */
 	private void initializeAll() {
 		setLanguage(DEFAULT_LANGUAGE);
-		
 		myExternalCanvas = new ScrollingDrawingWindow();
 		myTurtleController = new TurtleController(
 				new Image(getClass().getClassLoader().getResourceAsStream(DEFAULT_TURTLE)),
@@ -48,16 +53,16 @@ public class Visualization extends BorderPane implements IConstants {
 				TURTLE_WIDTH,
 				TURTLE_HEIGHT,
 				myExternalCanvas.getInternalCanvas());
-		
 		interpreter = new CommandTreeInterpreter(myTurtleController);
 		myControlPanelRight = new ControlPanelRight(interpreter, this);		
 		myControlTextInput = new ControlTextInput(interpreter, this, myExternalCanvas);
 		myControlPanelLeft = new ControlPanelLeft(interpreter, myResources, myControlTextInput.getCommandWindow());
 	}
-	
+	/**
+	 * Method sets layout of major views
+	 */
 	private void initializeLayout() {		
 		this.setPadding(new Insets(20,20,20,20));
-//		this.setTop(new InfoTop());
 		this.setCenter(myExternalCanvas);
 		this.setBottom(myControlTextInput);
 		this.setRight(myControlPanelRight);
@@ -66,17 +71,18 @@ public class Visualization extends BorderPane implements IConstants {
 		this.setHeight(Double.MAX_VALUE);
 		this.setBackground(new Background(new BackgroundFill(INITIAL_COLOR, null, null)));
 	}
-	
+	/**
+	 * Method sets default language by
+	 * @param language
+	 */
 	public void setLanguage(String language) {
 		myResources = ResourceBundle.getBundle(LANGUAGE_RESOURCE_PACKAGE + language);
 	}
-//	
-//	public void changeLanguage() {
-//		myResources = myControlPanelRight.getLanguage();
-//	}
-	
+	/**
+	 * Method to 
+	 * @return current language
+	 */
 	public ResourceBundle getLanguage() {
-//		changeLanguage();
 		return myResources;
 	}
 

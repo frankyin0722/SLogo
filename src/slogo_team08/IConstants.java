@@ -23,6 +23,7 @@ public interface IConstants {
 	public static final Color INITIAL_COLOR = Color.ALICEBLUE;
 	public static final String DEFAULT_COLOR_PALETTE = "BasicRainbowPalette";
 	public static final String COLOR_RESOURCE_PACKAGE = "resources.colors/";
+	public static final String DEFAULT_COLOR_PALETTE_KEY = "PALETTETYPE";
 	
 	public static final String DEFAULT_LANGUAGE_FOLDER = "./src/resources/languages/";
 	public static final String LANGUAGE_RESOURCE_PACKAGE = "resources.languages/";
