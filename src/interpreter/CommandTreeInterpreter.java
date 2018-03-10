@@ -87,7 +87,6 @@ public class CommandTreeInterpreter {
 		else {
 			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(0)); // reset the current turtle to be the first in active turtle list 
 		}
-		//System.out.println("current turtle: "+currentTurtle);
 	}
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
@@ -121,6 +120,7 @@ public class CommandTreeInterpreter {
 				break;
 		}
 	}
+	
 	private void updateUserDefined(CommandNode node, List<Object> Parameters) {
 		List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
 		for (int i = 0; i < para.size(); i++) {
@@ -129,9 +129,6 @@ public class CommandTreeInterpreter {
 			}
 			else {
 				myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
-			}	
-			if (i==2) {
-				//System.out.println("current depth value: "+Parameters.get(i));
 			}
 		}
 		List<Object> paramForUserDefinedCommand = new ArrayList<>();

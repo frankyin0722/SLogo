@@ -117,13 +117,19 @@ public class Parser implements TreeGenerator{
 		if (currentIndex >= userInput.size()) {
 			return;
 		}
+		boolean findSyntax = false;
 		for (Pattern pattern : inputHandlerMap.keySet()) {
 			if (SomePatternManager.match(userInput.get(currentIndex), pattern)) {
+				findSyntax = true;
 				CommandTypes cmdType = inputHandlerMap.get(pattern);
 				//System.out.println(cmdType);
 				cmdType.recurse(root);
 				break;
 			}
+		}
+		if (!findSyntax) {
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError1");
+			throw new CommandException(Resources.getString("CommandHeaderError"));
 		}
 	}
 	
