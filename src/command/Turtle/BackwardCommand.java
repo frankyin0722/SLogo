@@ -3,7 +3,7 @@ package command.Turtle;
 import command.Command;
 import turtle.Turtle;
 /**
- * moves the turtle backwards in respect to it current direction
+ * moves the turtle backward in respect to it current direction
  */
 public class BackwardCommand implements Command{
 	private Turtle myTurtle;
@@ -14,7 +14,7 @@ public class BackwardCommand implements Command{
 		myMovement = movement;
 	}
 	/**
-	 * moves turtle backwards
+	 * moves turtle backward, returns distance moved
 	 */
 	public double execute(){
 		myTurtle.changeX(myTurtle.getX() - Math.sin(myTurtle.getDirection())*myMovement);

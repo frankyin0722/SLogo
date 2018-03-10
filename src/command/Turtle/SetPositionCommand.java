@@ -2,7 +2,9 @@ package command.Turtle;
 
 import command.Command;
 import turtle.Turtle;
-
+/**
+ * sets a turtle to a given position
+ */
 public class SetPositionCommand implements Command{
 	private Turtle myTurtle;
 	private double newX;
@@ -13,7 +15,9 @@ public class SetPositionCommand implements Command{
 		newX = x;
 		newY = -1 * y;
 	}
-	
+	/**
+	 * sets turtle to given position
+	 */
 	public double execute(){
 		double delta = Math.sqrt(Math.pow(newX - myTurtle.getX(), 2)+Math.pow(newY - myTurtle.getY(), 2));
 		myTurtle.changeX(newX);
