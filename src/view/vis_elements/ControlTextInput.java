@@ -72,5 +72,9 @@ public class ControlTextInput extends HBox {
 	private void resetTurtle() {
 		interpreter.getTurtleController().resetTurtles();
 	}
+	
+	public CommandWindow getCommandWindow() {
+		return myCommandWindow;
+	}
 
 }
