@@ -2,9 +2,12 @@ package turtle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import alerts.Alerts;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Paint;
 import observables.Listener;
 import view.canvas.DrawingWindow;
 
@@ -18,8 +21,11 @@ public class TurtleController extends Group implements Listener {
 	private double turtleHeight;
 	private Image myImage;
 	private List<Boolean> active;
+	private int shapeIndex = 0;
+	private int colorIndex = 0;
+	private Map<Integer, Paint> colors;
+	private List<Image> shapes;
 	private int currentTurtle;
-	
 	public TurtleController(DrawingWindow dw) {
 		setupTurtleController(dw);
 	}
@@ -164,4 +170,43 @@ public class TurtleController extends Group implements Listener {
 	public void update() {
 		notifyListeners();
 	}
+    
+    
+	 public void setShape(int index) {
+		try {
+			shapeIndex = index;
+	 		for(Turtle turtle: turtles) {
+	 			turtle.setShape(shapes.get(index));
+	 		}
+		}
+		catch(Exception e){
+			Alerts.createAlert(new IndexOutOfBoundsException(), "OutOfBounds");
+		}
+ 		
+ }
+	 public void setColorByIndex(int index) {
+		
+		 try {
+			colorIndex = index;
+	 		for(Turtle turtle: turtles) {
+	 			turtle.getPen().setColor(colors.get(index));
+	 		}
+		 }
+ 		catch(Exception e){
+			Alerts.createAlert(new IndexOutOfBoundsException(), "OutOfBounds");
+		}
+	 }
+	 public double getShapeIndex() {
+ 		return shapeIndex;
+	 }
+ 
+	 public double getColorIndex() {
+ 		return colorIndex;
+	 }
+	 public void setPalette(Map<Integer,Paint> palette) {
+		 colors = palette;
+	 }
+	 public void setImageMenu(List<Image> images) {
+		 shapes = images;
+	 }
 }

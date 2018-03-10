@@ -79,7 +79,9 @@ public class CommandTreeInterpreter {
 		}
 		Parameters.add(myRoot.getNodeChildren().get(i));
 	}
+	
 	private void interpretTurtle(int i, CommandNode myRoot, List<Object> Parameters) {
+		System.out.println(myTurtleController.getActiveTurtleIndices().size());
 		for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
 			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(t)); // 0 index refers to 1 turtle 
 			interpretTree(myRoot.getNodeChildren().get(i));
@@ -91,7 +93,6 @@ public class CommandTreeInterpreter {
 		else {
 			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(0)); // reset the current turtle to be the first in active turtle list 
 		}
-		//System.out.println("current turtle: "+currentTurtle);
 	}
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
@@ -117,11 +118,15 @@ public class CommandTreeInterpreter {
 			case "GroupBracket":
 				updateGroupBracket(node, Parameters);
 				break;
+			case "Display":
+				Parameters.add(this.getTurtleController());
+				createCommand(node, Parameters);
 			default: 
 				createCommand(node, Parameters);
 				break;
 		}
 	}
+	
 	private void updateUserDefined(CommandNode node, List<Object> Parameters) {
 		List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
 		for (int i = 0; i < para.size(); i++) {
@@ -130,9 +135,6 @@ public class CommandTreeInterpreter {
 			}
 			else {
 				myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
-			}	
-			if (i==2) {
-				//System.out.println("current depth value: "+Parameters.get(i));
 			}
 		}
 		List<Object> paramForUserDefinedCommand = new ArrayList<>();
@@ -195,6 +197,8 @@ public class CommandTreeInterpreter {
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		Command thisCommand = null;
+		for(Object obj: parameters) {
+		}
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 			return thisCommand;
@@ -208,7 +212,6 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			System.out.print("Executing");
 	        try {
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);

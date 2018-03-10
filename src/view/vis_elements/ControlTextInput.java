@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import parser.Parser;
+import view.canvas.ScrollingDrawingWindow;
 
 public class ControlTextInput extends HBox {
 
@@ -22,11 +23,13 @@ public class ControlTextInput extends HBox {
 	private CommandTreeInterpreter interpreter;
 	private ResourceBundle myResources;
 	private Visualization myVisualization;
+	private ScrollingDrawingWindow myExternalCanvas;
 	
-	public ControlTextInput(CommandTreeInterpreter i, Visualization visualization) {
+	public ControlTextInput(CommandTreeInterpreter i, Visualization visualization, ScrollingDrawingWindow sdw) {
 		myVisualization = visualization;
-		myResources = myVisualization.getLanguage();
+		getLanguage();
 		interpreter = i;
+		myExternalCanvas = sdw;
 		myCommandWindow = new CommandWindow();
 		this.getChildren().addAll(myCommandWindow,buttonBox());
 		setButtonAction();
@@ -71,6 +74,8 @@ public class ControlTextInput extends HBox {
 	
 	private void resetTurtle() {
 		interpreter.getTurtleController().resetTurtles();
+		myExternalCanvas.setHvalue(0.5);
+		myExternalCanvas.setVvalue(0.5);
 	}
 	
 	public CommandWindow getCommandWindow() {

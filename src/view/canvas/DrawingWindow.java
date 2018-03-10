@@ -56,7 +56,6 @@ public class DrawingWindow extends Pane implements Listener, IConstants {
 	
 	public void addTurtle(Turtle turtle) {
 		this.getChildren().add(turtle.getImageView());
-//		this.getChildren().add(turtle);
 	}
 	
 	public void addTurtles(List<Turtle> turtles) {

@@ -7,6 +7,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import slogo_team08.IConstants;
+import view.supplements.TabDragFunctionality;
 
 public class TabView implements IConstants {
 
@@ -20,8 +21,7 @@ public class TabView implements IConstants {
 	
 	private void initializePanes() {
 		tabs = new TabPane();
-		TabDragFunctionality dragsupport = new TabDragFunctionality();
-		dragsupport.addSupport(tabs);
+		TabDragFunctionality dragsupport = new TabDragFunctionality(tabs);
 		myAnchor = new AnchorPane();
 		TabButton plusButton = new TabButton(tabs);
 		AnchorPane.setRightAnchor(plusButton, 10.0);
