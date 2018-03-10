@@ -3,8 +3,6 @@ package turtle;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
-import observables.Listener;
-import observables.Speaker;
 
 public class Pen {
 	private Paint color;
