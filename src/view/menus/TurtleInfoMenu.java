@@ -3,7 +3,6 @@ package view.menus;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
 import observables.Listener;
 import turtle.TurtleController;

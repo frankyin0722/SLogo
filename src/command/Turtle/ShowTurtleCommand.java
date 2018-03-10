@@ -1,7 +1,6 @@
 package command.Turtle;
 
 import command.Command;
-import interpreter.CommandTreeInterpreter;
 import turtle.Turtle;
 
 public class ShowTurtleCommand implements Command{
