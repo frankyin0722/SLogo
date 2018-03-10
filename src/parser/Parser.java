@@ -13,8 +13,6 @@ import alerts.Alerts;
 import alerts.CommandException;
 import alerts.Resources;
 
-//import sun.security.tools.keytool.Resources;
-
 import interpreter.CommandTreeInterpreter;
 
 public class Parser implements TreeGenerator{
@@ -152,11 +150,6 @@ public class Parser implements TreeGenerator{
 	
 	public CommandTreeInterpreter getInterpreter() {
 		return myInterpreter;
-	}
-	
-	@Override
-	public void printNode(CommandNode node) {
-		//a way to turn a node into a easily viewable string. not done yet
 	}
 	
 }

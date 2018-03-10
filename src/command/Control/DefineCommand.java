@@ -9,7 +9,7 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 /**
- * define a 
+ * define a command that might be used later on 
  */
 public class DefineCommand implements Command{
 	private String myCommandName;
@@ -24,6 +24,9 @@ public class DefineCommand implements Command{
 		successfullyCreated = (commandName.getNodeValue()==1 ? true : false);
 	}
 	
+	/**
+	 * once successfully defined, maps the parameters of this command to the user-define command name
+	 */
 	public double execute() {
 		if (!successfullyCreated) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError2")), "CommandMessageError3");
@@ -38,7 +41,6 @@ public class DefineCommand implements Command{
 		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
 			myInterpreter.getUserCommands().remove(myCommandName); // remove the old user-defined command if it exists
 		}
-		//
 		return 1.0;
 	}
 }

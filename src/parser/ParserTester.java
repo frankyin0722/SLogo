@@ -12,7 +12,6 @@ public class ParserTester {
 	}
 	
 	private void printTree(TreeGenerator myparser, CommandNode myRoot) {
-		myparser.printNode(myRoot);
 		while (myRoot.getNodeChildren().size()!=0) {
 			//myparser.printNode(myRoot.g)
 		}

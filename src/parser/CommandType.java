@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import alerts.CommandException;
-
+/**
+ * implement the CommandTypes interface and one specific method for the recurse parsing on the command type 
+ */
 public class CommandType implements CommandTypes {
 	private static final int PARAMETERINDEX = 0; // stored in the 0th index of the array
 	private static final int CATEGORYINDEX = 1; // stored in the 1st index of the array 
@@ -29,7 +31,11 @@ public class CommandType implements CommandTypes {
 	private static String MakeUserInstructionCommand = "MakeUserInstruction";
 	private static String UserDefinedType = "UserDefined";
 
-	
+	/**
+	 * constructor of the command type class, taking in the user input command and the parser, which contains all necessary instances for the parsing to be done correctly 
+	 * @param input: list of processed user input 
+	 * @param treeGenerator: one parser instance 
+	 */
 	public CommandType (List<String> input, TreeGenerator treeGenerator) {
 		myTreeGenerator = treeGenerator;
 		userInput = input;
@@ -37,13 +43,16 @@ public class CommandType implements CommandTypes {
 		myRoots = new ArrayList<>();
 	}
 	
+	/**
+	 * initializes the first step for the parsing process, generates language mapping, creates the command root, and starts the recursive process for command tree generation 
+	 * @param language: the language that is currently used in SLogo 
+	 */
 	public void initialize(ResourceBundle language) {
 		languagePatternMapping = SomePatternManager.getPatterns(language);
 		if (!isGroupStartCommand(userInput.get(myTreeGenerator.getIndex()))) {
 			String nodeValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex()));
 			myCurrentRoot = new CommandNode(getCommandCategory(nodeValue), nodeValue, null, 0);
 			myRoots.add(myCurrentRoot);
-			myTreeGenerator.printNode(myCurrentRoot);
 			myTreeGenerator.increaseIndex();
 			for (int i = 0; i < getNumParameterNeeded(nodeValue); i++) {
 				myTreeGenerator.recurse(myCurrentRoot);
@@ -118,6 +127,9 @@ public class CommandType implements CommandTypes {
 		}
 	}
 	
+	/**
+	 * recurses through the current node to build the tree by attaching all its child nodes to it and calls the next recursion to participate in the tree generation process 
+	 */
 	@Override
 	public void recurse(CommandNode node) {
 		if (node.getCommandName().equals(MakeUserInstructionCommand) || node.getCommandName().equals(DefineCommand)) {
@@ -126,13 +138,11 @@ public class CommandType implements CommandTypes {
 				 child.setNodeValue(1); 
 			}
 			node.addChild(child);
-			myTreeGenerator.printNode(child);
 			myTreeGenerator.increaseIndex();
 		}
 		else {
 			String currentValue = getCommandFromLanguageBundle(userInput.get(myTreeGenerator.getIndex())); 
 			CommandNode child = new CommandNode(getCommandCategory(currentValue), currentValue, null, 0);
-			myTreeGenerator.printNode(child);
 			myTreeGenerator.increaseIndex();
 			node.addChild(child);
 			for (int i = 0; i < getNumParameterNeeded(currentValue); i++) {
@@ -141,18 +151,33 @@ public class CommandType implements CommandTypes {
 		}
 	} 
 	
+	/**
+	 * gets the current root and passes it to the interpreter for command interpretation 
+	 * @return: one command root 
+	 */
 	public CommandNode getCurrentRoot() {
 		return myCurrentRoot;
 	}
 	
+	/**
+	 * gets all of the command roots and passes it to the interpreter for command interpretation 
+	 * @return: list of command roots 
+	 */
 	public List<CommandNode> getRoot() {
 		return myRoots;
 	}
 	
+	/**
+	 * gets the user input and passes it to the parser 
+	 * @return: list of user input 
+	 */
 	public List<String> getUserInput(){
 		return Collections.unmodifiableList(userInput);
 	}
-
+	
+	/**
+	 * gets the string of this command type 
+	 */
 	@Override
 	public String whichType() {
 		return "Command";

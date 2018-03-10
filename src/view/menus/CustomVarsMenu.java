@@ -14,28 +14,38 @@ import javafx.scene.layout.VBox;
 import observables.Listener;
 import variables.VariableManager;
 import view.supplements.StageVariableChanger;
-
+/**
+ * Menu displays current custom variables and
+ * allows user to change variable name 
+ * @author elizabethshulman
+ *
+ */
 public class CustomVarsMenu extends TitledPane implements Listener {
 	
-	public static final String ACTVAR_KEY = "ActiveVariables";
 	private HBox varsDisplay;
 	private VBox keyCol;
 	private VBox valCol;
 	private ListView<String> keyView;
 	private ListView<Object> valView;
 	private CommandTreeInterpreter interpreter;
-	VariableManager myvars;
-
-	
+	private VariableManager myvars;
+	/**
+	 * Constructor takes in
+	 * @param i, interpreter
+	 * Sets up display for active variables
+	 */
 	public CustomVarsMenu(CommandTreeInterpreter i) {
 		interpreter = i;
 		interpreter.addListener(this);
-		initializeTableElements();
-
+		initializeTableElements();		
 		this.setText("Variables");
 		this.setExpanded(false);
 	}
-
+	/**
+	 * Method initializes dual VBoxs to display
+	 * (1) variable name aka key
+	 * (2) variable value aka val
+	 */
 	private void initializeTableElements() {
 		varsDisplay = new HBox();
 		varsDisplay.setPrefWidth(USE_PREF_SIZE);
@@ -48,14 +58,17 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 		varsDisplay.getChildren().addAll(keyCol, valCol);
 		this.setContent(varsDisplay);
 	}
-
+	/**
+	 * Method adds variables to display boxes and
+	 * sets up key and value changes on click
+	 * @param myvars
+	 */
 	private void buildTableContents(VariableManager myvars) {	
 		ObservableList<String> tempkeys = FXCollections.observableArrayList(new ArrayList<String>(myvars.getNames()));
 		ArrayList<Object> tempvals = new ArrayList<>();
 		for(String s : tempkeys) {
 			tempvals.add(myvars.getVariable(s).getValue()); 
 		}
-		
 		resetLists(tempkeys, tempvals);
 		setupKeyEvent();
 		setupValEvent();
