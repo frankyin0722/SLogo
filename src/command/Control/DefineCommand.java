@@ -8,7 +8,9 @@ import alerts.Resources;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
-
+/**
+ * define a 
+ */
 public class DefineCommand implements Command{
 	private String myCommandName;
 	private List<CommandNode> myVariables;

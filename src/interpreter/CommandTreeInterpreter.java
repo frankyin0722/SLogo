@@ -209,10 +209,12 @@ public class CommandTreeInterpreter {
 				node.setNodeValue(result);
 			}
 			catch (IllegalAccessException | InvocationTargetException e) {
-				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+				Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError8");
+				return;
 			}
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
-			System.err.println("Error executing commands1: " + thisCommand.getClass().getName() + ".execute()");
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError7");
+			return;
 		} 
 	}
 	

@@ -7,7 +7,9 @@ import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
 import turtle.TurtleController;
-
+/**
+ * ask all available turtles that satisfy the given condition to execute some commands 
+ */
 public class AskWithCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<Integer> myTemporaryActiveTurtleIndices;
@@ -23,6 +25,9 @@ public class AskWithCommand implements Command{
 		myOldActiveTurtleIndices = myInterpreter.getCurrentActiveTurtleIndices();
 	}
 	
+	/**
+	 * iterates through all available turtles to evaluate their condition values, adds the non-zero ones to the new active turtle list, runs some commands on the new active turtle list, and sets the active turtle list back to previous at the end of this command execution 
+	 */
 	public double execute() {
 		TurtleController myTurtleController = myInterpreter.getTurtleController();
 		for (int i = 1; i <= myInterpreter.getCurrentAvailableTurtles().size(); i++) { // creates an active list of turtles that satisfies the condition 

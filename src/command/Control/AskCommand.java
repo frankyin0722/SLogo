@@ -6,7 +6,9 @@ import java.util.List;
 import command.Command;
 import interpreter.CommandTreeInterpreter;
 import parser.CommandNode;
-
+/**
+ * asks turtles with specific indices to execute some commands 
+ */
 public class AskCommand implements Command{
 	private CommandTreeInterpreter myInterpreter;
 	private List<Integer> myTemporaryActiveTurtleIndices;
@@ -25,15 +27,14 @@ public class AskCommand implements Command{
 			}
 		}
 	}
-	
+	/**
+	 * sets the active turtle list to the list the parameters define, executes the sub-commands based on the list recently defined, and sets the active turtle list back to previous
+	 */
 	public double execute() {
 		myInterpreter.getTurtleController().resetActiveTurtles(myTemporaryActiveTurtleIndices);
-		System.out.println("i got here");
-		System.out.println(myInterpreter.getCurrentActiveTurtleIndices());
 		for (int i = 0; i < mySubCommands.size(); i++) {
 			myInterpreter.interpretTree(mySubCommands.get(i));
 		}
-		System.out.println("i got here2");
 		myInterpreter.getTurtleController().resetActiveTurtles(myOldActiveTurtleIndices);
 		if (mySubCommands.size() != 0) {
 			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
