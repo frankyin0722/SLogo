@@ -28,24 +28,3 @@ public class CanvasColorButton extends BaseButton {
 		return colorPicker;
 	}
 }
-
-
-/**
- * 
- * 		recolorer.setOnAction(e -> ourPen.setColor(recolorer.getValue()));
- * 
-@SuppressWarnings({ "unchecked", "rawtypes" })
-private void initializeColorPicker() {
-	ColorPicker colorPicker = new ColorPicker();
-	colorPicker.setStyle("-fx-color-label-visible: false ;");
-	colorPicker.setOnAction(new EventHandler() {
-		@Override
-		public void handle(Event event) {
-			setBackgroundColor(colorPicker.getValue());
-		}
-	});
-	this.getChildren().add(colorPicker);
-}
-	
-
-*/

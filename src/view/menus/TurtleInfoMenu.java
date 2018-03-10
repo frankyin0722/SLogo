@@ -19,7 +19,7 @@ public class TurtleInfoMenu extends TitledPane implements Listener {
 	
 	private void setupMenu() {
 		this.setText("Turtle Information");
-		this.setExpanded(true);
+		this.setExpanded(false);
 	}
 	
 	private void setupContent() {

@@ -13,6 +13,8 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
@@ -32,7 +34,6 @@ public class CommandTreeInterpreter {
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
 	private int currentTurtle; 
-
 	
 	public CommandTreeInterpreter(TurtleController turtlecontroller) {
 		myCommandManager = new CommandManager();
@@ -174,9 +175,7 @@ public class CommandTreeInterpreter {
 	
 	private void updateGroupBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
-			//
 			double totalValue = 0;
-			//
 			for (CommandNode sub : node.getNodeChildren()) {
 				totalValue = totalValue + sub.getNodeValue();
 			}
@@ -185,7 +184,6 @@ public class CommandTreeInterpreter {
 		else {
 			node.setNodeValue(0.0);
 		}
-		//
 	}
 	
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
@@ -207,7 +205,6 @@ public class CommandTreeInterpreter {
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
 	        try {
-	 
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
 			}
@@ -215,6 +212,7 @@ public class CommandTreeInterpreter {
 				Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError8");
 				return;
 			}
+
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError7");
 			return;
@@ -230,6 +228,7 @@ public class CommandTreeInterpreter {
 			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
 		}
 		Command thisCommand = createCommandInstance(commandClass, parameters);
+
         invokeExecuteMethod(node, commandClass, thisCommand);
 	}
 	
@@ -328,5 +327,4 @@ public class CommandTreeInterpreter {
 	public List<Listener> getActiveUDCListener() {
 		return activeUDCListener;
 	}
-
 }

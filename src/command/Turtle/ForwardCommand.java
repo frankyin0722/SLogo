@@ -2,7 +2,9 @@ package command.Turtle;
 
 import command.Command;
 import turtle.Turtle;
-
+/**
+ * moves the turtle forward in respect to it current direction
+ */
 public class ForwardCommand implements Command{
 	private Turtle myTurtle;
 	private double myMovement;
@@ -11,7 +13,9 @@ public class ForwardCommand implements Command{
 		myTurtle = turtle;
 		myMovement = movement;
 	}
-	
+	/**
+	 * moves turtle forward, returns distance moved
+	 */
 	public double execute(){
 		myTurtle.changeX(myTurtle.getX() + Math.sin(myTurtle.getDirection())*myMovement);
 		myTurtle.changeY(myTurtle.getY() - Math.cos(myTurtle.getDirection())*myMovement);
