@@ -13,6 +13,9 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
@@ -207,6 +210,7 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
+			
 			try {
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
@@ -228,8 +232,21 @@ public class CommandTreeInterpreter {
 			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
 		}
 		Command thisCommand = createCommandInstance(commandClass, parameters);
-		invokeExecuteMethod(node, commandClass, thisCommand);
 		
+//		int FRAMES_PER_SECOND = 60;
+//	    int MILLISECOND_DELAY = 1000 / FRAMES_PER_SECOND;
+//	    double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+//		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY),
+//                e -> step(SECOND_DELAY));
+//        Timeline animation = new Timeline();
+//        animation.setCycleCount(Timeline.INDEFINITE);
+//        animation.getKeyFrames().add(frame);
+//        animation.play();
+        invokeExecuteMethod(node, commandClass, thisCommand);
+	}
+	
+	private void step(double elapsedTime) {
+		System.out.print("Stepping");
 	}
 	
 	public List<Turtle> getCurrentActiveTurtles() {
