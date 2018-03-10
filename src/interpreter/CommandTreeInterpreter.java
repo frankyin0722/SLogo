@@ -215,6 +215,7 @@ public class CommandTreeInterpreter {
 				Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError8");
 				return;
 			}
+
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError7");
 			return;
@@ -230,6 +231,7 @@ public class CommandTreeInterpreter {
 			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
 		}
 		Command thisCommand = createCommandInstance(commandClass, parameters);
+
         invokeExecuteMethod(node, commandClass, thisCommand);
 	}
 	
