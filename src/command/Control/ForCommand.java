@@ -22,7 +22,8 @@ public class ForCommand implements Command{
 	}
 	@Override
 	public double execute() {
-		myInterpreter.getVariables().setVariable((double) myParameters.get(0).getNodeValue(), myParameters.get(0).getCommandName());
+		myInterpreter.getVariables().setVariable((double) myParameters.get(1).getNodeValue(), myParameters.get(0).getCommandName());
+		System.out.println("start initial value: "+myParameters.get(1).getNodeValue());
 		Variable var = myInterpreter.getVariables().getVariable(myParameters.get(0).getCommandName());
 		
 		int start = (int) myParameters.get(START_INDEX).getNodeValue();
