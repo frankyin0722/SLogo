@@ -13,12 +13,7 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.concurrent.Task;
-import javafx.concurrent.WorkerStateEvent;
-import javafx.event.EventHandler;
-import javafx.util.Duration;
+import javafx.scene.paint.Paint;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
@@ -37,6 +32,7 @@ public class CommandTreeInterpreter {
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
+	private  HashMap<Integer, Paint> indexToColor;
 	private int currentTurtle; 
 
 	
@@ -81,7 +77,7 @@ public class CommandTreeInterpreter {
 	}
 	
 	private void interpretTurtle(int i, CommandNode myRoot, List<Object> Parameters) {
-		System.out.println(myTurtleController.getActiveTurtleIndices().size());
+		
 		for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
 			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(t)); // 0 index refers to 1 turtle 
 			interpretTree(myRoot.getNodeChildren().get(i));
@@ -170,7 +166,7 @@ public class CommandTreeInterpreter {
 	
 	private void updateBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
-			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+			//
 			node.setNodeValue(node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
 		}
 		else {
@@ -180,9 +176,9 @@ public class CommandTreeInterpreter {
 	
 	private void updateGroupBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
-			//System.out.println("user defined command nodevalue: "+node.getNodeChildren().get(node.getNodeChildren().size()-1).getNodeValue());
+			//
 			double totalValue = 0;
-			//System.out.println(node.getNodeChildren().size());
+			//
 			for (CommandNode sub : node.getNodeChildren()) {
 				totalValue = totalValue + sub.getNodeValue();
 			}
@@ -191,12 +187,14 @@ public class CommandTreeInterpreter {
 		else {
 			node.setNodeValue(0.0);
 		}
-		//System.out.println(node.getNodeValue());
+		//
 	}
 	
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		Command thisCommand = null;
+		for(Object obj: parameters) {
+		}
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 			return thisCommand;
@@ -210,16 +208,19 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			try {
+	        try {
+	 
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
 			}
-			catch (IllegalAccessException | InvocationTargetException exception) {
-				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+			catch (IllegalAccessException | InvocationTargetException e) {
+				Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError8");
+				return;
 			}
-		
+
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
-			System.err.println("Error executing commands1: " + thisCommand.getClass().getName() + ".execute()");
+			Alerts.createAlert(new CommandException(Resources.getString("CommandHeaderError")), "CommandMessageError7");
+			return;
 		} 
 	}
 	
@@ -232,13 +233,10 @@ public class CommandTreeInterpreter {
 			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
 		}
 		Command thisCommand = createCommandInstance(commandClass, parameters);
-		
+
         invokeExecuteMethod(node, commandClass, thisCommand);
 	}
 	
-	private void step(double elapsedTime) {
-		System.out.print("Stepping");
-	}
 	
 	public List<Turtle> getCurrentActiveTurtles() {
 		return myTurtleController.getActiveTurtles();
@@ -333,6 +331,10 @@ public class CommandTreeInterpreter {
 	
 	public List<Listener> getActiveUDCListener() {
 		return activeUDCListener;
+	}
+
+	public void setPalette(HashMap<Integer, Paint> colormap) {
+		indexToColor = colormap;
 	}
 
 }

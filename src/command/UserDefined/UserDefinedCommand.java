@@ -24,7 +24,7 @@ public class UserDefinedCommand implements Command{
 			throw new CommandException(Resources.getString("CommandHeaderError"));
 		}
 		myInterpreter.interpretTree(storedMethod);
-		System.out.println("user defined command value: " + storedMethod.getNodeValue());
+		
 		return storedMethod.getNodeValue();	
 	}
 

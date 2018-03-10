@@ -25,6 +25,7 @@ public class TurtleAvatarMenu extends TitledPane {
 		myTurtleController = tc;
 		setupPane(resources);
 		setupTurtleSelection();
+//		initiateToInterp();
 	}
 	
 	private void setupPane(ResourceBundle resources) {

@@ -16,7 +16,6 @@ public class SumCommand implements Command{
 	 * returns the sum
 	 */
 	public double execute(){
-		System.out.println("sum of " + input1 + " " + input2 + "=" + (input1+input2));
 		return input1+input2;
 	}
 	

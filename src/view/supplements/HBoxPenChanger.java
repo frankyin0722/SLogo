@@ -42,7 +42,7 @@ public class HBoxPenChanger extends HBox {
 	}
 	
 	private ColorPicker buildColorSelection() {
-		ColorPicker recolorer = new ColorPicker(ourPen.getColor());
+		ColorPicker recolorer = new ColorPicker((Color) ourPen.getColor());
 		recolorer.setStyle("-fx-color-label-visible: false ;");
 		recolorer.setOnAction(e -> ourPen.setColor(recolorer.getValue()));
 		return recolorer;

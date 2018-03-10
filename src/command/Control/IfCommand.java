@@ -25,14 +25,14 @@ public class IfCommand implements Command {
 	@Override
 	public double execute() {
 		if (myExpression) {
-			//System.out.println("i am here");
+			//
 			for (int i = 0; i < mySubCommands.size(); i++) {
 				myInterpreter.interpretTree(mySubCommands.get(i));
-				//System.out.println("i am here2");
+				//
 			}
 		}
 		if (mySubCommands.size() != 0) {
-			//System.out.println(mySubCommands.get(mySubCommands.size()-1).getNodeValue());
+			//
 			return (double) mySubCommands.get(mySubCommands.size()-1).getNodeValue();
 		}
 		else {
