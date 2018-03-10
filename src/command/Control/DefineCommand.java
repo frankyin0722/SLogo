@@ -38,7 +38,7 @@ public class DefineCommand implements Command{
 		if (myInterpreter.getUserCommands().containsKey(myCommandName)) {
 			myInterpreter.getUserCommands().remove(myCommandName); // remove the old user-defined command if it exists
 		}
-		//System.out.println("successfully define:" + myInterpreter.getUserCommandParameters().get(myCommandName).size());
+		//
 		return 1.0;
 	}
 }

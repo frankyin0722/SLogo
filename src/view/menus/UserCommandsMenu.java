@@ -1,7 +1,5 @@
 package view.menus;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -9,13 +7,10 @@ import java.util.ResourceBundle;
 import interpreter.CommandTreeInterpreter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import observables.Listener;
 import parser.CommandNode;
 import view.vis_elements.CommandWindow;
@@ -52,8 +47,7 @@ public class UserCommandsMenu extends TitledPane implements Listener {
 			}
 		});
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	@Override
 	public void update() {
 		ObservableList<String> names = FXCollections.observableArrayList(interpreter.getUserCommands().keySet());

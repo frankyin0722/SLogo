@@ -33,7 +33,7 @@ public class IfElseCommand implements Command {
 			return returnValue(mySubCommandsTrue);
 		}
 		else {
-			System.out.println("false tree gets interpreter!");
+			
 			for (int i = 0; i < mySubCommandsFalse.size(); i++) {
 				myInterpreter.interpretTree(mySubCommandsFalse.get(i));
 			}

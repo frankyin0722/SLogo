@@ -6,7 +6,6 @@ import java.util.List;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import observables.Listener;
 
@@ -21,13 +20,6 @@ public class Turtle extends Group {
 	private double oldY;
 	private double newX;
 	private double newY;
-	private List<Color> colors = new ArrayList<Color>() {{
-		add(Color.GREEN);
-		add(Color.GREY);
-	}};
-	private List<Image> images = new ArrayList<Image>();
-	private int shapeIndex = 0;
-	private int colorIndex = 0;
 	public Turtle(Image image, double x, double y, double width, double height) {
 		super();
 		zeroX = x- width/2;
@@ -101,7 +93,7 @@ public class Turtle extends Group {
     
     public void setVisibility(boolean visible) {
     		myImage.setVisible(visible);
-    		System.out.println(myImage.isVisible());
+    		notifyListeners();
     }
     public boolean checkVisibility() {
     		return myImage.isVisible();
@@ -131,35 +123,22 @@ public class Turtle extends Group {
     		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
     		result+="Heading: " + Math.toDegrees(direction) + "\n";
     		result+="Visible: " + myImage.isVisible() + "\n";
-    		result+= pen.toString();
+    		result+= "\n" + pen.toString();
     		return result;
     }
     
-    public double getShapeIndex() {
-    		return shapeIndex;
-    }
-    
-    public double getColorIndex() {
-    		return colorIndex;
-    }
+   
     
     public ImageView getImageView() {
     		return myImage;
     }
-    public void setShape(int index) {
-    		shapeIndex = index;
-    		myImage.setImage(images.get(index));
-    		//throw error if out of bounds
-    }
-    public void setColorByIndex(int index) {
-    		colorIndex = index;
-    		pen.setColor(colors.get(index));
-    		//throw error if oob
+    public void setShape(Image image) {
+    		myImage.setImage(image);
     }
     
     public void addListener(Listener l) {
     		myListeners.add(l);
-    		pen.addListener(l);
+    		//pen.addListener(l);
     }
     
     public void notifyListeners() {

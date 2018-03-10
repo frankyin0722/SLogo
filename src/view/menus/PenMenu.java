@@ -23,7 +23,7 @@ public class PenMenu extends TitledPane implements Listener {
 		myTurtles = tc;
 		initializeTitledPane();
 		setupPenChangers();
-//		myTurtles.addTurtleListener(this);  //this is what breaks the sliders
+		myTurtles.addTurtleListener(this);  //this is what breaks the sliders
 
 	}
 	
