@@ -152,9 +152,4 @@ public class Parser implements TreeGenerator{
 		return myInterpreter;
 	}
 	
-	@Override
-	public void printNode(CommandNode node) {
-		//a way to turn a node into a easily viewable string. not done yet
-	}
-	
 }

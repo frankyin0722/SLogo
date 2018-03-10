@@ -13,8 +13,6 @@ public interface TreeGenerator {
 	public void increaseListEndIndex();
 	
 	public void recurse(CommandNode commandNode);
-	
-	public void printNode(CommandNode node);
 
 	public CommandTreeInterpreter getInterpreter();
 }
