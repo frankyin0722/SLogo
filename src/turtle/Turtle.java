@@ -10,6 +10,7 @@ import javafx.scene.shape.Line;
 import observables.Listener;
 /**
  * models the logo turtle, contains information about itself and depends on pen
+ * @author shichengrao
  */
 public class Turtle extends Group {
 	private Pen pen = new Pen();

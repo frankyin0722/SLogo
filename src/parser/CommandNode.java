@@ -10,13 +10,12 @@ public class CommandNode {
 	private String myCommandName;
 	private List<CommandNode> myChildren;
 	private double myNodeValue;
-	
 	/**
-	 * constructor of the command node, taking in its type, name, children and value 
-	 * @param commandType: type of the command 
-	 * @param commandName: name of the command 
-	 * @param subCommands: children of the node that carries parameter information 
-	 * @param value: value of the node 
+	 * Makes a command node with given parameters
+	 * @param commandType
+	 * @param commandName
+	 * @param subCommands
+	 * @param value
 	 */
 	public CommandNode (String commandType, String commandName, List<CommandNode> subCommands, double value) {
 		myCommandType = commandType;
@@ -41,7 +40,6 @@ public class CommandNode {
 	public String getCommandType() {
 		return myCommandType;
 	}
-	
 	/**
 	 * gets the name of this node 
 	 * @return: string of the command name 
@@ -49,7 +47,7 @@ public class CommandNode {
 	public String getCommandName() {
 		return myCommandName;
 	}
-	
+
 	/**
 	 * gets the value of this node 
 	 * @return: double of the node value 
@@ -57,7 +55,6 @@ public class CommandNode {
 	public double getNodeValue() {
 		return myNodeValue;
 	}
-	
 	/**
 	 * sets the value of this node 
 	 * @param newValue: the value that this node is assigned to 
@@ -65,7 +62,7 @@ public class CommandNode {
 	public void setNodeValue(double newValue) {
 		myNodeValue = newValue;
 	}
-	
+
 	/**
 	 * passes the list of all the node's children for command parsing and interpreting purposes 
 	 * @return: the list of all the node's child nodes 
