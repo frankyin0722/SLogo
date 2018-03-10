@@ -15,6 +15,9 @@ import command.Command;
 import command.CommandManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.util.Duration;
 import observables.Listener;
 import parser.CommandNode;
@@ -207,14 +210,27 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			
-			try {
-				double result = (double) thisExecution.invoke(thisCommand, null);
-				node.setNodeValue(result);
-			}
-			catch (IllegalAccessException | InvocationTargetException e) {
-				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
-			}
+			Task<Void> sleeper = new Task<Void>() {
+	            @Override
+	            protected Void call() throws Exception {
+	                try {
+	                    Thread.sleep(50000);
+	                } catch (InterruptedException e) {
+	                }
+	                return null;
+	            }
+	        };
+	        sleeper.setOnSucceeded(e -> {
+	        	try {
+					double result = (double) thisExecution.invoke(thisCommand, null);
+					node.setNodeValue(result);
+				}
+				catch (IllegalAccessException | InvocationTargetException exception) {
+					System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+				}
+	        });
+	        new Thread(sleeper).start();
+		
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			System.err.println("Error executing commands1: " + thisCommand.getClass().getName() + ".execute()");
 		} 
