@@ -13,7 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import observables.Listener;
 import variables.VariableManager;
-import view.supplements.SceneVariableChanger;
+import view.supplements.StageVariableChanger;
 
 public class CustomVarsMenu extends TitledPane implements Listener {
 	
@@ -82,7 +82,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 	}
 	
 	private void updateKey(String key) {
-		SceneVariableChanger keystage = new SceneVariableChanger("key", key, this);
+		StageVariableChanger keystage = new StageVariableChanger("key", key, this);
 		update();
 	}
 	
@@ -97,7 +97,7 @@ public class CustomVarsMenu extends TitledPane implements Listener {
 	
 	private void updateVal(int index) {
 		keyView.getSelectionModel().select(index);
-		SceneVariableChanger varstage = new SceneVariableChanger("value",
+		StageVariableChanger varstage = new StageVariableChanger("value",
 				keyView.getSelectionModel().getSelectedItem(), this);
 		update();
 	}

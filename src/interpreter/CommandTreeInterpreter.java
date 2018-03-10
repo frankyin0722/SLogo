@@ -15,6 +15,9 @@ import command.Command;
 import command.CommandManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.util.Duration;
 import observables.Listener;
 import parser.CommandNode;
@@ -90,7 +93,6 @@ public class CommandTreeInterpreter {
 		else {
 			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(0)); // reset the current turtle to be the first in active turtle list 
 		}
-		//System.out.println("current turtle: "+currentTurtle);
 	}
 	
 	private void updateNodeValue(CommandNode node, List<Object> Parameters) {
@@ -124,6 +126,7 @@ public class CommandTreeInterpreter {
 				break;
 		}
 	}
+	
 	private void updateUserDefined(CommandNode node, List<Object> Parameters) {
 		List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
 		for (int i = 0; i < para.size(); i++) {
@@ -132,9 +135,6 @@ public class CommandTreeInterpreter {
 			}
 			else {
 				myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
-			}	
-			if (i==2) {
-				//System.out.println("current depth value: "+Parameters.get(i));
 			}
 		}
 		List<Object> paramForUserDefinedCommand = new ArrayList<>();
@@ -197,6 +197,8 @@ public class CommandTreeInterpreter {
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		Command thisCommand = null;
+		for(Object obj: parameters) {
+		}
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 			return thisCommand;
@@ -210,12 +212,32 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			
-			try {
+//			Task<Void> sleeper = new Task<Void>() {
+//	            @Override
+//	            protected Void call() throws Exception {
+//	                try {
+//	                    Thread.sleep(50000);
+//	                } catch (InterruptedException e) {
+//	                }
+//	                return null;
+//	            }
+//	        };
+//	        sleeper.setOnSucceeded(e -> {
+//	        	try {
+//					double result = (double) thisExecution.invoke(thisCommand, null);
+//					node.setNodeValue(result);
+//				}
+//				catch (IllegalAccessException | InvocationTargetException exception) {
+//					System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+//				}
+//	        });
+//	        new Thread(sleeper).start();
+	        try {
+	 
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
 			}
-			catch (IllegalAccessException | InvocationTargetException e) {
+			catch (IllegalAccessException | InvocationTargetException exception) {
 				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
 			}
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {

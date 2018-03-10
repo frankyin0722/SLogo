@@ -26,8 +26,8 @@ public class TurtleImageMenu extends TitledPane {
 	public TurtleImageMenu(ResourceBundle resources, TurtleController tc) {
 		myTurtleController = tc;
 		setupPane(resources);
-		initiateToInterp();
 		setupTurtleSelection();
+		initiateToInterp();
 	}
 	
 	private void setupPane(ResourceBundle resources) {
@@ -37,6 +37,7 @@ public class TurtleImageMenu extends TitledPane {
 	
 	private void setupTurtleSelection() {
 		myTurtleList = new VBox();
+		myTurtleImages = new ArrayList<>();
 		myTurtleButtons = new ArrayList<>();
 		makeButton("franklin.jpg", myTurtleList);
 		makeButton("cute_turtle.png", myTurtleList);

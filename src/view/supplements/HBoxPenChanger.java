@@ -1,14 +1,14 @@
 package view.supplements;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import buttons.BaseButton;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import turtle.Pen;
 import turtle.Turtle;
 
@@ -18,7 +18,7 @@ public class HBoxPenChanger extends HBox {
 	private int index;
 	
 	public HBoxPenChanger() {
-		Text titleText = new  Text(" ID    Color             Pen Width");
+		Text titleText = new  Text("      ID        Color       Pen Width");
 		titleText.setFont(new Font(14));
 		titleText.setFill(Color.DARKBLUE);
 		this.getChildren().add(titleText);
@@ -32,17 +32,15 @@ public class HBoxPenChanger extends HBox {
 		this.getChildren().addAll(
 				buildTurtleLabel(),
 				buildColorSelection(),
-				buildWidthSlider());
+				buildWidthStage());
 	}
 	
-	//BUILD TEXT STRING
 	private Text buildTurtleLabel() {
-		Text turtleIndex = new Text(Integer.toString(index+1));
-		turtleIndex.setFont(new Font(15));
+		Text turtleIndex = new Text("Pen " + Integer.toString(index+1) + " ");
+		turtleIndex.setFont(new Font(14));
 		return turtleIndex;
 	}
 	
-	//BUILD COLORPICKER
 	private ColorPicker buildColorSelection() {
 		ColorPicker recolorer = new ColorPicker((Color) ourPen.getColor());
 		recolorer.setStyle("-fx-color-label-visible: false ;");
@@ -50,19 +48,13 @@ public class HBoxPenChanger extends HBox {
 		return recolorer;
 	}
 	
-	/**
-	 * Initializes a slider to change the width of a turtle's pen.
-	 * Code modified from  <a href="https://docs.oracle.com/javafx/2/ui_controls/slider.htm">JavaFX Documentation</a>
-	 * @return slider object to modify turtle's pen width
-	 */
-	private Slider buildWidthSlider() {
-		Slider slider = new Slider(0,2,1);
-		slider.valueProperty().addListener(new ChangeListener<Number>() {
-			public void changed(ObservableValue<? extends Number> ov,
-	                Number old_val, Number new_val) {
-				ourPen.setWidth(new_val.doubleValue());
-			}
+	private Button buildWidthStage() {
+		Button b = new BaseButton("Modify Width");
+		b.setOnAction(e -> {
+			Stage addSlider = new StagePenChanger(ourPen);
+			addSlider.showAndWait();
 		});
-		return slider;
+		b.setAlignment(Pos.CENTER_RIGHT);
+		return b;
 	}
 }

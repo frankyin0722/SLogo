@@ -126,7 +126,7 @@ public class Turtle extends Group {
     		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
     		result+="Heading: " + Math.toDegrees(direction) + "\n";
     		result+="Visible: " + myImage.isVisible() + "\n";
-    		result+= pen.toString();
+    		result+= "\n" + pen.toString();
     		return result;
     }
     
@@ -141,7 +141,7 @@ public class Turtle extends Group {
     
     public void addListener(Listener l) {
     		myListeners.add(l);
-    		pen.addListener(l);
+    		//pen.addListener(l);
     }
     
     public void notifyListeners() {

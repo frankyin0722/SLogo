@@ -3,9 +3,9 @@ package command.Display;
 import command.Command;
 import turtle.TurtleController;
 
-public class ShapeCommand implements Command {
+public class GetShapeCommand implements Command {
 	private TurtleController myController;
-	public ShapeCommand(TurtleController controller) {
+	public GetShapeCommand(TurtleController controller) {
 		myController = controller;
 	}
 	@Override

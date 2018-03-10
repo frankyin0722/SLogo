@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import alerts.Alerts;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Paint;
@@ -172,18 +173,28 @@ public class TurtleController extends Group implements Listener {
     
     
 	 public void setShape(int index) {
- 		shapeIndex = index;
- 		for(Turtle turtle: turtles) {
- 			turtle.setShape(shapes.get(index));
- 		}
- 		//throw error if out of bounds
+		try {
+			shapeIndex = index;
+	 		for(Turtle turtle: turtles) {
+	 			turtle.setShape(shapes.get(index));
+	 		}
+		}
+		catch(Exception e){
+			Alerts.createAlert(new IndexOutOfBoundsException(), "OutOfBounds");
+		}
+ 		
  }
 	 public void setColorByIndex(int index) {
- 		colorIndex = index;
- 		for(Turtle turtle: turtles) {
- 			turtle.getPen().setColor(colors.get(index));
- 		}
- 		//throw error if oob
+		
+		 try {
+			colorIndex = index;
+	 		for(Turtle turtle: turtles) {
+	 			turtle.getPen().setColor(colors.get(index));
+	 		}
+		 }
+ 		catch(Exception e){
+			Alerts.createAlert(new IndexOutOfBoundsException(), "OutOfBounds");
+		}
 	 }
 	 public double getShapeIndex() {
  		return shapeIndex;

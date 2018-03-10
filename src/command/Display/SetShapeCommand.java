@@ -6,9 +6,9 @@ import turtle.TurtleController;
 public class SetShapeCommand implements Command {
 	private TurtleController myController;
 	private int myIndex;
-	public SetShapeCommand(int index, TurtleController controller) {
+	public SetShapeCommand(double index, TurtleController controller) {
 		myController = controller;
-		myIndex = index;
+		myIndex = (int)index;
 	}
 	@Override
 	public double execute() {
