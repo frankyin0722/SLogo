@@ -37,6 +37,7 @@ public class TurtleImageMenu extends TitledPane {
 	
 	private void setupTurtleSelection() {
 		myTurtleList = new VBox();
+		myTurtleImages = new ArrayList<>();
 		myTurtleButtons = new ArrayList<>();
 		makeButton("franklin.jpg", myTurtleList);
 		makeButton("cute_turtle.png", myTurtleList);
