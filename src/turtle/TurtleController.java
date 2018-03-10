@@ -1,12 +1,14 @@
 package turtle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import alerts.Alerts;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import observables.Listener;
 import view.canvas.DrawingWindow;
@@ -23,7 +25,7 @@ public class TurtleController extends Group implements Listener {
 	private List<Boolean> active;
 	private int shapeIndex = 0;
 	private int colorIndex = 0;
-	private Map<Integer, Paint> colors;
+	private Map<Integer, Color> colors;
 	private List<Image> shapes;
 	private int currentTurtle;
 	public TurtleController(DrawingWindow dw) {
@@ -203,8 +205,8 @@ public class TurtleController extends Group implements Listener {
 	 public double getColorIndex() {
  		return colorIndex;
 	 }
-	 public void setPalette(Map<Integer,Paint> palette) {
-		 colors = palette;
+	 public void setPalette(HashMap<Integer, Color> indexToColor) {
+		 colors = indexToColor;
 	 }
 	 public void setImageMenu(List<Image> images) {
 		 shapes = images;

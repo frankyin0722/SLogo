@@ -13,6 +13,7 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import observables.Listener;
 import parser.CommandNode;
@@ -32,7 +33,6 @@ public class CommandTreeInterpreter {
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
-	private  HashMap<Integer, Paint> indexToColor;
 	private int currentTurtle; 
 
 	
@@ -332,9 +332,4 @@ public class CommandTreeInterpreter {
 	public List<Listener> getActiveUDCListener() {
 		return activeUDCListener;
 	}
-
-	public void setPalette(HashMap<Integer, Paint> colormap) {
-		indexToColor = colormap;
-	}
-
 }

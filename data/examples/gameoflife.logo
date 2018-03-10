@@ -1,3 +1,5 @@
+# once code initiated, run command "iterate"
+# use "st" to view all turtles
 pu
 setxy -220 -220
 pd
@@ -21,13 +23,13 @@ to iterate [ ] [
 					set :x + :x 1
 				]
 			]
-		] 
+		]
 		if [ or less? :x 2 greater? :x 3 ] [
 			ask [ :a ] [ seth 270 ]
 		]
 		if [ equal? :x 3 ] [
 			ask [ :a ] [ seth 90 ]
-		]  
+		]
 	]
 	askwith [ equal? heading 90 ] [ st ]
 	askwith [ equal? heading 270 ] [ ht ]
