@@ -197,6 +197,8 @@ public class CommandTreeInterpreter {
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
 		Constructor<?> commandConstructor = commandClass.getDeclaredConstructors()[0];
 		Command thisCommand = null;
+		for(Object obj: parameters) {
+		}
 		try {
 			thisCommand = (Command) commandConstructor.newInstance(parameters.toArray());
 			return thisCommand;
@@ -210,27 +212,34 @@ public class CommandTreeInterpreter {
 		Method thisExecution = null;
 		try {
 			thisExecution = commandClass.getDeclaredMethod("execute", null);
-			Task<Void> sleeper = new Task<Void>() {
-	            @Override
-	            protected Void call() throws Exception {
-	                try {
-	                    Thread.sleep(50000);
-	                } catch (InterruptedException e) {
-	                }
-	                return null;
-	            }
-	        };
-	        sleeper.setOnSucceeded(e -> {
-	        	try {
-					double result = (double) thisExecution.invoke(thisCommand, null);
-					node.setNodeValue(result);
-				}
-				catch (IllegalAccessException | InvocationTargetException exception) {
-					System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
-				}
-	        });
-	        new Thread(sleeper).start();
-		
+//			Task<Void> sleeper = new Task<Void>() {
+//	            @Override
+//	            protected Void call() throws Exception {
+//	                try {
+//	                    Thread.sleep(50000);
+//	                } catch (InterruptedException e) {
+//	                }
+//	                return null;
+//	            }
+//	        };
+//	        sleeper.setOnSucceeded(e -> {
+//	        	try {
+//					double result = (double) thisExecution.invoke(thisCommand, null);
+//					node.setNodeValue(result);
+//				}
+//				catch (IllegalAccessException | InvocationTargetException exception) {
+//					System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+//				}
+//	        });
+//	        new Thread(sleeper).start();
+	        try {
+	 
+				double result = (double) thisExecution.invoke(thisCommand, null);
+				node.setNodeValue(result);
+			}
+			catch (IllegalAccessException | InvocationTargetException exception) {
+				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
+			}
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			System.err.println("Error executing commands1: " + thisCommand.getClass().getName() + ".execute()");
 		} 

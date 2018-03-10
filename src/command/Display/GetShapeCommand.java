@@ -1,17 +1,16 @@
 package command.Display;
 
 import command.Command;
-import turtle.Turtle;
 import turtle.TurtleController;
 
-public class GetPenColorCommand implements Command {
+public class GetShapeCommand implements Command {
 	private TurtleController myController;
-	public GetPenColorCommand(TurtleController controller) {
+	public GetShapeCommand(TurtleController controller) {
 		myController = controller;
 	}
 	@Override
 	public double execute() {
-		return myController.getColorIndex();
+		return myController.getShapeIndex();
 	}
 
 }
