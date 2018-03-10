@@ -1,17 +1,15 @@
 package turtle;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import observables.Listener;
+import observables.Speaker;
 
-public class Pen {
+public class Pen implements Speaker {
 	private Color color;
 	private boolean up;
 	private double width;
-	private List<Listener> myListeners;
+//	private List<Listener> myListeners;
 	
 	public Pen() {
 		this(Color.BLACK, false, 1);
@@ -21,7 +19,6 @@ public class Pen {
 		color = c;
 		this.up = up;
 		this.width = width;
-		myListeners = new ArrayList<>();
 	}
 	
 	//returns if the pen is up
@@ -43,6 +40,11 @@ public class Pen {
 
     }
     
+    public double getWidth() {
+    		return width;
+    }
+    
+    
     //changes the width of the pen
     public void setWidth(double newWidth) {
     		width = newWidth;
@@ -57,15 +59,7 @@ public class Pen {
     		notifyListeners();
     }
     
-    public void addListener(Listener l) {
-		myListeners.add(l);
-}
 
-    public void notifyListeners() {
-		for (Listener l: myListeners) {
-			l.update();
-		}
-    }
     
     //prints current state
     @Override
@@ -81,4 +75,24 @@ public class Pen {
     public Color getColor() {
     		return color;
     }
+
+    
+    
+    //SPEAKER METHODS
+    
+    public void addListener(Listener l) {
+		myListeners.add(l);
+}
+
+    public void notifyListeners() {
+		for (Listener l: myListeners) {
+			l.update();
+		}
+    }
+    
+	@Override
+	public void removeListener(Listener l) {
+		myListeners.remove(l);
+	}
+
 }

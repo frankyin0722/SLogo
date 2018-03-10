@@ -131,7 +131,7 @@ public class Turtle extends Group {
     		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
     		result+="Heading: " + Math.toDegrees(direction) + "\n";
     		result+="Visible: " + myImage.isVisible() + "\n";
-    		result+= pen.toString();
+    		result+= "\n" + pen.toString();
     		return result;
     }
     
