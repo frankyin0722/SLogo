@@ -77,5 +77,9 @@ public class ControlTextInput extends HBox {
 		myExternalCanvas.setHvalue(0.5);
 		myExternalCanvas.setVvalue(0.5);
 	}
+	
+	public CommandWindow getCommandWindow() {
+		return myCommandWindow;
+	}
 
 }

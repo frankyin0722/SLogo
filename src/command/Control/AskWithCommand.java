@@ -26,7 +26,7 @@ public class AskWithCommand implements Command{
 	public double execute() {
 		TurtleController myTurtleController = myInterpreter.getTurtleController();
 		for (int i = 1; i <= myInterpreter.getCurrentAvailableTurtles().size(); i++) { // creates an active list of turtles that satisfies the condition 
-			myInterpreter.setCurrentActiveTurtleIndex(i);
+			myInterpreter.getTurtleController().setCurrentTurtleIndex(i);
 			myInterpreter.interpretTree(myCondition);
 			if (myCondition.getNodeValue()!=0) {
 				myTemporaryActiveTurtleIndices.add(myInterpreter.getCurrentActiveTurtleIndex());

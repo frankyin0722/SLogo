@@ -13,6 +13,12 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
+import javafx.util.Duration;
 import observables.Listener;
 import parser.CommandNode;
 import turtle.Turtle;
@@ -73,17 +79,19 @@ public class CommandTreeInterpreter {
 		}
 		Parameters.add(myRoot.getNodeChildren().get(i));
 	}
+	
 	private void interpretTurtle(int i, CommandNode myRoot, List<Object> Parameters) {
+		System.out.println(myTurtleController.getActiveTurtleIndices().size());
 		for (int t = 0; t < myTurtleController.getActiveTurtleIndices().size(); t++) {
-			currentTurtle = myTurtleController.getActiveTurtleIndices().get(t); // 0 index refers to 1 turtle 
+			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(t)); // 0 index refers to 1 turtle 
 			interpretTree(myRoot.getNodeChildren().get(i));
 			Parameters.add(myRoot.getNodeChildren().get(i).getNodeValue());
 		}
 		if (myTurtleController.getActiveTurtleIndices().size()==0) {
-			currentTurtle = 0;
+			myTurtleController.setCurrentTurtleIndex(0);
 		}
 		else {
-			currentTurtle = myTurtleController.getActiveTurtleIndices().get(0); // reset the current turtle to be the first in active turtle list 
+			myTurtleController.setCurrentTurtleIndex(myTurtleController.getActiveTurtleIndices().get(0)); // reset the current turtle to be the first in active turtle list 
 		}
 	}
 	
@@ -110,11 +118,15 @@ public class CommandTreeInterpreter {
 			case "GroupBracket":
 				updateGroupBracket(node, Parameters);
 				break;
+			case "Display":
+				Parameters.add(this.getTurtleController());
+				createCommand(node, Parameters);
 			default: 
 				createCommand(node, Parameters);
 				break;
 		}
 	}
+	
 	private void updateUserDefined(CommandNode node, List<Object> Parameters) {
 		List<CommandNode> para = userDefinedCommandParameters.get(node.getCommandName());
 		for (int i = 0; i < para.size(); i++) {
@@ -123,9 +135,6 @@ public class CommandTreeInterpreter {
 			}
 			else {
 				myVariables.addVariable(new Variable((double) Parameters.get(i)), para.get(i).getCommandName());
-			}	
-			if (i==2) {
-				//System.out.println("current depth value: "+Parameters.get(i));
 			}
 		}
 		List<Object> paramForUserDefinedCommand = new ArrayList<>();
@@ -205,9 +214,10 @@ public class CommandTreeInterpreter {
 				double result = (double) thisExecution.invoke(thisCommand, null);
 				node.setNodeValue(result);
 			}
-			catch (IllegalAccessException | InvocationTargetException e) {
+			catch (IllegalAccessException | InvocationTargetException exception) {
 				System.err.println("Error executing commands: " + thisCommand.getClass().getName() + ".execute()");
 			}
+		
 		} catch (IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			System.err.println("Error executing commands1: " + thisCommand.getClass().getName() + ".execute()");
 		} 
@@ -222,8 +232,12 @@ public class CommandTreeInterpreter {
 			commandClass = myCommandManager.createCommand(node.getCommandType(), node.getCommandType());
 		}
 		Command thisCommand = createCommandInstance(commandClass, parameters);
-		invokeExecuteMethod(node, commandClass, thisCommand);
 		
+        invokeExecuteMethod(node, commandClass, thisCommand);
+	}
+	
+	private void step(double elapsedTime) {
+		System.out.print("Stepping");
 	}
 	
 	public List<Turtle> getCurrentActiveTurtles() {
@@ -287,7 +301,7 @@ public class CommandTreeInterpreter {
 	}
 		
 	public int getCurrentActiveTurtleIndex() {
-		return currentTurtle;
+		return myTurtleController.getCurrentTurtleIndex();
 	}
 	
 	public void setCurrentActiveTurtleIndex(int index) {
