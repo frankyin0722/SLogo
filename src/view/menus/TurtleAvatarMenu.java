@@ -58,7 +58,7 @@ public class TurtleAvatarMenu extends TitledPane {
 		File imageDir = new File(DEFAULT_IMAGE_FOLDER);
 		for (File f: imageDir.listFiles()) {
 			String name = f.getName();
-			if (name.substring(name.length() - 3,name.length()).equals("png") | 
+			if (name.substring(name.length() - 3,name.length()).equals("png") || 
 					name.substring(name.length() - 3,name.length()).equals("jpg")) {
 				makeButton(DEFAULT_IMAGE_PATH+f.getName(), myTurtleBox);
 			}
