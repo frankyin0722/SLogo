@@ -32,9 +32,7 @@ public class CommandTreeInterpreter {
 	private HashMap<String, String> activeUDC;
 	private List<Listener> theseListeners;
 	private List<Listener> activeUDCListener;
-	private  HashMap<Integer, Paint> indexToColor;
 	private int currentTurtle; 
-
 	
 	public CommandTreeInterpreter(TurtleController turtlecontroller) {
 		myCommandManager = new CommandManager();
@@ -176,9 +174,7 @@ public class CommandTreeInterpreter {
 	
 	private void updateGroupBracket(CommandNode node, List<Object> Parameters) {
 		if (node.getNodeChildren().size()!=0) {
-			//
 			double totalValue = 0;
-			//
 			for (CommandNode sub : node.getNodeChildren()) {
 				totalValue = totalValue + sub.getNodeValue();
 			}
@@ -187,7 +183,6 @@ public class CommandTreeInterpreter {
 		else {
 			node.setNodeValue(0.0);
 		}
-		//
 	}
 	
 	private Command createCommandInstance(Class<?> commandClass, List<Object> parameters) {
@@ -331,10 +326,6 @@ public class CommandTreeInterpreter {
 	
 	public List<Listener> getActiveUDCListener() {
 		return activeUDCListener;
-	}
-
-	public void setPalette(HashMap<Integer, Paint> colormap) {
-		indexToColor = colormap;
 	}
 
 }

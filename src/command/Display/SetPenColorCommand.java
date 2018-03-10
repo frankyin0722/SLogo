@@ -17,6 +17,7 @@ public class SetPenColorCommand implements Command{
 	 */
 	@Override
 	public double execute() {
+		System.out.println("hi");
 		myController.setColorByIndex(colorIndex);
 		return colorIndex;
 	}
