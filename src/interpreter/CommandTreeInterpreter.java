@@ -13,6 +13,7 @@ import alerts.CommandException;
 import alerts.Resources;
 import command.Command;
 import command.CommandManager;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import observables.Listener;
 import parser.CommandNode;
@@ -326,5 +327,4 @@ public class CommandTreeInterpreter {
 	public List<Listener> getActiveUDCListener() {
 		return activeUDCListener;
 	}
-
 }

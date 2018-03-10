@@ -18,6 +18,7 @@ public class DrawingWindow extends Pane implements Listener, IConstants {
 
 	}
 	
+
 	private void setupInitialCanvas() {
 		this.setPrefSize(INTERNAL_CANVAS_WIDTH, INTERNAL_CANVAS_HEIGHT);
 		this.setMaxSize(Double.POSITIVE_INFINITY,Double.POSITIVE_INFINITY);

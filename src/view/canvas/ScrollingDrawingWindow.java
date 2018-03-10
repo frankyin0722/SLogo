@@ -23,10 +23,6 @@ public class ScrollingDrawingWindow extends ScrollPane implements IConstants {
 		this.setPrefSize(EXTERNAL_CANVAS_WIDTH, EXTERNAL_CANVAS_HEIGHT);
 	}
 	
-//	public Turtle getDefaultTurtle() {
-//		return myDrawingWindow.getDefaultTurtle();
-//	}
-	
 	public DrawingWindow getInternalCanvas() {
 		return myDrawingWindow;
 	}
