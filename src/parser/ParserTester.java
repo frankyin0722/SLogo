@@ -1,7 +1,10 @@
 package parser;
 
 import turtle.Turtle;
-
+/**
+ * Class with no significance in running slogo, used as a way to test how the parser responds to various inputs
+ * @author FY
+ */
 public class ParserTester {
 	public static void main (String[] args) {
 		String userinput = "TO :command [ :expr :exprr ] [ fd :expr fd :exprr ]";
