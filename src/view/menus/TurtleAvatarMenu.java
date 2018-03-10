@@ -61,7 +61,7 @@ public class TurtleAvatarMenu extends TitledPane implements IConstants {
 		for (File f: imageDir.listFiles()) {
 			String name = f.getName();
 			String lastThree = name.substring(name.length() - 3,name.length());
-			if (lastThree.equals("png") | lastThree.equals("jpg")) {
+			if (lastThree.equals("png") || lastThree.equals("jpg")) {
 				makeButton(DEFAULT_IMAGE_PATH+f.getName(), turtleBox);
 			}
 		}
