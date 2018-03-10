@@ -8,7 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Line;
 import observables.Listener;
-
+/**
+ *
+ */
 public class Turtle extends Group {
 	private Pen pen = new Pen();
 	private List<Listener> myListeners;
@@ -120,14 +122,12 @@ public class Turtle extends Group {
     public String toString(int i) {
     		String result = "";
     		result+="Turtle ID: " + Integer.toString(i) + "\n";
-    		result+="Position: (" + oldX + ", " + oldY + ")" + "\n";
-    		result+="Heading: " + Math.toDegrees(direction) + "\n";
+    		result+="Position: (" + oldX + ", " + -oldY + ")" + "\n";
+    		result+="Heading: " + Math.toDegrees(direction) + " degrees\n";
     		result+="Visible: " + myImage.isVisible() + "\n";
     		result+= "\n" + pen.toString();
     		return result;
     }
-    
-   
     
     public ImageView getImageView() {
     		return myImage;
