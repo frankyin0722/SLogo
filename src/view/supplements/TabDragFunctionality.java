@@ -14,7 +14,7 @@ import javafx.scene.input.TransferMode;
 
 /**
  * Add tab reordering functionality to a TabPane tab.
- * Code from <a href="https://stackoverflow.com/questions/41473987/how-to-drag-and-drop-tabs-of-the-same-tabpane">this StackOverflow post</a>
+ * Code directly from <a href="https://stackoverflow.com/questions/41473987/how-to-drag-and-drop-tabs-of-the-same-tabpane">this StackOverflow post</a>
  * @author James_D, with minor modifications for clarity by @author elizabethshulman
  *
  */
