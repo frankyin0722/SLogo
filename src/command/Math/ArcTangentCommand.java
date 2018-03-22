@@ -4,10 +4,10 @@ import command.Command;
 /**
  * takes the arctangent of one parameter
  */
-public class ArctangentCommand implements Command{
+public class ArcTangentCommand implements Command{
 	private double input1;
 	
-	public ArctangentCommand (double expr1){
+	public ArcTangentCommand (double expr1){
 		input1 = Math.toRadians(expr1);
 	}
 	/**

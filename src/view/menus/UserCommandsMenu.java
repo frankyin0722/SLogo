@@ -88,6 +88,6 @@ public class UserCommandsMenu extends TitledPane implements Listener {
 		for (CommandNode c: list) {
 			s += (c.getCommandName() + " ");
 		}
-		return s.substring(0, s.length()-1) + "\n";
+		return s.substring(0, s.length()) + "\n";
 	}
 }
