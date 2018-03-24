@@ -178,8 +178,5 @@ public class CommandType implements CommandTypes {
 	/**
 	 * gets the string of this command type 
 	 */
-	@Override
-	public String whichType() {
-		return "Command";
-	}
+
 }

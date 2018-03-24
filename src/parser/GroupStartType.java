@@ -64,8 +64,5 @@ public class GroupStartType implements CommandTypes{
 		}
 	}
 	
-	@Override
-	public String whichType() {
-		return "GroupStart";
-	}
+
 }
