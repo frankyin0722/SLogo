@@ -14,6 +14,6 @@ public interface CommandTypes {
 	 * gets the exact current command type that the recursive parsing is iterating through 
 	 * @return
 	 */
-	public String whichType();
+
 	
 }
