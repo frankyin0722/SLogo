@@ -25,10 +25,7 @@ public class SaveFileButton extends BaseButton {
 	 * @param interpreter
 	 */
 	public void save(CommandTreeInterpreter interpreter) {
-		this.setOnAction(
-				new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
+		
 						FileChooser fc = new FileChooser();
 						Stage stage = new Stage();
 						fc.setInitialDirectory(new File("./data/examples"));
@@ -39,8 +36,8 @@ public class SaveFileButton extends BaseButton {
 						} catch (Exception e) {
 							Alerts.createAlert(null, "change");
 						}
-					}
-			});
+				
+		
 	}
 //  This commented out method was the beginning of my attempt to save the current variables and methods directly to an xml file (no need for actual history of commands)
 //	private void recordVariables(CommandTreeInterpreter interpreter) {
@@ -62,6 +59,7 @@ public class SaveFileButton extends BaseButton {
     public void saveXMLFile(String filePath, CommandTreeInterpreter interpreter) throws TransformerException, IOException {
         List<String> history = interpreter.getHistory();
         FileWriter fileWriter = new FileWriter(filePath);
+        //use string builder, call write once
         for(String str: history) {
         		fileWriter.write(str+"\n");
         }

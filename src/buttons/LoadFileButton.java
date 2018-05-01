@@ -27,10 +27,7 @@ public class LoadFileButton extends BaseButton {
 	 * @param cw
 	 */
 	public void loadFile(CommandWindow cw) {
-		this.setOnAction(
-				new EventHandler<ActionEvent>() {
-					@Override
-					public void handle(ActionEvent event) {
+		
 						FileChooser fc = new FileChooser();
 						Stage stage = new Stage();
 						fc.setInitialDirectory(new File("./data/examples"));
@@ -44,8 +41,7 @@ public class LoadFileButton extends BaseButton {
 						} catch (IOException e) {
 							Alerts.createAlert(new NullPointerException(), "filler");
 						}
-					}
-			});
+				
 		}
 	
 	private void openFile(CommandWindow cw, File file) {

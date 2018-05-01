@@ -45,12 +45,7 @@ public class Turtle extends Group {
 		myListeners = new ArrayList<>();
 		getChildren().add(myImage);
 	}
-	/**
-	 * default turtle contains no information
-	 */
-	public Turtle() {
-		super();
-	}
+
 	 /**
 	  * @return the turtle's pen
 	  */
