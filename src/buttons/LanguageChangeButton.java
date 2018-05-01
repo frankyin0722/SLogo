@@ -14,7 +14,7 @@ import view.vis_elements.Visualization;
 
 /**
  * 
- * @author elizabethshulman
+ * @author elizabethshulman, xlany
  * 
  * This class enables a user to change the language of inputted commands. It creates a button,
  * which upon click opens a new pop-up list of buttons (one representing each available language).
