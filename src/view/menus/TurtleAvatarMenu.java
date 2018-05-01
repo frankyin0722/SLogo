@@ -75,6 +75,7 @@ public class TurtleAvatarMenu extends TitledPane implements IConstants {
 	private void makeButton(String filepath, VBox vbox) {
 		Button button = new Button();
 		Image img = new Image(getClass().getClassLoader().getResourceAsStream(filepath));
+		myTurtleImages.add(img);
 		ImageView imgview = new ImageView(img);
 		imgview.setFitWidth(THUMBNAIL_WIDTH);
 		imgview.setFitHeight(THUMBNAIL_HEIGHT);
@@ -83,6 +84,7 @@ public class TurtleAvatarMenu extends TitledPane implements IConstants {
 		myTurtleButtons.add(button);
 		vbox.getChildren().add(button);
 	}
+	
 	/**
 	 * Change active turtles to selected image
 	 * @param img
