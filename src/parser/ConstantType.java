@@ -24,8 +24,5 @@ public class ConstantType implements CommandTypes{
 		myTreeGenerator.increaseIndex();
 	}
 	
-	public String whichType() {
-		return CONSTANT;
-	}
-	
+
 }

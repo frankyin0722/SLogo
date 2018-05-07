@@ -12,7 +12,6 @@ public class Pen {
 	private Paint color;
 	private boolean up;
 	private double width;
-//	private List<Listener> myListeners;
 	/**
 	 * defaults to a down black pen with 1 width if no parameters are specified
 	 */
@@ -59,8 +58,6 @@ public class Pen {
      */
     public void setColor(Paint color) {
     		this.color = color;
-    		//notifyListeners();
-
     }
     
   
@@ -71,8 +68,6 @@ public class Pen {
      */
     public void setWidth(double newWidth) {
     		width = newWidth;
-    		//notifyListeners();
-
     }
     
     /**
@@ -81,7 +76,6 @@ public class Pen {
     public void update(Line line) {
     		line.setStrokeWidth(width);
     		line.setStroke(color);
-    		//notifyListeners();
     }
     
 
@@ -105,24 +99,5 @@ public class Pen {
     public Paint getColor() {
     		return color;
     }
-
-    
-    
-    //SPEAKER METHODS
-    
-//    public void addListener(Listener l) {
-//		myListeners.add(l);
-//}
-//
-//    public void notifyListeners() {
-//		for (Listener l: myListeners) {
-//			l.update();
-//		}
-//    }
-//    
-//	@Override
-//	public void removeListener(Listener l) {
-//		myListeners.remove(l);
-//	}
 
 }

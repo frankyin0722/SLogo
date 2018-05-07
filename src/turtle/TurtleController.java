@@ -287,13 +287,51 @@ public class TurtleController implements Listener {
 	  * @return index associated with current shape
 	  */
 	 public double getShapeIndex() {
- 		return shapeIndex;
+		double index = 0;
+ 		for(int i = 0; i < turtles.size(); i++) {
+ 			if(active.get(i)) {
+ 				index = findIndex(turtles.get(i).getImageView().getImage());
+ 			}
+ 		}
+ 		return index;
+	 }
+	 /**
+	  * finds the given image in the saved image list
+	  * @param image
+	  * @return
+	  */
+	 public double findIndex(Image image) {
+		 for(int i = 0; i < shapes.size(); i++) {
+			 if(shapes.get(i).equals(image)) {
+				 return i;
+			 }
+		 }
+		 return -1;
 	 }
 	 /**
 	  * @return pen color associated with current shape
 	  */
 	 public double getColorIndex() {
- 		return colorIndex;
+		 double index = 0;
+	 		for(int i = 0; i < turtles.size(); i++) {
+	 			if(active.get(i)) {
+	 				index = findIndex((Color)turtles.get(i).getPen().getColor());
+	 			}
+	 		}
+	 		return index;
+	 }
+	 /**
+	  * finds the given color in the saved c
+	  * @param image
+	  * @return
+	  */
+	 public double findIndex(Color color) {
+		 for(Integer key: colors.keySet()) {
+			 if(colors.get(key).equals(color)) {
+				 return (double)key;
+			 }
+		 }
+		 return 0;
 	 }
 	 /**
 	  * sets the necessary indices and corresponding colors
