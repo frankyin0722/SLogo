@@ -196,6 +196,16 @@ public class Turtle extends Group {
     
     public void setOpaque(boolean active) {
 		myImage.setOpacity(active?1:0.5);
-}
+    }
+    
+    public ImageView makeStamp() {
+    		ImageView img = new ImageView(myImage.getImage());
+    		img.setFitWidth(myImage.getFitWidth());
+    		img.setFitHeight(myImage.getFitHeight());
+    		img.setX(myImage.getX());
+    		img.setY(myImage.getY());
+    		img.setRotate(Math.toDegrees(direction));
+    		return img;
+    }
 
 }

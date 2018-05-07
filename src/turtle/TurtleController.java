@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import alerts.Alerts;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import observables.Listener;
 import view.canvas.DrawingWindow;
@@ -30,6 +32,8 @@ public class TurtleController implements Listener {
 	private Map<Integer, Color> colors;
 	private List<Image> shapes;
 	private int currentTurtle;
+//	private List<ImageView> stamps;
+	private Group stamps;
 	
 	/**
 	 * makes a controller with the given paramters
@@ -50,6 +54,8 @@ public class TurtleController implements Listener {
 		addActiveTurtle(image, x, y, width, height);
 		notifyListeners();
 		currentTurtle = 1;
+		stamps = new Group();
+		dw.getChildren().add(stamps);
 	}
 	/**
 	 * initializes all the instance variables
@@ -310,4 +316,35 @@ public class TurtleController implements Listener {
 	 public void setImageMenu(List<Image> images) {
 		 shapes = images;
 	 }
+	 
+	 
+	 public int matchShape(Image img) {
+		 for (int i=0; i<shapes.size(); i++) {
+			 if (shapes.get(i).equals(img)) {
+				 return i;
+			 }
+		 }
+		 return 0;
+	 }
+	 
+	 public double setStamp() {
+		int index = 0;
+		for(int i = 0; i < turtles.size(); i++) {
+			if(active.get(i)) {
+				ImageView img = turtles.get(i).makeStamp();
+				stamps.getChildren().add(img);
+				index = matchShape(img.getImage());
+			}
+		 }
+		return index;
+	 }
+	 
+	 public double clearStamps() {
+		 int size = stamps.getChildren().size();
+		 System.out.print("here!" + size);
+		 stamps.getChildren().clear();
+		 if (size > 0) return 1;
+		 else return 0;
+	 }
+
 }

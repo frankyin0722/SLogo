@@ -121,6 +121,7 @@ public class CommandTreeInterpreter {
 			case "Display":
 				Parameters.add(this.getTurtleController());
 				createCommand(node, Parameters);
+				break;
 			default: 
 				createCommand(node, Parameters);
 				break;
